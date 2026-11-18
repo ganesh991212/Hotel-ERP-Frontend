@@ -1,8 +1,62 @@
-# Hotel ERP Frontend
+# Hotel ERP Frontend (Flutter)
 
-Flutter clients (mobile, tablet, web, TV/kitchen display) for the Hotel ERP.
+One Flutter codebase for **web, Android, iOS, tablets and kitchen TVs**. Rules, build plan and API
+docs live in [Hotel-ERP-Backend](https://github.com/ganesh991212/Hotel-ERP-Backend) (`CLAUDE.md`, `docs/`).
 
-**Status:** empty until Phase 7. UI is built from the reference videos.
+## What is here
 
-Rules, design and the build plan live in the backend repo, not here:
-https://github.com/ganesh991212/Hotel-ERP-Backend (`CLAUDE.md`, `docs/BUILD-PLAN.md`).
+| Who | Screens |
+|---|---|
+| Platform admin | Overview (hotels, monthly revenue, sign-ups, plan mix), Hotels (register, suspend/resume, change plan, per-hotel feature overrides), Plans (prices, features, limits) |
+| Hotel admin / manager | Overview dashboard, Floor, Kitchen, Menu, Tables & QR, Team (people + role permission matrix), Expenses, Settings (kitchen mode, QR confirmation, plan & billing) |
+| Server | Floor: tables, take orders, confirm QR orders, mark served |
+| Chef | Kitchen: pick up new orders, strict queue (only the head can start), mark ready, see other chefs live |
+| Diner (public) | `/#/t/<qr-token>`: menu, cart with server-priced totals, live order tracker |
+
+Tabs are derived from the signed-in user's **permissions** and the hotel's **plan features**
+(`GET /me`, `GET /me/entitlements`). Hiding is UX only; the API enforces everything.
+
+## Run locally
+
+Start the backend first (see its README), then:
+
+```bash
+flutter pub get
+flutter run -d chrome --dart-define=API_BASE=http://localhost:8000
+```
+
+Release web build (bundles CanvasKit instead of loading it from a CDN):
+
+```bash
+flutter build web --release --no-web-resources-cdn --dart-define=API_BASE=https://api.example.com
+```
+
+Android/iOS: `flutter run` on a device with the same `--dart-define`.
+
+## Structure
+
+```
+lib/
+  core/        api client (serialised token refresh), realtime socket, session, router, money, theme tokens
+  ui/          component library: Glass card, PillTabs, StatusChip, PillBar, CapsuleBars, NightPanel, dialogs
+  features/    auth, platform, hotel, floor, kitchen, diner
+  l10n/        app_en.arb (every string, with descriptions)
+```
+
+## Rules this code follows
+- **No money arithmetic.** The server sends `_minor` paise; `core/money.dart` formats them by string
+  slicing. Cart totals come from `POST /orders/quote` and `POST /d/{qr}/quote`.
+- **No literal strings** in feature code; everything is in `lib/l10n/app_en.arb` (CI checks).
+- **Theme tokens only** (`core/theme/tokens.dart`, light and dark sets). Status is always icon + label.
+- **Serialised refresh.** One in-flight refresh shared by all callers, because refresh tokens rotate
+  and reuse revokes the family.
+- **Realtime.** One WebSocket per outlet; screens refetch on events, show a stale banner when the
+  socket drops, and the kitchen polls every 5 s as fallback.
+
+## Design
+Visual language: soft mint glass cards on a green gradient, Outfit display + Inter body type,
+pill-shaped segmented navigation with a stretching indicator, a dark contrast panel for live work,
+large numerals, staggered card entrances. It was **inspired by** a commercial dashboard template the
+owner shared; no code, images or assets from that template are used (its licence forbids
+redistributing its source, and this repo is public). Fonts are bundled from Google Fonts under the
+SIL Open Font License (`assets/fonts/OFL-*.txt`).

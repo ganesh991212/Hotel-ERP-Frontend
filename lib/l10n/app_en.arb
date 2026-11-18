@@ -1,0 +1,1533 @@
+{
+  "@@locale": "en",
+  "appName": "Vethra",
+  "@appName": {
+    "description": "Product name shown in the brand pill and browser title (working name)"
+  },
+  "signInTitle": "Welcome back",
+  "@signInTitle": {
+    "description": "Login card heading"
+  },
+  "signInSubtitle": "Sign in to run your restaurant.",
+  "@signInSubtitle": {
+    "description": "Login card subtitle"
+  },
+  "email": "Email",
+  "@email": {
+    "description": "Email field label"
+  },
+  "password": "Password",
+  "@password": {
+    "description": "Password field label"
+  },
+  "signIn": "Sign in",
+  "@signIn": {
+    "description": "Login button"
+  },
+  "signOut": "Sign out",
+  "@signOut": {
+    "description": "Profile menu: sign out"
+  },
+  "showPassword": "Show password",
+  "@showPassword": {
+    "description": "Tooltip to reveal password"
+  },
+  "hidePassword": "Hide password",
+  "@hidePassword": {
+    "description": "Tooltip to hide password"
+  },
+  "loginHeadline": "Orders, kitchen and money in one calm place.",
+  "@loginHeadline": {
+    "description": "Large headline on the login screen"
+  },
+  "loginPointQr": "Table QR ordering",
+  "@loginPointQr": {
+    "description": "Login screen feature chip"
+  },
+  "loginPointKitchen": "Live chef queues",
+  "@loginPointKitchen": {
+    "description": "Login screen feature chip"
+  },
+  "loginPointDashboards": "Daily dashboards",
+  "@loginPointDashboards": {
+    "description": "Login screen feature chip"
+  },
+  "yourProfile": "Your profile",
+  "@yourProfile": {
+    "description": "Tooltip for the profile button"
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": "Settings button"
+  },
+  "alerts": "Alerts",
+  "@alerts": {
+    "description": "Notification bell title"
+  },
+  "noAlerts": "Nothing needs you right now",
+  "@noAlerts": {
+    "description": "Empty alerts list"
+  },
+  "close": "Close",
+  "@close": {
+    "description": "Close dialog button tooltip"
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Cancel button"
+  },
+  "save": "Save",
+  "@save": {
+    "description": "Save button"
+  },
+  "saveChanges": "Save changes",
+  "@saveChanges": {
+    "description": "Save settings button"
+  },
+  "edit": "Edit",
+  "@edit": {
+    "description": "Edit tooltip"
+  },
+  "delete": "Delete",
+  "@delete": {
+    "description": "Delete button"
+  },
+  "more": "More",
+  "@more": {
+    "description": "Overflow menu tooltip"
+  },
+  "add": "Add",
+  "@add": {
+    "description": "Add item to order button"
+  },
+  "increase": "Increase",
+  "@increase": {
+    "description": "Increase quantity tooltip"
+  },
+  "decrease": "Decrease",
+  "@decrease": {
+    "description": "Decrease quantity tooltip"
+  },
+  "all": "All",
+  "@all": {
+    "description": "Filter chip that shows everything"
+  },
+  "name": "Name",
+  "@name": {
+    "description": "Name field or column label"
+  },
+  "status": "Status",
+  "@status": {
+    "description": "Status column label"
+  },
+  "role": "Role",
+  "@role": {
+    "description": "Role field or column label"
+  },
+  "phone": "Phone",
+  "@phone": {
+    "description": "Phone column label"
+  },
+  "phoneOptional": "Phone (optional)",
+  "@phoneOptional": {
+    "description": "Optional phone field label"
+  },
+  "date": "Date",
+  "@date": {
+    "description": "Date field label"
+  },
+  "type": "Type",
+  "@type": {
+    "description": "Veg or non-veg selector label"
+  },
+  "reason": "Reason",
+  "@reason": {
+    "description": "Reason field label"
+  },
+  "reasonAuditedHelp": "Saved in the audit log.",
+  "@reasonAuditedHelp": {
+    "description": "Help text under a reason field"
+  },
+  "defaultReason": "Changed by platform admin",
+  "@defaultReason": {
+    "description": "Reason recorded when the admin leaves the reason empty"
+  },
+  "tabOverview": "Overview",
+  "@tabOverview": {
+    "description": "Navigation tab: dashboard"
+  },
+  "tabHotels": "Hotels",
+  "@tabHotels": {
+    "description": "Navigation tab: hotels (platform)"
+  },
+  "tabPlans": "Plans",
+  "@tabPlans": {
+    "description": "Navigation tab: subscription plans (platform)"
+  },
+  "tabFloor": "Floor",
+  "@tabFloor": {
+    "description": "Navigation tab: tables and order taking"
+  },
+  "tabKitchen": "Kitchen",
+  "@tabKitchen": {
+    "description": "Navigation tab: kitchen display"
+  },
+  "tabMenu": "Menu",
+  "@tabMenu": {
+    "description": "Navigation tab: menu"
+  },
+  "tabTables": "Tables",
+  "@tabTables": {
+    "description": "Navigation tab: tables and QR codes"
+  },
+  "tabTeam": "Team",
+  "@tabTeam": {
+    "description": "Navigation tab: staff and roles"
+  },
+  "tabExpenses": "Expenses",
+  "@tabExpenses": {
+    "description": "Navigation tab: hotel expenses"
+  },
+  "goodMorning": "Good morning, {name}",
+  "@goodMorning": {
+    "description": "Dashboard greeting before noon",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "goodAfternoon": "Good afternoon, {name}",
+  "@goodAfternoon": {
+    "description": "Dashboard greeting in the afternoon",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "goodEvening": "Good evening, {name}",
+  "@goodEvening": {
+    "description": "Dashboard greeting in the evening",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "waiting": "Waiting",
+  "@waiting": {
+    "description": "Pill bar: orders waiting for the kitchen"
+  },
+  "cooking": "Cooking",
+  "@cooking": {
+    "description": "Pill bar: orders being prepared"
+  },
+  "tablesBusy": "Tables busy",
+  "@tablesBusy": {
+    "description": "Pill bar: share of tables with open orders"
+  },
+  "servedToday": "Served",
+  "@servedToday": {
+    "description": "Pill bar: orders served today"
+  },
+  "ordersToday": "Orders today",
+  "@ordersToday": {
+    "description": "Big number caption"
+  },
+  "revenueToday": "Revenue today",
+  "@revenueToday": {
+    "description": "Big number caption"
+  },
+  "avgPrep": "Avg prep",
+  "@avgPrep": {
+    "description": "Big number caption: average preparation time"
+  },
+  "thisMonth": "This month",
+  "@thisMonth": {
+    "description": "Revenue card caption"
+  },
+  "expensesAmount": "Expenses {amount}",
+  "@expensesAmount": {
+    "description": "Revenue card: expenses this month",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "netAmount": "Net {amount}",
+  "@netAmount": {
+    "description": "Revenue card: revenue minus expenses",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "ordersByHour": "Orders by hour",
+  "@ordersByHour": {
+    "description": "Card title: hourly orders chart"
+  },
+  "ordersSoFarToday": "orders so far today",
+  "@ordersSoFarToday": {
+    "description": "Caption next to the order count"
+  },
+  "openFloor": "Open floor",
+  "@openFloor": {
+    "description": "Tooltip: go to the floor page"
+  },
+  "openKitchen": "Open kitchen",
+  "@openKitchen": {
+    "description": "Tooltip: go to the kitchen page"
+  },
+  "kitchenPace": "Kitchen pace",
+  "@kitchenPace": {
+    "description": "Card title: preparation time dial"
+  },
+  "avgPrepMinutes": "avg minutes to cook",
+  "@avgPrepMinutes": {
+    "description": "Caption under the dial value"
+  },
+  "chefsOnShift": "{count, plural, =1{1 chef on shift} other{{count} chefs on shift}}",
+  "@chefsOnShift": {
+    "description": "Chip: chefs currently on shift",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cookingNow": "{count} cooking",
+  "@cookingNow": {
+    "description": "Chip: orders being cooked now",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "servedShare": "Served today",
+  "@servedShare": {
+    "description": "Live orders card title with percent served"
+  },
+  "liveOrders": "Live orders",
+  "@liveOrders": {
+    "description": "Dark panel title"
+  },
+  "noLiveOrders": "No open orders",
+  "@noLiveOrders": {
+    "description": "Empty live orders panel"
+  },
+  "topDishes": "Top dishes",
+  "@topDishes": {
+    "description": "Accordion section: best sellers this week"
+  },
+  "chefs": "Chefs",
+  "@chefs": {
+    "description": "Accordion section or card title: chefs"
+  },
+  "avgTicket": "Average ticket",
+  "@avgTicket": {
+    "description": "Accordion section: average order value"
+  },
+  "perOrderToday": "per order today",
+  "@perOrderToday": {
+    "description": "Caption next to average ticket"
+  },
+  "noDataYet": "No data yet",
+  "@noDataYet": {
+    "description": "Empty chart or list"
+  },
+  "noChefsYet": "No chefs added yet",
+  "@noChefsYet": {
+    "description": "No chefs in the team"
+  },
+  "soldCount": "{count} sold",
+  "@soldCount": {
+    "description": "Dish sales count",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "doneCount": "{count} done",
+  "@doneCount": {
+    "description": "Orders a chef finished today",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "revenueLast7Days": "Revenue, last 7 days",
+  "@revenueLast7Days": {
+    "description": "Week card subtitle"
+  },
+  "statusPlaced": "Awaiting confirmation",
+  "@statusPlaced": {
+    "description": "Order status: placed by diner, needs staff confirmation"
+  },
+  "statusConfirmed": "New",
+  "@statusConfirmed": {
+    "description": "Order status: confirmed, waiting for a chef"
+  },
+  "statusQueued": "Queued",
+  "@statusQueued": {
+    "description": "Order status: assigned to a chef's queue"
+  },
+  "statusPreparing": "Preparing",
+  "@statusPreparing": {
+    "description": "Order status: being cooked"
+  },
+  "statusReady": "Ready",
+  "@statusReady": {
+    "description": "Order status: ready to serve"
+  },
+  "statusServed": "Served",
+  "@statusServed": {
+    "description": "Order status: served to the table"
+  },
+  "statusCancelled": "Cancelled",
+  "@statusCancelled": {
+    "description": "Order status: cancelled"
+  },
+  "channelQr": "QR",
+  "@channelQr": {
+    "description": "Order channel: diner scanned the table QR"
+  },
+  "channelWaiter": "Server",
+  "@channelWaiter": {
+    "description": "Order channel: taken by a server"
+  },
+  "channelAdmin": "Admin",
+  "@channelAdmin": {
+    "description": "Order channel: taken by an admin"
+  },
+  "orderNumberTable": "#{number} · Table {table}",
+  "@orderNumberTable": {
+    "description": "Order number with table label",
+    "placeholders": {
+      "number": {
+        "type": "int"
+      },
+      "table": {
+        "type": "String"
+      }
+    }
+  },
+  "tableLabel": "Table {label}",
+  "@tableLabel": {
+    "description": "Table name",
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "minutesAgo": "{minutes, plural, =0{just now} =1{1 min ago} other{{minutes} min ago}}",
+  "@minutesAgo": {
+    "description": "Relative time",
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "minutesShort": "{minutes} min",
+  "@minutesShort": {
+    "description": "Duration in minutes",
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "roleHotelAdmin": "Hotel admin",
+  "@roleHotelAdmin": {
+    "description": "Role name"
+  },
+  "roleManager": "Manager",
+  "@roleManager": {
+    "description": "Role name"
+  },
+  "roleCashier": "Cashier",
+  "@roleCashier": {
+    "description": "Role name"
+  },
+  "roleWaiter": "Server",
+  "@roleWaiter": {
+    "description": "Role name for waiter staff"
+  },
+  "roleChef": "Chef",
+  "@roleChef": {
+    "description": "Role name"
+  },
+  "rolePlatformAdmin": "Platform admin",
+  "@rolePlatformAdmin": {
+    "description": "Role name for the super admin"
+  },
+  "live": "Live",
+  "@live": {
+    "description": "Connection chip: realtime connected"
+  },
+  "reconnecting": "Reconnecting",
+  "@reconnecting": {
+    "description": "Connection chip: realtime disconnected"
+  },
+  "staleBanner": "Connection lost. Showing the last known queue; refreshing every few seconds.",
+  "@staleBanner": {
+    "description": "Banner when the realtime socket is down"
+  },
+  "modeChefAccept": "Chefs pick up",
+  "@modeChefAccept": {
+    "description": "Kitchen mode: chefs pick orders from a board"
+  },
+  "modeAutoAssign": "Auto assign",
+  "@modeAutoAssign": {
+    "description": "Kitchen mode: system assigns orders"
+  },
+  "modeAdminPrint": "Printed tickets",
+  "@modeAdminPrint": {
+    "description": "Kitchen mode: cooks from printed tickets"
+  },
+  "upForGrabs": "New orders",
+  "@upForGrabs": {
+    "description": "Card title: orders waiting for a chef to pick up"
+  },
+  "waitingForChef": "Waiting for a chef",
+  "@waitingForChef": {
+    "description": "Card title in auto-assign mode"
+  },
+  "noNewOrders": "No new orders",
+  "@noNewOrders": {
+    "description": "Empty new orders list"
+  },
+  "noNewOrdersBody": "New orders appear here instantly.",
+  "@noNewOrdersBody": {
+    "description": "Empty new orders list body"
+  },
+  "pickUp": "Pick up",
+  "@pickUp": {
+    "description": "Button: chef claims an order"
+  },
+  "pickedUp": "Order is yours",
+  "@pickedUp": {
+    "description": "Snackbar after a chef picks up an order"
+  },
+  "myQueue": "My queue",
+  "@myQueue": {
+    "description": "Chef's own queue panel title"
+  },
+  "queueEmpty": "You're free. Pick up the next order.",
+  "@queueEmpty": {
+    "description": "Empty chef queue"
+  },
+  "offShiftBody": "You're off shift. Switch on to receive orders.",
+  "@offShiftBody": {
+    "description": "Chef queue when off shift"
+  },
+  "lockedUntilHead": "Starts after the order ahead of it is ready",
+  "@lockedUntilHead": {
+    "description": "Tooltip on queued orders"
+  },
+  "startCooking": "Start cooking",
+  "@startCooking": {
+    "description": "Button: start the head order"
+  },
+  "started": "Started",
+  "@started": {
+    "description": "Snackbar after starting; also a date column header"
+  },
+  "markReady": "Mark ready",
+  "@markReady": {
+    "description": "Button: order is ready"
+  },
+  "markedReady": "Marked ready. The server has been told.",
+  "@markedReady": {
+    "description": "Snackbar after marking ready"
+  },
+  "cookingFor": "Cooking {minutes} min · target {target} min",
+  "@cookingFor": {
+    "description": "Elapsed cooking time",
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      },
+      "target": {
+        "type": "int"
+      }
+    }
+  },
+  "waitingFor": "Waiting {minutes} min",
+  "@waitingFor": {
+    "description": "Elapsed waiting time",
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "otherChefs": "Other chefs",
+  "@otherChefs": {
+    "description": "Card title: other chefs' queues"
+  },
+  "noOtherChefs": "No other chefs",
+  "@noOtherChefs": {
+    "description": "Empty other chefs list"
+  },
+  "idle": "Idle",
+  "@idle": {
+    "description": "Chef has nothing queued"
+  },
+  "onShift": "On shift",
+  "@onShift": {
+    "description": "Chef shift status"
+  },
+  "offShift": "Off shift",
+  "@offShift": {
+    "description": "Chef shift status"
+  },
+  "returnToBoard": "Return to board",
+  "@returnToBoard": {
+    "description": "Manager action: unassign an order"
+  },
+  "readyToServe": "Ready to serve",
+  "@readyToServe": {
+    "description": "Card title: ready orders"
+  },
+  "nothingWaiting": "Nothing waiting to be served",
+  "@nothingWaiting": {
+    "description": "Empty ready list"
+  },
+  "serve": "Serve",
+  "@serve": {
+    "description": "Button: mark served"
+  },
+  "needsAttention": "Needs attention",
+  "@needsAttention": {
+    "description": "Card title: orders to confirm or serve"
+  },
+  "allCalm": "All calm. Nothing to confirm or serve.",
+  "@allCalm": {
+    "description": "Empty attention list"
+  },
+  "markServed": "Served",
+  "@markServed": {
+    "description": "Button: mark order served"
+  },
+  "confirmOrder": "Confirm",
+  "@confirmOrder": {
+    "description": "Button: confirm a QR order"
+  },
+  "noTables": "No tables yet",
+  "@noTables": {
+    "description": "Empty tables list"
+  },
+  "noTablesBody": "Add tables to print their QR codes.",
+  "@noTablesBody": {
+    "description": "Empty tables list body"
+  },
+  "seats": "{count, plural, =1{1 seat} other{{count} seats}}",
+  "@seats": {
+    "description": "Seats at a table",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "seatsLabel": "Seats",
+  "@seatsLabel": {
+    "description": "Seats field label"
+  },
+  "inactive": "Inactive",
+  "@inactive": {
+    "description": "Table is not taking orders"
+  },
+  "free": "Free",
+  "@free": {
+    "description": "Table has no open orders"
+  },
+  "openOrders": "Open orders",
+  "@openOrders": {
+    "description": "Section title in table sheet"
+  },
+  "cannotTakeOrders": "Your role can't take orders here.",
+  "@cannotTakeOrders": {
+    "description": "Shown when the user lacks order permission"
+  },
+  "searchMenu": "Search the menu",
+  "@searchMenu": {
+    "description": "Search field hint"
+  },
+  "kitchenNoteHint": "Note for the kitchen (optional)",
+  "@kitchenNoteHint": {
+    "description": "Order note hint"
+  },
+  "sendToKitchen": "Send to kitchen",
+  "@sendToKitchen": {
+    "description": "Button: place staff order"
+  },
+  "orderSent": "Order sent to the kitchen",
+  "@orderSent": {
+    "description": "Snackbar after placing a staff order"
+  },
+  "soldOut": "Sold out",
+  "@soldOut": {
+    "description": "Item unavailable"
+  },
+  "veg": "Veg",
+  "@veg": {
+    "description": "Vegetarian"
+  },
+  "nonVeg": "Non-veg",
+  "@nonVeg": {
+    "description": "Non-vegetarian"
+  },
+  "subtotal": "Subtotal",
+  "@subtotal": {
+    "description": "Order subtotal"
+  },
+  "tax": "GST",
+  "@tax": {
+    "description": "Tax line"
+  },
+  "serviceCharge": "Service charge",
+  "@serviceCharge": {
+    "description": "Service charge line"
+  },
+  "total": "Total",
+  "@total": {
+    "description": "Order total"
+  },
+  "addCategory": "Add category",
+  "@addCategory": {
+    "description": "Button"
+  },
+  "addItem": "Add item",
+  "@addItem": {
+    "description": "Button"
+  },
+  "editItem": "Edit item",
+  "@editItem": {
+    "description": "Dialog title"
+  },
+  "addCategoryFirst": "Add a category first",
+  "@addCategoryFirst": {
+    "description": "Snackbar when adding an item without categories"
+  },
+  "menuEmpty": "Your menu is empty",
+  "@menuEmpty": {
+    "description": "Empty menu"
+  },
+  "menuEmptyBody": "Add a category, then your dishes.",
+  "@menuEmptyBody": {
+    "description": "Empty menu body"
+  },
+  "noMatches": "Nothing matches",
+  "@noMatches": {
+    "description": "Empty search result"
+  },
+  "category": "Category",
+  "@category": {
+    "description": "Category label"
+  },
+  "price": "Price",
+  "@price": {
+    "description": "Price column"
+  },
+  "prepTime": "Prep time",
+  "@prepTime": {
+    "description": "Preparation time label"
+  },
+  "availability": "Availability",
+  "@availability": {
+    "description": "Availability column"
+  },
+  "available": "Available",
+  "@available": {
+    "description": "Item available"
+  },
+  "priceRupees": "Price (₹)",
+  "@priceRupees": {
+    "description": "Price field label"
+  },
+  "priceHelp": "Before tax. GST is added automatically if you are registered.",
+  "@priceHelp": {
+    "description": "Help under the price field"
+  },
+  "descriptionOptional": "Description (optional)",
+  "@descriptionOptional": {
+    "description": "Item description field"
+  },
+  "addTable": "Add table",
+  "@addTable": {
+    "description": "Button"
+  },
+  "qrSheet": "QR sheet",
+  "@qrSheet": {
+    "description": "Button and dialog: printable QR codes"
+  },
+  "qrSheetHelp": "Print this page and place each code on its table.",
+  "@qrSheetHelp": {
+    "description": "Help in the QR sheet dialog"
+  },
+  "scanToOrder": "Scan to order",
+  "@scanToOrder": {
+    "description": "Caption under a printed QR code"
+  },
+  "tableName": "Table name",
+  "@tableName": {
+    "description": "Field label"
+  },
+  "tableNameHelp": "Short and unique, like T1 or P2.",
+  "@tableNameHelp": {
+    "description": "Help under table name"
+  },
+  "areaOptional": "Area (optional)",
+  "@areaOptional": {
+    "description": "Field label, e.g. Indoor or Patio"
+  },
+  "copyLink": "Copy link",
+  "@copyLink": {
+    "description": "Menu action"
+  },
+  "openDinerView": "Open diner view",
+  "@openDinerView": {
+    "description": "Menu action"
+  },
+  "rotateQr": "Replace QR code",
+  "@rotateQr": {
+    "description": "Menu action: invalidate the old QR"
+  },
+  "deactivate": "Deactivate",
+  "@deactivate": {
+    "description": "Menu action"
+  },
+  "activate": "Activate",
+  "@activate": {
+    "description": "Menu action"
+  },
+  "qrActive": "QR active",
+  "@qrActive": {
+    "description": "Chip"
+  },
+  "openOrdersCount": "{count} open",
+  "@openOrdersCount": {
+    "description": "Chip: open orders on a table",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "linkCopied": "Link copied",
+  "@linkCopied": {
+    "description": "Snackbar"
+  },
+  "qrRotated": "New QR created. Print it; the old one no longer works.",
+  "@qrRotated": {
+    "description": "Snackbar after rotating a QR"
+  },
+  "people": "People",
+  "@people": {
+    "description": "Team sub-tab"
+  },
+  "rolesAndAccess": "Roles & access",
+  "@rolesAndAccess": {
+    "description": "Team sub-tab: permission matrix"
+  },
+  "searchPeople": "Search by name or role",
+  "@searchPeople": {
+    "description": "Search hint"
+  },
+  "addMember": "Add member",
+  "@addMember": {
+    "description": "Button"
+  },
+  "newRole": "New role",
+  "@newRole": {
+    "description": "Button"
+  },
+  "newRoleLocked": "Custom roles (upgrade)",
+  "@newRoleLocked": {
+    "description": "Button when the plan lacks custom roles"
+  },
+  "newRoleHelp": "Then tick what this role can do.",
+  "@newRoleHelp": {
+    "description": "Help under new role name"
+  },
+  "permission": "Permission",
+  "@permission": {
+    "description": "Matrix column header"
+  },
+  "adminLocked": "Hotel admins always have every permission",
+  "@adminLocked": {
+    "description": "Tooltip on the locked admin column"
+  },
+  "disabled": "Disabled",
+  "@disabled": {
+    "description": "Account disabled"
+  },
+  "active": "Active",
+  "@active": {
+    "description": "Account active"
+  },
+  "makeRole": "Make {role}",
+  "@makeRole": {
+    "description": "Menu action to change a user's role",
+    "placeholders": {
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "disableAccount": "Disable account",
+  "@disableAccount": {
+    "description": "Menu action"
+  },
+  "enableAccount": "Enable account",
+  "@enableAccount": {
+    "description": "Menu action"
+  },
+  "emailLoginHelp": "They sign in with this email.",
+  "@emailLoginHelp": {
+    "description": "Help under email"
+  },
+  "tempPassword": "Temporary password",
+  "@tempPassword": {
+    "description": "Field label"
+  },
+  "tempPasswordHelp": "At least 8 characters. Share it privately.",
+  "@tempPasswordHelp": {
+    "description": "Help under temporary password"
+  },
+  "sendInvite": "Add member",
+  "@sendInvite": {
+    "description": "Primary button in add member dialog"
+  },
+  "permDashboard": "See the dashboard",
+  "@permDashboard": {
+    "description": "Permission label"
+  },
+  "permOrderView": "See orders",
+  "@permOrderView": {
+    "description": "Permission label"
+  },
+  "permOrderCreate": "Take orders",
+  "@permOrderCreate": {
+    "description": "Permission label"
+  },
+  "permOrderConfirm": "Confirm QR orders",
+  "@permOrderConfirm": {
+    "description": "Permission label"
+  },
+  "permOrderServe": "Mark orders served",
+  "@permOrderServe": {
+    "description": "Permission label"
+  },
+  "permOrderCancel": "Cancel orders",
+  "@permOrderCancel": {
+    "description": "Permission label"
+  },
+  "permKitchenCook": "Pick up and cook",
+  "@permKitchenCook": {
+    "description": "Permission label"
+  },
+  "permKitchenManage": "Manage chef queues",
+  "@permKitchenManage": {
+    "description": "Permission label"
+  },
+  "permTableManage": "Manage tables and QR",
+  "@permTableManage": {
+    "description": "Permission label"
+  },
+  "permMenuManage": "Edit menu and prices",
+  "@permMenuManage": {
+    "description": "Permission label"
+  },
+  "permMenuAvailability": "Mark items sold out",
+  "@permMenuAvailability": {
+    "description": "Permission label"
+  },
+  "permStaffManage": "Manage staff",
+  "@permStaffManage": {
+    "description": "Permission label"
+  },
+  "permRoleManage": "Configure roles",
+  "@permRoleManage": {
+    "description": "Permission label"
+  },
+  "permExpenseView": "See expenses",
+  "@permExpenseView": {
+    "description": "Permission label"
+  },
+  "permExpenseManage": "Record expenses",
+  "@permExpenseManage": {
+    "description": "Permission label"
+  },
+  "permReportView": "See reports",
+  "@permReportView": {
+    "description": "Permission label"
+  },
+  "permSettingsManage": "Settings and billing",
+  "@permSettingsManage": {
+    "description": "Permission label"
+  },
+  "addExpense": "Add expense",
+  "@addExpense": {
+    "description": "Button"
+  },
+  "editExpense": "Edit expense",
+  "@editExpense": {
+    "description": "Dialog title"
+  },
+  "previousMonth": "Previous month",
+  "@previousMonth": {
+    "description": "Tooltip"
+  },
+  "nextMonth": "Next month",
+  "@nextMonth": {
+    "description": "Tooltip"
+  },
+  "spentThisMonth": "Spent this month",
+  "@spentThisMonth": {
+    "description": "Summary caption"
+  },
+  "byDay": "By day",
+  "@byDay": {
+    "description": "Card title"
+  },
+  "noExpenses": "No expenses this month",
+  "@noExpenses": {
+    "description": "Empty state"
+  },
+  "noExpensesBody": "Record gas, groceries, salaries and more.",
+  "@noExpensesBody": {
+    "description": "Empty state body"
+  },
+  "amountRupees": "Amount (₹)",
+  "@amountRupees": {
+    "description": "Field label"
+  },
+  "paidBy": "Paid by",
+  "@paidBy": {
+    "description": "Payment method label"
+  },
+  "payCash": "Cash",
+  "@payCash": {
+    "description": "Payment method"
+  },
+  "payUpi": "UPI",
+  "@payUpi": {
+    "description": "Payment method"
+  },
+  "payCard": "Card",
+  "@payCard": {
+    "description": "Payment method"
+  },
+  "payBank": "Bank",
+  "@payBank": {
+    "description": "Payment method"
+  },
+  "vendorOptional": "Vendor (optional)",
+  "@vendorOptional": {
+    "description": "Field label"
+  },
+  "noteOptional": "Note (optional)",
+  "@noteOptional": {
+    "description": "Field label"
+  },
+  "kitchenAndOrdering": "Kitchen",
+  "@kitchenAndOrdering": {
+    "description": "Settings tab"
+  },
+  "planAndBilling": "Plan & billing",
+  "@planAndBilling": {
+    "description": "Settings tab"
+  },
+  "restaurantName": "Restaurant name",
+  "@restaurantName": {
+    "description": "Field label"
+  },
+  "kitchenMode": "How orders reach chefs",
+  "@kitchenMode": {
+    "description": "Field label"
+  },
+  "kitchenModeHelp": "Locked options need a higher plan.",
+  "@kitchenModeHelp": {
+    "description": "Help under kitchen mode"
+  },
+  "maxQueue": "Orders per chef at once",
+  "@maxQueue": {
+    "description": "Field label"
+  },
+  "maxQueueHelp": "A chef can't hold more than this in their queue.",
+  "@maxQueueHelp": {
+    "description": "Help under max queue"
+  },
+  "confirmQrOrders": "Confirm QR orders first",
+  "@confirmQrOrders": {
+    "description": "Switch label"
+  },
+  "confirmQrOrdersHelp": "A server approves table orders before the kitchen sees them.",
+  "@confirmQrOrdersHelp": {
+    "description": "Switch help"
+  },
+  "subActive": "Active",
+  "@subActive": {
+    "description": "Subscription status"
+  },
+  "subTrial": "Trial",
+  "@subTrial": {
+    "description": "Subscription status"
+  },
+  "subPastDue": "Payment due",
+  "@subPastDue": {
+    "description": "Subscription status"
+  },
+  "subSuspended": "Suspended",
+  "@subSuspended": {
+    "description": "Subscription status"
+  },
+  "perMonth": "{amount} / month",
+  "@perMonth": {
+    "description": "Plan price",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "perMonthShort": "/ month",
+  "@perMonthShort": {
+    "description": "Suffix after a plan price"
+  },
+  "trialEndsOn": "Trial ends {date}",
+  "@trialEndsOn": {
+    "description": "Trial end date",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "renewsOn": "Renews {date}",
+  "@renewsOn": {
+    "description": "Renewal date",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "choosePlan": "Choose a plan",
+  "@choosePlan": {
+    "description": "Section label"
+  },
+  "choosePlanHelp": "You'll pay securely on Razorpay. Your plan activates as soon as the payment clears.",
+  "@choosePlanHelp": {
+    "description": "Help under plan choice"
+  },
+  "paymentsNotConfigured": "Online payment isn't switched on yet. Contact support to activate.",
+  "@paymentsNotConfigured": {
+    "description": "Shown when Razorpay keys are missing"
+  },
+  "payAndActivate": "Pay & activate",
+  "@payAndActivate": {
+    "description": "Button: start checkout"
+  },
+  "renew": "Renew",
+  "@renew": {
+    "description": "Button: renew current plan"
+  },
+  "payments": "Payments",
+  "@payments": {
+    "description": "Section label: past subscription payments"
+  },
+  "managePlan": "Manage plan",
+  "@managePlan": {
+    "description": "Banner action"
+  },
+  "bannerPastDue": "Your payment is due. Pay now to avoid interruption.",
+  "@bannerPastDue": {
+    "description": "Banner when subscription is past due"
+  },
+  "bannerSuspended": "Your account is paused. You can still view your data; pay to resume orders.",
+  "@bannerSuspended": {
+    "description": "Banner when suspended"
+  },
+  "hotels": "Hotels",
+  "@hotels": {
+    "description": "Big number caption"
+  },
+  "mrr": "Monthly revenue",
+  "@mrr": {
+    "description": "Big number caption: recurring revenue"
+  },
+  "orders30d": "Orders (30 days)",
+  "@orders30d": {
+    "description": "Big number caption and column"
+  },
+  "collected30d": "Collected, last 30 days",
+  "@collected30d": {
+    "description": "Card caption"
+  },
+  "trialsEnding": "{count} trials end this week",
+  "@trialsEnding": {
+    "description": "Chip",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "signups": "New hotels",
+  "@signups": {
+    "description": "Card title: signups per month"
+  },
+  "planMix": "Plan mix",
+  "@planMix": {
+    "description": "Card title"
+  },
+  "recentHotels": "Recent hotels",
+  "@recentHotels": {
+    "description": "Card title"
+  },
+  "noHotels": "No hotels yet",
+  "@noHotels": {
+    "description": "Empty state"
+  },
+  "noHotelsBody": "Register your first hotel to get started.",
+  "@noHotelsBody": {
+    "description": "Empty state body"
+  },
+  "searchHotels": "Search hotels",
+  "@searchHotels": {
+    "description": "Search hint"
+  },
+  "registerHotel": "Register hotel",
+  "@registerHotel": {
+    "description": "Button and dialog title"
+  },
+  "hotelRegistered": "Hotel registered. Share the admin login with them.",
+  "@hotelRegistered": {
+    "description": "Snackbar"
+  },
+  "hotel": "Hotel",
+  "@hotel": {
+    "description": "Column header"
+  },
+  "plan": "Plan",
+  "@plan": {
+    "description": "Column header or field label"
+  },
+  "city": "City",
+  "@city": {
+    "description": "Column header or field label"
+  },
+  "tablesCol": "Tables",
+  "@tablesCol": {
+    "description": "Column header"
+  },
+  "hotelName": "Hotel name",
+  "@hotelName": {
+    "description": "Field label"
+  },
+  "trialHelp": "Every new hotel starts on a free trial.",
+  "@trialHelp": {
+    "description": "Help under plan choice"
+  },
+  "gstRegistration": "GST registration",
+  "@gstRegistration": {
+    "description": "Field label"
+  },
+  "gstRegular": "Regular",
+  "@gstRegular": {
+    "description": "GST registration type"
+  },
+  "gstComposition": "Composition",
+  "@gstComposition": {
+    "description": "GST registration type"
+  },
+  "gstUnregistered": "Not registered",
+  "@gstUnregistered": {
+    "description": "GST registration type"
+  },
+  "gstin": "GSTIN",
+  "@gstin": {
+    "description": "Field label"
+  },
+  "hotelAdmin": "Hotel admin",
+  "@hotelAdmin": {
+    "description": "Section title"
+  },
+  "suspendHotel": "Suspend",
+  "@suspendHotel": {
+    "description": "Button"
+  },
+  "resumeHotel": "Resume",
+  "@resumeHotel": {
+    "description": "Button"
+  },
+  "changePlan": "Change plan",
+  "@changePlan": {
+    "description": "Button"
+  },
+  "overrides": "Feature overrides",
+  "@overrides": {
+    "description": "Button and dialog title"
+  },
+  "overridesHelp": "Turn a feature on or off for this hotel only, regardless of its plan.",
+  "@overridesHelp": {
+    "description": "Dialog help"
+  },
+  "overridden": "Overridden for this hotel",
+  "@overridden": {
+    "description": "Subtitle when an override exists"
+  },
+  "fromPlan": "From plan",
+  "@fromPlan": {
+    "description": "Subtitle when no override exists"
+  },
+  "placeholderPrice": "Placeholder",
+  "@placeholderPrice": {
+    "description": "Chip: price not yet market-validated"
+  },
+  "editPrice": "Edit price",
+  "@editPrice": {
+    "description": "Tooltip and dialog title"
+  },
+  "monthlyPrice": "Monthly price (₹)",
+  "@monthlyPrice": {
+    "description": "Field label"
+  },
+  "priceChangeHelp": "Applies to new subscriptions. Existing hotels keep their price until renewal.",
+  "@priceChangeHelp": {
+    "description": "Help under price"
+  },
+  "features": "Features",
+  "@features": {
+    "description": "Section title"
+  },
+  "limits": "Limits",
+  "@limits": {
+    "description": "Section title"
+  },
+  "limit": "Limit",
+  "@limit": {
+    "description": "Field label"
+  },
+  "limitHelp": "Leave empty for unlimited.",
+  "@limitHelp": {
+    "description": "Help under limit"
+  },
+  "unlimited": "Unlimited",
+  "@unlimited": {
+    "description": "Limit value"
+  },
+  "featQr": "QR ordering",
+  "@featQr": {
+    "description": "Feature name"
+  },
+  "featWaiter": "Server ordering",
+  "@featWaiter": {
+    "description": "Feature name"
+  },
+  "featChefAccept": "Chefs pick up orders",
+  "@featChefAccept": {
+    "description": "Feature name"
+  },
+  "featAutoRouting": "Auto-assign to chefs",
+  "@featAutoRouting": {
+    "description": "Feature name"
+  },
+  "featAdminPrint": "Printed kitchen tickets",
+  "@featAdminPrint": {
+    "description": "Feature name"
+  },
+  "featExpenses": "Expenses",
+  "@featExpenses": {
+    "description": "Feature name"
+  },
+  "featCustomRoles": "Custom roles",
+  "@featCustomRoles": {
+    "description": "Feature name"
+  },
+  "featReports": "Advanced reports",
+  "@featReports": {
+    "description": "Feature name"
+  },
+  "featRatings": "Ratings",
+  "@featRatings": {
+    "description": "Feature name"
+  },
+  "featApi": "API & webhooks",
+  "@featApi": {
+    "description": "Feature name"
+  },
+  "featRooms": "Rooms",
+  "@featRooms": {
+    "description": "Feature name"
+  },
+  "limOutlets": "Outlets",
+  "@limOutlets": {
+    "description": "Limit name"
+  },
+  "limTables": "Tables",
+  "@limTables": {
+    "description": "Limit name"
+  },
+  "limStaff": "Staff",
+  "@limStaff": {
+    "description": "Limit name"
+  },
+  "limChefs": "Chefs",
+  "@limChefs": {
+    "description": "Limit name"
+  },
+  "limMenuItems": "Menu items",
+  "@limMenuItems": {
+    "description": "Limit name"
+  },
+  "limOrders": "Orders per month",
+  "@limOrders": {
+    "description": "Limit name"
+  },
+  "qrInvalid": "This QR code doesn't work",
+  "@qrInvalid": {
+    "description": "Diner error title"
+  },
+  "qrInvalidBody": "Please ask a server for help.",
+  "@qrInvalidBody": {
+    "description": "Diner error body"
+  },
+  "dinerHeadline": "What would you like?",
+  "@dinerHeadline": {
+    "description": "Diner page headline"
+  },
+  "dinerViewOnly": "Browse the menu and tell your server when you're ready.",
+  "@dinerViewOnly": {
+    "description": "Shown when QR ordering is off"
+  },
+  "yourOrder": "Your order",
+  "@yourOrder": {
+    "description": "Cart dialog title"
+  },
+  "yourOrders": "Your orders",
+  "@yourOrders": {
+    "description": "Tracker title"
+  },
+  "stepSent": "Sent",
+  "@stepSent": {
+    "description": "Diner tracker first step: order sent to the restaurant"
+  },
+  "dinerNoteHint": "Anything the kitchen should know?",
+  "@dinerNoteHint": {
+    "description": "Order note hint for diners"
+  },
+  "pricesByRestaurant": "Prices and taxes are set by the restaurant.",
+  "@pricesByRestaurant": {
+    "description": "Small print under totals"
+  },
+  "placeOrder": "Place order",
+  "@placeOrder": {
+    "description": "Button"
+  },
+  "orderPlaced": "Order placed. We'll update you here.",
+  "@orderPlaced": {
+    "description": "Snackbar"
+  },
+  "itemsCount": "{count, plural, =1{1 item} other{{count} items}}",
+  "@itemsCount": {
+    "description": "Cart bar count",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "viewOrder": "View order",
+  "@viewOrder": {
+    "description": "Cart bar button"
+  },
+  "chefPreparing": "{name} is preparing it",
+  "@chefPreparing": {
+    "description": "Tracker: chef name",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "readyOnItsWay": "Ready! It's on its way to your table.",
+  "@readyOnItsWay": {
+    "description": "Tracker: ready message"
+  },
+  "errGeneric": "Something went wrong. Please try again.",
+  "@errGeneric": {
+    "description": "Generic error"
+  },
+  "errOffline": "You're offline. Check the connection and retry.",
+  "@errOffline": {
+    "description": "Network error"
+  },
+  "errCredentials": "Email or password is wrong.",
+  "@errCredentials": {
+    "description": "Login error"
+  },
+  "errFeatureLocked": "Your plan doesn't include this. Upgrade to unlock it.",
+  "@errFeatureLocked": {
+    "description": "Feature locked error"
+  },
+  "errLimit": "You've reached your plan's limit.",
+  "@errLimit": {
+    "description": "Plan limit error"
+  },
+  "errPermission": "Your role doesn't allow this.",
+  "@errPermission": {
+    "description": "Permission error"
+  },
+  "errTaken": "Another chef already picked this order.",
+  "@errTaken": {
+    "description": "Accept race lost"
+  },
+  "errQueueFull": "Finish an order before picking another.",
+  "@errQueueFull": {
+    "description": "Chef queue full"
+  },
+  "errNotHead": "Finish the order ahead of this one first.",
+  "@errNotHead": {
+    "description": "Strict queue error"
+  },
+  "errSoldOut": "An item just sold out. Please update your order.",
+  "@errSoldOut": {
+    "description": "Item unavailable error"
+  },
+  "errSessionExpired": "Your table session ended. Scan the QR again.",
+  "@errSessionExpired": {
+    "description": "Diner session expired"
+  },
+  "errRequired": "Required",
+  "@errRequired": {
+    "description": "Validation: empty field"
+  },
+  "errEmail": "Enter a valid email",
+  "@errEmail": {
+    "description": "Validation: email"
+  },
+  "errAmount": "Enter an amount like 250 or 99.50",
+  "@errAmount": {
+    "description": "Validation: amount"
+  },
+  "errPasswordLength": "At least 8 characters",
+  "@errPasswordLength": {
+    "description": "Validation: password length"
+  },
+  "errGstin": "Enter a 15-character GSTIN",
+  "@errGstin": {
+    "description": "Validation: GSTIN"
+  }
+}

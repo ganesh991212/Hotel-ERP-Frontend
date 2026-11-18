@@ -1,0 +1,161 @@
+import 'dart:async';
+import 'dart:convert';
+
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+
+/// API base. Override at build time: --dart-define=API_BASE=https://api.example.com
+const apiBase = String.fromEnvironment('API_BASE', defaultValue: 'http://localhost:8000');
+
+class ApiException implements Exception {
+  ApiException(this.status, this.code, this.message, [this.details = const {}]);
+  final int status;
+  final String code;
+  final String message;
+  final Map<String, dynamic> details;
+
+  bool get isLocked => code == 'feature_locked' || code == 'limit_reached';
+
+  @override
+  String toString() => message;
+}
+
+class Tokens {
+  const Tokens(this.access, this.refresh, this.platform);
+  final String access;
+  final String refresh;
+  final bool platform;
+}
+
+/// HTTP client with bearer auth and **serialised** token refresh.
+///
+/// Refresh tokens rotate and reuse revokes the whole family (backend rule 9), so two parallel
+/// 401s must share one refresh call. [_refreshing] is that single in-flight future.
+class ApiClient {
+  ApiClient({http.Client? httpClient}) : _http = httpClient ?? http.Client();
+
+  final http.Client _http;
+  Tokens? _tokens;
+  Future<bool>? _refreshing;
+  void Function()? onSignedOut;
+
+  static const _kAccess = 'auth.access', _kRefresh = 'auth.refresh', _kPlatform = 'auth.platform';
+
+  Tokens? get tokens => _tokens;
+  String? get accessToken => _tokens?.access;
+
+  Future<void> restore() async {
+    final p = await SharedPreferences.getInstance();
+    final a = p.getString(_kAccess), r = p.getString(_kRefresh);
+    if (a != null && r != null) _tokens = Tokens(a, r, p.getBool(_kPlatform) ?? false);
+  }
+
+  Future<void> _save(Tokens? t) async {
+    _tokens = t;
+    final p = await SharedPreferences.getInstance();
+    if (t == null) {
+      await p.remove(_kAccess);
+      await p.remove(_kRefresh);
+      await p.remove(_kPlatform);
+    } else {
+      await p.setString(_kAccess, t.access);
+      await p.setString(_kRefresh, t.refresh);
+      await p.setBool(_kPlatform, t.platform);
+    }
+  }
+
+  Future<Tokens> login(String email, String password) async {
+    final res = await _send('POST', '/api/v1/auth/login', body: {'email': email, 'password': password}, auth: false);
+    final t = Tokens(res['access_token'], res['refresh_token'], res['platform'] == true);
+    await _save(t);
+    return t;
+  }
+
+  Future<void> logout() async {
+    final r = _tokens?.refresh;
+    await _save(null);
+    if (r != null) {
+      try {
+        await _send('POST', '/api/v1/auth/logout', body: {'refresh_token': r}, auth: false);
+      } catch (_) {}
+    }
+  }
+
+  Future<bool> _refresh() {
+    return _refreshing ??= () async {
+      try {
+        final r = _tokens?.refresh;
+        if (r == null) return false;
+        final res = await _send('POST', '/api/v1/auth/refresh', body: {'refresh_token': r}, auth: false);
+        await _save(Tokens(res['access_token'], res['refresh_token'], res['platform'] == true));
+        return true;
+      } catch (_) {
+        await _save(null);
+        onSignedOut?.call();
+        return false;
+      } finally {
+        _refreshing = null;
+      }
+    }();
+  }
+
+  Future<dynamic> get(String path, {Map<String, String>? headers}) => _authed('GET', path, headers: headers);
+  Future<dynamic> post(String path, [Object? body, Map<String, String>? headers]) =>
+      _authed('POST', path, body: body, headers: headers);
+  Future<dynamic> put(String path, [Object? body]) => _authed('PUT', path, body: body);
+  Future<dynamic> patch(String path, [Object? body]) => _authed('PATCH', path, body: body);
+  Future<dynamic> delete(String path) => _authed('DELETE', path);
+
+  /// Unauthenticated call (diner pages) with optional extra headers.
+  Future<dynamic> public(String method, String path, {Object? body, Map<String, String>? headers}) =>
+      _send(method, path, body: body, auth: false, headers: headers);
+
+  Future<dynamic> _authed(String method, String path, {Object? body, Map<String, String>? headers}) async {
+    final pending = _refreshing;
+    if (pending != null) await pending;
+    try {
+      return await _send(method, path, body: body, headers: headers);
+    } on ApiException catch (e) {
+      if (e.status == 401 && e.code == 'token_expired' && await _refresh()) {
+        return _send(method, path, body: body, headers: headers);
+      }
+      if (e.status == 401) {
+        await _save(null);
+        onSignedOut?.call();
+      }
+      rethrow;
+    }
+  }
+
+  Future<dynamic> _send(String method, String path,
+      {Object? body, bool auth = true, Map<String, String>? headers}) async {
+    final req = http.Request(method, Uri.parse('$apiBase$path'));
+    req.headers['Accept'] = 'application/json';
+    if (auth && _tokens != null) req.headers['Authorization'] = 'Bearer ${_tokens!.access}';
+    if (headers != null) req.headers.addAll(headers);
+    if (body != null) {
+      req.headers['Content-Type'] = 'application/json';
+      req.body = jsonEncode(body);
+    }
+    final http.Response res;
+    try {
+      res = await http.Response.fromStream(await _http.send(req).timeout(const Duration(seconds: 20)));
+    } on TimeoutException {
+      throw ApiException(0, 'timeout', 'timeout');
+    } catch (_) {
+      throw ApiException(0, 'offline', 'offline');
+    }
+    final text = utf8.decode(res.bodyBytes);
+    final data = text.isEmpty ? null : jsonDecode(text);
+    if (res.statusCode >= 400) {
+      if (data is Map && data['code'] != null) {
+        throw ApiException(res.statusCode, data['code'], data['message'] ?? '', Map.from(data['details'] ?? {}));
+      }
+      // FastAPI validation errors: {"detail": [...]}
+      final detail = data is Map ? data['detail'] : null;
+      final msg = detail is List && detail.isNotEmpty ? (detail.first['msg'] ?? '').toString() : res.reasonPhrase;
+      throw ApiException(res.statusCode, 'invalid', msg ?? '');
+    }
+    return data;
+  }
+}
