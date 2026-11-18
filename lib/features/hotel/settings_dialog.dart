@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:material_ui/material_ui.dart';
@@ -5,6 +8,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../core/api/api_client.dart';
 import '../../core/auth/session.dart';
+import '../../core/branding/branding.dart';
 import '../../core/money.dart';
 import '../../core/theme/tokens.dart';
 import '../../l10n/app_localizations.dart';
@@ -60,16 +64,18 @@ class _SettingsState extends ConsumerState<_Settings> {
     return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
       PillTabs<String>(
         expand: true,
-        items: [('kitchen', l.kitchenAndOrdering), ('billing', l.planAndBilling)],
+        items: [('kitchen', l.kitchenAndOrdering), ('brand', l.branding), ('billing', l.planAndBilling)],
         selected: _tab,
         onSelect: (v) => setState(() => _tab = v),
       ),
       const SizedBox(height: 8),
       AnimatedSwitcher(
         duration: Motion.medium,
-        child: _tab == 'kitchen'
-            ? KeyedSubtree(key: const ValueKey('k'), child: _kitchen(context))
-            : KeyedSubtree(key: const ValueKey('b'), child: _billing(context)),
+        child: switch (_tab) {
+          'kitchen' => KeyedSubtree(key: const ValueKey('k'), child: _kitchen(context)),
+          'brand' => const KeyedSubtree(key: ValueKey('br'), child: _BrandingForm()),
+          _ => KeyedSubtree(key: const ValueKey('b'), child: _billing(context)),
+        },
       ),
     ]);
   }
@@ -217,5 +223,108 @@ class _SettingsState extends ConsumerState<_Settings> {
           ),
       ],
     ]);
+  }
+}
+
+
+/// Logo and one-line address: shown in the app and printed on table QR cards.
+class _BrandingForm extends ConsumerStatefulWidget {
+  const _BrandingForm();
+
+  @override
+  ConsumerState<_BrandingForm> createState() => _BrandingFormState();
+}
+
+class _BrandingFormState extends ConsumerState<_BrandingForm> {
+  final _address = TextEditingController();
+  bool _loaded = false;
+  bool _busy = false;
+
+  Future<void> _pickLogo() async {
+    final l = AppLocalizations.of(context);
+    final picked = await FilePicker.pickFiles(type: FileType.image);
+    if (picked.isEmpty || !mounted) return;
+    final bytes = await picked.single.readAsBytes();
+    if (!mounted) return;
+    setState(() => _busy = true);
+    final ok = await guard(context,
+        () => ref.read(apiProvider).put('/api/v1/branding/logo', {'image_b64': base64Encode(bytes)}));
+    if (!mounted) return;
+    setState(() => _busy = false);
+    if (ok) {
+      ref.invalidate(brandingProvider);
+      showDone(context, l.logoUpdated);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
+    final t = context.tokens;
+    final tt = Theme.of(context).textTheme;
+    final brand = ref.watch(brandingProvider);
+    return brand.when(
+      loading: () => const LoadingBlock(height: 200),
+      error: (e, _) => Text(errorText(context, e)),
+      data: (b) {
+        if (!_loaded && b != null) {
+          _address.text = b.addressLine ?? '';
+          _loaded = true;
+        }
+        return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+          FieldLabel(l.hotelLogo, help: l.hotelLogoHelp),
+          Row(children: [
+            Container(
+              width: 84,
+              height: 84,
+              clipBehavior: Clip.antiAlias,
+              decoration: BoxDecoration(
+                color: t.paper,
+                borderRadius: BorderRadius.circular(Rad.tile),
+                border: Border.all(color: t.line2),
+              ),
+              child: b?.logo == null
+                  ? Icon(Icons.image_outlined, color: t.faint)
+                  : Image.memory(b!.logo!, fit: BoxFit.contain),
+            ),
+            const SizedBox(width: 14),
+            Expanded(
+              child: Wrap(spacing: 8, runSpacing: 8, children: [
+                FilledButton.icon(
+                  onPressed: _busy ? null : _pickLogo,
+                  icon: const Icon(Icons.upload_rounded, size: 18),
+                  label: Text(b?.logo == null ? l.uploadLogo : l.replaceLogo),
+                ),
+                if (b?.logo != null)
+                  TextButton(
+                    onPressed: _busy
+                        ? null
+                        : () async {
+                            await guard(context, () => ref.read(apiProvider).delete('/api/v1/branding/logo'));
+                            ref.invalidate(brandingProvider);
+                          },
+                    child: Text(l.removeLogo, style: TextStyle(color: t.danger)),
+                  ),
+              ]),
+            ),
+          ]),
+          FieldLabel(l.addressLine, help: l.addressLineHelp),
+          TextField(controller: _address, maxLength: 200, decoration: const InputDecoration(counterText: '')),
+          Text(l.poweredByNote, style: tt.bodySmall),
+          DialogActions(
+            primary: l.saveChanges,
+            busy: _busy,
+            onPrimary: () async {
+              final ok = await guard(
+                  context, () => ref.read(apiProvider).put('/api/v1/branding', {'address_line': _address.text}));
+              if (ok && mounted) {
+                ref.invalidate(brandingProvider);
+                Navigator.of(this.context).pop();
+              }
+            },
+          ),
+        ]);
+      },
+    );
   }
 }

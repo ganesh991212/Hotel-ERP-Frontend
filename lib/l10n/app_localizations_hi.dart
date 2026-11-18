@@ -1384,6 +1384,38 @@ class AppLocalizationsHi extends AppLocalizations {
   String get langHi => 'हिन्दी';
 
   @override
+  String get branding => 'ब्रांडिंग';
+
+  @override
+  String get hotelLogo => 'होटल लोगो';
+
+  @override
+  String get hotelLogoHelp =>
+      'ऐप में दिखता है और टेबल QR कार्ड पर छपता है। PNG या JPEG।';
+
+  @override
+  String get uploadLogo => 'लोगो अपलोड करें';
+
+  @override
+  String get replaceLogo => 'लोगो बदलें';
+
+  @override
+  String get removeLogo => 'हटाएँ';
+
+  @override
+  String get logoUpdated => 'लोगो अपडेट हो गया';
+
+  @override
+  String get addressLine => 'पता (एक लाइन)';
+
+  @override
+  String get addressLineHelp => 'QR कार्ड पर होटल के नाम के नीचे छपता है।';
+
+  @override
+  String get poweredByNote =>
+      'QR कार्ड के आख़िर में प्लेटफ़ॉर्म की छोटी \"Powered by\" लाइन होती है।';
+
+  @override
   String get errGeneric => 'कुछ गड़बड़ हो गई। कृपया फिर कोशिश करें।';
 
   @override

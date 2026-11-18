@@ -1847,6 +1847,46 @@
   "@langHi": {
     "description": "Native name of Hindi; identical in every language file"
   },
+  "branding": "Branding",
+  "@branding": {
+    "description": "Settings tab: logo and address"
+  },
+  "hotelLogo": "Hotel logo",
+  "@hotelLogo": {
+    "description": "Field label"
+  },
+  "hotelLogoHelp": "Shown in the app and printed on table QR cards. PNG or JPEG.",
+  "@hotelLogoHelp": {
+    "description": "Help under logo"
+  },
+  "uploadLogo": "Upload logo",
+  "@uploadLogo": {
+    "description": "Button"
+  },
+  "replaceLogo": "Replace logo",
+  "@replaceLogo": {
+    "description": "Button when a logo exists"
+  },
+  "removeLogo": "Remove",
+  "@removeLogo": {
+    "description": "Button: delete logo"
+  },
+  "logoUpdated": "Logo updated",
+  "@logoUpdated": {
+    "description": "Snackbar"
+  },
+  "addressLine": "Address (one line)",
+  "@addressLine": {
+    "description": "Field label"
+  },
+  "addressLineHelp": "Printed under your hotel name on QR cards.",
+  "@addressLineHelp": {
+    "description": "Help under address"
+  },
+  "poweredByNote": "QR cards end with a small \"Powered by\" line from the platform.",
+  "@poweredByNote": {
+    "description": "Note in branding settings"
+  },
   "errGeneric": "Something went wrong. Please try again.",
   "@errGeneric": {
     "description": "Generic error"

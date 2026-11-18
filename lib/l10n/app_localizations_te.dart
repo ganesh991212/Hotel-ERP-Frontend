@@ -1389,6 +1389,39 @@ class AppLocalizationsTe extends AppLocalizations {
   String get langHi => 'हिन्दी';
 
   @override
+  String get branding => 'బ్రాండింగ్';
+
+  @override
+  String get hotelLogo => 'హోటల్ లోగో';
+
+  @override
+  String get hotelLogoHelp =>
+      'యాప్‌లో కనిపిస్తుంది, టేబుల్ QR కార్డులపై ప్రింట్ అవుతుంది. PNG లేదా JPEG.';
+
+  @override
+  String get uploadLogo => 'లోగో అప్‌లోడ్';
+
+  @override
+  String get replaceLogo => 'లోగో మార్చు';
+
+  @override
+  String get removeLogo => 'తొలగించు';
+
+  @override
+  String get logoUpdated => 'లోగో అప్‌డేట్ అయింది';
+
+  @override
+  String get addressLine => 'చిరునామా (ఒక లైన్)';
+
+  @override
+  String get addressLineHelp =>
+      'QR కార్డులపై మీ హోటల్ పేరు కింద ప్రింట్ అవుతుంది.';
+
+  @override
+  String get poweredByNote =>
+      'QR కార్డుల చివర ప్లాట్‌ఫామ్ నుండి చిన్న \"Powered by\" లైన్ ఉంటుంది.';
+
+  @override
   String get errGeneric => 'ఏదో తప్పు జరిగింది. దయచేసి మళ్ళీ ప్రయత్నించండి.';
 
   @override

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -105,6 +106,17 @@ class ApiClient {
   }
 
   Future<dynamic> get(String path, {Map<String, String>? headers}) => _authed('GET', path, headers: headers);
+
+  /// Raw bytes (images). Same auth and refresh handling as JSON calls.
+  Future<Uint8List> getBytes(String path) async {
+    Future<http.Response> once() => _http
+        .get(Uri.parse('$apiBase$path'), headers: {if (_tokens != null) 'Authorization': 'Bearer ${_tokens!.access}'})
+        .timeout(const Duration(seconds: 20));
+    var res = await once();
+    if (res.statusCode == 401 && await _refresh()) res = await once();
+    if (res.statusCode >= 400) throw ApiException(res.statusCode, 'http_${res.statusCode}', res.reasonPhrase ?? '');
+    return res.bodyBytes;
+  }
   Future<dynamic> post(String path, [Object? body, Map<String, String>? headers]) =>
       _authed('POST', path, body: body, headers: headers);
   Future<dynamic> put(String path, [Object? body]) => _authed('PUT', path, body: body);

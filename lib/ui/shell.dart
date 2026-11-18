@@ -7,6 +7,7 @@ import 'package:material_ui/material_ui.dart';
 
 import '../core/auth/session.dart';
 import '../core/theme/tokens.dart';
+import '../core/branding/branding.dart';
 import '../core/l10n/locale.dart';
 import '../core/push/permission/notif_permission.dart';
 import '../core/push/push_service.dart';
@@ -119,13 +120,14 @@ class AppShell extends ConsumerWidget {
   }
 }
 
-class _Brand extends StatelessWidget {
+class _Brand extends ConsumerWidget {
   const _Brand({required this.session});
   final Session session;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final t = context.tokens;
+    final logo = ref.watch(brandingProvider).value?.logo;
     final l = AppLocalizations.of(context);
     return Container(
       padding: const EdgeInsets.fromLTRB(14, 9, 18, 9),
@@ -135,7 +137,12 @@ class _Brand extends StatelessWidget {
         color: t.card,
       ),
       child: Row(mainAxisSize: MainAxisSize.min, children: [
-        _HalfDot(color: t.accentDeep),
+        logo != null
+            ? ClipRRect(
+                borderRadius: BorderRadius.circular(6),
+                child: Image.memory(logo, width: 24, height: 24, fit: BoxFit.contain),
+              )
+            : _HalfDot(color: t.accentDeep),
         const SizedBox(width: 9),
         Flexible(
           child: Text(

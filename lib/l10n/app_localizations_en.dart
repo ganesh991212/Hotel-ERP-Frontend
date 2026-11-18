@@ -1388,6 +1388,38 @@ class AppLocalizationsEn extends AppLocalizations {
   String get langHi => 'हिन्दी';
 
   @override
+  String get branding => 'Branding';
+
+  @override
+  String get hotelLogo => 'Hotel logo';
+
+  @override
+  String get hotelLogoHelp =>
+      'Shown in the app and printed on table QR cards. PNG or JPEG.';
+
+  @override
+  String get uploadLogo => 'Upload logo';
+
+  @override
+  String get replaceLogo => 'Replace logo';
+
+  @override
+  String get removeLogo => 'Remove';
+
+  @override
+  String get logoUpdated => 'Logo updated';
+
+  @override
+  String get addressLine => 'Address (one line)';
+
+  @override
+  String get addressLineHelp => 'Printed under your hotel name on QR cards.';
+
+  @override
+  String get poweredByNote =>
+      'QR cards end with a small \"Powered by\" line from the platform.';
+
+  @override
   String get errGeneric => 'Something went wrong. Please try again.';
 
   @override

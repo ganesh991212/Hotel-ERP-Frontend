@@ -2608,6 +2608,66 @@ abstract class AppLocalizations {
   /// **'हिन्दी'**
   String get langHi;
 
+  /// Settings tab: logo and address
+  ///
+  /// In en, this message translates to:
+  /// **'Branding'**
+  String get branding;
+
+  /// Field label
+  ///
+  /// In en, this message translates to:
+  /// **'Hotel logo'**
+  String get hotelLogo;
+
+  /// Help under logo
+  ///
+  /// In en, this message translates to:
+  /// **'Shown in the app and printed on table QR cards. PNG or JPEG.'**
+  String get hotelLogoHelp;
+
+  /// Button
+  ///
+  /// In en, this message translates to:
+  /// **'Upload logo'**
+  String get uploadLogo;
+
+  /// Button when a logo exists
+  ///
+  /// In en, this message translates to:
+  /// **'Replace logo'**
+  String get replaceLogo;
+
+  /// Button: delete logo
+  ///
+  /// In en, this message translates to:
+  /// **'Remove'**
+  String get removeLogo;
+
+  /// Snackbar
+  ///
+  /// In en, this message translates to:
+  /// **'Logo updated'**
+  String get logoUpdated;
+
+  /// Field label
+  ///
+  /// In en, this message translates to:
+  /// **'Address (one line)'**
+  String get addressLine;
+
+  /// Help under address
+  ///
+  /// In en, this message translates to:
+  /// **'Printed under your hotel name on QR cards.'**
+  String get addressLineHelp;
+
+  /// Note in branding settings
+  ///
+  /// In en, this message translates to:
+  /// **'QR cards end with a small \"Powered by\" line from the platform.'**
+  String get poweredByNote;
+
   /// Generic error
   ///
   /// In en, this message translates to:
