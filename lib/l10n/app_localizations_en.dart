@@ -1,0 +1,1471 @@
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
+
+import 'app_localizations.dart';
+
+// ignore_for_file: type=lint
+
+/// The translations for English (`en`).
+class AppLocalizationsEn extends AppLocalizations {
+  AppLocalizationsEn([String locale = 'en']) : super(locale);
+
+  @override
+  String get appName => 'Vethra';
+
+  @override
+  String get signInTitle => 'Welcome back';
+
+  @override
+  String get signInSubtitle => 'Sign in to run your restaurant.';
+
+  @override
+  String get email => 'Email';
+
+  @override
+  String get password => 'Password';
+
+  @override
+  String get signIn => 'Sign in';
+
+  @override
+  String get signOut => 'Sign out';
+
+  @override
+  String get showPassword => 'Show password';
+
+  @override
+  String get hidePassword => 'Hide password';
+
+  @override
+  String get loginHeadline => 'Orders, kitchen and money in one calm place.';
+
+  @override
+  String get loginPointQr => 'Table QR ordering';
+
+  @override
+  String get loginPointKitchen => 'Live chef queues';
+
+  @override
+  String get loginPointDashboards => 'Daily dashboards';
+
+  @override
+  String get yourProfile => 'Your profile';
+
+  @override
+  String get settings => 'Settings';
+
+  @override
+  String get alerts => 'Alerts';
+
+  @override
+  String get noAlerts => 'Nothing needs you right now';
+
+  @override
+  String get close => 'Close';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get save => 'Save';
+
+  @override
+  String get saveChanges => 'Save changes';
+
+  @override
+  String get edit => 'Edit';
+
+  @override
+  String get delete => 'Delete';
+
+  @override
+  String get more => 'More';
+
+  @override
+  String get add => 'Add';
+
+  @override
+  String get increase => 'Increase';
+
+  @override
+  String get decrease => 'Decrease';
+
+  @override
+  String get all => 'All';
+
+  @override
+  String get name => 'Name';
+
+  @override
+  String get status => 'Status';
+
+  @override
+  String get role => 'Role';
+
+  @override
+  String get phone => 'Phone';
+
+  @override
+  String get phoneOptional => 'Phone (optional)';
+
+  @override
+  String get date => 'Date';
+
+  @override
+  String get type => 'Type';
+
+  @override
+  String get reason => 'Reason';
+
+  @override
+  String get reasonAuditedHelp => 'Saved in the audit log.';
+
+  @override
+  String get defaultReason => 'Changed by platform admin';
+
+  @override
+  String get tabOverview => 'Overview';
+
+  @override
+  String get tabHotels => 'Hotels';
+
+  @override
+  String get tabPlans => 'Plans';
+
+  @override
+  String get tabFloor => 'Floor';
+
+  @override
+  String get tabKitchen => 'Kitchen';
+
+  @override
+  String get tabMenu => 'Menu';
+
+  @override
+  String get tabTables => 'Tables';
+
+  @override
+  String get tabTeam => 'Team';
+
+  @override
+  String get tabExpenses => 'Expenses';
+
+  @override
+  String goodMorning(String name) {
+    return 'Good morning, $name';
+  }
+
+  @override
+  String goodAfternoon(String name) {
+    return 'Good afternoon, $name';
+  }
+
+  @override
+  String goodEvening(String name) {
+    return 'Good evening, $name';
+  }
+
+  @override
+  String get waiting => 'Waiting';
+
+  @override
+  String get cooking => 'Cooking';
+
+  @override
+  String get tablesBusy => 'Tables busy';
+
+  @override
+  String get servedToday => 'Served';
+
+  @override
+  String get ordersToday => 'Orders today';
+
+  @override
+  String get revenueToday => 'Revenue today';
+
+  @override
+  String get avgPrep => 'Avg prep';
+
+  @override
+  String get thisMonth => 'This month';
+
+  @override
+  String expensesAmount(String amount) {
+    return 'Expenses $amount';
+  }
+
+  @override
+  String netAmount(String amount) {
+    return 'Net $amount';
+  }
+
+  @override
+  String get ordersByHour => 'Orders by hour';
+
+  @override
+  String get ordersSoFarToday => 'orders so far today';
+
+  @override
+  String get openFloor => 'Open floor';
+
+  @override
+  String get openKitchen => 'Open kitchen';
+
+  @override
+  String get kitchenPace => 'Kitchen pace';
+
+  @override
+  String get avgPrepMinutes => 'avg minutes to cook';
+
+  @override
+  String chefsOnShift(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count chefs on shift',
+      one: '1 chef on shift',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String cookingNow(int count) {
+    return '$count cooking';
+  }
+
+  @override
+  String get servedShare => 'Served today';
+
+  @override
+  String get liveOrders => 'Live orders';
+
+  @override
+  String get noLiveOrders => 'No open orders';
+
+  @override
+  String get topDishes => 'Top dishes';
+
+  @override
+  String get chefs => 'Chefs';
+
+  @override
+  String get avgTicket => 'Average ticket';
+
+  @override
+  String get perOrderToday => 'per order today';
+
+  @override
+  String get noDataYet => 'No data yet';
+
+  @override
+  String get noChefsYet => 'No chefs added yet';
+
+  @override
+  String soldCount(int count) {
+    return '$count sold';
+  }
+
+  @override
+  String doneCount(int count) {
+    return '$count done';
+  }
+
+  @override
+  String get revenueLast7Days => 'Revenue, last 7 days';
+
+  @override
+  String get statusPlaced => 'Awaiting confirmation';
+
+  @override
+  String get statusConfirmed => 'New';
+
+  @override
+  String get statusQueued => 'Queued';
+
+  @override
+  String get statusPreparing => 'Preparing';
+
+  @override
+  String get statusReady => 'Ready';
+
+  @override
+  String get statusServed => 'Served';
+
+  @override
+  String get statusCancelled => 'Cancelled';
+
+  @override
+  String get channelQr => 'QR';
+
+  @override
+  String get channelWaiter => 'Server';
+
+  @override
+  String get channelAdmin => 'Admin';
+
+  @override
+  String orderNumberTable(int number, String table) {
+    return '#$number · Table $table';
+  }
+
+  @override
+  String tableLabel(String label) {
+    return 'Table $label';
+  }
+
+  @override
+  String minutesAgo(int minutes) {
+    String _temp0 = intl.Intl.pluralLogic(
+      minutes,
+      locale: localeName,
+      other: '$minutes min ago',
+      one: '1 min ago',
+      zero: 'just now',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String minutesShort(int minutes) {
+    return '$minutes min';
+  }
+
+  @override
+  String get roleHotelAdmin => 'Hotel admin';
+
+  @override
+  String get roleManager => 'Manager';
+
+  @override
+  String get roleCashier => 'Cashier';
+
+  @override
+  String get roleWaiter => 'Server';
+
+  @override
+  String get roleChef => 'Chef';
+
+  @override
+  String get rolePlatformAdmin => 'Platform admin';
+
+  @override
+  String get live => 'Live';
+
+  @override
+  String get reconnecting => 'Reconnecting';
+
+  @override
+  String get staleBanner =>
+      'Connection lost. Showing the last known queue; refreshing every few seconds.';
+
+  @override
+  String get modeChefAccept => 'Chefs pick up';
+
+  @override
+  String get modeAutoAssign => 'Auto assign';
+
+  @override
+  String get modeAdminPrint => 'Printed tickets';
+
+  @override
+  String get upForGrabs => 'New orders';
+
+  @override
+  String get waitingForChef => 'Waiting for a chef';
+
+  @override
+  String get noNewOrders => 'No new orders';
+
+  @override
+  String get noNewOrdersBody => 'New orders appear here instantly.';
+
+  @override
+  String get pickUp => 'Pick up';
+
+  @override
+  String get pickedUp => 'Order is yours';
+
+  @override
+  String get myQueue => 'My queue';
+
+  @override
+  String get queueEmpty => 'You\'re free. Pick up the next order.';
+
+  @override
+  String get offShiftBody => 'You\'re off shift. Switch on to receive orders.';
+
+  @override
+  String get lockedUntilHead => 'Starts after the order ahead of it is ready';
+
+  @override
+  String get startCooking => 'Start cooking';
+
+  @override
+  String get started => 'Started';
+
+  @override
+  String get markReady => 'Mark ready';
+
+  @override
+  String get markedReady => 'Marked ready. The server has been told.';
+
+  @override
+  String cookingFor(int minutes, int target) {
+    return 'Cooking $minutes min · target $target min';
+  }
+
+  @override
+  String waitingFor(int minutes) {
+    return 'Waiting $minutes min';
+  }
+
+  @override
+  String get otherChefs => 'Other chefs';
+
+  @override
+  String get noOtherChefs => 'No other chefs';
+
+  @override
+  String get idle => 'Idle';
+
+  @override
+  String get onShift => 'On shift';
+
+  @override
+  String get offShift => 'Off shift';
+
+  @override
+  String get returnToBoard => 'Return to board';
+
+  @override
+  String get readyToServe => 'Ready to serve';
+
+  @override
+  String get nothingWaiting => 'Nothing waiting to be served';
+
+  @override
+  String get serve => 'Serve';
+
+  @override
+  String get needsAttention => 'Needs attention';
+
+  @override
+  String get allCalm => 'All calm. Nothing to confirm or serve.';
+
+  @override
+  String get markServed => 'Served';
+
+  @override
+  String get confirmOrder => 'Confirm';
+
+  @override
+  String get noTables => 'No tables yet';
+
+  @override
+  String get noTablesBody => 'Add tables to print their QR codes.';
+
+  @override
+  String seats(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count seats',
+      one: '1 seat',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get seatsLabel => 'Seats';
+
+  @override
+  String get inactive => 'Inactive';
+
+  @override
+  String get free => 'Free';
+
+  @override
+  String get openOrders => 'Open orders';
+
+  @override
+  String get cannotTakeOrders => 'Your role can\'t take orders here.';
+
+  @override
+  String get searchMenu => 'Search the menu';
+
+  @override
+  String get kitchenNoteHint => 'Note for the kitchen (optional)';
+
+  @override
+  String get sendToKitchen => 'Send to kitchen';
+
+  @override
+  String get orderSent => 'Order sent to the kitchen';
+
+  @override
+  String get soldOut => 'Sold out';
+
+  @override
+  String get veg => 'Veg';
+
+  @override
+  String get nonVeg => 'Non-veg';
+
+  @override
+  String get subtotal => 'Subtotal';
+
+  @override
+  String get tax => 'GST';
+
+  @override
+  String get serviceCharge => 'Service charge';
+
+  @override
+  String get total => 'Total';
+
+  @override
+  String get addCategory => 'Add category';
+
+  @override
+  String get addItem => 'Add item';
+
+  @override
+  String get editItem => 'Edit item';
+
+  @override
+  String get addCategoryFirst => 'Add a category first';
+
+  @override
+  String get menuEmpty => 'Your menu is empty';
+
+  @override
+  String get menuEmptyBody => 'Add a category, then your dishes.';
+
+  @override
+  String get noMatches => 'Nothing matches';
+
+  @override
+  String get category => 'Category';
+
+  @override
+  String get price => 'Price';
+
+  @override
+  String get prepTime => 'Prep time';
+
+  @override
+  String get availability => 'Availability';
+
+  @override
+  String get available => 'Available';
+
+  @override
+  String get priceRupees => 'Price (₹)';
+
+  @override
+  String get priceHelp =>
+      'Before tax. GST is added automatically if you are registered.';
+
+  @override
+  String get descriptionOptional => 'Description (optional)';
+
+  @override
+  String get addTable => 'Add table';
+
+  @override
+  String get tableName => 'Table name';
+
+  @override
+  String get tableNameHelp => 'Short and unique, like T1 or P2.';
+
+  @override
+  String get areaOptional => 'Area (optional)';
+
+  @override
+  String get copyLink => 'Copy link';
+
+  @override
+  String get openDinerView => 'Open diner view';
+
+  @override
+  String get rotateQr => 'Replace QR code';
+
+  @override
+  String get deactivate => 'Deactivate';
+
+  @override
+  String get activate => 'Activate';
+
+  @override
+  String get qrActive => 'QR active';
+
+  @override
+  String openOrdersCount(int count) {
+    return '$count open';
+  }
+
+  @override
+  String get linkCopied => 'Link copied';
+
+  @override
+  String get qrRotated =>
+      'New QR created. Print it; the old one no longer works.';
+
+  @override
+  String get people => 'People';
+
+  @override
+  String get rolesAndAccess => 'Roles & access';
+
+  @override
+  String get searchPeople => 'Search by name or role';
+
+  @override
+  String get addMember => 'Add member';
+
+  @override
+  String get newRole => 'New role';
+
+  @override
+  String get newRoleLocked => 'Custom roles (upgrade)';
+
+  @override
+  String get newRoleHelp => 'Then tick what this role can do.';
+
+  @override
+  String get permission => 'Permission';
+
+  @override
+  String get adminLocked => 'Hotel admins always have every permission';
+
+  @override
+  String get disabled => 'Disabled';
+
+  @override
+  String get active => 'Active';
+
+  @override
+  String makeRole(String role) {
+    return 'Make $role';
+  }
+
+  @override
+  String get disableAccount => 'Disable account';
+
+  @override
+  String get enableAccount => 'Enable account';
+
+  @override
+  String get emailLoginHelp => 'They sign in with this email.';
+
+  @override
+  String get tempPassword => 'Temporary password';
+
+  @override
+  String get tempPasswordHelp => 'At least 8 characters. Share it privately.';
+
+  @override
+  String get sendInvite => 'Add member';
+
+  @override
+  String get permDashboard => 'See the dashboard';
+
+  @override
+  String get permOrderView => 'See orders';
+
+  @override
+  String get permOrderCreate => 'Take orders';
+
+  @override
+  String get permOrderConfirm => 'Confirm QR orders';
+
+  @override
+  String get permOrderServe => 'Mark orders served';
+
+  @override
+  String get permOrderCancel => 'Cancel orders';
+
+  @override
+  String get permKitchenCook => 'Pick up and cook';
+
+  @override
+  String get permKitchenManage => 'Manage chef queues';
+
+  @override
+  String get permTableManage => 'Manage tables and QR';
+
+  @override
+  String get permMenuManage => 'Edit menu and prices';
+
+  @override
+  String get permMenuAvailability => 'Mark items sold out';
+
+  @override
+  String get permStaffManage => 'Manage staff';
+
+  @override
+  String get permRoleManage => 'Configure roles';
+
+  @override
+  String get permExpenseView => 'See expenses';
+
+  @override
+  String get permExpenseManage => 'Record expenses';
+
+  @override
+  String get permReportView => 'See reports';
+
+  @override
+  String get permSettingsManage => 'Settings and billing';
+
+  @override
+  String get addExpense => 'Add expense';
+
+  @override
+  String get editExpense => 'Edit expense';
+
+  @override
+  String get previousMonth => 'Previous month';
+
+  @override
+  String get nextMonth => 'Next month';
+
+  @override
+  String get spentThisMonth => 'Spent this month';
+
+  @override
+  String get byDay => 'By day';
+
+  @override
+  String get noExpenses => 'No expenses this month';
+
+  @override
+  String get noExpensesBody => 'Record gas, groceries, salaries and more.';
+
+  @override
+  String get amountRupees => 'Amount (₹)';
+
+  @override
+  String get paidBy => 'Paid by';
+
+  @override
+  String get payCash => 'Cash';
+
+  @override
+  String get payUpi => 'UPI';
+
+  @override
+  String get payCard => 'Card';
+
+  @override
+  String get payBank => 'Bank';
+
+  @override
+  String get vendorOptional => 'Vendor (optional)';
+
+  @override
+  String get noteOptional => 'Note (optional)';
+
+  @override
+  String get kitchenAndOrdering => 'Kitchen';
+
+  @override
+  String get planAndBilling => 'Plan & billing';
+
+  @override
+  String get restaurantName => 'Restaurant name';
+
+  @override
+  String get kitchenMode => 'How orders reach chefs';
+
+  @override
+  String get kitchenModeHelp => 'Locked options need a higher plan.';
+
+  @override
+  String get maxQueue => 'Orders per chef at once';
+
+  @override
+  String get maxQueueHelp =>
+      'A chef can\'t hold more than this in their queue.';
+
+  @override
+  String get confirmQrOrders => 'Confirm QR orders first';
+
+  @override
+  String get confirmQrOrdersHelp =>
+      'A server approves table orders before the kitchen sees them.';
+
+  @override
+  String get subActive => 'Active';
+
+  @override
+  String get subTrial => 'Trial';
+
+  @override
+  String get subPastDue => 'Payment due';
+
+  @override
+  String get subSuspended => 'Suspended';
+
+  @override
+  String perMonth(String amount) {
+    return '$amount / month';
+  }
+
+  @override
+  String get perMonthShort => '/ month';
+
+  @override
+  String trialEndsOn(String date) {
+    return 'Trial ends $date';
+  }
+
+  @override
+  String renewsOn(String date) {
+    return 'Renews $date';
+  }
+
+  @override
+  String get choosePlan => 'Choose a plan';
+
+  @override
+  String get choosePlanHelp =>
+      'You\'ll pay securely on Razorpay. Your plan activates as soon as the payment clears.';
+
+  @override
+  String get paymentsNotConfigured =>
+      'Online payment isn\'t switched on yet. Contact support to activate.';
+
+  @override
+  String get payAndActivate => 'Pay & activate';
+
+  @override
+  String get renew => 'Renew';
+
+  @override
+  String get payments => 'Payments';
+
+  @override
+  String get managePlan => 'Manage plan';
+
+  @override
+  String get bannerPastDue =>
+      'Your payment is due. Pay now to avoid interruption.';
+
+  @override
+  String get bannerSuspended =>
+      'Your account is paused. You can still view your data; pay to resume orders.';
+
+  @override
+  String get hotels => 'Hotels';
+
+  @override
+  String get mrr => 'Monthly revenue';
+
+  @override
+  String get orders30d => 'Orders (30 days)';
+
+  @override
+  String get collected30d => 'Collected, last 30 days';
+
+  @override
+  String trialsEnding(int count) {
+    return '$count trials end this week';
+  }
+
+  @override
+  String get signups => 'New hotels';
+
+  @override
+  String get planMix => 'Plan mix';
+
+  @override
+  String get recentHotels => 'Recent hotels';
+
+  @override
+  String get noHotels => 'No hotels yet';
+
+  @override
+  String get noHotelsBody => 'Register your first hotel to get started.';
+
+  @override
+  String get searchHotels => 'Search hotels';
+
+  @override
+  String get registerHotel => 'Register hotel';
+
+  @override
+  String get hotelRegistered =>
+      'Hotel registered. Share the admin login with them.';
+
+  @override
+  String get hotel => 'Hotel';
+
+  @override
+  String get plan => 'Plan';
+
+  @override
+  String get city => 'City';
+
+  @override
+  String get tablesCol => 'Tables';
+
+  @override
+  String get hotelName => 'Hotel name';
+
+  @override
+  String get trialHelp => 'Every new hotel starts on a free trial.';
+
+  @override
+  String get gstRegistration => 'GST registration';
+
+  @override
+  String get gstRegular => 'Regular';
+
+  @override
+  String get gstComposition => 'Composition';
+
+  @override
+  String get gstUnregistered => 'Not registered';
+
+  @override
+  String get gstin => 'GSTIN';
+
+  @override
+  String get hotelAdmin => 'Hotel admin';
+
+  @override
+  String get suspendHotel => 'Suspend';
+
+  @override
+  String get resumeHotel => 'Resume';
+
+  @override
+  String get changePlan => 'Change plan';
+
+  @override
+  String get overrides => 'Feature overrides';
+
+  @override
+  String get overridesHelp =>
+      'Turn a feature on or off for this hotel only, regardless of its plan.';
+
+  @override
+  String get overridden => 'Overridden for this hotel';
+
+  @override
+  String get fromPlan => 'From plan';
+
+  @override
+  String get placeholderPrice => 'Placeholder';
+
+  @override
+  String get editPrice => 'Edit price';
+
+  @override
+  String get monthlyPrice => 'Monthly price (₹)';
+
+  @override
+  String get priceChangeHelp =>
+      'Applies to new subscriptions. Existing hotels keep their price until renewal.';
+
+  @override
+  String get features => 'Features';
+
+  @override
+  String get limits => 'Limits';
+
+  @override
+  String get limit => 'Limit';
+
+  @override
+  String get limitHelp => 'Leave empty for unlimited.';
+
+  @override
+  String get unlimited => 'Unlimited';
+
+  @override
+  String get featQr => 'QR ordering';
+
+  @override
+  String get featWaiter => 'Server ordering';
+
+  @override
+  String get featChefAccept => 'Chefs pick up orders';
+
+  @override
+  String get featAutoRouting => 'Auto-assign to chefs';
+
+  @override
+  String get featAdminPrint => 'Printed kitchen tickets';
+
+  @override
+  String get featExpenses => 'Expenses';
+
+  @override
+  String get featCustomRoles => 'Custom roles';
+
+  @override
+  String get featReports => 'Advanced reports';
+
+  @override
+  String get featRatings => 'Ratings';
+
+  @override
+  String get featApi => 'API & webhooks';
+
+  @override
+  String get featRooms => 'Rooms';
+
+  @override
+  String get limOutlets => 'Outlets';
+
+  @override
+  String get limTables => 'Tables';
+
+  @override
+  String get limStaff => 'Staff';
+
+  @override
+  String get limChefs => 'Chefs';
+
+  @override
+  String get limMenuItems => 'Menu items';
+
+  @override
+  String get limOrders => 'Orders per month';
+
+  @override
+  String get qrInvalid => 'This QR code doesn\'t work';
+
+  @override
+  String get qrInvalidBody => 'Please ask a server for help.';
+
+  @override
+  String get dinerHeadline => 'What would you like?';
+
+  @override
+  String get dinerViewOnly =>
+      'Browse the menu and tell your server when you\'re ready.';
+
+  @override
+  String get yourOrder => 'Your order';
+
+  @override
+  String get yourOrders => 'Your orders';
+
+  @override
+  String get stepSent => 'Sent';
+
+  @override
+  String get dinerNoteHint => 'Anything the kitchen should know?';
+
+  @override
+  String get pricesByRestaurant =>
+      'Prices and taxes are set by the restaurant.';
+
+  @override
+  String get placeOrder => 'Place order';
+
+  @override
+  String get orderPlaced => 'Order placed. We\'ll update you here.';
+
+  @override
+  String itemsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count items',
+      one: '1 item',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get viewOrder => 'View order';
+
+  @override
+  String chefPreparing(String name) {
+    return '$name is preparing it';
+  }
+
+  @override
+  String get readyOnItsWay => 'Ready! It\'s on its way to your table.';
+
+  @override
+  String get printKot => 'Print KOT';
+
+  @override
+  String printKotTitle(int number) {
+    return 'Print KOT #$number';
+  }
+
+  @override
+  String get printKotExplain =>
+      'Is the kitchen cooking from paper for this order? Sending it on paper takes it off the chefs\' screen so nobody picks it up twice.';
+
+  @override
+  String get printAndSend => 'Print and send to kitchen';
+
+  @override
+  String get printCopyOnly => 'Just print a copy';
+
+  @override
+  String get kotPrinted => 'KOT printed';
+
+  @override
+  String get kotSentOnPaper =>
+      'KOT printed. The order is now with the kitchen on paper.';
+
+  @override
+  String get onPaper => 'On paper';
+
+  @override
+  String get onPaperTitle => 'Cooking from paper';
+
+  @override
+  String get onPaperHelp =>
+      'Printed tickets handed to the kitchen. Mark them ready when the food comes out.';
+
+  @override
+  String get billTable => 'Bill';
+
+  @override
+  String billForTable(String label) {
+    return 'Bill · Table $label';
+  }
+
+  @override
+  String get billExplain =>
+      'Creates one bill for every unbilled order on this table. Bills are numbered and cannot be edited.';
+
+  @override
+  String get createBill => 'Create bill';
+
+  @override
+  String notServedYet(String orders) {
+    return 'Not served yet: #$orders';
+  }
+
+  @override
+  String get billAnyway => 'Bill them anyway';
+
+  @override
+  String billPaid(String method) {
+    return 'Paid · $method';
+  }
+
+  @override
+  String get billUnpaid => 'Unpaid';
+
+  @override
+  String ordersIncluded(String orders) {
+    return 'Orders #$orders';
+  }
+
+  @override
+  String get cgst => 'CGST';
+
+  @override
+  String get sgst => 'SGST';
+
+  @override
+  String get printBill => 'Print bill';
+
+  @override
+  String get printDuplicate => 'Print duplicate';
+
+  @override
+  String get billPrinted => 'Bill printed';
+
+  @override
+  String get settlePayment => 'Payment received by';
+
+  @override
+  String get voidBill => 'Void bill';
+
+  @override
+  String get printerSetup => 'Printer setup';
+
+  @override
+  String get paperSize => 'Paper';
+
+  @override
+  String get paperSizeHelp =>
+      'Match your printer\'s roll. A4 for office printers.';
+
+  @override
+  String get paper58 => '58 mm';
+
+  @override
+  String get paper80 => '80 mm';
+
+  @override
+  String get paperA4 => 'A4';
+
+  @override
+  String get printWith => 'Print using';
+
+  @override
+  String get printSystem => 'Print dialog';
+
+  @override
+  String get printNetwork => 'Network printer';
+
+  @override
+  String get printSystemHelp =>
+      'Works with any printer this device can use: thermal, laser, inkjet, Bluetooth or USB.';
+
+  @override
+  String get printNetworkHelp =>
+      'Sends straight to a Wi-Fi/LAN thermal printer. No dialog; fastest for the kitchen.';
+
+  @override
+  String get printWebHelp =>
+      'In the browser, printing always opens the print dialog. Use the Android or iPhone app to print straight to a network printer.';
+
+  @override
+  String get printerIp => 'Printer IP address';
+
+  @override
+  String get port => 'Port';
+
+  @override
+  String get testPrint => 'Test print';
+
+  @override
+  String get testPrintTitle => 'TEST PRINT';
+
+  @override
+  String get testPrintBody => 'If you can read this, the printer works.';
+
+  @override
+  String get soundAlertsOn => 'Sound alerts: on';
+
+  @override
+  String get soundAlertsOff => 'Sound alerts: off';
+
+  @override
+  String get soundOn => 'Sound alerts on';
+
+  @override
+  String get soundOff => 'Sound alerts off';
+
+  @override
+  String get testSound => 'Test alert sound';
+
+  @override
+  String get soundBlocked =>
+      'The browser blocked sound. Tap anywhere on the page, then try again.';
+
+  @override
+  String get serviceTimes => 'Service times';
+
+  @override
+  String get serviceTimesHelp =>
+      'Orders placed today. p90 = 9 out of 10 orders were faster than this.';
+
+  @override
+  String get stageWait => 'Wait for chef';
+
+  @override
+  String get stageWaitHelp => 'Order confirmed → cooking starts';
+
+  @override
+  String get stagePrep => 'Preparation';
+
+  @override
+  String get stagePrepHelp => 'Cooking starts → ready';
+
+  @override
+  String get stageServe => 'Serving';
+
+  @override
+  String get stageServeHelp => 'Ready → on the table';
+
+  @override
+  String get stageTotal => 'Order to table';
+
+  @override
+  String get stageTotalHelp => 'What the guest feels';
+
+  @override
+  String get minAvg => 'min avg';
+
+  @override
+  String p90Line(String minutes, int count) {
+    return 'p90 $minutes min · $count orders';
+  }
+
+  @override
+  String get servingByServer => 'Serving time by server';
+
+  @override
+  String serverServeLine(String name, String minutes, int count) {
+    return '$name: $minutes min · $count served';
+  }
+
+  @override
+  String get categories => 'Categories';
+
+  @override
+  String get expenseCategories => 'Expense categories';
+
+  @override
+  String get categoriesHelp =>
+      'Global categories are set for every hotel. Add your own for anything else; only your hotel sees them.';
+
+  @override
+  String get scopeGlobal => 'Global';
+
+  @override
+  String get scopeHotel => 'Yours';
+
+  @override
+  String get renameCategory => 'Rename category';
+
+  @override
+  String get addOwnCategory => 'Add your own category';
+
+  @override
+  String get addOwnCategoryHelp => 'Visible only to your hotel.';
+
+  @override
+  String get tabCategories => 'Categories';
+
+  @override
+  String get globalCategoriesHelp =>
+      'Categories here appear for every hotel immediately. Switching one off hides it for new expenses; past expenses keep it.';
+
+  @override
+  String get newGlobalCategory => 'New global category';
+
+  @override
+  String get globalCategoryAdded => 'Added for every hotel';
+
+  @override
+  String usedTimes(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'used $count times',
+      one: 'used once',
+      zero: 'unused',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get printQr => 'Print QR';
+
+  @override
+  String get printAllQr => 'Print all QR codes';
+
+  @override
+  String get enableAlerts => 'Enable alerts';
+
+  @override
+  String get enableAlertsBody =>
+      'Turn on loud alerts for new and ready orders. Keep this tab open for the loud sound; when the tab is closed you get a normal notification.';
+
+  @override
+  String get enableAlertsDenied =>
+      'Notifications are blocked for this site in your browser settings. Tap to turn on the loud in-page sound; keep this tab open.';
+
+  @override
+  String get notNow => 'Not now';
+
+  @override
+  String get language => 'Language';
+
+  @override
+  String get langEn => 'English';
+
+  @override
+  String get langTe => 'తెలుగు';
+
+  @override
+  String get langHi => 'हिन्दी';
+
+  @override
+  String get branding => 'Branding';
+
+  @override
+  String get hotelLogo => 'Hotel logo';
+
+  @override
+  String get hotelLogoHelp =>
+      'Shown in the app and printed on table QR cards. PNG or JPEG.';
+
+  @override
+  String get uploadLogo => 'Upload logo';
+
+  @override
+  String get replaceLogo => 'Replace logo';
+
+  @override
+  String get removeLogo => 'Remove';
+
+  @override
+  String get logoUpdated => 'Logo updated';
+
+  @override
+  String get addressLine => 'Address (one line)';
+
+  @override
+  String get addressLineHelp => 'Printed under your hotel name on QR cards.';
+
+  @override
+  String get poweredByNote =>
+      'QR cards end with a small \"Powered by\" line from the platform.';
+
+  @override
+  String get errGeneric => 'Something went wrong. Please try again.';
+
+  @override
+  String get errOffline => 'You\'re offline. Check the connection and retry.';
+
+  @override
+  String get errCredentials => 'Email or password is wrong.';
+
+  @override
+  String get errFeatureLocked =>
+      'Your plan doesn\'t include this. Upgrade to unlock it.';
+
+  @override
+  String get errLimit => 'You\'ve reached your plan\'s limit.';
+
+  @override
+  String get errPermission => 'Your role doesn\'t allow this.';
+
+  @override
+  String get errTaken => 'Another chef already picked this order.';
+
+  @override
+  String get errQueueFull => 'Finish an order before picking another.';
+
+  @override
+  String get errNotHead => 'Finish the order ahead of this one first.';
+
+  @override
+  String get errSoldOut => 'An item just sold out. Please update your order.';
+
+  @override
+  String get errSessionExpired =>
+      'Your table session ended. Scan the QR again.';
+
+  @override
+  String get errRequired => 'Required';
+
+  @override
+  String get errEmail => 'Enter a valid email';
+
+  @override
+  String get errAmount => 'Enter an amount like 250 or 99.50';
+
+  @override
+  String get errPasswordLength => 'At least 8 characters';
+
+  @override
+  String get errGstin => 'Enter a 15-character GSTIN';
+}

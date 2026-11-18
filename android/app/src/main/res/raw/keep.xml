@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Sounds are referenced only from notification payloads; keep them from being stripped by resource shrinking. -->
+<resources xmlns:tools="http://schemas.android.com/tools" tools:keep="@raw/kitchen_alert,@raw/ready_alert" />

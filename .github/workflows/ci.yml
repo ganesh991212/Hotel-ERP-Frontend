@@ -1,0 +1,20 @@
+name: ci
+on:
+  push:
+  pull_request:
+jobs:
+  flutter:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+      - run: flutter pub get
+      - run: flutter gen-l10n
+      - run: flutter analyze
+      - name: No literal Text in features (strings live in ARB)
+        run: |
+          if grep -rnE "Text\('[A-Za-z]" lib/features lib/ui; then echo "Use AppLocalizations"; exit 1; fi
+      - run: flutter test
+      - run: flutter build web --release --no-web-resources-cdn

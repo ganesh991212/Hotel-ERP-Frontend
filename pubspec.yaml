@@ -1,0 +1,60 @@
+name: hotel_erp
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0+1
+
+environment:
+  sdk: ^3.14.0
+
+dependencies:
+  audioplayers: ^6.8.1
+  file_picker: ^13.4.0
+  firebase_core: ^5.2.0
+  firebase_messaging: ^17.1.0
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  flutter_riverpod: ^3.5.0
+  go_router: ^18.1.4
+  http: ^1.6.0
+  intl: ^0.20.3
+  material_ui: ^1.1.0
+  pdf: ^3.13.1
+  printing: ^5.15.1
+  qr_flutter: ^4.1.0
+  shared_preferences: ^2.5.6
+  url_launcher: ^6.3.3
+  web: ^1.1.2
+  web_socket_channel: ^3.0.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+  generate: true
+  assets:
+    - assets/sounds/
+    # Regional scripts: plain assets, loaded on demand by core/l10n/locale.dart (not at startup).
+    - assets/fonts/NotoSansTelugu_400Regular.ttf
+    - assets/fonts/NotoSansTelugu_600SemiBold.ttf
+    - assets/fonts/NotoSansDevanagari_400Regular.ttf
+    - assets/fonts/NotoSansDevanagari_600SemiBold.ttf
+  fonts:
+    - family: Outfit
+      fonts:
+        - asset: assets/fonts/Outfit_400Regular.ttf
+        - asset: assets/fonts/Outfit_500Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Outfit_600SemiBold.ttf
+          weight: 600
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter_400Regular.ttf
+        - asset: assets/fonts/Inter_500Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Inter_600SemiBold.ttf
+          weight: 600
