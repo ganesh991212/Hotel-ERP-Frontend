@@ -78,6 +78,66 @@ Future<void> printDocument(Map<String, dynamic> doc, {required String title, req
   await Printing.layoutPdf(name: title, format: format, onLayout: (_) async => bytes);
 }
 
+/// Table QR codes. Roll paper (or a network thermal printer): one ticket per table, cut between them.
+/// A4: a grid of cut-out cards, six per page, for stickers or table tents.
+Future<void> printTableQrs(Map<String, dynamic> doc, {required PrintSettings settings}) async {
+  final tickets = (doc['tickets'] as List).cast<Map>();
+  final b64 = doc['escpos_b64'] as String?;
+  if (b64 != null && settings.route == PrintRoute.network && !kIsWeb) {
+    await sendRaw(settings.host, settings.port, base64Decode(b64));
+    return;
+  }
+  final name = tickets.length == 1 ? 'QR ${tickets.first['label']}' : 'Table QR codes';
+  if (settings.paper == PaperSize.a4) {
+    final bytes = await buildQrSheet(doc['hotel_name'] as String, tickets);
+    await Printing.layoutPdf(name: name, format: PdfPageFormat.a4, onLayout: (_) async => bytes);
+    return;
+  }
+  final format = settings.paper == PaperSize.mm58 ? PdfPageFormat.roll57 : PdfPageFormat.roll80;
+  final bytes = await buildPdfPages([for (final t in tickets) (t['blocks'] as List).cast<List>()], format);
+  await Printing.layoutPdf(name: name, format: format, onLayout: (_) async => bytes);
+}
+
+/// A4 sheet: 2 x 3 cards with cut lines, each with hotel, table, QR and instructions.
+Future<Uint8List> buildQrSheet(String hotelName, List<Map> tickets, {bool compress = true}) async {
+  await _fonts();
+  final doc = pw.Document(compress: compress);
+  for (var i = 0; i < tickets.length; i += 6) {
+    final page = tickets.sublist(i, (i + 6).clamp(0, tickets.length));
+    doc.addPage(pw.Page(
+      pageFormat: PdfPageFormat.a4,
+      margin: const pw.EdgeInsets.all(24),
+      build: (_) => pw.GridView(
+        crossAxisCount: 2,
+        childAspectRatio: 1.05,
+        children: [
+          for (final t in page)
+            pw.Container(
+              margin: const pw.EdgeInsets.all(6),
+              padding: const pw.EdgeInsets.all(12),
+              decoration: pw.BoxDecoration(
+                border: pw.Border.all(color: PdfColors.grey500, width: .6, style: pw.BorderStyle.dashed),
+                borderRadius: const pw.BorderRadius.all(pw.Radius.circular(10)),
+              ),
+              child: pw.Column(mainAxisAlignment: pw.MainAxisAlignment.center, children: [
+                pw.Text(hotelName, style: pw.TextStyle(font: _bold, fontSize: 12)),
+                pw.SizedBox(height: 4),
+                pw.Text('Table ${t['label']}', style: pw.TextStyle(font: _bold, fontSize: 22)),
+                pw.SizedBox(height: 8),
+                pw.BarcodeWidget(barcode: pw.Barcode.qrCode(), data: t['url'] as String, width: 132, height: 132),
+                pw.SizedBox(height: 8),
+                pw.Text('Scan to order', style: pw.TextStyle(font: _bold, fontSize: 13)),
+                pw.Text('Open your phone camera and point it at the code',
+                    style: pw.TextStyle(font: _regular, fontSize: 8, color: PdfColors.grey700)),
+              ]),
+            ),
+        ],
+      ),
+    ));
+  }
+  return doc.save();
+}
+
 pw.Font? _regular, _bold;
 
 Future<void> _fonts() async {
@@ -86,13 +146,29 @@ Future<void> _fonts() async {
 }
 
 /// Blocks -> PDF. Exposed for tests (compress: false keeps text searchable, as in the CMS app).
-Future<Uint8List> buildPdf(List<List> blocks, PdfPageFormat format, {bool compress = true}) async {
+Future<Uint8List> buildPdf(List<List> blocks, PdfPageFormat format, {bool compress = true}) =>
+    buildPdfPages([blocks], format, compress: compress);
+
+/// One page per block list (roll printers cut between pages).
+Future<Uint8List> buildPdfPages(List<List<List>> pages, PdfPageFormat format, {bool compress = true}) async {
   await _fonts();
+  final receipt = format.width < PdfPageFormat.a4.width;
+  final doc = pw.Document(compress: compress);
+  for (final blocks in pages) {
+    doc.addPage(pw.Page(
+      pageFormat: format,
+      margin: pw.EdgeInsets.all(receipt ? 6 : 36),
+      build: (_) => pw.Column(crossAxisAlignment: pw.CrossAxisAlignment.stretch, children: _render(blocks, format)),
+    ));
+  }
+  return doc.save();
+}
+
+List<pw.Widget> _render(List<List> blocks, PdfPageFormat format) {
   final receipt = format.width < PdfPageFormat.a4.width;
   final base = receipt ? (format.width < PdfPageFormat.roll80.width ? 7.5 : 9.0) : 10.5;
   pw.TextStyle st({double scale = 1, bool bold = false}) =>
       pw.TextStyle(font: bold ? _bold : _regular, fontSize: base * scale);
-
   final children = <pw.Widget>[];
   for (final b in blocks) {
     switch (b[0] as String) {
@@ -119,13 +195,12 @@ Future<Uint8List> buildPdf(List<List> blocks, PdfPageFormat format, {bool compre
         ));
       case 'feed':
         children.add(pw.SizedBox(height: base * (b[1] as int)));
+      case 'qr':
+        final side = receipt ? format.width * .62 : 260.0;
+        children.add(pw.Center(
+          child: pw.BarcodeWidget(barcode: pw.Barcode.qrCode(), data: b[1], width: side, height: side),
+        ));
     }
   }
-  final doc = pw.Document(compress: compress);
-  doc.addPage(pw.Page(
-    pageFormat: format,
-    margin: pw.EdgeInsets.all(receipt ? 6 : 36),
-    build: (_) => pw.Column(crossAxisAlignment: pw.CrossAxisAlignment.stretch, children: children),
-  ));
-  return doc.save();
+  return children;
 }

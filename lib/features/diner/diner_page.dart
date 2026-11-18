@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../core/api/api_client.dart';
 import '../../core/api/realtime.dart';
 import '../../core/auth/session.dart';
+import '../../core/l10n/locale.dart';
 import '../../core/money.dart';
 import '../../core/theme/tokens.dart';
 import '../../l10n/app_localizations.dart';
@@ -165,6 +166,8 @@ class _DinerPageState extends ConsumerState<DinerPage> {
                         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                           Row(children: [
                             Expanded(child: Text(m['hotel']['name'], style: tt.titleLarge)),
+                            const LanguageButton(),
+                            const SizedBox(width: 8),
                             StatusChip(
                                 icon: Icons.table_restaurant_outlined,
                                 label: l.tableLabel(m['table']['label']),

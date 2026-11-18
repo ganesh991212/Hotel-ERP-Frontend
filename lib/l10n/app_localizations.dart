@@ -6,6 +6,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
 import 'app_localizations_en.dart';
+import 'app_localizations_hi.dart';
+import 'app_localizations_te.dart';
 
 // ignore_for_file: type=lint
 
@@ -92,7 +94,11 @@ abstract class AppLocalizations {
       ];
 
   /// A list of this localizations delegate's supported locales.
-  static const List<Locale> supportedLocales = <Locale>[Locale('en')];
+  static const List<Locale> supportedLocales = <Locale>[
+    Locale('en'),
+    Locale('hi'),
+    Locale('te'),
+  ];
 
   /// Product name shown in the brand pill and browser title (working name)
   ///
@@ -1113,24 +1119,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Add table'**
   String get addTable;
-
-  /// Button and dialog: printable QR codes
-  ///
-  /// In en, this message translates to:
-  /// **'QR sheet'**
-  String get qrSheet;
-
-  /// Help in the QR sheet dialog
-  ///
-  /// In en, this message translates to:
-  /// **'Print this page and place each code on its table.'**
-  String get qrSheetHelp;
-
-  /// Caption under a printed QR code
-  ///
-  /// In en, this message translates to:
-  /// **'Scan to order'**
-  String get scanToOrder;
 
   /// Field label
   ///
@@ -2560,6 +2548,66 @@ abstract class AppLocalizations {
   /// **'{count, plural, =0{unused} =1{used once} other{used {count} times}}'**
   String usedTimes(int count);
 
+  /// Table menu: print this table's QR code
+  ///
+  /// In en, this message translates to:
+  /// **'Print QR'**
+  String get printQr;
+
+  /// Button: print QR codes for every active table
+  ///
+  /// In en, this message translates to:
+  /// **'Print all QR codes'**
+  String get printAllQr;
+
+  /// Button: unlock sound and ask for notification permission
+  ///
+  /// In en, this message translates to:
+  /// **'Enable alerts'**
+  String get enableAlerts;
+
+  /// Banner text in the browser
+  ///
+  /// In en, this message translates to:
+  /// **'Turn on loud alerts for new and ready orders. Keep this tab open for the loud sound; when the tab is closed you get a normal notification.'**
+  String get enableAlertsBody;
+
+  /// Banner text when notification permission is denied
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications are blocked for this site in your browser settings. Tap to turn on the loud in-page sound; keep this tab open.'**
+  String get enableAlertsDenied;
+
+  /// Dismiss button
+  ///
+  /// In en, this message translates to:
+  /// **'Not now'**
+  String get notNow;
+
+  /// Language switcher label
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get language;
+
+  /// Native name of English; identical in every language file
+  ///
+  /// In en, this message translates to:
+  /// **'English'**
+  String get langEn;
+
+  /// Native name of Telugu; identical in every language file
+  ///
+  /// In en, this message translates to:
+  /// **'తెలుగు'**
+  String get langTe;
+
+  /// Native name of Hindi; identical in every language file
+  ///
+  /// In en, this message translates to:
+  /// **'हिन्दी'**
+  String get langHi;
+
   /// Generic error
   ///
   /// In en, this message translates to:
@@ -2668,7 +2716,7 @@ class _AppLocalizationsDelegate
 
   @override
   bool isSupported(Locale locale) =>
-      <String>['en'].contains(locale.languageCode);
+      <String>['en', 'hi', 'te'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
@@ -2679,6 +2727,10 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
   switch (locale.languageCode) {
     case 'en':
       return AppLocalizationsEn();
+    case 'hi':
+      return AppLocalizationsHi();
+    case 'te':
+      return AppLocalizationsTe();
   }
 
   throw FlutterError(

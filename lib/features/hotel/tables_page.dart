@@ -6,6 +6,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../core/api/api_client.dart';
 import '../../core/auth/session.dart';
+import '../../core/printing/print_service.dart';
 import '../../core/theme/tokens.dart';
 import '../../l10n/app_localizations.dart';
 import '../../ui/components.dart';
@@ -27,9 +28,9 @@ class TablesPage extends ConsumerWidget {
         index: 0,
         child: PageHeading(l.tabTables, actions: [
           OutlinedButton.icon(
-            onPressed: () => data.whenData((list) => _qrSheet(context, list)),
+            onPressed: () => printQrCodes(context, ref, null),
             icon: const Icon(Icons.print_outlined, size: 18),
-            label: Text(l.qrSheet),
+            label: Text(l.printAllQr),
           ),
           FilledButton.icon(
             onPressed: () => _addTable(context, ref),
@@ -99,32 +100,6 @@ class TablesPage extends ConsumerWidget {
       ),
     );
   }
-
-  void _qrSheet(BuildContext context, List<Map<String, dynamic>> list) {
-    final l = AppLocalizations.of(context);
-    showGlassDialog(
-      context,
-      title: l.qrSheet,
-      maxWidth: 900,
-      body: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-        Text(l.qrSheetHelp, style: Theme.of(context).textTheme.bodySmall),
-        const SizedBox(height: 12),
-        Wrap(spacing: 16, runSpacing: 16, children: [
-          for (final t in list)
-            Container(
-              width: 180,
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(color: context.tokens.paper, borderRadius: BorderRadius.circular(16)),
-              child: Column(children: [
-                QrImageView(data: absoluteLink(t['qr_url']), size: 150, backgroundColor: context.tokens.paper),
-                Text(t['label'], style: Theme.of(context).textTheme.titleLarge?.copyWith(color: context.tokens.paperInk)),
-                Text(l.scanToOrder, style: Theme.of(context).textTheme.bodySmall?.copyWith(color: context.tokens.paperInk.withValues(alpha: .6))),
-              ]),
-            ),
-        ]),
-      ]),
-    );
-  }
 }
 
 class _QrCard extends ConsumerWidget {
@@ -147,6 +122,7 @@ class _QrCard extends ConsumerWidget {
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
             onSelected: (v) => _action(context, ref, v),
             itemBuilder: (_) => [
+              PopupMenuItem(value: 'print', child: Text(l.printQr)),
               PopupMenuItem(value: 'copy', child: Text(l.copyLink)),
               PopupMenuItem(value: 'open', child: Text(l.openDinerView)),
               PopupMenuItem(value: 'rotate', child: Text(l.rotateQr)),
@@ -184,6 +160,8 @@ class _QrCard extends ConsumerWidget {
     final l = AppLocalizations.of(context);
     final api = ref.read(apiProvider);
     switch (v) {
+      case 'print':
+        await printQrCodes(context, ref, table['id'] as String);
       case 'copy':
         await Clipboard.setData(ClipboardData(text: absoluteLink(table['qr_url'])));
         if (context.mounted) showDone(context, l.linkCopied);
@@ -198,4 +176,24 @@ class _QrCard extends ConsumerWidget {
     }
     ref.invalidate(tablesAdminProvider);
   }
+}
+
+
+/// Prints one table's QR ([tableId]) or every active table's. Uses this device's printer setup:
+/// roll paper or a network thermal printer gives one ticket per table; A4 gives a sheet of cut-out cards.
+Future<void> printQrCodes(BuildContext context, WidgetRef ref, String? tableId) async {
+  final l = AppLocalizations.of(context);
+  await guard(context, () async {
+    final settings = await PrintSettings.load();
+    final path = tableId == null ? '/api/v1/tables/qr-print' : '/api/v1/tables/$tableId/qr-print';
+    final doc = Map<String, dynamic>.from(await ref.read(apiProvider).post(path, {
+      'paper_mm': settings.escposMm,
+      'origin': Uri.base.origin, // used only when the server has no PUBLIC_DINER_URL (dev/preview)
+    }));
+    if ((doc['tickets'] as List).isEmpty) {
+      if (context.mounted) showDone(context, l.noTables);
+      return;
+    }
+    await printTableQrs(doc, settings: settings);
+  });
 }

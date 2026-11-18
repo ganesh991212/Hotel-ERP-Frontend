@@ -766,18 +766,6 @@
   "@addTable": {
     "description": "Button"
   },
-  "qrSheet": "QR sheet",
-  "@qrSheet": {
-    "description": "Button and dialog: printable QR codes"
-  },
-  "qrSheetHelp": "Print this page and place each code on its table.",
-  "@qrSheetHelp": {
-    "description": "Help in the QR sheet dialog"
-  },
-  "scanToOrder": "Scan to order",
-  "@scanToOrder": {
-    "description": "Caption under a printed QR code"
-  },
   "tableName": "Table name",
   "@tableName": {
     "description": "Field label"
@@ -1818,6 +1806,46 @@
         "type": "int"
       }
     }
+  },
+  "printQr": "Print QR",
+  "@printQr": {
+    "description": "Table menu: print this table's QR code"
+  },
+  "printAllQr": "Print all QR codes",
+  "@printAllQr": {
+    "description": "Button: print QR codes for every active table"
+  },
+  "enableAlerts": "Enable alerts",
+  "@enableAlerts": {
+    "description": "Button: unlock sound and ask for notification permission"
+  },
+  "enableAlertsBody": "Turn on loud alerts for new and ready orders. Keep this tab open for the loud sound; when the tab is closed you get a normal notification.",
+  "@enableAlertsBody": {
+    "description": "Banner text in the browser"
+  },
+  "enableAlertsDenied": "Notifications are blocked for this site in your browser settings. Tap to turn on the loud in-page sound; keep this tab open.",
+  "@enableAlertsDenied": {
+    "description": "Banner text when notification permission is denied"
+  },
+  "notNow": "Not now",
+  "@notNow": {
+    "description": "Dismiss button"
+  },
+  "language": "Language",
+  "@language": {
+    "description": "Language switcher label"
+  },
+  "langEn": "English",
+  "@langEn": {
+    "description": "Native name of English; identical in every language file"
+  },
+  "langTe": "తెలుగు",
+  "@langTe": {
+    "description": "Native name of Telugu; identical in every language file"
+  },
+  "langHi": "हिन्दी",
+  "@langHi": {
+    "description": "Native name of Hindi; identical in every language file"
   },
   "errGeneric": "Something went wrong. Please try again.",
   "@errGeneric": {

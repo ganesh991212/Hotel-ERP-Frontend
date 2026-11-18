@@ -5,32 +5,14 @@ import 'dart:js_interop_unsafe';
 
 import 'package:web/web.dart' as web;
 
-// Firebase Web config values — public identifiers, safe to ship client-side
-// (Firebase's security model relies on Security Rules / backend token
-// verification, not on hiding these). Baked in via --dart-define at build
-// time from GitHub repo secrets; empty until the Firebase project exists.
-const _apiKey = String.fromEnvironment('FIREBASE_API_KEY');
-const _authDomain = String.fromEnvironment('FIREBASE_AUTH_DOMAIN');
-const _projectId = String.fromEnvironment('FIREBASE_PROJECT_ID');
-const _storageBucket = String.fromEnvironment('FIREBASE_STORAGE_BUCKET');
-const _messagingSenderId = String.fromEnvironment('FIREBASE_MESSAGING_SENDER_ID');
-const _appId = String.fromEnvironment('FIREBASE_APP_ID');
-const _vapidKey = String.fromEnvironment('FIREBASE_VAPID_KEY');
+// Config arrives at runtime from GET /api/v1/push/config (set in the server's .env), not --dart-define,
+// so one web build works for every deployment. These are public identifiers, not secrets.
+Map<String, dynamic> _cfg = const {};
+String _v(String k) => (_cfg[k] ?? '') as String;
 
-/// Every value `registerWebPush` actually needs, including the VAPID key.
-///
-/// The key was missing from this check while `getToken()` below depends on
-/// it, so a build with Firebase configured but no VAPID key passed the gate,
-/// asked the user for notification permission, loaded the SDK, and only then
-/// failed to mint a token.
-///
-/// That ordering is what makes it worth guarding rather than letting it fail
-/// naturally: a browser grants a site one notification prompt. Spending it on
-/// a configuration that cannot produce a token leaves the user permanently
-/// "subscribed" to nothing, with no prompt left to re-ask once the key is
-/// added.
-bool get _configured =>
-    _apiKey.isNotEmpty && _projectId.isNotEmpty && _vapidKey.isNotEmpty;
+/// Every value registerWebPush needs, including the VAPID key (GigBridge lesson: a browser grants one
+/// notification prompt; do not spend it on a configuration that cannot mint a token).
+bool get _configured => _v('apiKey').isNotEmpty && _v('projectId').isNotEmpty && _v('vapidKey').isNotEmpty;
 
 // Registered at its own scope, deliberately narrower than the default '/' —
 // Flutter already runs its own service worker (flutter_service_worker.js) at
@@ -54,7 +36,8 @@ bool _firebaseReady = false;
 /// yet (--dart-define values empty), the user denied notification
 /// permission, or anything else went wrong — push is additive, never
 /// something the rest of the app depends on.
-Future<String?> registerWebPush() async {
+Future<String?> registerWebPush(Map<String, dynamic> config) async {
+  _cfg = config;
   if (!_configured) return null;
   try {
     final permission = (await web.Notification.requestPermission().toDart).toDart;
@@ -63,13 +46,17 @@ Future<String?> registerWebPush() async {
     await _ensureFirebaseLoaded();
 
     final registration = await web.window.navigator.serviceWorker
-        .register('/firebase-messaging-sw.js'.toJS, web.RegistrationOptions(scope: _swScope))
+        // The service worker is a static file; it reads its Firebase config from this query string.
+        .register('/firebase-messaging-sw.js?${Uri(queryParameters: {
+              for (final k in ['apiKey', 'authDomain', 'projectId', 'storageBucket', 'messagingSenderId', 'appId'])
+                k: _v(k),
+            }).query}'.toJS, web.RegistrationOptions(scope: _swScope))
         .toDart;
 
     final firebase = globalContext.getProperty('firebase'.toJS) as JSObject;
     final messaging = firebase.callMethod('messaging'.toJS) as JSObject;
     final options = JSObject()
-      ..setProperty('vapidKey'.toJS, _vapidKey.toJS)
+      ..setProperty('vapidKey'.toJS, _v('vapidKey').toJS)
       ..setProperty('serviceWorkerRegistration'.toJS, registration);
     final tokenPromise = messaging.callMethod('getToken'.toJS, options) as JSPromise<JSString>;
     final token = await tokenPromise.toDart;
@@ -85,12 +72,12 @@ Future<void> _ensureFirebaseLoaded() async {
   await _ensureScript(_messagingScriptUrl);
 
   final config = JSObject()
-    ..setProperty('apiKey'.toJS, _apiKey.toJS)
-    ..setProperty('authDomain'.toJS, _authDomain.toJS)
-    ..setProperty('projectId'.toJS, _projectId.toJS)
-    ..setProperty('storageBucket'.toJS, _storageBucket.toJS)
-    ..setProperty('messagingSenderId'.toJS, _messagingSenderId.toJS)
-    ..setProperty('appId'.toJS, _appId.toJS);
+    ..setProperty('apiKey'.toJS, _v('apiKey').toJS)
+    ..setProperty('authDomain'.toJS, _v('authDomain').toJS)
+    ..setProperty('projectId'.toJS, _v('projectId').toJS)
+    ..setProperty('storageBucket'.toJS, _v('storageBucket').toJS)
+    ..setProperty('messagingSenderId'.toJS, _v('messagingSenderId').toJS)
+    ..setProperty('appId'.toJS, _v('appId').toJS);
   (globalContext.getProperty('firebase'.toJS) as JSObject)
       .callMethod('initializeApp'.toJS, config);
   _firebaseReady = true;

@@ -32,13 +32,16 @@ ThemeData buildTheme(Brightness brightness) {
     labelMedium: TextStyle(fontFamily: bodyFont, fontSize: 12, fontWeight: FontWeight.w500, color: t.dim),
     labelSmall: TextStyle(fontFamily: bodyFont, fontSize: 11, fontWeight: FontWeight.w500, color: t.faint),
   );
+  // Telugu/Devanagari glyphs come from on-demand fonts (core/l10n/locale.dart); Latin stays Outfit/Inter.
+  final textWithScripts = text.apply(fontFamilyFallback: const ['NotoSansTelugu', 'NotoSansDevanagari']);
   final pill = RoundedRectangleBorder(borderRadius: BorderRadius.circular(Rad.pill));
   return ThemeData(
     useMaterial3: true,
     brightness: brightness,
     colorScheme: scheme,
     fontFamily: bodyFont,
-    textTheme: text,
+    fontFamilyFallback: const ['NotoSansTelugu', 'NotoSansDevanagari'],
+    textTheme: textWithScripts,
     scaffoldBackgroundColor: t.bgTop,
     extensions: [t],
     splashFactory: InkSparkle.splashFactory,

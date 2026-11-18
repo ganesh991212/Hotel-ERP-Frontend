@@ -1,9 +1,15 @@
+import 'dart:ui' show ImageFilter;
+
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 
 import '../core/auth/session.dart';
 import '../core/theme/tokens.dart';
+import '../core/l10n/locale.dart';
+import '../core/push/permission/notif_permission.dart';
+import '../core/push/push_service.dart';
 import '../core/sound/alert_sound.dart';
 import '../features/hotel/printer_dialog.dart';
 import '../features/hotel/settings_dialog.dart';
@@ -56,51 +62,38 @@ class AppShell extends ConsumerWidget {
     });
     final tabs = tabsFor(context, s);
     final current = tabs.where((t) => location.startsWith(t.path)).firstOrNull?.path ?? tabs.firstOrNull?.path ?? '';
-    final pills = PillTabs<String>(
-      items: [for (final t in tabs) (t.path, t.label)],
-      selected: current,
-      onSelect: (p) => context.go(p),
-      expand: context.isPhone && tabs.length <= 3,
-    );
     final g = context.gutter;
+    final phone = context.isPhone;
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: AppBackground(
-        child: SafeArea(
-          bottom: false,
-          child: Column(children: [
-            Padding(
-              padding: EdgeInsets.fromLTRB(g, context.isPhone ? 10 : 22, g, 0),
-              child: context.isPhone
-                  ? Column(children: [
-                      Row(children: [
-                        Expanded(child: Align(alignment: Alignment.centerLeft, child: _Brand(session: s))),
-                        const SizedBox(width: 8),
-                        ..._actions(context, ref, s, compact: true),
-                      ]),
-                      const SizedBox(height: 12),
-                      tabs.length <= 3
-                          ? pills
-                          : SingleChildScrollView(scrollDirection: Axis.horizontal, child: pills),
-                    ])
-                  : Row(children: [
-                      _Brand(session: s),
-                      const SizedBox(width: 16),
-                      Expanded(
-                        child: Align(
-                          alignment: Alignment.centerRight,
-                          child: SingleChildScrollView(scrollDirection: Axis.horizontal, reverse: true, child: pills),
-                        ),
-                      ),
-                      const SizedBox(width: 12),
-                      ..._actions(context, ref, s, compact: false),
-                    ]),
+        child: Stack(children: [
+          SafeArea(
+            bottom: false,
+            child: Column(children: [
+              Padding(
+                padding: EdgeInsets.fromLTRB(g, phone ? 10 : 22, g, 0),
+                child: Row(children: [
+                  Expanded(child: Align(alignment: Alignment.centerLeft, child: _Brand(session: s))),
+                  const SizedBox(width: 8),
+                  ..._actions(context, ref, s, compact: phone),
+                ]),
+              ),
+              if (!s.platform && s.subscriptionStatus != 'ACTIVE' && s.subscriptionStatus != 'TRIAL')
+                _SubscriptionBanner(status: s.subscriptionStatus),
+              if (kIsWeb && !s.platform && s.canAny(['kitchen.cook', 'order.serve', 'order.confirm', 'kot.print']))
+                const _EnableAlertsBanner(),
+              Expanded(child: child),
+            ]),
+          ),
+          if (tabs.length > 1)
+            Positioned(
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: _BottomDock(tabs: tabs, current: current, onSelect: (p) => context.go(p)),
             ),
-            if (!s.platform && s.subscriptionStatus != 'ACTIVE' && s.subscriptionStatus != 'TRIAL')
-              _SubscriptionBanner(status: s.subscriptionStatus),
-            Expanded(child: child),
-          ]),
-        ),
+        ]),
       ),
     );
   }
@@ -109,6 +102,8 @@ class AppShell extends ConsumerWidget {
     final l = AppLocalizations.of(context);
     final t = context.tokens;
     return [
+      const LanguageButton(),
+      const SizedBox(width: 8),
       if (!s.platform && s.can('settings.manage'))
         compact
             ? RoundButton(icon: Icons.tune_rounded, tooltip: l.settings, onTap: () => showSettingsDialog(context))
@@ -327,6 +322,112 @@ class _SubscriptionBanner extends StatelessWidget {
   }
 }
 
+/// Browser only: one tap unlocks loud in-app sound for this session (autoplay policy) and asks for
+/// notification permission. Browsers never allow a custom notification sound, so the copy says to keep the
+/// tab open for the loud alert; background notifications use the system sound.
+class _EnableAlertsBanner extends ConsumerStatefulWidget {
+  const _EnableAlertsBanner();
+
+  @override
+  ConsumerState<_EnableAlertsBanner> createState() => _EnableAlertsBannerState();
+}
+
+class _EnableAlertsBannerState extends ConsumerState<_EnableAlertsBanner> {
+  bool _dismissed = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final sound = ref.watch(alertSoundProvider);
+    final perm = notificationPermission();
+    if (_dismissed || (sound.unlocked && perm != 'default') || !sound.enabled) return const SizedBox.shrink();
+    final l = AppLocalizations.of(context);
+    final t = context.tokens;
+    return Padding(
+      padding: EdgeInsets.fromLTRB(context.gutter, 12, context.gutter, 0),
+      child: Glass(
+        strong: true,
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+        child: Wrap(crossAxisAlignment: WrapCrossAlignment.center, spacing: 12, runSpacing: 8, children: [
+          Icon(Icons.campaign_outlined, color: t.accentDeep),
+          ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 560),
+            child: Text(perm == 'denied' ? l.enableAlertsDenied : l.enableAlertsBody),
+          ),
+          FilledButton.icon(
+            onPressed: () async {
+              await sound.play(AlertKind.ready, force: true); // the tap itself unlocks audio
+              if (notificationPermission() == 'default') {
+                await requestNotificationPermission();
+                final s = ref.read(sessionProvider).value;
+                if (s != null) {
+                  ref.read(pushServiceProvider).reset();
+                  await ref.read(pushServiceProvider).register(s.userId);
+                }
+              }
+              if (mounted) setState(() {});
+            },
+            icon: const Icon(Icons.notifications_active_outlined, size: 18),
+            label: Text(l.enableAlerts),
+          ),
+          TextButton(onPressed: () => setState(() => _dismissed = true), child: Text(l.notNow)),
+        ]),
+      ),
+    );
+  }
+}
+
+/// Space pages leave at the bottom so the floating dock never covers content.
+const double kDockClearance = 104;
+
+/// Floating glass navigation dock. Phones: icon over label, full width when few tabs, otherwise scrolls
+/// sideways and keeps the selected tab in view. Larger screens: icon + label, centred.
+class _BottomDock extends StatelessWidget {
+  const _BottomDock({required this.tabs, required this.current, required this.onSelect});
+  final List<NavTab> tabs;
+  final String current;
+  final ValueChanged<String> onSelect;
+
+  @override
+  Widget build(BuildContext context) {
+    final phone = context.isPhone;
+    final g = context.gutter;
+    final t = context.tokens;
+    final pills = PillTabs<String>(
+      items: [for (final t in tabs) (t.path, t.label)],
+      icons: [for (final t in tabs) t.icon],
+      stacked: phone,
+      elevated: true,
+      expand: phone && tabs.length <= 4,
+      selected: current,
+      onSelect: onSelect,
+    );
+    // Frosted glass: content scrolling underneath blurs instead of showing through as text.
+    final bar = DecoratedBox(
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(Rad.pill), boxShadow: t.shadow),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(Rad.pill),
+        child: BackdropFilter(filter: ImageFilter.blur(sigmaX: 14, sigmaY: 14), child: pills),
+      ),
+    );
+    return SafeArea(
+      top: false,
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(g, 0, g, phone ? 10 : 18),
+        child: LayoutBuilder(builder: (context, c) {
+          final Widget content = phone && tabs.length <= 4
+              ? SizedBox(width: c.maxWidth, child: bar)
+              : SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  physics: const BouncingScrollPhysics(),
+                  child: ConstrainedBox(constraints: BoxConstraints(minWidth: c.maxWidth), child: Center(child: bar)),
+                );
+          return Center(child: content);
+        }),
+      ),
+    );
+  }
+}
+
 /// Standard scrollable page body with gutters.
 class PageBody extends StatelessWidget {
   const PageBody({super.key, required this.children, this.maxWidth = 1500});
@@ -337,7 +438,7 @@ class PageBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final g = context.gutter;
     return SingleChildScrollView(
-      padding: EdgeInsets.fromLTRB(g, 18, g, 40),
+      padding: EdgeInsets.fromLTRB(g, 18, g, kDockClearance + MediaQuery.paddingOf(context).bottom),
       child: Center(
         child: ConstrainedBox(
           constraints: BoxConstraints(maxWidth: maxWidth),
@@ -360,7 +461,8 @@ class PageHeading extends StatelessWidget {
     if (actions.isEmpty) return Padding(padding: const EdgeInsets.only(bottom: 16), child: head);
     return Padding(
       padding: const EdgeInsets.only(bottom: 16),
-      child: context.isPhone
+      // Stack heading over actions until there is clearly room for one row (avoids wrapping the title).
+      child: context.width < 1000
           ? Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               head,
               const SizedBox(height: 12),

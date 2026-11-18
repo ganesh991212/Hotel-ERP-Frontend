@@ -12,8 +12,8 @@ import 'web/push_web.dart';
 ///  * the memo is keyed by user id, so on a shared tablet the next person's sign-in re-binds the token
 ///    (otherwise the previous user's alerts keep arriving here);
 ///  * sign-out releases the token server-side before the session ends.
-/// A safe no-op until Firebase is configured (google-services.json / GoogleService-Info.plist on mobile,
-/// --dart-define FIREBASE_* on web). The open app still alerts loudly through the realtime socket.
+/// A safe no-op until Firebase is configured in the server's .env (see GET /api/v1/push/config).
+/// The open app still alerts loudly through the realtime socket.
 class PushService {
   PushService(this._api);
 
@@ -29,6 +29,12 @@ class PushService {
     return _inFlight = _register();
   }
 
+  /// Forget the memo so the next register() runs again (e.g. after the user grants browser permission).
+  void reset() {
+    _inFlight = null;
+    _registeredFor = null;
+  }
+
   /// Best-effort; never blocks sign-out. Call before the access token is cleared.
   Future<void> unregister() async {
     final token = _token, platform = _platform;
@@ -42,13 +48,37 @@ class PushService {
   }
 
   Future<void> _register() async {
+    // All Firebase settings come from the server's .env (GET /api/v1/push/config): no per-build config files.
+    Map<String, dynamic> config;
+    try {
+      config = Map<String, dynamic>.from(await _api.public('GET', '/api/v1/push/config'));
+    } catch (_) {
+      return;
+    }
+    if (config['enabled'] != true) return;
     if (kIsWeb) {
-      final token = await registerWebPush();
+      final web = config['web'];
+      if (web == null) return;
+      final token = await registerWebPush(Map<String, dynamic>.from(web));
       if (token != null) await _send(token, 'web');
       return;
     }
+    final ios = defaultTargetPlatform == TargetPlatform.iOS;
+    final native = config[ios ? 'ios' : 'android'] as Map?;
+    if (native == null) return;
     try {
-      if (Firebase.apps.isEmpty) await Firebase.initializeApp();
+      if (Firebase.apps.isEmpty) {
+        await Firebase.initializeApp(
+          options: FirebaseOptions(
+            apiKey: native['apiKey'],
+            appId: native['appId'],
+            messagingSenderId: native['messagingSenderId'],
+            projectId: native['projectId'],
+            storageBucket: (native['storageBucket'] as String?)?.isEmpty == true ? null : native['storageBucket'],
+            iosBundleId: native['iosBundleId'],
+          ),
+        );
+      }
       final messaging = FirebaseMessaging.instance;
       final settings = await messaging.requestPermission(alert: true, sound: true, criticalAlert: false);
       if (settings.authorizationStatus == AuthorizationStatus.denied) return;

@@ -13,6 +13,9 @@ class AlertSound {
   bool enabled = true;
   bool lastFailed = false;
 
+  /// True once a sound has played in this page session (browsers allow audio only after a user tap).
+  bool unlocked = false;
+
   static const _files = {AlertKind.newOrder: 'sounds/kitchen_alert.wav', AlertKind.ready: 'sounds/ready_alert.wav'};
 
   Future<void> loadPrefs() async {
@@ -32,6 +35,7 @@ class AlertSound {
       await player.setVolume(1.0);
       await player.play(AssetSource(_files[kind]!), volume: 1.0);
       lastFailed = false;
+      unlocked = true;
       if (kind == AlertKind.newOrder) {
         // Second ring so a busy kitchen does not miss it.
         await player.onPlayerComplete.first.timeout(const Duration(seconds: 4));

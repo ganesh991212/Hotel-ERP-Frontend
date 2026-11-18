@@ -11,7 +11,7 @@ docs live in [Hotel-ERP-Backend](https://github.com/ganesh991212/Hotel-ERP-Backe
 | Hotel admin / manager | Overview dashboard, Floor, Kitchen, Menu, Tables & QR, Team (people + role permission matrix), Expenses, Settings (kitchen mode, QR confirmation, plan & billing) |
 | Server | Floor: tables, take orders, confirm QR orders, mark served |
 | Chef | Kitchen: pick up new orders, strict queue (only the head can start), mark ready, see other chefs live |
-| Diner (public) | `/#/t/<qr-token>`: menu, cart with server-priced totals, live order tracker |
+| Diner (public) | `/#/t/<qr-token>`: menu, cart with server-priced totals, live order tracker, language switch |
 
 Tabs are derived from the signed-in user's **permissions** and the hotel's **plan features**
 (`GET /me`, `GET /me/entitlements`). Hiding is UX only; the API enforces everything.
@@ -60,11 +60,16 @@ lib/
   (profile menu → Printer setup). Adapted from the CMS app's invoice generator.
 - **Loud alerts** (`core/sound/`, `assets/sounds/`): original synthesised sounds near full scale, played on live
   events (new order for chefs, ready for servers). Browsers need one tap before audio; "Test alert sound" unlocks it.
-- **Push** (`core/push/`, ported from GigBridge): FCM on Android/iOS/web. Android channels play on the alarm stream
-  (`MainActivity.kt`, `res/raw/`). Off until Firebase is configured:
-  - Android: `android/app/google-services.json`; iOS: `ios/Runner/GoogleService-Info.plist` and add
-    `kitchen_alert.wav`/`ready_alert.wav` to the Runner target in Xcode;
-  - Web: build with `--dart-define=FIREBASE_*` and run `scripts/render_firebase_sw.sh` after `flutter build web`.
+- **Push** (`core/push/`, ported from GigBridge): FCM on Android/iOS/web, configured **only in the backend `.env`**
+  (`FCM_*` secret + public `FIREBASE_*` app ids). The app reads `GET /api/v1/push/config` at sign-in; no
+  google-services.json, plist or per-build defines. Android channels play on the alarm stream (`MainActivity.kt`,
+  `res/raw/`); the iOS sounds are already in the Runner target. Browsers cannot play custom notification sounds:
+  staff tap **Enable alerts** once and keep the tab open for the loud in-page sound.
+- **Languages**: English, Telugu, Hindi (`lib/l10n/app_*.arb`), switch with the 文A button; remembered per device.
+  Telugu/Devanagari fonts load only when chosen. Prints (KOT, bill, QR) stay English for thermal printers.
+  Translations are a first draft: have a native speaker review before launch.
+- **Table QR codes**: Tables → ⋯ → Print QR, or Print all QR codes (A4 sheet of cards, or one ticket per table on
+  roll/network thermal printers; thermal printers draw the QR natively).
 
 ## Design
 Visual language: soft mint glass cards on a green gradient, Outfit display + Inter body type,

@@ -573,15 +573,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get addTable => 'Add table';
 
   @override
-  String get qrSheet => 'QR sheet';
-
-  @override
-  String get qrSheetHelp => 'Print this page and place each code on its table.';
-
-  @override
-  String get scanToOrder => 'Scan to order';
-
-  @override
   String get tableName => 'Table name';
 
   @override
@@ -1363,6 +1354,38 @@ class AppLocalizationsEn extends AppLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String get printQr => 'Print QR';
+
+  @override
+  String get printAllQr => 'Print all QR codes';
+
+  @override
+  String get enableAlerts => 'Enable alerts';
+
+  @override
+  String get enableAlertsBody =>
+      'Turn on loud alerts for new and ready orders. Keep this tab open for the loud sound; when the tab is closed you get a normal notification.';
+
+  @override
+  String get enableAlertsDenied =>
+      'Notifications are blocked for this site in your browser settings. Tap to turn on the loud in-page sound; keep this tab open.';
+
+  @override
+  String get notNow => 'Not now';
+
+  @override
+  String get language => 'Language';
+
+  @override
+  String get langEn => 'English';
+
+  @override
+  String get langTe => 'తెలుగు';
+
+  @override
+  String get langHi => 'हिन्दी';
 
   @override
   String get errGeneric => 'Something went wrong. Please try again.';

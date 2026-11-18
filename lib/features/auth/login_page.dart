@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_ui/material_ui.dart';
 
 import '../../core/auth/session.dart';
+import '../../core/l10n/locale.dart';
 import '../../core/theme/tokens.dart';
 import '../../l10n/app_localizations.dart';
 import '../../ui/components.dart';
@@ -101,7 +102,11 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     );
 
     final hero = Column(crossAxisAlignment: CrossAxisAlignment.start, mainAxisSize: MainAxisSize.min, children: [
-      Text(l.appName, style: tt.titleLarge?.copyWith(color: t.accentDeep)),
+      Row(children: [
+        Text(l.appName, style: tt.titleLarge?.copyWith(color: t.accentDeep)),
+        const Spacer(),
+        const LanguageButton(compact: false),
+      ]),
       const SizedBox(height: 10),
       Text(l.loginHeadline, style: context.isPhone ? tt.displaySmall : tt.displayLarge),
       const SizedBox(height: 22),

@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_ui/material_ui.dart';
 
 import 'core/auth/session.dart';
+import 'core/l10n/locale.dart';
 import 'core/push/push_service.dart';
 import 'core/router.dart';
 import 'core/theme/theme.dart';
@@ -26,6 +27,7 @@ class HotelErpApp extends ConsumerWidget {
       theme: buildTheme(Brightness.light),
       darkTheme: buildTheme(Brightness.dark),
       themeMode: ThemeMode.light,
+      locale: ref.watch(localeProvider),
       routerConfig: ref.watch(routerProvider),
       localizationsDelegates: const [
         AppLocalizations.delegate,

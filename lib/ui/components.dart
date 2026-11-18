@@ -179,11 +179,27 @@ class _RevealState extends State<Reveal> with SingleTickerProviderStateMixin {
 /// Segmented pill navigation with a sliding dark indicator. The leading edge moves first and the
 /// trailing edge follows, giving the stretch-then-settle motion of the reference.
 class PillTabs<T> extends StatefulWidget {
-  const PillTabs({super.key, required this.items, required this.selected, required this.onSelect, this.expand = false});
+  const PillTabs({
+    super.key,
+    required this.items,
+    required this.selected,
+    required this.onSelect,
+    this.expand = false,
+    this.icons,
+    this.stacked = false,
+    this.elevated = false,
+  });
   final List<(T, String)> items;
   final T selected;
   final ValueChanged<T> onSelect;
   final bool expand;
+
+  /// Optional icon per item (bottom dock). [stacked] puts the icon above a small label (phones).
+  final List<IconData>? icons;
+  final bool stacked;
+
+  /// Stronger glass + shadow when floating over content (bottom dock).
+  final bool elevated;
 
   @override
   State<PillTabs<T>> createState() => _PillTabsState<T>();
@@ -216,6 +232,10 @@ class _PillTabsState<T> extends State<PillTabs<T>> {
     final off = box.localToGlobal(Offset.zero, ancestor: stack);
     final r = off & box.size;
     if (r != _rect) {
+      // Dock only: keep the newly selected tab in view when the bar scrolls (phones with many tabs).
+      if (widget.elevated) {
+        Scrollable.ensureVisible(_keys[i].currentContext!, duration: Motion.medium, curve: Motion.ease, alignment: .5);
+      }
       setState(() {
         _prev = _rect;
         _rect = r;
@@ -237,7 +257,7 @@ class _PillTabsState<T> extends State<PillTabs<T>> {
     return Container(
       padding: const EdgeInsets.all(4),
       decoration: BoxDecoration(
-        color: t.cardStrong,
+        color: widget.elevated ? t.solid.withValues(alpha: .78) : t.cardStrong,
         borderRadius: BorderRadius.circular(Rad.pill),
         border: Border.all(color: t.hair),
       ),
@@ -268,16 +288,35 @@ class _PillTabsState<T> extends State<PillTabs<T>> {
         borderRadius: BorderRadius.circular(Rad.pill),
         onTap: () => widget.onSelect(item.$1),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 11),
-          child: AnimatedDefaultTextStyle(
-            duration: Motion.fast,
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.labelLarge!.copyWith(color: sel ? t.onNight : t.dim),
-            child: Text(item.$2, textAlign: TextAlign.center, maxLines: 1),
-          ),
+          padding: widget.stacked
+              ? const EdgeInsets.symmetric(horizontal: 12, vertical: 7)
+              : const EdgeInsets.symmetric(horizontal: 18, vertical: 11),
+          child: _label(context, i, item.$2, sel ? t.onNight : t.dim),
         ),
       ),
     );
+  }
+}
+
+extension on _PillTabsState {
+  Widget _label(BuildContext context, int i, String text, Color color) {
+    final tt = Theme.of(context).textTheme;
+    final icon = widget.icons == null ? null : widget.icons![i];
+    final label = AnimatedDefaultTextStyle(
+      duration: Motion.fast,
+      textAlign: TextAlign.center,
+      style: (widget.stacked ? tt.labelSmall! : tt.labelLarge!).copyWith(color: color),
+      child: Text(text, textAlign: TextAlign.center, maxLines: 1),
+    );
+    if (icon == null) return label;
+    final glyph = TweenAnimationBuilder<Color?>(
+      tween: ColorTween(end: color),
+      duration: Motion.fast,
+      builder: (_, c, _) => Icon(icon, size: widget.stacked ? 20 : 18, color: c),
+    );
+    return widget.stacked
+        ? Column(mainAxisSize: MainAxisSize.min, children: [glyph, const SizedBox(height: 2), label])
+        : Row(mainAxisSize: MainAxisSize.min, children: [glyph, const SizedBox(width: 8), label]);
   }
 }
 

@@ -37,6 +37,11 @@ flutter:
   generate: true
   assets:
     - assets/sounds/
+    # Regional scripts: plain assets, loaded on demand by core/l10n/locale.dart (not at startup).
+    - assets/fonts/NotoSansTelugu_400Regular.ttf
+    - assets/fonts/NotoSansTelugu_600SemiBold.ttf
+    - assets/fonts/NotoSansDevanagari_400Regular.ttf
+    - assets/fonts/NotoSansDevanagari_600SemiBold.ttf
   fonts:
     - family: Outfit
       fonts:
