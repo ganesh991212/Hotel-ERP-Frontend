@@ -4,7 +4,10 @@ import 'package:material_ui/material_ui.dart';
 
 import '../core/auth/session.dart';
 import '../core/theme/tokens.dart';
+import '../core/sound/alert_sound.dart';
+import '../features/hotel/printer_dialog.dart';
 import '../features/hotel/settings_dialog.dart';
+import 'feedback.dart';
 import '../l10n/app_localizations.dart';
 import 'components.dart';
 import 'status.dart';
@@ -24,6 +27,7 @@ List<NavTab> tabsFor(BuildContext context, Session s) {
       NavTab('/p/overview', l.tabOverview, Icons.space_dashboard_outlined),
       NavTab('/p/hotels', l.tabHotels, Icons.apartment_rounded),
       NavTab('/p/plans', l.tabPlans, Icons.workspace_premium_outlined),
+      NavTab('/p/categories', l.tabCategories, Icons.category_outlined),
     ];
   }
   return [
@@ -46,6 +50,10 @@ class AppShell extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final s = ref.watch(sessionProvider).value;
     if (s == null) return const SizedBox.shrink();
+    ref.listen(outletEventsProvider, (_, next) {
+      final kind = alertFor(s, next.value);
+      if (kind != null) ref.read(alertSoundProvider).play(kind);
+    });
     final tabs = tabsFor(context, s);
     final current = tabs.where((t) => location.startsWith(t.path)).firstOrNull?.path ?? tabs.firstOrNull?.path ?? '';
     final pills = PillTabs<String>(
@@ -239,8 +247,20 @@ class _ProfileButton extends ConsumerWidget {
       position: PopupMenuPosition.under,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
       color: context.tokens.solid,
-      onSelected: (v) {
-        if (v == 'logout') ref.read(sessionProvider.notifier).logout();
+      onSelected: (v) async {
+        final sound = ref.read(alertSoundProvider);
+        switch (v) {
+          case 'logout':
+            ref.read(sessionProvider.notifier).logout();
+          case 'sound':
+            await sound.setEnabled(!sound.enabled);
+            if (context.mounted) showDone(context, sound.enabled ? l.soundOn : l.soundOff);
+          case 'test':
+            await sound.play(AlertKind.newOrder, force: true);
+            if (context.mounted && sound.lastFailed) showDone(context, l.soundBlocked);
+          case 'printer':
+            if (context.mounted) showPrinterDialog(context);
+        }
       },
       itemBuilder: (_) => [
         PopupMenuItem(
@@ -253,6 +273,24 @@ class _ProfileButton extends ConsumerWidget {
           ),
         ),
         const PopupMenuDivider(),
+        if (!session.platform) ...[
+          PopupMenuItem(value: 'sound', child: Row(children: [
+            Icon(ref.read(alertSoundProvider).enabled ? Icons.volume_up_rounded : Icons.volume_off_rounded, size: 18),
+            const SizedBox(width: 10),
+            Text(ref.read(alertSoundProvider).enabled ? l.soundAlertsOn : l.soundAlertsOff),
+          ])),
+          PopupMenuItem(value: 'test', child: Row(children: [
+            const Icon(Icons.campaign_outlined, size: 18),
+            const SizedBox(width: 10),
+            Text(l.testSound),
+          ])),
+          PopupMenuItem(value: 'printer', child: Row(children: [
+            const Icon(Icons.print_outlined, size: 18),
+            const SizedBox(width: 10),
+            Text(l.printerSetup),
+          ])),
+          const PopupMenuDivider(),
+        ],
         PopupMenuItem(value: 'logout', child: Row(children: [
           const Icon(Icons.logout_rounded, size: 18),
           const SizedBox(width: 10),
@@ -334,4 +372,24 @@ class PageHeading extends StatelessWidget {
             ]),
     );
   }
+}
+
+
+/// Which loud alert (if any) a live event deserves for this person. Mirrors the server's push rules so the
+/// open app and a backgrounded phone ring for the same things.
+AlertKind? alertFor(Session s, Map<String, dynamic>? ev) {
+  if (ev == null) return null;
+  final type = ev['type'];
+  final order = ev['order'] as Map<String, dynamic>?;
+  if (order == null) return null;
+  final status = order['status'];
+  final mode = (s.me['outlet'] as Map?)?['kitchen_mode'];
+  if (type == 'order.ready' && s.can('order.serve')) return AlertKind.ready;
+  if (type == 'order.created' && status == 'PLACED' && s.can('order.confirm')) return AlertKind.newOrder;
+  if (type == 'order.created' && status == 'CONFIRMED') {
+    if (mode == 'CHEF_ACCEPT' && s.can('kitchen.cook')) return AlertKind.newOrder;
+    if (mode == 'ADMIN_PRINT' && s.can('kot.print')) return AlertKind.newOrder;
+  }
+  if (type == 'order.assigned' && order['chef']?['id'] == s.userId) return AlertKind.newOrder;
+  return null;
 }

@@ -119,6 +119,8 @@ class _Dashboard extends StatelessWidget {
       Reveal(index: 0, child: _StatusStrip(d: d)),
       const SizedBox(height: 18),
       grid,
+      const SizedBox(height: Gap.m),
+      Reveal(index: 7, child: _ServiceTimesCard(d: d)),
     ]);
   }
 }
@@ -682,6 +684,101 @@ class _WeekCard extends StatelessWidget {
               ),
           ]),
         ),
+      ]),
+    );
+  }
+}
+
+
+/// Stage timings today: wait for a chef, preparation, serving, and the guest's total. Average and p90
+/// (the slowest 10%), because an average hides the bad nights.
+class _ServiceTimesCard extends StatelessWidget {
+  const _ServiceTimesCard({required this.d});
+  final Map<String, dynamic> d;
+
+  @override
+  Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
+    final t = context.tokens;
+    final tt = Theme.of(context).textTheme;
+    final timings = Map<String, dynamic>.from(d['timings'] ?? {});
+    final servers = (d['servers'] as List? ?? const []).cast<Map>();
+    final stages = [
+      ('wait_for_chef', l.stageWait, Icons.hourglass_top_rounded, l.stageWaitHelp),
+      ('preparation', l.stagePrep, Icons.local_fire_department_rounded, l.stagePrepHelp),
+      ('serving', l.stageServe, Icons.room_service_outlined, l.stageServeHelp),
+      ('total', l.stageTotal, Icons.timer_outlined, l.stageTotalHelp),
+    ];
+    String fmt(Object? v) => v == null ? '–' : NumberFormat('0.#').format(v);
+    Widget stage((String, String, IconData, String) s, int i) {
+      final m = Map<String, dynamic>.from(timings[s.$1] ?? {});
+      final total = i == 3;
+      final box = Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: total ? t.night : t.solid,
+          borderRadius: BorderRadius.circular(Rad.tile),
+          border: Border.all(color: total ? t.night : t.line),
+        ),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Row(children: [
+            Icon(s.$3, size: 16, color: total ? t.onNight : t.dim),
+            const SizedBox(width: 6),
+            Expanded(child: Text(s.$2, style: tt.labelLarge?.copyWith(color: total ? t.onNight : t.ink))),
+          ]),
+          const SizedBox(height: 6),
+          Row(crossAxisAlignment: CrossAxisAlignment.end, children: [
+            Text(fmt(m['avg_minutes']), style: tt.displaySmall?.copyWith(color: total ? t.onNight : t.ink)),
+            const SizedBox(width: 4),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 5),
+              child: Text(l.minAvg, style: tt.labelMedium?.copyWith(color: total ? t.nightDim : t.dim)),
+            ),
+          ]),
+          Text(l.p90Line(fmt(m['p90_minutes']), (m['count'] ?? 0) as int),
+              style: tt.labelSmall?.copyWith(color: total ? t.nightDim : t.faint)),
+          const SizedBox(height: 4),
+          Text(s.$4, style: tt.labelSmall?.copyWith(color: total ? t.nightDim : t.faint)),
+        ]),
+      );
+      return box;
+    }
+
+    final cells = [for (final (i, s) in stages.indexed) stage(s, i)];
+    return Glass(
+      child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+        CardTitle(l.serviceTimes),
+        Text(l.serviceTimesHelp, style: tt.bodySmall),
+        const SizedBox(height: 14),
+        if (context.isPhone)
+          GridView.count(
+            crossAxisCount: 2,
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            mainAxisSpacing: 10,
+            crossAxisSpacing: 10,
+            childAspectRatio: .95,
+            children: cells,
+          )
+        else
+          IntrinsicHeight(
+            child: Row(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+              for (final (i, c) in cells.indexed) ...[if (i > 0) const SizedBox(width: 10), Expanded(child: c)],
+            ]),
+          ),
+        if (servers.isNotEmpty) ...[
+          const SizedBox(height: 14),
+          Text(l.servingByServer, style: tt.titleMedium),
+          const SizedBox(height: 6),
+          Wrap(spacing: 8, runSpacing: 8, children: [
+            for (final sv in servers)
+              StatusChip(
+                icon: Icons.person_outline,
+                label: l.serverServeLine(sv['name'], fmt(sv['avg_serve_minutes']), sv['served'] as int),
+                color: t.accentDeep,
+              ),
+          ]),
+        ],
       ]),
     );
   }

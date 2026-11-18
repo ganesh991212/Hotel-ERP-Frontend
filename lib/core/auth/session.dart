@@ -62,10 +62,14 @@ class SessionController extends AsyncNotifier<Session?> {
   Future<void> reload() async => state = AsyncData(await _load());
 
   Future<void> logout() async {
+    await ref.read(pushReleaseProvider)();
     await _api.logout();
     state = const AsyncData(null);
   }
 }
+
+/// Set by the push module; releases this device's token before sign-out (avoids an import cycle).
+final pushReleaseProvider = Provider<Future<void> Function()>((ref) => () async {});
 
 final sessionProvider = AsyncNotifierProvider<SessionController, Session?>(SessionController.new);
 

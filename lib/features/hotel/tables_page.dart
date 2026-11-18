@@ -4,6 +4,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../core/api/api_client.dart';
 import '../../core/auth/session.dart';
 import '../../core/theme/tokens.dart';
 import '../../l10n/app_localizations.dart';
@@ -115,7 +116,7 @@ class TablesPage extends ConsumerWidget {
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(color: context.tokens.paper, borderRadius: BorderRadius.circular(16)),
               child: Column(children: [
-                QrImageView(data: t['qr_url'], size: 150, backgroundColor: context.tokens.paper),
+                QrImageView(data: absoluteLink(t['qr_url']), size: 150, backgroundColor: context.tokens.paper),
                 Text(t['label'], style: Theme.of(context).textTheme.titleLarge?.copyWith(color: context.tokens.paperInk)),
                 Text(l.scanToOrder, style: Theme.of(context).textTheme.bodySmall?.copyWith(color: context.tokens.paperInk.withValues(alpha: .6))),
               ]),
@@ -161,7 +162,7 @@ class _QrCard extends ConsumerWidget {
             padding: const EdgeInsets.all(10),
             child: Opacity(
               opacity: active ? 1 : .35,
-              child: QrImageView(data: table['qr_url'], backgroundColor: context.tokens.paper),
+              child: QrImageView(data: absoluteLink(table['qr_url']), backgroundColor: context.tokens.paper),
             ),
           ),
         ),
@@ -184,10 +185,10 @@ class _QrCard extends ConsumerWidget {
     final api = ref.read(apiProvider);
     switch (v) {
       case 'copy':
-        await Clipboard.setData(ClipboardData(text: table['qr_url']));
+        await Clipboard.setData(ClipboardData(text: absoluteLink(table['qr_url'])));
         if (context.mounted) showDone(context, l.linkCopied);
       case 'open':
-        await launchUrl(Uri.parse(table['qr_url']), webOnlyWindowName: '_blank');
+        await launchUrl(Uri.parse(absoluteLink(table['qr_url'])), webOnlyWindowName: '_blank');
       case 'rotate':
         final ok = await guard(context, () => api.post('/api/v1/tables/${table['id']}/rotate-qr'));
         if (ok && context.mounted) showDone(context, l.qrRotated);

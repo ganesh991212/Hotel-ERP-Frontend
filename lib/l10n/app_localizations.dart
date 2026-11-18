@@ -2104,6 +2104,462 @@ abstract class AppLocalizations {
   /// **'Ready! It\'s on its way to your table.'**
   String get readyOnItsWay;
 
+  /// Tooltip: print a kitchen order ticket
+  ///
+  /// In en, this message translates to:
+  /// **'Print KOT'**
+  String get printKot;
+
+  /// Dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'Print KOT #{number}'**
+  String printKotTitle(int number);
+
+  /// Explains the paper path
+  ///
+  /// In en, this message translates to:
+  /// **'Is the kitchen cooking from paper for this order? Sending it on paper takes it off the chefs\' screen so nobody picks it up twice.'**
+  String get printKotExplain;
+
+  /// Primary action: print KOT and move order to paper path
+  ///
+  /// In en, this message translates to:
+  /// **'Print and send to kitchen'**
+  String get printAndSend;
+
+  /// Secondary action: print without changing the order
+  ///
+  /// In en, this message translates to:
+  /// **'Just print a copy'**
+  String get printCopyOnly;
+
+  /// Snackbar
+  ///
+  /// In en, this message translates to:
+  /// **'KOT printed'**
+  String get kotPrinted;
+
+  /// Snackbar after paper-path KOT
+  ///
+  /// In en, this message translates to:
+  /// **'KOT printed. The order is now with the kitchen on paper.'**
+  String get kotSentOnPaper;
+
+  /// Chip: order handed to the kitchen as a printed ticket
+  ///
+  /// In en, this message translates to:
+  /// **'On paper'**
+  String get onPaper;
+
+  /// Kitchen card title
+  ///
+  /// In en, this message translates to:
+  /// **'Cooking from paper'**
+  String get onPaperTitle;
+
+  /// Kitchen card help
+  ///
+  /// In en, this message translates to:
+  /// **'Printed tickets handed to the kitchen. Mark them ready when the food comes out.'**
+  String get onPaperHelp;
+
+  /// Button on a table: open the bill
+  ///
+  /// In en, this message translates to:
+  /// **'Bill'**
+  String get billTable;
+
+  /// Bill dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'Bill · Table {label}'**
+  String billForTable(String label);
+
+  /// Bill dialog help
+  ///
+  /// In en, this message translates to:
+  /// **'Creates one bill for every unbilled order on this table. Bills are numbered and cannot be edited.'**
+  String get billExplain;
+
+  /// Button
+  ///
+  /// In en, this message translates to:
+  /// **'Create bill'**
+  String get createBill;
+
+  /// Warning listing unserved orders
+  ///
+  /// In en, this message translates to:
+  /// **'Not served yet: #{orders}'**
+  String notServedYet(String orders);
+
+  /// Button: include unserved orders
+  ///
+  /// In en, this message translates to:
+  /// **'Bill them anyway'**
+  String get billAnyway;
+
+  /// Chip: bill paid with a method
+  ///
+  /// In en, this message translates to:
+  /// **'Paid · {method}'**
+  String billPaid(String method);
+
+  /// Chip: bill not paid
+  ///
+  /// In en, this message translates to:
+  /// **'Unpaid'**
+  String get billUnpaid;
+
+  /// Orders on this bill
+  ///
+  /// In en, this message translates to:
+  /// **'Orders #{orders}'**
+  String ordersIncluded(String orders);
+
+  /// Central GST line
+  ///
+  /// In en, this message translates to:
+  /// **'CGST'**
+  String get cgst;
+
+  /// State GST line
+  ///
+  /// In en, this message translates to:
+  /// **'SGST'**
+  String get sgst;
+
+  /// Button
+  ///
+  /// In en, this message translates to:
+  /// **'Print bill'**
+  String get printBill;
+
+  /// Button when the bill was printed before
+  ///
+  /// In en, this message translates to:
+  /// **'Print duplicate'**
+  String get printDuplicate;
+
+  /// Snackbar
+  ///
+  /// In en, this message translates to:
+  /// **'Bill printed'**
+  String get billPrinted;
+
+  /// Label above payment method buttons
+  ///
+  /// In en, this message translates to:
+  /// **'Payment received by'**
+  String get settlePayment;
+
+  /// Button: cancel an issued bill
+  ///
+  /// In en, this message translates to:
+  /// **'Void bill'**
+  String get voidBill;
+
+  /// Profile menu item and dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'Printer setup'**
+  String get printerSetup;
+
+  /// Field label
+  ///
+  /// In en, this message translates to:
+  /// **'Paper'**
+  String get paperSize;
+
+  /// Help under paper size
+  ///
+  /// In en, this message translates to:
+  /// **'Match your printer\'s roll. A4 for office printers.'**
+  String get paperSizeHelp;
+
+  /// Paper size
+  ///
+  /// In en, this message translates to:
+  /// **'58 mm'**
+  String get paper58;
+
+  /// Paper size
+  ///
+  /// In en, this message translates to:
+  /// **'80 mm'**
+  String get paper80;
+
+  /// Paper size
+  ///
+  /// In en, this message translates to:
+  /// **'A4'**
+  String get paperA4;
+
+  /// Field label
+  ///
+  /// In en, this message translates to:
+  /// **'Print using'**
+  String get printWith;
+
+  /// Route: OS print dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Print dialog'**
+  String get printSystem;
+
+  /// Route: raw ESC/POS over Wi-Fi
+  ///
+  /// In en, this message translates to:
+  /// **'Network printer'**
+  String get printNetwork;
+
+  /// Help
+  ///
+  /// In en, this message translates to:
+  /// **'Works with any printer this device can use: thermal, laser, inkjet, Bluetooth or USB.'**
+  String get printSystemHelp;
+
+  /// Help
+  ///
+  /// In en, this message translates to:
+  /// **'Sends straight to a Wi-Fi/LAN thermal printer. No dialog; fastest for the kitchen.'**
+  String get printNetworkHelp;
+
+  /// Help on web
+  ///
+  /// In en, this message translates to:
+  /// **'In the browser, printing always opens the print dialog. Use the Android or iPhone app to print straight to a network printer.'**
+  String get printWebHelp;
+
+  /// Field label
+  ///
+  /// In en, this message translates to:
+  /// **'Printer IP address'**
+  String get printerIp;
+
+  /// Field label
+  ///
+  /// In en, this message translates to:
+  /// **'Port'**
+  String get port;
+
+  /// Button
+  ///
+  /// In en, this message translates to:
+  /// **'Test print'**
+  String get testPrint;
+
+  /// Heading printed on the test ticket
+  ///
+  /// In en, this message translates to:
+  /// **'TEST PRINT'**
+  String get testPrintTitle;
+
+  /// Body of the test ticket
+  ///
+  /// In en, this message translates to:
+  /// **'If you can read this, the printer works.'**
+  String get testPrintBody;
+
+  /// Profile menu toggle state
+  ///
+  /// In en, this message translates to:
+  /// **'Sound alerts: on'**
+  String get soundAlertsOn;
+
+  /// Profile menu toggle state
+  ///
+  /// In en, this message translates to:
+  /// **'Sound alerts: off'**
+  String get soundAlertsOff;
+
+  /// Snackbar
+  ///
+  /// In en, this message translates to:
+  /// **'Sound alerts on'**
+  String get soundOn;
+
+  /// Snackbar
+  ///
+  /// In en, this message translates to:
+  /// **'Sound alerts off'**
+  String get soundOff;
+
+  /// Profile menu item
+  ///
+  /// In en, this message translates to:
+  /// **'Test alert sound'**
+  String get testSound;
+
+  /// Snackbar when autoplay is blocked
+  ///
+  /// In en, this message translates to:
+  /// **'The browser blocked sound. Tap anywhere on the page, then try again.'**
+  String get soundBlocked;
+
+  /// Dashboard card title
+  ///
+  /// In en, this message translates to:
+  /// **'Service times'**
+  String get serviceTimes;
+
+  /// Card help
+  ///
+  /// In en, this message translates to:
+  /// **'Orders placed today. p90 = 9 out of 10 orders were faster than this.'**
+  String get serviceTimesHelp;
+
+  /// Stage name
+  ///
+  /// In en, this message translates to:
+  /// **'Wait for chef'**
+  String get stageWait;
+
+  /// Stage definition
+  ///
+  /// In en, this message translates to:
+  /// **'Order confirmed → cooking starts'**
+  String get stageWaitHelp;
+
+  /// Stage name
+  ///
+  /// In en, this message translates to:
+  /// **'Preparation'**
+  String get stagePrep;
+
+  /// Stage definition
+  ///
+  /// In en, this message translates to:
+  /// **'Cooking starts → ready'**
+  String get stagePrepHelp;
+
+  /// Stage name
+  ///
+  /// In en, this message translates to:
+  /// **'Serving'**
+  String get stageServe;
+
+  /// Stage definition
+  ///
+  /// In en, this message translates to:
+  /// **'Ready → on the table'**
+  String get stageServeHelp;
+
+  /// Stage name: total time
+  ///
+  /// In en, this message translates to:
+  /// **'Order to table'**
+  String get stageTotal;
+
+  /// Stage definition
+  ///
+  /// In en, this message translates to:
+  /// **'What the guest feels'**
+  String get stageTotalHelp;
+
+  /// Suffix after average minutes
+  ///
+  /// In en, this message translates to:
+  /// **'min avg'**
+  String get minAvg;
+
+  /// Slowest-10% line
+  ///
+  /// In en, this message translates to:
+  /// **'p90 {minutes} min · {count} orders'**
+  String p90Line(String minutes, int count);
+
+  /// Section title
+  ///
+  /// In en, this message translates to:
+  /// **'Serving time by server'**
+  String get servingByServer;
+
+  /// Per-server serving time
+  ///
+  /// In en, this message translates to:
+  /// **'{name}: {minutes} min · {count} served'**
+  String serverServeLine(String name, String minutes, int count);
+
+  /// Button
+  ///
+  /// In en, this message translates to:
+  /// **'Categories'**
+  String get categories;
+
+  /// Dialog and page title
+  ///
+  /// In en, this message translates to:
+  /// **'Expense categories'**
+  String get expenseCategories;
+
+  /// Help
+  ///
+  /// In en, this message translates to:
+  /// **'Global categories are set for every hotel. Add your own for anything else; only your hotel sees them.'**
+  String get categoriesHelp;
+
+  /// Chip: category from the platform
+  ///
+  /// In en, this message translates to:
+  /// **'Global'**
+  String get scopeGlobal;
+
+  /// Chip: hotel's own category
+  ///
+  /// In en, this message translates to:
+  /// **'Yours'**
+  String get scopeHotel;
+
+  /// Dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'Rename category'**
+  String get renameCategory;
+
+  /// Field label
+  ///
+  /// In en, this message translates to:
+  /// **'Add your own category'**
+  String get addOwnCategory;
+
+  /// Help
+  ///
+  /// In en, this message translates to:
+  /// **'Visible only to your hotel.'**
+  String get addOwnCategoryHelp;
+
+  /// Platform navigation tab
+  ///
+  /// In en, this message translates to:
+  /// **'Categories'**
+  String get tabCategories;
+
+  /// Help
+  ///
+  /// In en, this message translates to:
+  /// **'Categories here appear for every hotel immediately. Switching one off hides it for new expenses; past expenses keep it.'**
+  String get globalCategoriesHelp;
+
+  /// Field hint
+  ///
+  /// In en, this message translates to:
+  /// **'New global category'**
+  String get newGlobalCategory;
+
+  /// Snackbar
+  ///
+  /// In en, this message translates to:
+  /// **'Added for every hotel'**
+  String get globalCategoryAdded;
+
+  /// How many expenses use a category
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{unused} =1{used once} other{used {count} times}}'**
+  String usedTimes(int count);
+
   /// Generic error
   ///
   /// In en, this message translates to:

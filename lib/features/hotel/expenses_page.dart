@@ -59,6 +59,16 @@ class ExpensesPage extends ConsumerWidget {
             ]),
           ),
           if (canEdit)
+            OutlinedButton.icon(
+              onPressed: () async {
+                await showGlassDialog(context, title: l.expenseCategories, body: const _CategoryManager());
+                ref.invalidate(_expenseCatsProvider);
+                ref.invalidate(_expensesProvider);
+              },
+              icon: const Icon(Icons.category_outlined, size: 18),
+              label: Text(l.categories),
+            ),
+          if (canEdit)
             FilledButton.icon(
               onPressed: () => _edit(context, ref, null),
               icon: const Icon(Icons.add_rounded, size: 18),
@@ -298,6 +308,96 @@ class _ExpenseFormState extends ConsumerState<_ExpenseForm> {
                 if (ok) Navigator.of(this.context).pop();
               },
             ),
+          ),
+        ]),
+      ]),
+    );
+  }
+}
+
+
+/// Global categories (set by the platform, same for every hotel) plus this hotel's own.
+class _CategoryManager extends ConsumerStatefulWidget {
+  const _CategoryManager();
+
+  @override
+  ConsumerState<_CategoryManager> createState() => _CategoryManagerState();
+}
+
+class _CategoryManagerState extends ConsumerState<_CategoryManager> {
+  final _name = TextEditingController();
+
+  Future<void> _reload() async => ref.invalidate(_expenseCatsProvider);
+
+  Future<void> _rename(Map c) async {
+    final l = AppLocalizations.of(context);
+    final ctl = TextEditingController(text: c['name']);
+    await showGlassDialog(
+      context,
+      title: l.renameCategory,
+      body: Builder(
+        builder: (ctx) => Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+          TextField(controller: ctl, autofocus: true),
+          DialogActions(
+            primary: l.save,
+            onPrimary: () async {
+              final ok = await guard(ctx,
+                  () => ref.read(apiProvider).patch('/api/v1/expense-categories/${c['id']}', {'name': ctl.text.trim()}));
+              if (ok && ctx.mounted) Navigator.of(ctx).pop();
+            },
+          ),
+        ]),
+      ),
+    );
+    await _reload();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
+    final t = context.tokens;
+    final tt = Theme.of(context).textTheme;
+    final cats = ref.watch(_expenseCatsProvider);
+    return cats.when(
+      loading: () => const LoadingBlock(height: 160),
+      error: (e, _) => Text(errorText(context, e)),
+      data: (list) => Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+        Text(l.categoriesHelp, style: tt.bodySmall),
+        const SizedBox(height: 10),
+        for (final c in list)
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 2),
+            child: Row(children: [
+              Expanded(child: Text(c['name'], style: tt.bodyMedium)),
+              if (c['scope'] == 'GLOBAL')
+                StatusChip(icon: Icons.public, label: l.scopeGlobal, color: t.info)
+              else ...[
+                StatusChip(icon: Icons.storefront_outlined, label: l.scopeHotel, color: t.accentDeep),
+                IconButton(tooltip: l.edit, onPressed: () => _rename(c), icon: const Icon(Icons.edit_outlined, size: 18)),
+                IconButton(
+                  tooltip: l.delete,
+                  onPressed: () async {
+                    await guard(context, () => ref.read(apiProvider).delete('/api/v1/expense-categories/${c['id']}'));
+                    await _reload();
+                  },
+                  icon: Icon(Icons.delete_outline, size: 18, color: t.danger),
+                ),
+              ],
+            ]),
+          ),
+        FieldLabel(l.addOwnCategory, help: l.addOwnCategoryHelp),
+        Row(children: [
+          Expanded(child: TextField(controller: _name)),
+          const SizedBox(width: 8),
+          FilledButton(
+            onPressed: () async {
+              if (_name.text.trim().isEmpty) return;
+              final ok = await guard(
+                  context, () => ref.read(apiProvider).post('/api/v1/expense-categories', {'name': _name.text.trim()}));
+              if (ok) _name.clear();
+              await _reload();
+            },
+            child: Text(l.add),
           ),
         ]),
       ]),

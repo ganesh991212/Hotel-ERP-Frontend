@@ -1102,6 +1102,269 @@ class AppLocalizationsEn extends AppLocalizations {
   String get readyOnItsWay => 'Ready! It\'s on its way to your table.';
 
   @override
+  String get printKot => 'Print KOT';
+
+  @override
+  String printKotTitle(int number) {
+    return 'Print KOT #$number';
+  }
+
+  @override
+  String get printKotExplain =>
+      'Is the kitchen cooking from paper for this order? Sending it on paper takes it off the chefs\' screen so nobody picks it up twice.';
+
+  @override
+  String get printAndSend => 'Print and send to kitchen';
+
+  @override
+  String get printCopyOnly => 'Just print a copy';
+
+  @override
+  String get kotPrinted => 'KOT printed';
+
+  @override
+  String get kotSentOnPaper =>
+      'KOT printed. The order is now with the kitchen on paper.';
+
+  @override
+  String get onPaper => 'On paper';
+
+  @override
+  String get onPaperTitle => 'Cooking from paper';
+
+  @override
+  String get onPaperHelp =>
+      'Printed tickets handed to the kitchen. Mark them ready when the food comes out.';
+
+  @override
+  String get billTable => 'Bill';
+
+  @override
+  String billForTable(String label) {
+    return 'Bill · Table $label';
+  }
+
+  @override
+  String get billExplain =>
+      'Creates one bill for every unbilled order on this table. Bills are numbered and cannot be edited.';
+
+  @override
+  String get createBill => 'Create bill';
+
+  @override
+  String notServedYet(String orders) {
+    return 'Not served yet: #$orders';
+  }
+
+  @override
+  String get billAnyway => 'Bill them anyway';
+
+  @override
+  String billPaid(String method) {
+    return 'Paid · $method';
+  }
+
+  @override
+  String get billUnpaid => 'Unpaid';
+
+  @override
+  String ordersIncluded(String orders) {
+    return 'Orders #$orders';
+  }
+
+  @override
+  String get cgst => 'CGST';
+
+  @override
+  String get sgst => 'SGST';
+
+  @override
+  String get printBill => 'Print bill';
+
+  @override
+  String get printDuplicate => 'Print duplicate';
+
+  @override
+  String get billPrinted => 'Bill printed';
+
+  @override
+  String get settlePayment => 'Payment received by';
+
+  @override
+  String get voidBill => 'Void bill';
+
+  @override
+  String get printerSetup => 'Printer setup';
+
+  @override
+  String get paperSize => 'Paper';
+
+  @override
+  String get paperSizeHelp =>
+      'Match your printer\'s roll. A4 for office printers.';
+
+  @override
+  String get paper58 => '58 mm';
+
+  @override
+  String get paper80 => '80 mm';
+
+  @override
+  String get paperA4 => 'A4';
+
+  @override
+  String get printWith => 'Print using';
+
+  @override
+  String get printSystem => 'Print dialog';
+
+  @override
+  String get printNetwork => 'Network printer';
+
+  @override
+  String get printSystemHelp =>
+      'Works with any printer this device can use: thermal, laser, inkjet, Bluetooth or USB.';
+
+  @override
+  String get printNetworkHelp =>
+      'Sends straight to a Wi-Fi/LAN thermal printer. No dialog; fastest for the kitchen.';
+
+  @override
+  String get printWebHelp =>
+      'In the browser, printing always opens the print dialog. Use the Android or iPhone app to print straight to a network printer.';
+
+  @override
+  String get printerIp => 'Printer IP address';
+
+  @override
+  String get port => 'Port';
+
+  @override
+  String get testPrint => 'Test print';
+
+  @override
+  String get testPrintTitle => 'TEST PRINT';
+
+  @override
+  String get testPrintBody => 'If you can read this, the printer works.';
+
+  @override
+  String get soundAlertsOn => 'Sound alerts: on';
+
+  @override
+  String get soundAlertsOff => 'Sound alerts: off';
+
+  @override
+  String get soundOn => 'Sound alerts on';
+
+  @override
+  String get soundOff => 'Sound alerts off';
+
+  @override
+  String get testSound => 'Test alert sound';
+
+  @override
+  String get soundBlocked =>
+      'The browser blocked sound. Tap anywhere on the page, then try again.';
+
+  @override
+  String get serviceTimes => 'Service times';
+
+  @override
+  String get serviceTimesHelp =>
+      'Orders placed today. p90 = 9 out of 10 orders were faster than this.';
+
+  @override
+  String get stageWait => 'Wait for chef';
+
+  @override
+  String get stageWaitHelp => 'Order confirmed → cooking starts';
+
+  @override
+  String get stagePrep => 'Preparation';
+
+  @override
+  String get stagePrepHelp => 'Cooking starts → ready';
+
+  @override
+  String get stageServe => 'Serving';
+
+  @override
+  String get stageServeHelp => 'Ready → on the table';
+
+  @override
+  String get stageTotal => 'Order to table';
+
+  @override
+  String get stageTotalHelp => 'What the guest feels';
+
+  @override
+  String get minAvg => 'min avg';
+
+  @override
+  String p90Line(String minutes, int count) {
+    return 'p90 $minutes min · $count orders';
+  }
+
+  @override
+  String get servingByServer => 'Serving time by server';
+
+  @override
+  String serverServeLine(String name, String minutes, int count) {
+    return '$name: $minutes min · $count served';
+  }
+
+  @override
+  String get categories => 'Categories';
+
+  @override
+  String get expenseCategories => 'Expense categories';
+
+  @override
+  String get categoriesHelp =>
+      'Global categories are set for every hotel. Add your own for anything else; only your hotel sees them.';
+
+  @override
+  String get scopeGlobal => 'Global';
+
+  @override
+  String get scopeHotel => 'Yours';
+
+  @override
+  String get renameCategory => 'Rename category';
+
+  @override
+  String get addOwnCategory => 'Add your own category';
+
+  @override
+  String get addOwnCategoryHelp => 'Visible only to your hotel.';
+
+  @override
+  String get tabCategories => 'Categories';
+
+  @override
+  String get globalCategoriesHelp =>
+      'Categories here appear for every hotel immediately. Switching one off hides it for new expenses; past expenses keep it.';
+
+  @override
+  String get newGlobalCategory => 'New global category';
+
+  @override
+  String get globalCategoryAdded => 'Added for every hotel';
+
+  @override
+  String usedTimes(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'used $count times',
+      one: 'used once',
+      zero: 'unused',
+    );
+    return '$_temp0';
+  }
+
+  @override
   String get errGeneric => 'Something went wrong. Please try again.';
 
   @override

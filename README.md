@@ -53,6 +53,19 @@ lib/
 - **Realtime.** One WebSocket per outlet; screens refetch on events, show a stale banner when the
   socket drops, and the kitchen polls every 5 s as fallback.
 
+## Printing, sounds, push
+- **Printing** (`core/printing/`): the server sends layout blocks for each KOT/bill. The app renders them to PDF and
+  opens the system print dialog (any printer: thermal with driver, laser, inkjet, Android print services, AirPrint)
+  at 58 mm, 80 mm or A4. On Android/iOS it can instead send ESC/POS straight to a network thermal printer
+  (profile menu → Printer setup). Adapted from the CMS app's invoice generator.
+- **Loud alerts** (`core/sound/`, `assets/sounds/`): original synthesised sounds near full scale, played on live
+  events (new order for chefs, ready for servers). Browsers need one tap before audio; "Test alert sound" unlocks it.
+- **Push** (`core/push/`, ported from GigBridge): FCM on Android/iOS/web. Android channels play on the alarm stream
+  (`MainActivity.kt`, `res/raw/`). Off until Firebase is configured:
+  - Android: `android/app/google-services.json`; iOS: `ios/Runner/GoogleService-Info.plist` and add
+    `kitchen_alert.wav`/`ready_alert.wav` to the Runner target in Xcode;
+  - Web: build with `--dart-define=FIREBASE_*` and run `scripts/render_firebase_sw.sh` after `flutter build web`.
+
 ## Design
 Visual language: soft mint glass cards on a green gradient, Outfit display + Inter body type,
 pill-shaped segmented navigation with a stretching indicator, a dark contrast panel for live work,

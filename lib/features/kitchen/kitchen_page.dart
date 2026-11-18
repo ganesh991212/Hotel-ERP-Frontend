@@ -8,6 +8,7 @@ import '../../ui/components.dart';
 import '../../ui/feedback.dart';
 import '../../ui/shell.dart';
 import '../../ui/status.dart';
+import '../floor/print_actions.dart';
 
 /// Board refreshes on every outlet event and polls every 5 s as the documented fallback.
 final kitchenBoardProvider = liveProvider<Map<String, dynamic>>(
@@ -52,6 +53,7 @@ class _Board extends ConsumerWidget {
     final others = chefs.where((c) => c['is_me'] != true).toList();
     final grabs = (b['up_for_grabs'] as List).cast<Map<String, dynamic>>();
     final ready = (b['ready'] as List).cast<Map<String, dynamic>>();
+    final onPaper = (b['on_paper'] as List? ?? const []).cast<Map<String, dynamic>>();
     final acceptMode = b['kitchen_mode'] == 'CHEF_ACCEPT';
     final isChef = session.can('kitchen.cook') && me != null;
 
@@ -144,8 +146,35 @@ class _Board extends ConsumerWidget {
       else
         for (final (i, c) in cols.indexed)
           Padding(padding: const EdgeInsets.only(bottom: Gap.m), child: Reveal(index: i + 1, child: c)),
+      if (onPaper.isNotEmpty) ...[
+        const SizedBox(height: Gap.m),
+        Reveal(
+          index: 5,
+          child: Glass(
+            child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+              CardTitle(l.onPaperTitle, trailing: Text('${onPaper.length}', style: Theme.of(context).textTheme.displaySmall)),
+              Text(l.onPaperHelp, style: Theme.of(context).textTheme.bodySmall),
+              const SizedBox(height: 10),
+              for (final o in onPaper)
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 4),
+                  child: Row(children: [
+                    paperChip(context),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: Text('${l.orderNumberTable(o['number'], o['table']?['label'] ?? '-')} · ${orderLine(o)}',
+                          maxLines: 1, overflow: TextOverflow.ellipsis),
+                    ),
+                    KotPrintButton(order: o),
+                    MarkReadyButton(order: o, onDone: () => ref.invalidate(kitchenBoardProvider)),
+                  ]),
+                ),
+            ]),
+          ),
+        ),
+      ],
       const SizedBox(height: Gap.m),
-      Reveal(index: 5, child: readyCard),
+      Reveal(index: 6, child: readyCard),
     ]);
   }
 
@@ -320,6 +349,7 @@ class _TicketCard extends StatelessWidget {
           const SizedBox(width: 8),
           Expanded(child: Text(l.tableLabel(o['table']?['label'] ?? '-'), style: tt.titleMedium)),
           StatusChip(icon: channelIcon(o['channel']), label: channelLabel(context, o['channel']), color: t.dim),
+          KotPrintButton(order: o),
         ]),
         const SizedBox(height: 4),
         _ElapsedLine(o: o),

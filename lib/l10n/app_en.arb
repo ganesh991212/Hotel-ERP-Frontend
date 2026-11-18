@@ -1466,6 +1466,359 @@
   "@readyOnItsWay": {
     "description": "Tracker: ready message"
   },
+  "printKot": "Print KOT",
+  "@printKot": {
+    "description": "Tooltip: print a kitchen order ticket"
+  },
+  "printKotTitle": "Print KOT #{number}",
+  "@printKotTitle": {
+    "description": "Dialog title",
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "printKotExplain": "Is the kitchen cooking from paper for this order? Sending it on paper takes it off the chefs' screen so nobody picks it up twice.",
+  "@printKotExplain": {
+    "description": "Explains the paper path"
+  },
+  "printAndSend": "Print and send to kitchen",
+  "@printAndSend": {
+    "description": "Primary action: print KOT and move order to paper path"
+  },
+  "printCopyOnly": "Just print a copy",
+  "@printCopyOnly": {
+    "description": "Secondary action: print without changing the order"
+  },
+  "kotPrinted": "KOT printed",
+  "@kotPrinted": {
+    "description": "Snackbar"
+  },
+  "kotSentOnPaper": "KOT printed. The order is now with the kitchen on paper.",
+  "@kotSentOnPaper": {
+    "description": "Snackbar after paper-path KOT"
+  },
+  "onPaper": "On paper",
+  "@onPaper": {
+    "description": "Chip: order handed to the kitchen as a printed ticket"
+  },
+  "onPaperTitle": "Cooking from paper",
+  "@onPaperTitle": {
+    "description": "Kitchen card title"
+  },
+  "onPaperHelp": "Printed tickets handed to the kitchen. Mark them ready when the food comes out.",
+  "@onPaperHelp": {
+    "description": "Kitchen card help"
+  },
+  "billTable": "Bill",
+  "@billTable": {
+    "description": "Button on a table: open the bill"
+  },
+  "billForTable": "Bill · Table {label}",
+  "@billForTable": {
+    "description": "Bill dialog title",
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "billExplain": "Creates one bill for every unbilled order on this table. Bills are numbered and cannot be edited.",
+  "@billExplain": {
+    "description": "Bill dialog help"
+  },
+  "createBill": "Create bill",
+  "@createBill": {
+    "description": "Button"
+  },
+  "notServedYet": "Not served yet: #{orders}",
+  "@notServedYet": {
+    "description": "Warning listing unserved orders",
+    "placeholders": {
+      "orders": {
+        "type": "String"
+      }
+    }
+  },
+  "billAnyway": "Bill them anyway",
+  "@billAnyway": {
+    "description": "Button: include unserved orders"
+  },
+  "billPaid": "Paid · {method}",
+  "@billPaid": {
+    "description": "Chip: bill paid with a method",
+    "placeholders": {
+      "method": {
+        "type": "String"
+      }
+    }
+  },
+  "billUnpaid": "Unpaid",
+  "@billUnpaid": {
+    "description": "Chip: bill not paid"
+  },
+  "ordersIncluded": "Orders #{orders}",
+  "@ordersIncluded": {
+    "description": "Orders on this bill",
+    "placeholders": {
+      "orders": {
+        "type": "String"
+      }
+    }
+  },
+  "cgst": "CGST",
+  "@cgst": {
+    "description": "Central GST line"
+  },
+  "sgst": "SGST",
+  "@sgst": {
+    "description": "State GST line"
+  },
+  "printBill": "Print bill",
+  "@printBill": {
+    "description": "Button"
+  },
+  "printDuplicate": "Print duplicate",
+  "@printDuplicate": {
+    "description": "Button when the bill was printed before"
+  },
+  "billPrinted": "Bill printed",
+  "@billPrinted": {
+    "description": "Snackbar"
+  },
+  "settlePayment": "Payment received by",
+  "@settlePayment": {
+    "description": "Label above payment method buttons"
+  },
+  "voidBill": "Void bill",
+  "@voidBill": {
+    "description": "Button: cancel an issued bill"
+  },
+  "printerSetup": "Printer setup",
+  "@printerSetup": {
+    "description": "Profile menu item and dialog title"
+  },
+  "paperSize": "Paper",
+  "@paperSize": {
+    "description": "Field label"
+  },
+  "paperSizeHelp": "Match your printer's roll. A4 for office printers.",
+  "@paperSizeHelp": {
+    "description": "Help under paper size"
+  },
+  "paper58": "58 mm",
+  "@paper58": {
+    "description": "Paper size"
+  },
+  "paper80": "80 mm",
+  "@paper80": {
+    "description": "Paper size"
+  },
+  "paperA4": "A4",
+  "@paperA4": {
+    "description": "Paper size"
+  },
+  "printWith": "Print using",
+  "@printWith": {
+    "description": "Field label"
+  },
+  "printSystem": "Print dialog",
+  "@printSystem": {
+    "description": "Route: OS print dialog"
+  },
+  "printNetwork": "Network printer",
+  "@printNetwork": {
+    "description": "Route: raw ESC/POS over Wi-Fi"
+  },
+  "printSystemHelp": "Works with any printer this device can use: thermal, laser, inkjet, Bluetooth or USB.",
+  "@printSystemHelp": {
+    "description": "Help"
+  },
+  "printNetworkHelp": "Sends straight to a Wi-Fi/LAN thermal printer. No dialog; fastest for the kitchen.",
+  "@printNetworkHelp": {
+    "description": "Help"
+  },
+  "printWebHelp": "In the browser, printing always opens the print dialog. Use the Android or iPhone app to print straight to a network printer.",
+  "@printWebHelp": {
+    "description": "Help on web"
+  },
+  "printerIp": "Printer IP address",
+  "@printerIp": {
+    "description": "Field label"
+  },
+  "port": "Port",
+  "@port": {
+    "description": "Field label"
+  },
+  "testPrint": "Test print",
+  "@testPrint": {
+    "description": "Button"
+  },
+  "testPrintTitle": "TEST PRINT",
+  "@testPrintTitle": {
+    "description": "Heading printed on the test ticket"
+  },
+  "testPrintBody": "If you can read this, the printer works.",
+  "@testPrintBody": {
+    "description": "Body of the test ticket"
+  },
+  "soundAlertsOn": "Sound alerts: on",
+  "@soundAlertsOn": {
+    "description": "Profile menu toggle state"
+  },
+  "soundAlertsOff": "Sound alerts: off",
+  "@soundAlertsOff": {
+    "description": "Profile menu toggle state"
+  },
+  "soundOn": "Sound alerts on",
+  "@soundOn": {
+    "description": "Snackbar"
+  },
+  "soundOff": "Sound alerts off",
+  "@soundOff": {
+    "description": "Snackbar"
+  },
+  "testSound": "Test alert sound",
+  "@testSound": {
+    "description": "Profile menu item"
+  },
+  "soundBlocked": "The browser blocked sound. Tap anywhere on the page, then try again.",
+  "@soundBlocked": {
+    "description": "Snackbar when autoplay is blocked"
+  },
+  "serviceTimes": "Service times",
+  "@serviceTimes": {
+    "description": "Dashboard card title"
+  },
+  "serviceTimesHelp": "Orders placed today. p90 = 9 out of 10 orders were faster than this.",
+  "@serviceTimesHelp": {
+    "description": "Card help"
+  },
+  "stageWait": "Wait for chef",
+  "@stageWait": {
+    "description": "Stage name"
+  },
+  "stageWaitHelp": "Order confirmed → cooking starts",
+  "@stageWaitHelp": {
+    "description": "Stage definition"
+  },
+  "stagePrep": "Preparation",
+  "@stagePrep": {
+    "description": "Stage name"
+  },
+  "stagePrepHelp": "Cooking starts → ready",
+  "@stagePrepHelp": {
+    "description": "Stage definition"
+  },
+  "stageServe": "Serving",
+  "@stageServe": {
+    "description": "Stage name"
+  },
+  "stageServeHelp": "Ready → on the table",
+  "@stageServeHelp": {
+    "description": "Stage definition"
+  },
+  "stageTotal": "Order to table",
+  "@stageTotal": {
+    "description": "Stage name: total time"
+  },
+  "stageTotalHelp": "What the guest feels",
+  "@stageTotalHelp": {
+    "description": "Stage definition"
+  },
+  "minAvg": "min avg",
+  "@minAvg": {
+    "description": "Suffix after average minutes"
+  },
+  "p90Line": "p90 {minutes} min · {count} orders",
+  "@p90Line": {
+    "description": "Slowest-10% line",
+    "placeholders": {
+      "minutes": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "servingByServer": "Serving time by server",
+  "@servingByServer": {
+    "description": "Section title"
+  },
+  "serverServeLine": "{name}: {minutes} min · {count} served",
+  "@serverServeLine": {
+    "description": "Per-server serving time",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "minutes": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "categories": "Categories",
+  "@categories": {
+    "description": "Button"
+  },
+  "expenseCategories": "Expense categories",
+  "@expenseCategories": {
+    "description": "Dialog and page title"
+  },
+  "categoriesHelp": "Global categories are set for every hotel. Add your own for anything else; only your hotel sees them.",
+  "@categoriesHelp": {
+    "description": "Help"
+  },
+  "scopeGlobal": "Global",
+  "@scopeGlobal": {
+    "description": "Chip: category from the platform"
+  },
+  "scopeHotel": "Yours",
+  "@scopeHotel": {
+    "description": "Chip: hotel's own category"
+  },
+  "renameCategory": "Rename category",
+  "@renameCategory": {
+    "description": "Dialog title"
+  },
+  "addOwnCategory": "Add your own category",
+  "@addOwnCategory": {
+    "description": "Field label"
+  },
+  "addOwnCategoryHelp": "Visible only to your hotel.",
+  "@addOwnCategoryHelp": {
+    "description": "Help"
+  },
+  "tabCategories": "Categories",
+  "@tabCategories": {
+    "description": "Platform navigation tab"
+  },
+  "globalCategoriesHelp": "Categories here appear for every hotel immediately. Switching one off hides it for new expenses; past expenses keep it.",
+  "@globalCategoriesHelp": {
+    "description": "Help"
+  },
+  "newGlobalCategory": "New global category",
+  "@newGlobalCategory": {
+    "description": "Field hint"
+  },
+  "globalCategoryAdded": "Added for every hotel",
+  "@globalCategoryAdded": {
+    "description": "Snackbar"
+  },
+  "usedTimes": "{count, plural, =0{unused} =1{used once} other{used {count} times}}",
+  "@usedTimes": {
+    "description": "How many expenses use a category",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "errGeneric": "Something went wrong. Please try again.",
   "@errGeneric": {
     "description": "Generic error"

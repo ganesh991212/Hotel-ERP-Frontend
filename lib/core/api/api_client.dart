@@ -5,7 +5,12 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// API base. Override at build time: --dart-define=API_BASE=https://api.example.com
-const apiBase = String.fromEnvironment('API_BASE', defaultValue: 'http://localhost:8000');
+/// Empty (the default) means "same origin as the web app", which is how dev and preview builds are served.
+const _apiBaseDefine = String.fromEnvironment('API_BASE');
+final String apiBase = _apiBaseDefine.isNotEmpty ? _apiBaseDefine : Uri.base.origin;
+
+/// Resolves a server-provided link (e.g. a table QR `/#/t/<token>`) against the web origin when relative.
+String absoluteLink(String link) => link.startsWith('http') ? link : '${Uri.base.origin}$link';
 
 class ApiException implements Exception {
   ApiException(this.status, this.code, this.message, [this.details = const {}]);
@@ -104,7 +109,7 @@ class ApiClient {
       _authed('POST', path, body: body, headers: headers);
   Future<dynamic> put(String path, [Object? body]) => _authed('PUT', path, body: body);
   Future<dynamic> patch(String path, [Object? body]) => _authed('PATCH', path, body: body);
-  Future<dynamic> delete(String path) => _authed('DELETE', path);
+  Future<dynamic> delete(String path, [Object? body]) => _authed('DELETE', path, body: body);
 
   /// Unauthenticated call (diner pages) with optional extra headers.
   Future<dynamic> public(String method, String path, {Object? body, Map<String, String>? headers}) =>

@@ -12,6 +12,7 @@ import '../../ui/components.dart';
 import '../../ui/feedback.dart';
 import '../../ui/shell.dart';
 import '../../ui/status.dart';
+import 'print_actions.dart';
 
 final _tablesProvider = liveProvider<List<Map<String, dynamic>>>(
     (api) async => ((await api.get('/api/v1/tables')) as List).cast<Map<String, dynamic>>());
@@ -49,7 +50,10 @@ class _FloorPageState extends ConsumerState<FloorPage> {
     final orders = ref.watch(_openOrdersProvider).value ?? const [];
     final placed = orders.where((o) => o['status'] == 'PLACED').toList();
     final ready = orders.where((o) => o['status'] == 'READY').toList();
-    final attention = [...ready, ...placed];
+    // Waiting for a chef: printable as KOT when nobody in the kitchen is picking up on a screen.
+    final waiting = s.can('kot.print') ? orders.where((o) => o['status'] == 'CONFIRMED').toList() : <Map<String, dynamic>>[];
+    final onPaper = orders.where((o) => o['on_paper'] == true && o['status'] == 'PREPARING').toList();
+    final attention = [...ready, ...placed, ...onPaper, ...waiting];
 
     return PageBody(children: [
       Reveal(index: 0, child: PageHeading(l.tabFloor)),
@@ -131,13 +135,16 @@ class _AttentionRow extends ConsumerWidget {
     final tt = Theme.of(context).textTheme;
     final isReady = o['status'] == 'READY';
     final items = (o['items'] as List).map((i) => '${i['qty']}× ${i['name']}').join(', ');
+    final status = o['status'];
     final action = isReady
         ? (session.can('order.serve') ? (l.markServed, 'serve') : null)
-        : (session.can('order.confirm') ? (l.confirmOrder, 'confirm') : null);
+        : status == 'PLACED' && session.can('order.confirm')
+            ? (l.confirmOrder, 'confirm')
+            : null;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 6),
       child: Row(children: [
-        OrderStatusChip(o['status']),
+        o['on_paper'] == true && status == 'PREPARING' ? paperChip(context) : OrderStatusChip(o['status']),
         const SizedBox(width: 12),
         Expanded(
           child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -145,6 +152,8 @@ class _AttentionRow extends ConsumerWidget {
             Text(items, maxLines: 1, overflow: TextOverflow.ellipsis, style: tt.bodySmall),
           ]),
         ),
+        if (status == 'CONFIRMED') KotPrintButton(order: o),
+        MarkReadyButton(order: o, onDone: () => ref.invalidate(_openOrdersProvider)),
         if (action != null)
           FilledButton(
             onPressed: () => guard(context, () async {
@@ -296,6 +305,15 @@ class _OrderComposerState extends ConsumerState<OrderComposer> {
     final menu = ref.watch(menuDataProvider);
 
     return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+      if (ref.watch(sessionProvider).value!.can('bill.manage'))
+        Padding(
+          padding: const EdgeInsets.only(bottom: 12),
+          child: OutlinedButton.icon(
+            onPressed: () => showBillDialog(context, widget.table),
+            icon: const Icon(Icons.receipt_long_outlined, size: 18),
+            label: Text(l.billTable),
+          ),
+        ),
       if (orders.isNotEmpty) ...[
         Text(l.openOrders, style: tt.titleMedium),
         const SizedBox(height: 6),
@@ -310,6 +328,8 @@ class _OrderComposerState extends ConsumerState<OrderComposer> {
                     maxLines: 2, overflow: TextOverflow.ellipsis),
               ),
               Text(formatInr(o['total_minor']), style: tt.labelLarge),
+              KotPrintButton(order: o),
+              MarkReadyButton(order: o, onDone: () => ref.invalidate(_openOrdersProvider)),
             ]),
           ),
         const SizedBox(height: 12),
