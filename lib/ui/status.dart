@@ -38,6 +38,7 @@ String channelLabel(BuildContext context, String channel) {
     'QR' => l.channelQr,
     'WAITER' => l.channelWaiter,
     'ADMIN' => l.channelAdmin,
+    'TAKEAWAY' => l.channelTakeaway,
     _ => channel,
   };
 }
@@ -45,6 +46,7 @@ String channelLabel(BuildContext context, String channel) {
 IconData channelIcon(String channel) => switch (channel) {
       'QR' => Icons.qr_code_2_rounded,
       'WAITER' => Icons.room_service_outlined,
+      'TAKEAWAY' => Icons.shopping_bag_outlined,
       _ => Icons.badge_outlined,
     };
 
@@ -83,8 +85,8 @@ String? nextStepText(BuildContext context, Map<String, dynamic> o, {String? kitc
       },
     'ASSIGNED' => chef != null ? l.nextChefStarts(chef) : l.nextFreeChef,
     'PREPARING' => o['on_paper'] == true ? l.nowCookingPaper : (chef != null ? l.nowCooking(chef) : null),
-    'READY' => l.nextServe,
-    'SERVED' => o['bill_id'] == null ? l.nextBill : null,
+    'READY' => isTakeaway(o) ? l.nextHandOver : l.nextServe,
+    'SERVED' => o['bill_id'] == null ? (isTakeaway(o) ? l.nextBillOrder : l.nextBill) : null,
     _ => null,
   };
 }
@@ -98,4 +100,36 @@ class PickupOverdueChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) =>
       StatusChip(icon: Icons.alarm_rounded, label: AppLocalizations.of(context).notPickedUp, color: context.tokens.danger);
+}
+
+/// "#12 · Table T3", or for takeaway "Takeaway #12 · Ramesh". One wording on every screen.
+String orderTitle(BuildContext context, Map o) {
+  final l = AppLocalizations.of(context);
+  final table = (o['table'] as Map?)?['label'] as String?;
+  if (table != null) return l.orderNumberTable(o['number'] as int, table);
+  final name = o['customer_name'] as String?;
+  return name == null ? l.takeawayTitle(o['number'] as int) : l.takeawayTitleFor(o['number'] as int, name);
+}
+
+/// Where the order goes: "Table T3", "Takeaway · Ramesh" or "Takeaway".
+String orderPlace(BuildContext context, Map o) {
+  final l = AppLocalizations.of(context);
+  final table = (o['table'] as Map?)?['label'] as String?;
+  if (table != null) return l.tableLabel(table);
+  final name = o['customer_name'] as String?;
+  return name == null ? l.takeaway : l.takeawayFor(name);
+}
+
+bool isTakeaway(Map o) => o['channel'] == 'TAKEAWAY';
+
+/// CASH / UPI / CARD / MIXED as the user's language says it.
+String payMethodLabel(BuildContext context, String? method) {
+  final l = AppLocalizations.of(context);
+  return switch (method) {
+    'CASH' => l.payCash,
+    'UPI' => l.payUpi,
+    'CARD' => l.payCard,
+    'MIXED' => l.payMixed,
+    _ => method ?? '',
+  };
 }

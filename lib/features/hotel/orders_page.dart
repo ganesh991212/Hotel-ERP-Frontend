@@ -317,7 +317,7 @@ class _OrderRow extends ConsumerWidget {
         const SizedBox(width: 12),
         Expanded(
           child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text(l.orderNumberTable(o['number'], o['table']?['label'] ?? '-'), style: tt.titleSmall),
+            Text(orderTitle(context, o), style: tt.titleSmall),
             Text(items, maxLines: 2, overflow: TextOverflow.ellipsis, style: tt.bodySmall),
             const SizedBox(height: 4),
             Wrap(spacing: 10, runSpacing: 4, crossAxisAlignment: WrapCrossAlignment.center, children: [
@@ -362,7 +362,7 @@ class _BillRow extends ConsumerWidget {
     final tt = Theme.of(context).textTheme;
     final status = b['status'] as String;
     final chip = switch (status) {
-      'PAID' => StatusChip(icon: Icons.check_circle_outline, label: l.billPaid(b['payment_method'] ?? ''), color: t.ok),
+      'PAID' => StatusChip(icon: Icons.check_circle_outline, label: l.billPaid(payMethodLabel(context, b['payment_method'])), color: t.ok),
       'VOID' => StatusChip(icon: Icons.cancel_outlined, label: l.billCancelled, color: t.danger),
       _ => StatusChip(icon: Icons.pending_outlined, label: l.billUnpaid, color: t.warn),
     };

@@ -2839,8 +2839,8 @@ abstract class AppLocalizations {
   /// Alert shown to admins and chefs when an order waits too long
   ///
   /// In en, this message translates to:
-  /// **'Order #{number} (Table {table}) has not been picked up'**
-  String pickupOverdueToast(int number, String table);
+  /// **'Order #{number} ({place}) has not been picked up'**
+  String pickupOverdueToast(int number, String place);
 
   /// Table status: food served, not paid yet
   ///
@@ -3231,6 +3231,246 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{count, plural, =1{Printed once} other{Printed {count} times}}'**
   String printedTimes(int count);
+
+  /// Order type: no table, the guest collects it
+  ///
+  /// In en, this message translates to:
+  /// **'Takeaway'**
+  String get takeaway;
+
+  /// Floor button: take a takeaway / counter order
+  ///
+  /// In en, this message translates to:
+  /// **'Takeaway'**
+  String get newTakeaway;
+
+  /// Order title for a takeaway order
+  ///
+  /// In en, this message translates to:
+  /// **'Takeaway #{number}'**
+  String takeawayTitle(int number);
+
+  /// Order title for a takeaway order with the guest's name
+  ///
+  /// In en, this message translates to:
+  /// **'Takeaway #{number} · {name}'**
+  String takeawayTitleFor(int number, String name);
+
+  /// Where an order goes: takeaway for this guest
+  ///
+  /// In en, this message translates to:
+  /// **'Takeaway · {name}'**
+  String takeawayFor(String name);
+
+  /// Takeaway: name the guest collects with
+  ///
+  /// In en, this message translates to:
+  /// **'Guest name (optional)'**
+  String get guestName;
+
+  /// Takeaway: guest phone
+  ///
+  /// In en, this message translates to:
+  /// **'Phone (optional)'**
+  String get guestPhone;
+
+  /// Button: the takeaway guest collected the order
+  ///
+  /// In en, this message translates to:
+  /// **'Handed over'**
+  String get handedOver;
+
+  /// Next-step line: takeaway order ready
+  ///
+  /// In en, this message translates to:
+  /// **'Next: hand it over to the guest'**
+  String get nextHandOver;
+
+  /// Next-step line: takeaway handed over, not billed
+  ///
+  /// In en, this message translates to:
+  /// **'Next: bill this order'**
+  String get nextBillOrder;
+
+  /// Order channel label
+  ///
+  /// In en, this message translates to:
+  /// **'Takeaway'**
+  String get channelTakeaway;
+
+  /// Bill window title for a takeaway order
+  ///
+  /// In en, this message translates to:
+  /// **'Bill · {title}'**
+  String billForOrder(String title);
+
+  /// Bill line and button: discount
+  ///
+  /// In en, this message translates to:
+  /// **'Discount'**
+  String get discount;
+
+  /// Bill window button
+  ///
+  /// In en, this message translates to:
+  /// **'Add discount'**
+  String get addDiscount;
+
+  /// Discount kind: percent of the bill
+  ///
+  /// In en, this message translates to:
+  /// **'Percent'**
+  String get discountByPercent;
+
+  /// Discount kind: fixed rupee amount
+  ///
+  /// In en, this message translates to:
+  /// **'Amount (₹)'**
+  String get discountByAmount;
+
+  /// Discount value field
+  ///
+  /// In en, this message translates to:
+  /// **'How much'**
+  String get discountValue;
+
+  /// Discount reason field
+  ///
+  /// In en, this message translates to:
+  /// **'Reason (printed on the bill)'**
+  String get discountReason;
+
+  /// Shown under the discount form
+  ///
+  /// In en, this message translates to:
+  /// **'Your limit: {limit}'**
+  String discountLimit(String limit);
+
+  /// Discount form help
+  ///
+  /// In en, this message translates to:
+  /// **'Tax is recalculated on the discounted amount. A printed bill is replaced by a new one.'**
+  String get discountHelp;
+
+  /// Bill line: subtotal after discount
+  ///
+  /// In en, this message translates to:
+  /// **'Taxable value'**
+  String get taxableValue;
+
+  /// Roles matrix row: largest discount the role may give
+  ///
+  /// In en, this message translates to:
+  /// **'Max bill discount'**
+  String get maxBillDiscount;
+
+  /// Error: discount over the role limit
+  ///
+  /// In en, this message translates to:
+  /// **'That is more than your role may give ({limit})'**
+  String errDiscountLimit(String limit);
+
+  /// Validation: discount form
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid discount and a reason'**
+  String get errBadDiscount;
+
+  /// Shown instead of the discount button
+  ///
+  /// In en, this message translates to:
+  /// **'Your role cannot give discounts'**
+  String get noDiscountAllowed;
+
+  /// Bill window: amount paid so far
+  ///
+  /// In en, this message translates to:
+  /// **'Paid'**
+  String get paidSoFar;
+
+  /// Bill window: amount still due
+  ///
+  /// In en, this message translates to:
+  /// **'Due'**
+  String get dueNow;
+
+  /// Button: record one part of the payment
+  ///
+  /// In en, this message translates to:
+  /// **'Pay part'**
+  String get payPart;
+
+  /// Button: equal shares per guest
+  ///
+  /// In en, this message translates to:
+  /// **'Split equally'**
+  String get splitEqually;
+
+  /// Split dialog label
+  ///
+  /// In en, this message translates to:
+  /// **'How many guests?'**
+  String get howManyGuests;
+
+  /// One equal share
+  ///
+  /// In en, this message translates to:
+  /// **'Guest {n}: {amount}'**
+  String guestShare(int n, String amount);
+
+  /// Button next to a share
+  ///
+  /// In en, this message translates to:
+  /// **'Pay this share'**
+  String get payThisShare;
+
+  /// Pay part: amount field
+  ///
+  /// In en, this message translates to:
+  /// **'Amount received'**
+  String get amountReceived;
+
+  /// Pay part: reference field
+  ///
+  /// In en, this message translates to:
+  /// **'Reference (optional: UPI ref, card slip)'**
+  String get paymentRef;
+
+  /// Tooltip: undo a part entered by mistake
+  ///
+  /// In en, this message translates to:
+  /// **'Remove this payment'**
+  String get removePayment;
+
+  /// Payment method: several parts
+  ///
+  /// In en, this message translates to:
+  /// **'Mixed'**
+  String get payMixed;
+
+  /// Error
+  ///
+  /// In en, this message translates to:
+  /// **'That is more than is due ({due})'**
+  String errOverpayment(String due);
+
+  /// Error: void refused
+  ///
+  /// In en, this message translates to:
+  /// **'Part of this bill is paid. Remove those payments first.'**
+  String get errHasPayments;
+
+  /// Error
+  ///
+  /// In en, this message translates to:
+  /// **'More has been paid than the new total. Remove a payment first.'**
+  String get errPaymentsExceedTotal;
+
+  /// Label above the method buttons
+  ///
+  /// In en, this message translates to:
+  /// **'Pay what is due'**
+  String get payWholeDue;
 }
 
 class _AppLocalizationsDelegate

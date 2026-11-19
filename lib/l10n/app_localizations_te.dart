@@ -1515,8 +1515,8 @@ class AppLocalizationsTe extends AppLocalizations {
   String get notPickedUp => 'సమయానికి ఎవరూ తీసుకోలేదు';
 
   @override
-  String pickupOverdueToast(int number, String table) {
-    return 'ఆర్డర్ #$number (టేబుల్ $table) ఇంకా ఎవరూ తీసుకోలేదు';
+  String pickupOverdueToast(int number, String place) {
+    return 'ఆర్డర్ #$number ($place) ఇంకా ఎవరూ తీసుకోలేదు';
   }
 
   @override
@@ -1744,4 +1744,143 @@ class AppLocalizationsTe extends AppLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String get takeaway => 'టేక్‌అవే';
+
+  @override
+  String get newTakeaway => 'టేక్‌అవే';
+
+  @override
+  String takeawayTitle(int number) {
+    return 'టేక్‌అవే #$number';
+  }
+
+  @override
+  String takeawayTitleFor(int number, String name) {
+    return 'టేక్‌అవే #$number · $name';
+  }
+
+  @override
+  String takeawayFor(String name) {
+    return 'టేక్‌అవే · $name';
+  }
+
+  @override
+  String get guestName => 'అతిథి పేరు (ఐచ్ఛికం)';
+
+  @override
+  String get guestPhone => 'ఫోన్ (ఐచ్ఛికం)';
+
+  @override
+  String get handedOver => 'అందజేశారు';
+
+  @override
+  String get nextHandOver => 'తదుపరి: అతిథికి అందజేయండి';
+
+  @override
+  String get nextBillOrder => 'తదుపరి: ఈ ఆర్డర్‌కి బిల్ చేయండి';
+
+  @override
+  String get channelTakeaway => 'టేక్‌అవే';
+
+  @override
+  String billForOrder(String title) {
+    return 'బిల్ · $title';
+  }
+
+  @override
+  String get discount => 'డిస్కౌంట్';
+
+  @override
+  String get addDiscount => 'డిస్కౌంట్ ఇవ్వండి';
+
+  @override
+  String get discountByPercent => 'శాతం';
+
+  @override
+  String get discountByAmount => 'మొత్తం (₹)';
+
+  @override
+  String get discountValue => 'ఎంత';
+
+  @override
+  String get discountReason => 'కారణం (బిల్‌పై ముద్రించబడుతుంది)';
+
+  @override
+  String discountLimit(String limit) {
+    return 'మీ పరిమితి: $limit';
+  }
+
+  @override
+  String get discountHelp =>
+      'డిస్కౌంట్ తర్వాత పన్ను మళ్లీ లెక్కించబడుతుంది. ముద్రించిన బిల్ కొత్తదానితో మార్చబడుతుంది.';
+
+  @override
+  String get taxableValue => 'పన్ను విధించదగిన విలువ';
+
+  @override
+  String get maxBillDiscount => 'గరిష్ట బిల్ డిస్కౌంట్';
+
+  @override
+  String errDiscountLimit(String limit) {
+    return 'అది మీ పాత్ర ఇవ్వగలిగిన దానికంటే ఎక్కువ ($limit)';
+  }
+
+  @override
+  String get errBadDiscount => 'సరైన డిస్కౌంట్ మరియు కారణం ఇవ్వండి';
+
+  @override
+  String get noDiscountAllowed => 'మీ పాత్ర డిస్కౌంట్ ఇవ్వలేదు';
+
+  @override
+  String get paidSoFar => 'చెల్లించారు';
+
+  @override
+  String get dueNow => 'బకాయి';
+
+  @override
+  String get payPart => 'కొంత చెల్లించండి';
+
+  @override
+  String get splitEqually => 'సమానంగా పంచండి';
+
+  @override
+  String get howManyGuests => 'ఎంత మంది అతిథులు?';
+
+  @override
+  String guestShare(int n, String amount) {
+    return 'అతిథి $n: $amount';
+  }
+
+  @override
+  String get payThisShare => 'ఈ భాగం చెల్లించండి';
+
+  @override
+  String get amountReceived => 'అందిన మొత్తం';
+
+  @override
+  String get paymentRef => 'రిఫరెన్స్ (ఐచ్ఛికం)';
+
+  @override
+  String get removePayment => 'ఈ చెల్లింపును తొలగించండి';
+
+  @override
+  String get payMixed => 'మిశ్రమం';
+
+  @override
+  String errOverpayment(String due) {
+    return 'అది బకాయి కంటే ఎక్కువ ($due)';
+  }
+
+  @override
+  String get errHasPayments =>
+      'ఈ బిల్‌లో కొంత చెల్లించారు. ముందు ఆ చెల్లింపులను తొలగించండి.';
+
+  @override
+  String get errPaymentsExceedTotal =>
+      'కొత్త మొత్తం కంటే ఎక్కువ చెల్లించారు. ముందు ఒక చెల్లింపును తొలగించండి.';
+
+  @override
+  String get payWholeDue => 'బకాయి మొత్తం చెల్లించండి';
 }

@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_ui/material_ui.dart';
 
 import '../../core/auth/session.dart';
+import '../../core/money.dart';
 import '../../core/theme/tokens.dart';
 import '../../l10n/app_localizations.dart';
 import '../../ui/components.dart';
@@ -416,6 +417,31 @@ class _RolesMatrix extends ConsumerWidget {
                               }),
                     )),
                 ]),
+              // The largest bill discount each role may give (the server enforces it).
+              DataRow(cells: [
+                DataCell(Text(l.maxBillDiscount, style: tt.titleSmall)),
+                for (final r in rs)
+                  DataCell(
+                    r['locked'] == true || !canEdit
+                        ? Text(percentLabel((r['max_discount_bp'] as num?)?.toInt() ?? 0))
+                        : PopupMenuButton<int>(
+                            tooltip: l.maxBillDiscount,
+                            initialValue: (r['max_discount_bp'] as num?)?.toInt() ?? 0,
+                            onSelected: (v) => guard(context, () async {
+                              await ref.read(apiProvider).put('/api/v1/roles/${r['id']}/discount-limit', {'max_discount_bp': v});
+                              ref.invalidate(_rolesProvider);
+                            }),
+                            itemBuilder: (_) => [
+                              for (final v in const [0, 500, 1000, 1500, 2000, 2500, 5000, 10000])
+                                PopupMenuItem(value: v, child: Text(percentLabel(v))),
+                            ],
+                            child: Row(mainAxisSize: MainAxisSize.min, children: [
+                              Text(percentLabel((r['max_discount_bp'] as num?)?.toInt() ?? 0)),
+                              Icon(Icons.arrow_drop_down, color: t.dim),
+                            ]),
+                          ),
+                  ),
+              ]),
             ],
           ),
         ),

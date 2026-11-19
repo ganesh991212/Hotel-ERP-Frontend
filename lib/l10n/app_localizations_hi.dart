@@ -1507,8 +1507,8 @@ class AppLocalizationsHi extends AppLocalizations {
   String get notPickedUp => 'समय पर किसी ने नहीं लिया';
 
   @override
-  String pickupOverdueToast(int number, String table) {
-    return 'ऑर्डर #$number (टेबल $table) अभी तक किसी ने नहीं लिया';
+  String pickupOverdueToast(int number, String place) {
+    return 'ऑर्डर #$number ($place) अभी तक किसी ने नहीं लिया';
   }
 
   @override
@@ -1736,4 +1736,143 @@ class AppLocalizationsHi extends AppLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String get takeaway => 'टेकअवे';
+
+  @override
+  String get newTakeaway => 'टेकअवे';
+
+  @override
+  String takeawayTitle(int number) {
+    return 'टेकअवे #$number';
+  }
+
+  @override
+  String takeawayTitleFor(int number, String name) {
+    return 'टेकअवे #$number · $name';
+  }
+
+  @override
+  String takeawayFor(String name) {
+    return 'टेकअवे · $name';
+  }
+
+  @override
+  String get guestName => 'मेहमान का नाम (वैकल्पिक)';
+
+  @override
+  String get guestPhone => 'फ़ोन (वैकल्पिक)';
+
+  @override
+  String get handedOver => 'सौंप दिया';
+
+  @override
+  String get nextHandOver => 'अगला: मेहमान को सौंपें';
+
+  @override
+  String get nextBillOrder => 'अगला: इस ऑर्डर का बिल बनाएँ';
+
+  @override
+  String get channelTakeaway => 'टेकअवे';
+
+  @override
+  String billForOrder(String title) {
+    return 'बिल · $title';
+  }
+
+  @override
+  String get discount => 'छूट';
+
+  @override
+  String get addDiscount => 'छूट दें';
+
+  @override
+  String get discountByPercent => 'प्रतिशत';
+
+  @override
+  String get discountByAmount => 'राशि (₹)';
+
+  @override
+  String get discountValue => 'कितना';
+
+  @override
+  String get discountReason => 'कारण (बिल पर छपेगा)';
+
+  @override
+  String discountLimit(String limit) {
+    return 'आपकी सीमा: $limit';
+  }
+
+  @override
+  String get discountHelp =>
+      'छूट के बाद टैक्स दोबारा गिना जाता है। छपा बिल नए बिल से बदल जाता है।';
+
+  @override
+  String get taxableValue => 'कर योग्य मूल्य';
+
+  @override
+  String get maxBillDiscount => 'अधिकतम बिल छूट';
+
+  @override
+  String errDiscountLimit(String limit) {
+    return 'यह आपकी भूमिका की सीमा से अधिक है ($limit)';
+  }
+
+  @override
+  String get errBadDiscount => 'सही छूट और कारण दें';
+
+  @override
+  String get noDiscountAllowed => 'आपकी भूमिका छूट नहीं दे सकती';
+
+  @override
+  String get paidSoFar => 'भुगतान हुआ';
+
+  @override
+  String get dueNow => 'बकाया';
+
+  @override
+  String get payPart => 'आंशिक भुगतान';
+
+  @override
+  String get splitEqually => 'बराबर बाँटें';
+
+  @override
+  String get howManyGuests => 'कितने मेहमान?';
+
+  @override
+  String guestShare(int n, String amount) {
+    return 'मेहमान $n: $amount';
+  }
+
+  @override
+  String get payThisShare => 'यह हिस्सा चुकाएँ';
+
+  @override
+  String get amountReceived => 'प्राप्त राशि';
+
+  @override
+  String get paymentRef => 'रेफ़रेंस (वैकल्पिक)';
+
+  @override
+  String get removePayment => 'यह भुगतान हटाएँ';
+
+  @override
+  String get payMixed => 'मिश्रित';
+
+  @override
+  String errOverpayment(String due) {
+    return 'यह बकाया से अधिक है ($due)';
+  }
+
+  @override
+  String get errHasPayments =>
+      'इस बिल का कुछ भुगतान हो चुका है। पहले वे भुगतान हटाएँ।';
+
+  @override
+  String get errPaymentsExceedTotal =>
+      'नई राशि से ज़्यादा भुगतान हो चुका है। पहले एक भुगतान हटाएँ।';
+
+  @override
+  String get payWholeDue => 'पूरा बकाया चुकाएँ';
 }

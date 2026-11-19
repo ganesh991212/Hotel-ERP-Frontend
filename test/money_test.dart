@@ -40,4 +40,24 @@ void main() {
       }
     });
   });
+
+  group('discount percent input (integer basis points, no floats)', () {
+    test('parses whole and decimal percents', () {
+      expect(parsePercentToBp('10'), 1000);
+      expect(parsePercentToBp('12.5'), 1250);
+      expect(parsePercentToBp('0.25%'), 25);
+      expect(parsePercentToBp('100'), 10000);
+    });
+    test('rejects nonsense and out of range', () {
+      for (final bad in ['', 'ten', '0', '100.01', '101', '1.234', '-5']) {
+        expect(parsePercentToBp(bad), isNull, reason: bad);
+      }
+    });
+    test('labels', () {
+      expect(percentLabel(1000), '10%');
+      expect(percentLabel(1250), '12.5%');
+      expect(percentLabel(25), '0.25%');
+      expect(percentLabel(0), '0%');
+    });
+  });
 }

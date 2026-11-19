@@ -1511,8 +1511,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get notPickedUp => 'Not picked up in time';
 
   @override
-  String pickupOverdueToast(int number, String table) {
-    return 'Order #$number (Table $table) has not been picked up';
+  String pickupOverdueToast(int number, String place) {
+    return 'Order #$number ($place) has not been picked up';
   }
 
   @override
@@ -1739,4 +1739,143 @@ class AppLocalizationsEn extends AppLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String get takeaway => 'Takeaway';
+
+  @override
+  String get newTakeaway => 'Takeaway';
+
+  @override
+  String takeawayTitle(int number) {
+    return 'Takeaway #$number';
+  }
+
+  @override
+  String takeawayTitleFor(int number, String name) {
+    return 'Takeaway #$number · $name';
+  }
+
+  @override
+  String takeawayFor(String name) {
+    return 'Takeaway · $name';
+  }
+
+  @override
+  String get guestName => 'Guest name (optional)';
+
+  @override
+  String get guestPhone => 'Phone (optional)';
+
+  @override
+  String get handedOver => 'Handed over';
+
+  @override
+  String get nextHandOver => 'Next: hand it over to the guest';
+
+  @override
+  String get nextBillOrder => 'Next: bill this order';
+
+  @override
+  String get channelTakeaway => 'Takeaway';
+
+  @override
+  String billForOrder(String title) {
+    return 'Bill · $title';
+  }
+
+  @override
+  String get discount => 'Discount';
+
+  @override
+  String get addDiscount => 'Add discount';
+
+  @override
+  String get discountByPercent => 'Percent';
+
+  @override
+  String get discountByAmount => 'Amount (₹)';
+
+  @override
+  String get discountValue => 'How much';
+
+  @override
+  String get discountReason => 'Reason (printed on the bill)';
+
+  @override
+  String discountLimit(String limit) {
+    return 'Your limit: $limit';
+  }
+
+  @override
+  String get discountHelp =>
+      'Tax is recalculated on the discounted amount. A printed bill is replaced by a new one.';
+
+  @override
+  String get taxableValue => 'Taxable value';
+
+  @override
+  String get maxBillDiscount => 'Max bill discount';
+
+  @override
+  String errDiscountLimit(String limit) {
+    return 'That is more than your role may give ($limit)';
+  }
+
+  @override
+  String get errBadDiscount => 'Enter a valid discount and a reason';
+
+  @override
+  String get noDiscountAllowed => 'Your role cannot give discounts';
+
+  @override
+  String get paidSoFar => 'Paid';
+
+  @override
+  String get dueNow => 'Due';
+
+  @override
+  String get payPart => 'Pay part';
+
+  @override
+  String get splitEqually => 'Split equally';
+
+  @override
+  String get howManyGuests => 'How many guests?';
+
+  @override
+  String guestShare(int n, String amount) {
+    return 'Guest $n: $amount';
+  }
+
+  @override
+  String get payThisShare => 'Pay this share';
+
+  @override
+  String get amountReceived => 'Amount received';
+
+  @override
+  String get paymentRef => 'Reference (optional: UPI ref, card slip)';
+
+  @override
+  String get removePayment => 'Remove this payment';
+
+  @override
+  String get payMixed => 'Mixed';
+
+  @override
+  String errOverpayment(String due) {
+    return 'That is more than is due ($due)';
+  }
+
+  @override
+  String get errHasPayments =>
+      'Part of this bill is paid. Remove those payments first.';
+
+  @override
+  String get errPaymentsExceedTotal =>
+      'More has been paid than the new total. Remove a payment first.';
+
+  @override
+  String get payWholeDue => 'Pay what is due';
 }

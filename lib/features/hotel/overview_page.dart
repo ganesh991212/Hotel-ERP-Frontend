@@ -481,7 +481,7 @@ class _LiveRow extends StatelessWidget {
       const SizedBox(width: 12),
       Expanded(
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Text(l.orderNumberTable(o['number'], o['table']?['label'] ?? '-'),
+          Text(orderTitle(context, o),
               style: tt.bodyMedium?.copyWith(color: t.onNight)),
           Text('$label · ${l.minutesAgo(minutesSince(o['created_at']))}',
               style: tt.labelSmall?.copyWith(color: t.nightDim)),
