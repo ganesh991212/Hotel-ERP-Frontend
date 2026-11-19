@@ -546,5 +546,20 @@
   "maxBillDiscount": "గరిష్ట బిల్ డిస్కౌంట్",
   "errDiscountLimit": "అది మీ పాత్ర ఇవ్వగలిగిన దానికంటే ఎక్కువ ({limit})",
   "errBadDiscount": "సరైన డిస్కౌంట్ మరియు కారణం ఇవ్వండి",
-  "noDiscountAllowed": "మీ పాత్ర డిస్కౌంట్ ఇవ్వలేదు"
+  "noDiscountAllowed": "మీ పాత్ర డిస్కౌంట్ ఇవ్వలేదు",
+  "paidSoFar": "చెల్లించారు",
+  "dueNow": "బకాయి",
+  "payPart": "కొంత చెల్లించండి",
+  "splitEqually": "సమానంగా పంచండి",
+  "howManyGuests": "ఎంత మంది అతిథులు?",
+  "guestShare": "అతిథి {n}: {amount}",
+  "payThisShare": "ఈ భాగం చెల్లించండి",
+  "amountReceived": "అందిన మొత్తం",
+  "paymentRef": "రిఫరెన్స్ (ఐచ్ఛికం)",
+  "removePayment": "ఈ చెల్లింపును తొలగించండి",
+  "payMixed": "మిశ్రమం",
+  "errOverpayment": "అది బకాయి కంటే ఎక్కువ ({due})",
+  "errHasPayments": "ఈ బిల్‌లో కొంత చెల్లించారు. ముందు ఆ చెల్లింపులను తొలగించండి.",
+  "errPaymentsExceedTotal": "కొత్త మొత్తం కంటే ఎక్కువ చెల్లించారు. ముందు ఒక చెల్లింపును తొలగించండి.",
+  "payWholeDue": "బకాయి మొత్తం చెల్లించండి"
 }

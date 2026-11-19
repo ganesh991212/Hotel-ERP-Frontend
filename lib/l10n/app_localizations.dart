@@ -3381,6 +3381,96 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Your role cannot give discounts'**
   String get noDiscountAllowed;
+
+  /// Bill window: amount paid so far
+  ///
+  /// In en, this message translates to:
+  /// **'Paid'**
+  String get paidSoFar;
+
+  /// Bill window: amount still due
+  ///
+  /// In en, this message translates to:
+  /// **'Due'**
+  String get dueNow;
+
+  /// Button: record one part of the payment
+  ///
+  /// In en, this message translates to:
+  /// **'Pay part'**
+  String get payPart;
+
+  /// Button: equal shares per guest
+  ///
+  /// In en, this message translates to:
+  /// **'Split equally'**
+  String get splitEqually;
+
+  /// Split dialog label
+  ///
+  /// In en, this message translates to:
+  /// **'How many guests?'**
+  String get howManyGuests;
+
+  /// One equal share
+  ///
+  /// In en, this message translates to:
+  /// **'Guest {n}: {amount}'**
+  String guestShare(int n, String amount);
+
+  /// Button next to a share
+  ///
+  /// In en, this message translates to:
+  /// **'Pay this share'**
+  String get payThisShare;
+
+  /// Pay part: amount field
+  ///
+  /// In en, this message translates to:
+  /// **'Amount received'**
+  String get amountReceived;
+
+  /// Pay part: reference field
+  ///
+  /// In en, this message translates to:
+  /// **'Reference (optional: UPI ref, card slip)'**
+  String get paymentRef;
+
+  /// Tooltip: undo a part entered by mistake
+  ///
+  /// In en, this message translates to:
+  /// **'Remove this payment'**
+  String get removePayment;
+
+  /// Payment method: several parts
+  ///
+  /// In en, this message translates to:
+  /// **'Mixed'**
+  String get payMixed;
+
+  /// Error
+  ///
+  /// In en, this message translates to:
+  /// **'That is more than is due ({due})'**
+  String errOverpayment(String due);
+
+  /// Error: void refused
+  ///
+  /// In en, this message translates to:
+  /// **'Part of this bill is paid. Remove those payments first.'**
+  String get errHasPayments;
+
+  /// Error
+  ///
+  /// In en, this message translates to:
+  /// **'More has been paid than the new total. Remove a payment first.'**
+  String get errPaymentsExceedTotal;
+
+  /// Label above the method buttons
+  ///
+  /// In en, this message translates to:
+  /// **'Pay what is due'**
+  String get payWholeDue;
 }
 
 class _AppLocalizationsDelegate

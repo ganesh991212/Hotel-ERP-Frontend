@@ -121,3 +121,15 @@ String orderPlace(BuildContext context, Map o) {
 }
 
 bool isTakeaway(Map o) => o['channel'] == 'TAKEAWAY';
+
+/// CASH / UPI / CARD / MIXED as the user's language says it.
+String payMethodLabel(BuildContext context, String? method) {
+  final l = AppLocalizations.of(context);
+  return switch (method) {
+    'CASH' => l.payCash,
+    'UPI' => l.payUpi,
+    'CARD' => l.payCard,
+    'MIXED' => l.payMixed,
+    _ => method ?? '',
+  };
+}

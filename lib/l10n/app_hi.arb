@@ -546,5 +546,20 @@
   "maxBillDiscount": "अधिकतम बिल छूट",
   "errDiscountLimit": "यह आपकी भूमिका की सीमा से अधिक है ({limit})",
   "errBadDiscount": "सही छूट और कारण दें",
-  "noDiscountAllowed": "आपकी भूमिका छूट नहीं दे सकती"
+  "noDiscountAllowed": "आपकी भूमिका छूट नहीं दे सकती",
+  "paidSoFar": "भुगतान हुआ",
+  "dueNow": "बकाया",
+  "payPart": "आंशिक भुगतान",
+  "splitEqually": "बराबर बाँटें",
+  "howManyGuests": "कितने मेहमान?",
+  "guestShare": "मेहमान {n}: {amount}",
+  "payThisShare": "यह हिस्सा चुकाएँ",
+  "amountReceived": "प्राप्त राशि",
+  "paymentRef": "रेफ़रेंस (वैकल्पिक)",
+  "removePayment": "यह भुगतान हटाएँ",
+  "payMixed": "मिश्रित",
+  "errOverpayment": "यह बकाया से अधिक है ({due})",
+  "errHasPayments": "इस बिल का कुछ भुगतान हो चुका है। पहले वे भुगतान हटाएँ।",
+  "errPaymentsExceedTotal": "नई राशि से ज़्यादा भुगतान हो चुका है। पहले एक भुगतान हटाएँ।",
+  "payWholeDue": "पूरा बकाया चुकाएँ"
 }

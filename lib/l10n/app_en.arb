@@ -2451,5 +2451,78 @@
   "noDiscountAllowed": "Your role cannot give discounts",
   "@noDiscountAllowed": {
     "description": "Shown instead of the discount button"
+  },
+  "paidSoFar": "Paid",
+  "@paidSoFar": {
+    "description": "Bill window: amount paid so far"
+  },
+  "dueNow": "Due",
+  "@dueNow": {
+    "description": "Bill window: amount still due"
+  },
+  "payPart": "Pay part",
+  "@payPart": {
+    "description": "Button: record one part of the payment"
+  },
+  "splitEqually": "Split equally",
+  "@splitEqually": {
+    "description": "Button: equal shares per guest"
+  },
+  "howManyGuests": "How many guests?",
+  "@howManyGuests": {
+    "description": "Split dialog label"
+  },
+  "guestShare": "Guest {n}: {amount}",
+  "@guestShare": {
+    "description": "One equal share",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "payThisShare": "Pay this share",
+  "@payThisShare": {
+    "description": "Button next to a share"
+  },
+  "amountReceived": "Amount received",
+  "@amountReceived": {
+    "description": "Pay part: amount field"
+  },
+  "paymentRef": "Reference (optional: UPI ref, card slip)",
+  "@paymentRef": {
+    "description": "Pay part: reference field"
+  },
+  "removePayment": "Remove this payment",
+  "@removePayment": {
+    "description": "Tooltip: undo a part entered by mistake"
+  },
+  "payMixed": "Mixed",
+  "@payMixed": {
+    "description": "Payment method: several parts"
+  },
+  "errOverpayment": "That is more than is due ({due})",
+  "@errOverpayment": {
+    "description": "Error",
+    "placeholders": {
+      "due": {
+        "type": "String"
+      }
+    }
+  },
+  "errHasPayments": "Part of this bill is paid. Remove those payments first.",
+  "@errHasPayments": {
+    "description": "Error: void refused"
+  },
+  "errPaymentsExceedTotal": "More has been paid than the new total. Remove a payment first.",
+  "@errPaymentsExceedTotal": {
+    "description": "Error"
+  },
+  "payWholeDue": "Pay what is due",
+  "@payWholeDue": {
+    "description": "Label above the method buttons"
   }
 }

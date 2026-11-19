@@ -1824,4 +1824,55 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get noDiscountAllowed => 'आपकी भूमिका छूट नहीं दे सकती';
+
+  @override
+  String get paidSoFar => 'भुगतान हुआ';
+
+  @override
+  String get dueNow => 'बकाया';
+
+  @override
+  String get payPart => 'आंशिक भुगतान';
+
+  @override
+  String get splitEqually => 'बराबर बाँटें';
+
+  @override
+  String get howManyGuests => 'कितने मेहमान?';
+
+  @override
+  String guestShare(int n, String amount) {
+    return 'मेहमान $n: $amount';
+  }
+
+  @override
+  String get payThisShare => 'यह हिस्सा चुकाएँ';
+
+  @override
+  String get amountReceived => 'प्राप्त राशि';
+
+  @override
+  String get paymentRef => 'रेफ़रेंस (वैकल्पिक)';
+
+  @override
+  String get removePayment => 'यह भुगतान हटाएँ';
+
+  @override
+  String get payMixed => 'मिश्रित';
+
+  @override
+  String errOverpayment(String due) {
+    return 'यह बकाया से अधिक है ($due)';
+  }
+
+  @override
+  String get errHasPayments =>
+      'इस बिल का कुछ भुगतान हो चुका है। पहले वे भुगतान हटाएँ।';
+
+  @override
+  String get errPaymentsExceedTotal =>
+      'नई राशि से ज़्यादा भुगतान हो चुका है। पहले एक भुगतान हटाएँ।';
+
+  @override
+  String get payWholeDue => 'पूरा बकाया चुकाएँ';
 }

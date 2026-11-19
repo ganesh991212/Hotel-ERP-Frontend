@@ -1827,4 +1827,55 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noDiscountAllowed => 'Your role cannot give discounts';
+
+  @override
+  String get paidSoFar => 'Paid';
+
+  @override
+  String get dueNow => 'Due';
+
+  @override
+  String get payPart => 'Pay part';
+
+  @override
+  String get splitEqually => 'Split equally';
+
+  @override
+  String get howManyGuests => 'How many guests?';
+
+  @override
+  String guestShare(int n, String amount) {
+    return 'Guest $n: $amount';
+  }
+
+  @override
+  String get payThisShare => 'Pay this share';
+
+  @override
+  String get amountReceived => 'Amount received';
+
+  @override
+  String get paymentRef => 'Reference (optional: UPI ref, card slip)';
+
+  @override
+  String get removePayment => 'Remove this payment';
+
+  @override
+  String get payMixed => 'Mixed';
+
+  @override
+  String errOverpayment(String due) {
+    return 'That is more than is due ($due)';
+  }
+
+  @override
+  String get errHasPayments =>
+      'Part of this bill is paid. Remove those payments first.';
+
+  @override
+  String get errPaymentsExceedTotal =>
+      'More has been paid than the new total. Remove a payment first.';
+
+  @override
+  String get payWholeDue => 'Pay what is due';
 }

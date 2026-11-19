@@ -1832,4 +1832,55 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get noDiscountAllowed => 'మీ పాత్ర డిస్కౌంట్ ఇవ్వలేదు';
+
+  @override
+  String get paidSoFar => 'చెల్లించారు';
+
+  @override
+  String get dueNow => 'బకాయి';
+
+  @override
+  String get payPart => 'కొంత చెల్లించండి';
+
+  @override
+  String get splitEqually => 'సమానంగా పంచండి';
+
+  @override
+  String get howManyGuests => 'ఎంత మంది అతిథులు?';
+
+  @override
+  String guestShare(int n, String amount) {
+    return 'అతిథి $n: $amount';
+  }
+
+  @override
+  String get payThisShare => 'ఈ భాగం చెల్లించండి';
+
+  @override
+  String get amountReceived => 'అందిన మొత్తం';
+
+  @override
+  String get paymentRef => 'రిఫరెన్స్ (ఐచ్ఛికం)';
+
+  @override
+  String get removePayment => 'ఈ చెల్లింపును తొలగించండి';
+
+  @override
+  String get payMixed => 'మిశ్రమం';
+
+  @override
+  String errOverpayment(String due) {
+    return 'అది బకాయి కంటే ఎక్కువ ($due)';
+  }
+
+  @override
+  String get errHasPayments =>
+      'ఈ బిల్‌లో కొంత చెల్లించారు. ముందు ఆ చెల్లింపులను తొలగించండి.';
+
+  @override
+  String get errPaymentsExceedTotal =>
+      'కొత్త మొత్తం కంటే ఎక్కువ చెల్లించారు. ముందు ఒక చెల్లింపును తొలగించండి.';
+
+  @override
+  String get payWholeDue => 'బకాయి మొత్తం చెల్లించండి';
 }

@@ -362,7 +362,7 @@ class _BillRow extends ConsumerWidget {
     final tt = Theme.of(context).textTheme;
     final status = b['status'] as String;
     final chip = switch (status) {
-      'PAID' => StatusChip(icon: Icons.check_circle_outline, label: l.billPaid(b['payment_method'] ?? ''), color: t.ok),
+      'PAID' => StatusChip(icon: Icons.check_circle_outline, label: l.billPaid(payMethodLabel(context, b['payment_method'])), color: t.ok),
       'VOID' => StatusChip(icon: Icons.cancel_outlined, label: l.billCancelled, color: t.danger),
       _ => StatusChip(icon: Icons.pending_outlined, label: l.billUnpaid, color: t.warn),
     };

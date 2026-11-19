@@ -249,6 +249,107 @@ class _BillPanelState extends ConsumerState<_BillPanel> {
     if (mounted) setState(() => _busy = false);
   }
 
+  /// One part of the payment; the server marks the bill paid when nothing is due.
+  Future<void> _payPart({int? prefillMinor}) async {
+    final l = AppLocalizations.of(context);
+    final amount = TextEditingController(text: prefillMinor == null ? '' : minorToInput(prefillMinor));
+    final ref_ = TextEditingController();
+    var method = 'CASH';
+    final ok = await showGlassDialog<bool>(
+      context,
+      title: l.payPart,
+      body: StatefulBuilder(
+        builder: (ctx, set) => Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+          ChoiceRow<String>(
+            options: [('CASH', l.payCash), ('UPI', l.payUpi), ('CARD', l.payCard)],
+            value: method,
+            onChanged: (v) => set(() => method = v),
+          ),
+          FieldLabel(l.amountReceived),
+          TextField(
+            controller: amount,
+            autofocus: true,
+            keyboardType: const TextInputType.numberWithOptions(decimal: true),
+            decoration: const InputDecoration(prefixText: '₹ '),
+          ),
+          FieldLabel(l.paymentRef),
+          TextField(controller: ref_, maxLength: 60, decoration: const InputDecoration(counterText: '')),
+          DialogActions(primary: l.payPart, onPrimary: () => Navigator.of(ctx).pop(true)),
+        ]),
+      ),
+    );
+    if (ok != true || !mounted) return;
+    final minor = parseInrToMinor(amount.text);
+    if (minor == null || minor <= 0) return;
+    setState(() => _busy = true);
+    await guard(context, () async {
+      final r = await ref.read(apiProvider).post('/api/v1/bills/${_bill!['id']}/payments', {
+        'method': method,
+        'amount_minor': minor,
+        if (ref_.text.trim().isNotEmpty) 'reference': ref_.text.trim(),
+      });
+      setState(() => _bill = Map<String, dynamic>.from(r));
+    });
+    if (mounted) setState(() => _busy = false);
+  }
+
+  /// Equal shares of what is due (computed by the server); tapping a share records it as a part.
+  Future<void> _split() async {
+    final l = AppLocalizations.of(context);
+    var parts = 2;
+    List<int>? shares;
+    await showGlassDialog<void>(
+      context,
+      title: l.splitEqually,
+      body: StatefulBuilder(builder: (ctx, set) {
+        Future<void> load() async {
+          final r = await ref.read(apiProvider).get('/api/v1/bills/${_bill!['id']}/split?parts=$parts');
+          set(() => shares = ((r['shares_minor'] as List).cast<num>()).map((e) => e.toInt()).toList());
+        }
+
+        if (shares == null) load();
+        return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+          FieldLabel(l.howManyGuests),
+          ChoiceRow<int>(
+            options: [for (final n in const [2, 3, 4, 5, 6, 8, 10]) (n, '$n')],
+            value: parts,
+            onChanged: (v) {
+              set(() {
+                parts = v;
+                shares = null;
+              });
+            },
+          ),
+          const SizedBox(height: 10),
+          if (shares == null)
+            const LoadingBlock(height: 60)
+          else
+            for (final (i, s) in shares!.indexed)
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 3),
+                child: Row(children: [
+                  Expanded(child: Text(l.guestShare(i + 1, formatInr(s)))),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(ctx).pop();
+                      _payPart(prefillMinor: s);
+                    },
+                    child: Text(l.payThisShare),
+                  ),
+                ]),
+              ),
+        ]);
+      }),
+    );
+  }
+
+  Future<void> _removePayment(String paymentId) async {
+    await guard(context, () async {
+      final r = await ref.read(apiProvider).delete('/api/v1/bills/${_bill!['id']}/payments/$paymentId');
+      setState(() => _bill = Map<String, dynamic>.from(r));
+    });
+  }
+
   Future<void> _settle(String method) async {
     await guard(context, () async {
       final r = await ref.read(apiProvider).post('/api/v1/bills/${_bill!['id']}/settle', {'method': method});
@@ -352,7 +453,7 @@ class _BillPanelState extends ConsumerState<_BillPanel> {
             ? StatusChip(icon: Icons.cancel_outlined, label: l.billCancelled, color: t.danger)
             : StatusChip(
                 icon: paid ? Icons.check_circle_outline : Icons.pending_outlined,
-                label: paid ? l.billPaid(b['payment_method']) : l.billUnpaid,
+                label: paid ? l.billPaid(payMethodLabel(context, b['payment_method'])) : l.billUnpaid,
                 color: paid ? t.ok : t.warn,
               ),
       ]),
@@ -390,13 +491,44 @@ class _BillPanelState extends ConsumerState<_BillPanel> {
           icon: const Icon(Icons.percent_rounded, size: 18),
           label: Text(l.addDiscount),
         ),
+      // Parts paid so far (removable until the bill is paid) and what is still due. Amounts come from the server.
+      for (final p in (b['payments'] as List? ?? const []))
+        Row(children: [
+          Icon(Icons.check_circle_outline, size: 16, color: t.ok),
+          const SizedBox(width: 6),
+          Expanded(child: Text('${payMethodLabel(context, p['method'])}${p['reference'] != null ? ' · ${p['reference']}' : ''}')),
+          Text(formatInr(p['amount_minor'] as int)),
+          if (!paid && !cancelled)
+            IconButton(
+              tooltip: l.removePayment,
+              visualDensity: VisualDensity.compact,
+              onPressed: _busy ? null : () => _removePayment(p['id'] as String),
+              icon: Icon(Icons.close_rounded, size: 18, color: t.dim),
+            ),
+        ]),
+      if (!paid && !cancelled && ((b['paid_minor'] ?? 0) as int) > 0) ...[
+        row(l.paidSoFar, b['paid_minor'] as int),
+        row(l.dueNow, b['due_minor'] as int, strong: true),
+      ],
       if (!paid && !cancelled) ...[
-        FieldLabel(l.settlePayment),
+        FieldLabel(l.payWholeDue),
         ChoiceRow<String>(
           options: [('CASH', l.payCash), ('UPI', l.payUpi), ('CARD', l.payCard)],
           value: '',
           onChanged: _settle,
         ),
+        Wrap(spacing: 8, children: [
+          TextButton.icon(
+            onPressed: _busy ? null : () => _payPart(),
+            icon: const Icon(Icons.call_split_rounded, size: 18),
+            label: Text(l.payPart),
+          ),
+          TextButton.icon(
+            onPressed: _busy ? null : _split,
+            icon: const Icon(Icons.groups_outlined, size: 18),
+            label: Text(l.splitEqually),
+          ),
+        ]),
       ],
       if (s.can('bill.void') && !cancelled) ...[
         const SizedBox(height: 8),
