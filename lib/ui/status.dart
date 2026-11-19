@@ -68,3 +68,34 @@ String roleLabel(BuildContext context, String? code, [String? fallback]) {
     _ => fallback ?? code ?? '',
   };
 }
+
+/// "What happens next, and who does it" for an order (docs/04 "Order workflow"). One place for the Floor,
+/// the table window and the Orders screen, so every screen tells staff the same thing.
+String? nextStepText(BuildContext context, Map<String, dynamic> o, {String? kitchenMode}) {
+  final l = AppLocalizations.of(context);
+  final chef = (o['chef'] as Map?)?['name'] as String?;
+  return switch (o['status']) {
+    'PLACED' => l.nextConfirm,
+    'CONFIRMED' => switch (kitchenMode) {
+        'ADMIN_PRINT' => l.nextPrintKot,
+        'AUTO_ASSIGN' => l.nextFreeChef,
+        _ => l.nextChefPickup,
+      },
+    'ASSIGNED' => chef != null ? l.nextChefStarts(chef) : l.nextFreeChef,
+    'PREPARING' => o['on_paper'] == true ? l.nowCookingPaper : (chef != null ? l.nowCooking(chef) : null),
+    'READY' => l.nextServe,
+    'SERVED' => o['bill_id'] == null ? l.nextBill : null,
+    _ => null,
+  };
+}
+
+/// Shown on an order no chef took within the outlet's alert time (the server sets pickup_alerted_at).
+bool isPickupOverdue(Map<String, dynamic> o) => o['status'] == 'CONFIRMED' && o['pickup_alerted_at'] != null;
+
+class PickupOverdueChip extends StatelessWidget {
+  const PickupOverdueChip({super.key});
+
+  @override
+  Widget build(BuildContext context) =>
+      StatusChip(icon: Icons.alarm_rounded, label: AppLocalizations.of(context).notPickedUp, color: context.tokens.danger);
+}

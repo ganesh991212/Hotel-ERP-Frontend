@@ -1478,4 +1478,88 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get brandingSaved => 'బ్రాండింగ్ సేవ్ అయింది';
+
+  @override
+  String get nextConfirm => 'తదుపరి: ఈ ఆర్డర్‌ను నిర్ధారించండి';
+
+  @override
+  String get nextChefPickup => 'తదుపరి: కిచెన్ స్క్రీన్‌లో చెఫ్ తీసుకుంటారు';
+
+  @override
+  String get nextFreeChef => 'తదుపరి: ఖాళీ చెఫ్ కోసం వేచి ఉంది';
+
+  @override
+  String get nextPrintKot => 'తదుపరి: కిచెన్ కోసం KOT ప్రింట్ చేయండి';
+
+  @override
+  String nextChefStarts(String chef) {
+    return 'తదుపరి: $chef వంట మొదలుపెడతారు';
+  }
+
+  @override
+  String nowCooking(String chef) {
+    return '$chef వండుతున్నారు';
+  }
+
+  @override
+  String get nowCookingPaper =>
+      'ప్రింటెడ్ KOT నుండి వండుతున్నారు. సిద్ధమైనప్పుడు \'సిద్ధం\' నొక్కండి';
+
+  @override
+  String get nextServe => 'తదుపరి: టేబుల్‌కి అందించండి';
+
+  @override
+  String get nextBill => 'తదుపరి: టేబుల్‌కి బిల్ చేయండి';
+
+  @override
+  String get notPickedUp => 'సమయానికి ఎవరూ తీసుకోలేదు';
+
+  @override
+  String pickupOverdueToast(int number, String table) {
+    return 'ఆర్డర్ #$number (టేబుల్ $table) ఇంకా ఎవరూ తీసుకోలేదు';
+  }
+
+  @override
+  String get billPending => 'బిల్ పెండింగ్';
+
+  @override
+  String get billNow => 'బిల్';
+
+  @override
+  String get tabOrders => 'ఆర్డర్లు';
+
+  @override
+  String get ordersToday2 => 'ఈరోజు';
+
+  @override
+  String get noOrdersYet => 'ఇంకా ఆర్డర్లు లేవు';
+
+  @override
+  String get billed => 'బిల్ అయింది';
+
+  @override
+  String get servingMode => 'భోజనం టేబుల్‌కి ఎలా వస్తుంది';
+
+  @override
+  String get serveByWaiter => 'వెయిటర్ అందిస్తారు';
+
+  @override
+  String get serveAtCounter => 'కస్టమర్ కౌంటర్ వద్ద తీసుకుంటారు';
+
+  @override
+  String get servingModeHelp =>
+      'కౌంటర్: సిద్ధమైనప్పుడు కస్టమర్‌కి తీసుకోమని చెబుతుంది; \'అందించారు\' దశ ఉండదు.';
+
+  @override
+  String get pickupAlert => 'ఈ సమయంలో చెఫ్ తీసుకోకపోతే హెచ్చరిక';
+
+  @override
+  String get pickupAlertHelp =>
+      'అడ్మిన్‌లు మరియు షిఫ్ట్‌లో ఉన్న చెఫ్‌లకు గట్టి హెచ్చరిక వస్తుంది.';
+
+  @override
+  String get off => 'ఆఫ్';
+
+  @override
+  String get collectAtCounter => 'సిద్ధం! దయచేసి కౌంటర్ వద్ద తీసుకోండి.';
 }

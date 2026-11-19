@@ -7,6 +7,7 @@ import '../features/diner/diner_page.dart';
 import '../features/floor/floor_page.dart';
 import '../features/hotel/expenses_page.dart';
 import '../features/hotel/menu_page.dart';
+import '../features/hotel/orders_page.dart';
 import '../features/hotel/overview_page.dart';
 import '../features/hotel/tables_page.dart';
 import '../features/hotel/team_page.dart';
@@ -66,6 +67,7 @@ final routerProvider = Provider<GoRouter>((ref) {
           GoRoute(path: '/p/categories', pageBuilder: (_, s) => _fade(s, const CategoriesPage())),
           GoRoute(path: '/h/overview', pageBuilder: (_, s) => _fade(s, const HotelOverviewPage())),
           GoRoute(path: '/h/floor', pageBuilder: (_, s) => _fade(s, const FloorPage())),
+          GoRoute(path: '/h/orders', pageBuilder: (_, s) => _fade(s, const OrdersPage())),
           GoRoute(path: '/h/kitchen', pageBuilder: (_, s) => _fade(s, const KitchenPage())),
           GoRoute(path: '/h/menu', pageBuilder: (_, s) => _fade(s, const MenuPage())),
           GoRoute(path: '/h/tables', pageBuilder: (_, s) => _fade(s, const TablesPage())),

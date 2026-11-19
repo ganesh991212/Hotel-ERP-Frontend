@@ -16,8 +16,9 @@ import 'print_actions.dart';
 
 final _tablesProvider = liveProvider<List<Map<String, dynamic>>>(
     (api) async => ((await api.get('/api/v1/tables')) as List).cast<Map<String, dynamic>>());
+/// Open orders plus served orders not billed yet ("attention" scope): the next step for those is the bill.
 final _openOrdersProvider = liveProvider<List<Map<String, dynamic>>>(
-  (api) async => ((await api.get('/api/v1/orders?scope=open')) as List).cast<Map<String, dynamic>>(),
+  (api) async => ((await api.get('/api/v1/orders?scope=attention')) as List).cast<Map<String, dynamic>>(),
   poll: const Duration(seconds: 15),
 );
 final menuDataProvider = FutureProvider.autoDispose<(List<Map<String, dynamic>>, List<Map<String, dynamic>>)>((ref) async {
@@ -50,10 +51,16 @@ class _FloorPageState extends ConsumerState<FloorPage> {
     final orders = ref.watch(_openOrdersProvider).value ?? const [];
     final placed = orders.where((o) => o['status'] == 'PLACED').toList();
     final ready = orders.where((o) => o['status'] == 'READY').toList();
+    // Nobody picked these up in time (server alert): first, so someone acts.
+    final overdue = orders.where(isPickupOverdue).toList();
     // Waiting for a chef: printable as KOT when nobody in the kitchen is picking up on a screen.
-    final waiting = s.can('kot.print') ? orders.where((o) => o['status'] == 'CONFIRMED').toList() : <Map<String, dynamic>>[];
+    final waiting = s.can('kot.print')
+        ? orders.where((o) => o['status'] == 'CONFIRMED' && !isPickupOverdue(o)).toList()
+        : <Map<String, dynamic>>[];
     final onPaper = orders.where((o) => o['on_paper'] == true && o['status'] == 'PREPARING').toList();
-    final attention = [...ready, ...placed, ...onPaper, ...waiting];
+    // Served, not billed: the table still owes money.
+    final toBill = s.can('bill.manage') ? orders.where((o) => o['status'] == 'SERVED').toList() : <Map<String, dynamic>>[];
+    final attention = [...overdue, ...ready, ...placed, ...onPaper, ...waiting, ...toBill];
 
     return PageBody(children: [
       Reveal(index: 0, child: PageHeading(l.tabFloor)),
@@ -110,7 +117,7 @@ class _FloorPageState extends ConsumerState<FloorPage> {
                         index: 2 + i.clamp(0, 10),
                         child: _TableTile(
                           table: t,
-                          orders: orders.where((o) => o['table']?['id'] == t['id']).toList(),
+                          orders: orders.where((o) => o['table']?['id'] == t['id'] && o['status'] != 'SERVED').toList(),
                           canOrder: s.can('order.create') && s.feature('WAITER_ORDERING'),
                         ),
                       ),
@@ -136,6 +143,8 @@ class _AttentionRow extends ConsumerWidget {
     final isReady = o['status'] == 'READY';
     final items = (o['items'] as List).map((i) => '${i['qty']}× ${i['name']}').join(', ');
     final status = o['status'];
+    final next = nextStepText(context, o, kitchenMode: (session.me['outlet'] as Map?)?['kitchen_mode'] as String?);
+    final toBill = status == 'SERVED' && o['bill_id'] == null && o['table'] != null && session.can('bill.manage');
     final action = isReady
         ? (session.can('order.serve') ? (l.markServed, 'serve') : null)
         : status == 'PLACED' && session.can('order.confirm')
@@ -144,16 +153,35 @@ class _AttentionRow extends ConsumerWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 6),
       child: Row(children: [
-        o['on_paper'] == true && status == 'PREPARING' ? paperChip(context) : OrderStatusChip(o['status']),
+        isPickupOverdue(o)
+            ? const PickupOverdueChip()
+            : o['on_paper'] == true && status == 'PREPARING'
+                ? paperChip(context)
+                : OrderStatusChip(o['status']),
         const SizedBox(width: 12),
         Expanded(
           child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Text(l.orderNumberTable(o['number'], o['table']?['label'] ?? '-'), style: tt.titleSmall),
             Text(items, maxLines: 1, overflow: TextOverflow.ellipsis, style: tt.bodySmall),
+            if (next != null)
+              Text(next,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: tt.labelMedium?.copyWith(color: context.tokens.accentDeep)),
           ]),
         ),
         if (status == 'CONFIRMED') KotPrintButton(order: o),
         MarkReadyButton(order: o, onDone: () => ref.invalidate(_openOrdersProvider)),
+        if (toBill)
+          FilledButton.icon(
+            onPressed: () async {
+              await showBillDialog(context, o['table'] as Map);
+              ref.invalidate(_openOrdersProvider);
+              ref.invalidate(_tablesProvider);
+            },
+            icon: const Icon(Icons.receipt_long_outlined, size: 18),
+            label: Text(l.billNow),
+          ),
         if (action != null)
           FilledButton(
             onPressed: () => guard(context, () async {
@@ -178,7 +206,7 @@ class _TableTile extends StatelessWidget {
     final l = AppLocalizations.of(context);
     final t = context.tokens;
     final tt = Theme.of(context).textTheme;
-    final busy = orders.isNotEmpty;
+    final busy = orders.isNotEmpty || table['state'] == 'BILL_PENDING';
     final inactive = table['status'] != 'ACTIVE';
     final top = orders.isEmpty ? null : orders.first['status'] as String;
     return Glass(
@@ -202,6 +230,13 @@ class _TableTile extends StatelessWidget {
           StatusChip(icon: Icons.block, label: l.inactive, color: t.faint)
         else if (top != null)
           OrderStatusChip(top)
+        else if (table['state'] == 'BILL_PENDING')
+          // Served but not paid: guests are still seated and owe this much (amount computed by the server).
+          StatusChip(
+            icon: Icons.receipt_long_outlined,
+            label: '${l.billPending} · ${formatInr(table['unbilled_total_minor'] ?? 0, showPaise: false)}',
+            color: t.warn,
+          )
         else
           StatusChip(icon: Icons.check_circle_outline, label: l.free, color: t.ok),
       ]),
