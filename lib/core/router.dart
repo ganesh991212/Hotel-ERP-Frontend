@@ -52,7 +52,7 @@ final routerProvider = Provider<GoRouter>((ref) {
       final home = _home(context, s);
       if (loc == '/login' || loc == '/') return home;
       if (s.platform != loc.startsWith('/p/')) return home;
-      final allowed = tabsFor(context, s).any((t) => loc.startsWith(t.path));
+      final allowed = tabsFor(context, s).any((t) => isUnderTab(loc, t.path));
       return allowed ? null : home;
     },
     routes: [

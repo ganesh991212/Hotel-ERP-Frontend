@@ -28,6 +28,10 @@ class NavTab {
 }
 
 /// Tabs are derived from permissions and plan features. Hiding is UX only; the API enforces.
+/// Whether [location] is the tab at [path] or a page inside it. A plain prefix test is wrong: '/h/menu' starts
+/// with '/h/me', which highlighted Overview on the Menu page and let the route guard admit '/h/menu' via '/h/me'.
+bool isUnderTab(String location, String path) => location == path || location.startsWith('$path/');
+
 List<NavTab> tabsFor(BuildContext context, Session s) {
   final l = AppLocalizations.of(context);
   if (s.platform) {
@@ -79,7 +83,7 @@ class AppShell extends ConsumerWidget {
       }
     });
     final tabs = tabsFor(context, s);
-    final current = tabs.where((t) => location.startsWith(t.path)).firstOrNull?.path ?? tabs.firstOrNull?.path ?? '';
+    final current = tabs.where((t) => isUnderTab(location, t.path)).firstOrNull?.path ?? tabs.firstOrNull?.path ?? '';
     final g = context.gutter;
     final phone = context.isPhone;
     final scaffold = Scaffold(
