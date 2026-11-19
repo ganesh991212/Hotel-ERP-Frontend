@@ -2076,5 +2076,157 @@
   "collectAtCounter": "Ready! Please collect it from the counter.",
   "@collectAtCounter": {
     "description": "Diner page: order ready in counter mode"
+  },
+  "changePassword": "Change password",
+  "@changePassword": {
+    "description": "Profile menu item and dialog title"
+  },
+  "currentPassword": "Current password",
+  "@currentPassword": {
+    "description": "Field label"
+  },
+  "newPassword": "New password",
+  "@newPassword": {
+    "description": "Field label"
+  },
+  "confirmNewPassword": "Type the new password again",
+  "@confirmNewPassword": {
+    "description": "Field label"
+  },
+  "passwordsDontMatch": "The two new passwords don't match",
+  "@passwordsDontMatch": {
+    "description": "Validation"
+  },
+  "passwordChanged": "Password changed. Other devices are signed out.",
+  "@passwordChanged": {
+    "description": "Confirmation after changing own password"
+  },
+  "errWrongPassword": "Current password is wrong",
+  "@errWrongPassword": {
+    "description": "Error"
+  },
+  "errSamePassword": "Choose a different password",
+  "@errSamePassword": {
+    "description": "Error: new password equals the current one"
+  },
+  "resetPassword": "Reset password",
+  "@resetPassword": {
+    "description": "Team menu item: set a new password for a staff member"
+  },
+  "resetPasswordFor": "Reset password for {name}",
+  "@resetPasswordFor": {
+    "description": "Dialog title",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "resetPasswordHelp": "They are signed out everywhere. Give them the new password in person; they can change it from their profile.",
+  "@resetPasswordHelp": {
+    "description": "Dialog help"
+  },
+  "passwordResetDone": "Password reset for {name}",
+  "@passwordResetDone": {
+    "description": "Confirmation",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "periodToday": "Today",
+  "@periodToday": {
+    "description": "My work period filter"
+  },
+  "periodWeek": "Last 7 days",
+  "@periodWeek": {
+    "description": "My work period filter"
+  },
+  "myCooking": "Your cooking",
+  "@myCooking": {
+    "description": "My work section title for chefs"
+  },
+  "myServing": "Your serving",
+  "@myServing": {
+    "description": "My work section title for waiters"
+  },
+  "myBilling": "Your billing",
+  "@myBilling": {
+    "description": "My work section title for cashiers"
+  },
+  "statOrdersCooked": "Orders cooked",
+  "@statOrdersCooked": {
+    "description": "Stat label"
+  },
+  "statItemsCooked": "Items cooked",
+  "@statItemsCooked": {
+    "description": "Stat label"
+  },
+  "statAvgCook": "Avg cooking time",
+  "@statAvgCook": {
+    "description": "Stat label"
+  },
+  "statAvgWaitStart": "Avg wait to start",
+  "@statAvgWaitStart": {
+    "description": "Stat label: average minutes from order confirmed to this chef starting it"
+  },
+  "statInQueue": "In your queue now",
+  "@statInQueue": {
+    "description": "Stat label"
+  },
+  "statOrdersServed": "Orders served",
+  "@statOrdersServed": {
+    "description": "Stat label"
+  },
+  "statTablesServed": "Tables served",
+  "@statTablesServed": {
+    "description": "Stat label"
+  },
+  "statAvgServe": "Avg ready to table",
+  "@statAvgServe": {
+    "description": "Stat label"
+  },
+  "statOrdersTaken": "Orders you took",
+  "@statOrdersTaken": {
+    "description": "Stat label"
+  },
+  "statReadyNow": "Ready to serve now",
+  "@statReadyNow": {
+    "description": "Stat label"
+  },
+  "statBillsRaised": "Bills raised",
+  "@statBillsRaised": {
+    "description": "Stat label"
+  },
+  "statCollected": "Collected",
+  "@statCollected": {
+    "description": "Stat label: money received on your paid bills"
+  },
+  "statUnpaidNow": "Unpaid bills now",
+  "@statUnpaidNow": {
+    "description": "Stat label (whole hotel)"
+  },
+  "teamAverage": "Team {value}",
+  "@teamAverage": {
+    "description": "Caption under a personal average, e.g. 'Team 12.5 min'",
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "minutesDecimal": "{value} min",
+  "@minutesDecimal": {
+    "description": "Minutes with one decimal, e.g. 12.5 min",
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "noWorkYet": "Nothing yet in this period",
+  "@noWorkYet": {
+    "description": "Empty state"
   }
 }

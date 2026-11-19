@@ -1554,4 +1554,113 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get collectAtCounter => 'तैयार! कृपया काउंटर से ले लें।';
+
+  @override
+  String get changePassword => 'पासवर्ड बदलें';
+
+  @override
+  String get currentPassword => 'मौजूदा पासवर्ड';
+
+  @override
+  String get newPassword => 'नया पासवर्ड';
+
+  @override
+  String get confirmNewPassword => 'नया पासवर्ड फिर से लिखें';
+
+  @override
+  String get passwordsDontMatch => 'दोनों नए पासवर्ड मेल नहीं खाते';
+
+  @override
+  String get passwordChanged =>
+      'पासवर्ड बदल गया। दूसरे डिवाइस से साइन आउट हो गया।';
+
+  @override
+  String get errWrongPassword => 'मौजूदा पासवर्ड गलत है';
+
+  @override
+  String get errSamePassword => 'कोई दूसरा पासवर्ड चुनें';
+
+  @override
+  String get resetPassword => 'पासवर्ड रीसेट';
+
+  @override
+  String resetPasswordFor(String name) {
+    return '$name का पासवर्ड रीसेट';
+  }
+
+  @override
+  String get resetPasswordHelp =>
+      'वे हर डिवाइस से साइन आउट हो जाएँगे। नया पासवर्ड उन्हें खुद दें; वे प्रोफ़ाइल से बदल सकते हैं।';
+
+  @override
+  String passwordResetDone(String name) {
+    return '$name का पासवर्ड रीसेट हो गया';
+  }
+
+  @override
+  String get periodToday => 'आज';
+
+  @override
+  String get periodWeek => 'पिछले 7 दिन';
+
+  @override
+  String get myCooking => 'आपकी कुकिंग';
+
+  @override
+  String get myServing => 'आपकी सर्विंग';
+
+  @override
+  String get myBilling => 'आपकी बिलिंग';
+
+  @override
+  String get statOrdersCooked => 'बनाए गए ऑर्डर';
+
+  @override
+  String get statItemsCooked => 'बनाए गए आइटम';
+
+  @override
+  String get statAvgCook => 'औसत कुकिंग समय';
+
+  @override
+  String get statAvgWaitStart => 'शुरू होने तक इंतज़ार';
+
+  @override
+  String get statInQueue => 'अभी आपकी कतार में';
+
+  @override
+  String get statOrdersServed => 'परोसे गए ऑर्डर';
+
+  @override
+  String get statTablesServed => 'सर्व की गई टेबल';
+
+  @override
+  String get statAvgServe => 'तैयार से टेबल तक औसत';
+
+  @override
+  String get statOrdersTaken => 'आपके लिए गए ऑर्डर';
+
+  @override
+  String get statReadyNow => 'अभी परोसने को तैयार';
+
+  @override
+  String get statBillsRaised => 'बनाए गए बिल';
+
+  @override
+  String get statCollected => 'वसूला';
+
+  @override
+  String get statUnpaidNow => 'अभी बकाया बिल';
+
+  @override
+  String teamAverage(String value) {
+    return 'टीम $value';
+  }
+
+  @override
+  String minutesDecimal(String value) {
+    return '$value मिनट';
+  }
+
+  @override
+  String get noWorkYet => 'इस अवधि में अभी कुछ नहीं';
 }

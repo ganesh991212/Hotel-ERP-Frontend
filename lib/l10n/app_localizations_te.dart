@@ -1562,4 +1562,113 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get collectAtCounter => 'సిద్ధం! దయచేసి కౌంటర్ వద్ద తీసుకోండి.';
+
+  @override
+  String get changePassword => 'పాస్‌వర్డ్ మార్చండి';
+
+  @override
+  String get currentPassword => 'ప్రస్తుత పాస్‌వర్డ్';
+
+  @override
+  String get newPassword => 'కొత్త పాస్‌వర్డ్';
+
+  @override
+  String get confirmNewPassword => 'కొత్త పాస్‌వర్డ్ మళ్లీ టైప్ చేయండి';
+
+  @override
+  String get passwordsDontMatch => 'రెండు కొత్త పాస్‌వర్డ్‌లు సరిపోలలేదు';
+
+  @override
+  String get passwordChanged =>
+      'పాస్‌వర్డ్ మారింది. ఇతర పరికరాల నుండి సైన్ అవుట్ అయింది.';
+
+  @override
+  String get errWrongPassword => 'ప్రస్తుత పాస్‌వర్డ్ తప్పు';
+
+  @override
+  String get errSamePassword => 'వేరే పాస్‌వర్డ్ ఎంచుకోండి';
+
+  @override
+  String get resetPassword => 'పాస్‌వర్డ్ రీసెట్';
+
+  @override
+  String resetPasswordFor(String name) {
+    return '$name కోసం పాస్‌వర్డ్ రీసెట్';
+  }
+
+  @override
+  String get resetPasswordHelp =>
+      'వారు అన్ని పరికరాల నుండి సైన్ అవుట్ అవుతారు. కొత్త పాస్‌వర్డ్‌ను నేరుగా ఇవ్వండి; వారు ప్రొఫైల్ నుండి మార్చుకోవచ్చు.';
+
+  @override
+  String passwordResetDone(String name) {
+    return '$name పాస్‌వర్డ్ రీసెట్ అయింది';
+  }
+
+  @override
+  String get periodToday => 'ఈరోజు';
+
+  @override
+  String get periodWeek => 'గత 7 రోజులు';
+
+  @override
+  String get myCooking => 'మీ వంట';
+
+  @override
+  String get myServing => 'మీ సర్వింగ్';
+
+  @override
+  String get myBilling => 'మీ బిల్లింగ్';
+
+  @override
+  String get statOrdersCooked => 'వండిన ఆర్డర్లు';
+
+  @override
+  String get statItemsCooked => 'వండిన ఐటమ్స్';
+
+  @override
+  String get statAvgCook => 'సగటు వంట సమయం';
+
+  @override
+  String get statAvgWaitStart => 'మొదలుపెట్టే ముందు నిరీక్షణ';
+
+  @override
+  String get statInQueue => 'ఇప్పుడు మీ క్యూలో';
+
+  @override
+  String get statOrdersServed => 'అందించిన ఆర్డర్లు';
+
+  @override
+  String get statTablesServed => 'సర్వ్ చేసిన టేబుల్స్';
+
+  @override
+  String get statAvgServe => 'సిద్ధం నుండి టేబుల్ వరకు సగటు';
+
+  @override
+  String get statOrdersTaken => 'మీరు తీసుకున్న ఆర్డర్లు';
+
+  @override
+  String get statReadyNow => 'ఇప్పుడు అందించడానికి సిద్ధం';
+
+  @override
+  String get statBillsRaised => 'తయారుచేసిన బిల్లులు';
+
+  @override
+  String get statCollected => 'వసూలు';
+
+  @override
+  String get statUnpaidNow => 'ఇప్పుడు చెల్లించని బిల్లులు';
+
+  @override
+  String teamAverage(String value) {
+    return 'బృందం $value';
+  }
+
+  @override
+  String minutesDecimal(String value) {
+    return '$value నిమి';
+  }
+
+  @override
+  String get noWorkYet => 'ఈ కాలంలో ఇంకా ఏమీ లేదు';
 }
