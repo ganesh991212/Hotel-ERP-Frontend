@@ -443,5 +443,7 @@
   "errEmail": "సరైన ఈమెయిల్ ఇవ్వండి",
   "errAmount": "250 లేదా 99.50 లాంటి మొత్తం ఇవ్వండి",
   "errPasswordLength": "కనీసం 8 అక్షరాలు",
-  "errGstin": "15 అక్షరాల GSTIN ఇవ్వండి"
+  "errGstin": "15 అక్షరాల GSTIN ఇవ్వండి",
+  "settingsSaved": "సెట్టింగ్‌లు సేవ్ అయ్యాయి",
+  "brandingSaved": "బ్రాండింగ్ సేవ్ అయింది"
 }

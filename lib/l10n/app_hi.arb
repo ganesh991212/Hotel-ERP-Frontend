@@ -443,5 +443,7 @@
   "errEmail": "सही ईमेल डालें",
   "errAmount": "250 या 99.50 जैसी रकम डालें",
   "errPasswordLength": "कम से कम 8 अक्षर",
-  "errGstin": "15 अक्षर का GSTIN डालें"
+  "errGstin": "15 अक्षर का GSTIN डालें",
+  "settingsSaved": "सेटिंग्स सेव हो गईं",
+  "brandingSaved": "ब्रांडिंग सेव हो गई"
 }

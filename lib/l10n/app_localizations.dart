@@ -2644,7 +2644,7 @@ abstract class AppLocalizations {
   /// **'Remove'**
   String get removeLogo;
 
-  /// Snackbar
+  /// Confirmation message after uploading a logo
   ///
   /// In en, this message translates to:
   /// **'Logo updated'**
@@ -2763,6 +2763,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Enter a 15-character GSTIN'**
   String get errGstin;
+
+  /// Confirmation shown after saving hotel settings (the settings dialog closes)
+  ///
+  /// In en, this message translates to:
+  /// **'Settings saved'**
+  String get settingsSaved;
+
+  /// Confirmation shown after saving the hotel address on the Branding tab
+  ///
+  /// In en, this message translates to:
+  /// **'Branding saved'**
+  String get brandingSaved;
 }
 
 class _AppLocalizationsDelegate

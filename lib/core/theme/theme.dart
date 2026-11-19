@@ -92,12 +92,6 @@ ThemeData buildTheme(Brightness brightness) {
       side: BorderSide(color: t.line2),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
     ),
-    snackBarTheme: SnackBarThemeData(
-      backgroundColor: t.night,
-      contentTextStyle: text.bodyMedium?.copyWith(color: t.onNight),
-      behavior: SnackBarBehavior.floating,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-    ),
     tooltipTheme: TooltipThemeData(
       decoration: BoxDecoration(color: t.night, borderRadius: BorderRadius.circular(10)),
       textStyle: text.bodySmall?.copyWith(color: t.onNight),

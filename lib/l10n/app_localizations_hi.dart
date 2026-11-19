@@ -1464,4 +1464,10 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get errGstin => '15 अक्षर का GSTIN डालें';
+
+  @override
+  String get settingsSaved => 'सेटिंग्स सेव हो गईं';
+
+  @override
+  String get brandingSaved => 'ब्रांडिंग सेव हो गई';
 }

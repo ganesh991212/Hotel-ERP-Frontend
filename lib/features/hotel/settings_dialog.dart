@@ -62,11 +62,15 @@ class _SettingsState extends ConsumerState<_Settings> {
     final l = AppLocalizations.of(context);
     if (_settings == null || _sub == null) return const LoadingBlock(height: 200);
     return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-      PillTabs<String>(
-        expand: true,
-        items: [('kitchen', l.kitchenAndOrdering), ('brand', l.branding), ('billing', l.planAndBilling)],
-        selected: _tab,
-        onSelect: (v) => setState(() => _tab = v),
+      // Natural-width tabs: equal thirds cut long labels ("Plan & billing", and longer still in Telugu/Hindi).
+      // When they do not fit, PillTabs scrolls them sideways.
+      Align(
+        alignment: AlignmentDirectional.centerStart,
+        child: PillTabs<String>(
+          items: [('kitchen', l.kitchenAndOrdering), ('brand', l.branding), ('billing', l.planAndBilling)],
+          selected: _tab,
+          onSelect: (v) => setState(() => _tab = v),
+        ),
       ),
       const SizedBox(height: 8),
       AnimatedSwitcher(
@@ -135,7 +139,10 @@ class _SettingsState extends ConsumerState<_Settings> {
           setState(() => _busy = false);
           if (ok) {
             await ref.read(sessionProvider.notifier).reload();
-            if (mounted) Navigator.of(this.context).pop();
+            if (!mounted) return;
+            // The message lives in the app's top layer, so it stays visible after the dialog closes.
+            showDone(this.context, l.settingsSaved);
+            Navigator.of(this.context).pop();
           }
         },
       ),
@@ -319,6 +326,7 @@ class _BrandingFormState extends ConsumerState<_BrandingForm> {
                   context, () => ref.read(apiProvider).put('/api/v1/branding', {'address_line': _address.text}));
               if (ok && mounted) {
                 ref.invalidate(brandingProvider);
+                showDone(this.context, l.brandingSaved);
                 Navigator.of(this.context).pop();
               }
             },
