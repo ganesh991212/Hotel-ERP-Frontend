@@ -1511,8 +1511,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get notPickedUp => 'Not picked up in time';
 
   @override
-  String pickupOverdueToast(int number, String table) {
-    return 'Order #$number (Table $table) has not been picked up';
+  String pickupOverdueToast(int number, String place) {
+    return 'Order #$number ($place) has not been picked up';
   }
 
   @override
@@ -1738,5 +1738,49 @@ class AppLocalizationsEn extends AppLocalizations {
       one: 'Printed once',
     );
     return '$_temp0';
+  }
+
+  @override
+  String get takeaway => 'Takeaway';
+
+  @override
+  String get newTakeaway => 'Takeaway';
+
+  @override
+  String takeawayTitle(int number) {
+    return 'Takeaway #$number';
+  }
+
+  @override
+  String takeawayTitleFor(int number, String name) {
+    return 'Takeaway #$number · $name';
+  }
+
+  @override
+  String takeawayFor(String name) {
+    return 'Takeaway · $name';
+  }
+
+  @override
+  String get guestName => 'Guest name (optional)';
+
+  @override
+  String get guestPhone => 'Phone (optional)';
+
+  @override
+  String get handedOver => 'Handed over';
+
+  @override
+  String get nextHandOver => 'Next: hand it over to the guest';
+
+  @override
+  String get nextBillOrder => 'Next: bill this order';
+
+  @override
+  String get channelTakeaway => 'Takeaway';
+
+  @override
+  String billForOrder(String title) {
+    return 'Bill · $title';
   }
 }

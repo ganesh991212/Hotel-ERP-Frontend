@@ -1515,8 +1515,8 @@ class AppLocalizationsTe extends AppLocalizations {
   String get notPickedUp => 'సమయానికి ఎవరూ తీసుకోలేదు';
 
   @override
-  String pickupOverdueToast(int number, String table) {
-    return 'ఆర్డర్ #$number (టేబుల్ $table) ఇంకా ఎవరూ తీసుకోలేదు';
+  String pickupOverdueToast(int number, String place) {
+    return 'ఆర్డర్ #$number ($place) ఇంకా ఎవరూ తీసుకోలేదు';
   }
 
   @override
@@ -1743,5 +1743,49 @@ class AppLocalizationsTe extends AppLocalizations {
       one: 'ఒకసారి ప్రింట్ అయింది',
     );
     return '$_temp0';
+  }
+
+  @override
+  String get takeaway => 'టేక్‌అవే';
+
+  @override
+  String get newTakeaway => 'టేక్‌అవే';
+
+  @override
+  String takeawayTitle(int number) {
+    return 'టేక్‌అవే #$number';
+  }
+
+  @override
+  String takeawayTitleFor(int number, String name) {
+    return 'టేక్‌అవే #$number · $name';
+  }
+
+  @override
+  String takeawayFor(String name) {
+    return 'టేక్‌అవే · $name';
+  }
+
+  @override
+  String get guestName => 'అతిథి పేరు (ఐచ్ఛికం)';
+
+  @override
+  String get guestPhone => 'ఫోన్ (ఐచ్ఛికం)';
+
+  @override
+  String get handedOver => 'అందజేశారు';
+
+  @override
+  String get nextHandOver => 'తదుపరి: అతిథికి అందజేయండి';
+
+  @override
+  String get nextBillOrder => 'తదుపరి: ఈ ఆర్డర్‌కి బిల్ చేయండి';
+
+  @override
+  String get channelTakeaway => 'టేక్‌అవే';
+
+  @override
+  String billForOrder(String title) {
+    return 'బిల్ · $title';
   }
 }

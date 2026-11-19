@@ -58,6 +58,15 @@ void main() {
     expect(next('READY'), l.nextServe);
     expect(next('SERVED'), l.nextBill, reason: 'served but unpaid: the next step is the bill');
     expect(next('SERVED', extra: {'bill_id': 'b1'}), isNull);
+    // Takeaway: no table; the guest's name and the order number identify it on every screen.
+    final ta = _order('READY', extra: {'channel': 'TAKEAWAY', 'table': null, 'customer_name': 'Ramesh'});
+    expect(orderTitle(ctx, ta), 'Takeaway #7 · Ramesh');
+    expect(orderPlace(ctx, ta), 'Takeaway · Ramesh');
+    expect(orderTitle(ctx, {...ta, 'customer_name': null}), 'Takeaway #7');
+    expect(orderTitle(ctx, _order('READY', extra: {'table': {'label': 'T3'}})), '#7 · Table T3');
+    expect(nextStepText(ctx, ta), l.nextHandOver);
+    expect(nextStepText(ctx, {...ta, 'status': 'SERVED'}), l.nextBillOrder);
+    expect(channelLabel(ctx, 'TAKEAWAY'), 'Takeaway');
     expect(isPickupOverdue(_order('CONFIRMED', extra: {'pickup_alerted_at': '2026-11-19T10:00:00Z'})), isTrue);
     expect(isPickupOverdue(_order('PREPARING', extra: {'pickup_alerted_at': '2026-11-19T10:00:00Z'})), isFalse);
   });

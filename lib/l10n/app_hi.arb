@@ -456,7 +456,7 @@
   "nextServe": "अगला: टेबल पर परोसें",
   "nextBill": "अगला: टेबल का बिल बनाएँ",
   "notPickedUp": "समय पर किसी ने नहीं लिया",
-  "pickupOverdueToast": "ऑर्डर #{number} (टेबल {table}) अभी तक किसी ने नहीं लिया",
+  "pickupOverdueToast": "ऑर्डर #{number} ({place}) अभी तक किसी ने नहीं लिया",
   "billPending": "बिल बाकी",
   "billNow": "बिल",
   "tabOrders": "ऑर्डर",
@@ -521,5 +521,17 @@
   "errRangeTooLong": "अधिकतम 31 दिन चुनें",
   "openBill": "बिल खोलें",
   "statusPaid": "भुगतान हुआ",
-  "printedTimes": "{count, plural, =1{एक बार प्रिंट हुआ} other{{count} बार प्रिंट हुआ}}"
+  "printedTimes": "{count, plural, =1{एक बार प्रिंट हुआ} other{{count} बार प्रिंट हुआ}}",
+  "takeaway": "टेकअवे",
+  "newTakeaway": "टेकअवे",
+  "takeawayTitle": "टेकअवे #{number}",
+  "takeawayTitleFor": "टेकअवे #{number} · {name}",
+  "takeawayFor": "टेकअवे · {name}",
+  "guestName": "मेहमान का नाम (वैकल्पिक)",
+  "guestPhone": "फ़ोन (वैकल्पिक)",
+  "handedOver": "सौंप दिया",
+  "nextHandOver": "अगला: मेहमान को सौंपें",
+  "nextBillOrder": "अगला: इस ऑर्डर का बिल बनाएँ",
+  "channelTakeaway": "टेकअवे",
+  "billForOrder": "बिल · {title}"
 }

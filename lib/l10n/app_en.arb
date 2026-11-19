@@ -2009,14 +2009,14 @@
   "@notPickedUp": {
     "description": "Warning chip: no chef took the order within the alert time"
   },
-  "pickupOverdueToast": "Order #{number} (Table {table}) has not been picked up",
+  "pickupOverdueToast": "Order #{number} ({place}) has not been picked up",
   "@pickupOverdueToast": {
     "description": "Alert shown to admins and chefs when an order waits too long",
     "placeholders": {
       "number": {
         "type": "int"
       },
-      "table": {
+      "place": {
         "type": "String"
       }
     }
@@ -2316,6 +2316,77 @@
     "placeholders": {
       "count": {
         "type": "int"
+      }
+    }
+  },
+  "takeaway": "Takeaway",
+  "@takeaway": {
+    "description": "Order type: no table, the guest collects it"
+  },
+  "newTakeaway": "Takeaway",
+  "@newTakeaway": {
+    "description": "Floor button: take a takeaway / counter order"
+  },
+  "takeawayTitle": "Takeaway #{number}",
+  "@takeawayTitle": {
+    "description": "Order title for a takeaway order",
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "takeawayTitleFor": "Takeaway #{number} · {name}",
+  "@takeawayTitleFor": {
+    "description": "Order title for a takeaway order with the guest's name",
+    "placeholders": {
+      "number": {
+        "type": "int"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "takeawayFor": "Takeaway · {name}",
+  "@takeawayFor": {
+    "description": "Where an order goes: takeaway for this guest",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "guestName": "Guest name (optional)",
+  "@guestName": {
+    "description": "Takeaway: name the guest collects with"
+  },
+  "guestPhone": "Phone (optional)",
+  "@guestPhone": {
+    "description": "Takeaway: guest phone"
+  },
+  "handedOver": "Handed over",
+  "@handedOver": {
+    "description": "Button: the takeaway guest collected the order"
+  },
+  "nextHandOver": "Next: hand it over to the guest",
+  "@nextHandOver": {
+    "description": "Next-step line: takeaway order ready"
+  },
+  "nextBillOrder": "Next: bill this order",
+  "@nextBillOrder": {
+    "description": "Next-step line: takeaway handed over, not billed"
+  },
+  "channelTakeaway": "Takeaway",
+  "@channelTakeaway": {
+    "description": "Order channel label"
+  },
+  "billForOrder": "Bill · {title}",
+  "@billForOrder": {
+    "description": "Bill window title for a takeaway order",
+    "placeholders": {
+      "title": {
+        "type": "String"
       }
     }
   }

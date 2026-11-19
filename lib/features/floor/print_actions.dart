@@ -9,6 +9,7 @@ import '../../core/theme/tokens.dart';
 import '../../l10n/app_localizations.dart';
 import '../../ui/components.dart';
 import '../../ui/feedback.dart';
+import '../../ui/status.dart';
 
 /// Prints a KOT. With [sendToKitchen] a waiting order moves to the paper path (leaves the chefs' board).
 Future<void> printKot(BuildContext context, WidgetRef ref, Map order, {required bool sendToKitchen}) async {
@@ -62,6 +63,17 @@ Future<void> showBillDialog(BuildContext context, Map table) {
   return showGlassDialog(context, title: l.billForTable(table['label']), maxWidth: 520, body: _BillPanel(table: table));
 }
 
+/// A takeaway order's own bill (no table visit).
+Future<void> showOrderBillDialog(BuildContext context, Map order) {
+  final l = AppLocalizations.of(context);
+  return showGlassDialog(
+    context,
+    title: l.billForOrder(orderTitle(context, order)),
+    maxWidth: 520,
+    body: _BillPanel(table: const {}, order: order),
+  );
+}
+
 /// One specific bill from the register (paid or cancelled included): view and print again.
 Future<void> showBillById(BuildContext context, WidgetRef ref, String billId) async {
   try {
@@ -79,8 +91,11 @@ Future<void> showBillById(BuildContext context, WidgetRef ref, String billId) as
 }
 
 class _BillPanel extends ConsumerStatefulWidget {
-  const _BillPanel({required this.table, this.initial});
+  const _BillPanel({required this.table, this.initial, this.order});
   final Map table;
+
+  /// Billing one takeaway order instead of a table visit.
+  final Map? order;
 
   /// Opened from the bills register: show this bill as it is, without looking up the table's open bill.
   final Map<String, dynamic>? initial;
@@ -105,9 +120,24 @@ class _BillPanelState extends ConsumerState<_BillPanel> {
     if (widget.initial != null) {
       _bill = widget.initial;
       _loading = false;
+    } else if (widget.order != null) {
+      _loadForOrder();
     } else {
       _loadOpen();
     }
+  }
+
+  Future<void> _loadForOrder() async {
+    final billId = widget.order!['bill_id'];
+    try {
+      if (billId != null) {
+        final b = await ref.read(apiProvider).get('/api/v1/bills/$billId');
+        if (mounted) setState(() => _bill = Map<String, dynamic>.from(b));
+      }
+    } catch (e) {
+      if (mounted) showError(context, e);
+    }
+    if (mounted) setState(() => _loading = false);
   }
 
   Future<void> _loadOpen() async {
@@ -131,7 +161,7 @@ class _BillPanelState extends ConsumerState<_BillPanel> {
     setState(() => _busy = true);
     try {
       final b = await ref.read(apiProvider).post('/api/v1/bills', {
-        'table_id': widget.table['id'],
+        if (widget.order != null) 'order_id': widget.order!['id'] else 'table_id': widget.table['id'],
         'include_unserved': includeUnserved,
       });
       final replaced = (b['replaced_invoice_nos'] as List?)?.cast<String>() ?? const [];

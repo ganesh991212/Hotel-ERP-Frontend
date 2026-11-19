@@ -162,7 +162,7 @@ class _Board extends ConsumerWidget {
                     paperChip(context),
                     const SizedBox(width: 10),
                     Expanded(
-                      child: Text('${l.orderNumberTable(o['number'], o['table']?['label'] ?? '-')} · ${orderLine(o)}',
+                      child: Text('${orderTitle(context, o)} · ${orderLine(o)}',
                           maxLines: 1, overflow: TextOverflow.ellipsis),
                     ),
                     KotPrintButton(order: o),
@@ -243,7 +243,7 @@ class _HeadTicket extends StatelessWidget {
           Text('#${o['number']}', style: tt.displaySmall?.copyWith(color: t.onNight)),
           const SizedBox(width: 10),
           Expanded(
-            child: Text(l.tableLabel(o['table']?['label'] ?? '-'),
+            child: Text(orderPlace(context, o),
                 style: tt.titleMedium?.copyWith(color: t.onNight)),
           ),
           OrderStatusChip(o['status'], solid: true),
@@ -316,7 +316,7 @@ class _QueuedRow extends StatelessWidget {
       const SizedBox(width: 12),
       Expanded(
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Text(l.orderNumberTable(o['number'], o['table']?['label'] ?? '-'),
+          Text(orderTitle(context, o),
               style: tt.bodyMedium?.copyWith(color: t.onNight)),
           Text(items, maxLines: 1, overflow: TextOverflow.ellipsis, style: tt.labelSmall?.copyWith(color: t.nightDim)),
         ]),
@@ -333,7 +333,6 @@ class _TicketCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l = AppLocalizations.of(context);
     final t = context.tokens;
     final tt = Theme.of(context).textTheme;
     return Container(
@@ -347,7 +346,7 @@ class _TicketCard extends StatelessWidget {
         Row(children: [
           Text('#${o['number']}', style: tt.titleLarge),
           const SizedBox(width: 8),
-          Expanded(child: Text(l.tableLabel(o['table']?['label'] ?? '-'), style: tt.titleMedium)),
+          Expanded(child: Text(orderPlace(context, o), style: tt.titleMedium)),
           StatusChip(icon: channelIcon(o['channel']), label: channelLabel(context, o['channel']), color: t.dim),
           KotPrintButton(order: o),
         ]),
@@ -420,7 +419,7 @@ class _ChefLane extends ConsumerWidget {
               child: Row(children: [
                 Expanded(
                   child: Text(
-                    '#${o['number']} · ${l.tableLabel(o['table']?['label'] ?? '-')} · '
+                    '#${o['number']} · ${orderPlace(context, o)} · '
                     '${(o['items'] as List).map((i) => '${i['qty']}× ${i['name']}').join(', ')}',
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
@@ -487,7 +486,7 @@ class _ReadyPill extends ConsumerWidget {
       child: Row(mainAxisSize: MainAxisSize.min, children: [
         Icon(Icons.notifications_active_rounded, size: 16, color: t.accentDeep),
         const SizedBox(width: 6),
-        Text(l.orderNumberTable(o['number'], o['table']?['label'] ?? '-'), style: tt.labelLarge),
+        Text(orderTitle(context, o), style: tt.labelLarge),
         const SizedBox(width: 6),
         Text(l.minutesAgo(minutesSince(o['ready_at'])), style: tt.labelSmall),
         if (canServe) ...[

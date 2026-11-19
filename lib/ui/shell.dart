@@ -78,7 +78,7 @@ class AppShell extends ConsumerWidget {
         final o = ev!['order'] as Map;
         showWarning(
           context,
-          AppLocalizations.of(context).pickupOverdueToast(o['number'] as int, (o['table'] as Map?)?['label'] ?? '-'),
+          AppLocalizations.of(context).pickupOverdueToast(o['number'] as int, orderPlace(context, o)),
         );
       }
     });
@@ -241,7 +241,7 @@ class _AlertsBell extends ConsumerWidget {
                     ListTile(
                       contentPadding: EdgeInsets.zero,
                       leading: OrderStatusChip(o['status']),
-                      title: Text(l.orderNumberTable(o['number'], o['table']?['label'] ?? '-')),
+                      title: Text(orderTitle(context, o)),
                       subtitle: Text(l.minutesAgo(minutesSince(o['ready_at'] ?? o['created_at']))),
                     ),
                 ]),

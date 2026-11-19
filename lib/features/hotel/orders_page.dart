@@ -317,7 +317,7 @@ class _OrderRow extends ConsumerWidget {
         const SizedBox(width: 12),
         Expanded(
           child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text(l.orderNumberTable(o['number'], o['table']?['label'] ?? '-'), style: tt.titleSmall),
+            Text(orderTitle(context, o), style: tt.titleSmall),
             Text(items, maxLines: 2, overflow: TextOverflow.ellipsis, style: tt.bodySmall),
             const SizedBox(height: 4),
             Wrap(spacing: 10, runSpacing: 4, crossAxisAlignment: WrapCrossAlignment.center, children: [

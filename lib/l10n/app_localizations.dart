@@ -2839,8 +2839,8 @@ abstract class AppLocalizations {
   /// Alert shown to admins and chefs when an order waits too long
   ///
   /// In en, this message translates to:
-  /// **'Order #{number} (Table {table}) has not been picked up'**
-  String pickupOverdueToast(int number, String table);
+  /// **'Order #{number} ({place}) has not been picked up'**
+  String pickupOverdueToast(int number, String place);
 
   /// Table status: food served, not paid yet
   ///
@@ -3231,6 +3231,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{count, plural, =1{Printed once} other{Printed {count} times}}'**
   String printedTimes(int count);
+
+  /// Order type: no table, the guest collects it
+  ///
+  /// In en, this message translates to:
+  /// **'Takeaway'**
+  String get takeaway;
+
+  /// Floor button: take a takeaway / counter order
+  ///
+  /// In en, this message translates to:
+  /// **'Takeaway'**
+  String get newTakeaway;
+
+  /// Order title for a takeaway order
+  ///
+  /// In en, this message translates to:
+  /// **'Takeaway #{number}'**
+  String takeawayTitle(int number);
+
+  /// Order title for a takeaway order with the guest's name
+  ///
+  /// In en, this message translates to:
+  /// **'Takeaway #{number} · {name}'**
+  String takeawayTitleFor(int number, String name);
+
+  /// Where an order goes: takeaway for this guest
+  ///
+  /// In en, this message translates to:
+  /// **'Takeaway · {name}'**
+  String takeawayFor(String name);
+
+  /// Takeaway: name the guest collects with
+  ///
+  /// In en, this message translates to:
+  /// **'Guest name (optional)'**
+  String get guestName;
+
+  /// Takeaway: guest phone
+  ///
+  /// In en, this message translates to:
+  /// **'Phone (optional)'**
+  String get guestPhone;
+
+  /// Button: the takeaway guest collected the order
+  ///
+  /// In en, this message translates to:
+  /// **'Handed over'**
+  String get handedOver;
+
+  /// Next-step line: takeaway order ready
+  ///
+  /// In en, this message translates to:
+  /// **'Next: hand it over to the guest'**
+  String get nextHandOver;
+
+  /// Next-step line: takeaway handed over, not billed
+  ///
+  /// In en, this message translates to:
+  /// **'Next: bill this order'**
+  String get nextBillOrder;
+
+  /// Order channel label
+  ///
+  /// In en, this message translates to:
+  /// **'Takeaway'**
+  String get channelTakeaway;
+
+  /// Bill window title for a takeaway order
+  ///
+  /// In en, this message translates to:
+  /// **'Bill · {title}'**
+  String billForOrder(String title);
 }
 
 class _AppLocalizationsDelegate

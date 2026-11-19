@@ -456,7 +456,7 @@
   "nextServe": "తదుపరి: టేబుల్‌కి అందించండి",
   "nextBill": "తదుపరి: టేబుల్‌కి బిల్ చేయండి",
   "notPickedUp": "సమయానికి ఎవరూ తీసుకోలేదు",
-  "pickupOverdueToast": "ఆర్డర్ #{number} (టేబుల్ {table}) ఇంకా ఎవరూ తీసుకోలేదు",
+  "pickupOverdueToast": "ఆర్డర్ #{number} ({place}) ఇంకా ఎవరూ తీసుకోలేదు",
   "billPending": "బిల్ పెండింగ్",
   "billNow": "బిల్",
   "tabOrders": "ఆర్డర్లు",
@@ -521,5 +521,17 @@
   "errRangeTooLong": "గరిష్టంగా 31 రోజులు ఎంచుకోండి",
   "openBill": "బిల్ తెరవండి",
   "statusPaid": "చెల్లించారు",
-  "printedTimes": "{count, plural, =1{ఒకసారి ప్రింట్ అయింది} other{{count} సార్లు ప్రింట్ అయింది}}"
+  "printedTimes": "{count, plural, =1{ఒకసారి ప్రింట్ అయింది} other{{count} సార్లు ప్రింట్ అయింది}}",
+  "takeaway": "టేక్‌అవే",
+  "newTakeaway": "టేక్‌అవే",
+  "takeawayTitle": "టేక్‌అవే #{number}",
+  "takeawayTitleFor": "టేక్‌అవే #{number} · {name}",
+  "takeawayFor": "టేక్‌అవే · {name}",
+  "guestName": "అతిథి పేరు (ఐచ్ఛికం)",
+  "guestPhone": "ఫోన్ (ఐచ్ఛికం)",
+  "handedOver": "అందజేశారు",
+  "nextHandOver": "తదుపరి: అతిథికి అందజేయండి",
+  "nextBillOrder": "తదుపరి: ఈ ఆర్డర్‌కి బిల్ చేయండి",
+  "channelTakeaway": "టేక్‌అవే",
+  "billForOrder": "బిల్ · {title}"
 }

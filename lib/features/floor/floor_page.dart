@@ -61,12 +61,22 @@ class _FloorPageState extends ConsumerState<FloorPage> {
     // Served, not billed: the table still owes money. One row (one Bill button) per table: a visit gets one bill.
     final billedTables = <Object?>{};
     final toBill = s.can('bill.manage')
-        ? orders.where((o) => o['status'] == 'SERVED' && billedTables.add(o['table']?['id'])).toList()
+        ? orders.where((o) => o['status'] == 'SERVED' && billedTables.add(o['table']?['id'] ?? o['id'])).toList()
         : <Map<String, dynamic>>[];
     final attention = [...overdue, ...ready, ...placed, ...onPaper, ...waiting, ...toBill];
 
     return PageBody(children: [
-      Reveal(index: 0, child: PageHeading(l.tabFloor)),
+      Reveal(
+        index: 0,
+        child: PageHeading(l.tabFloor, actions: [
+          if (s.can('order.create') && s.feature('WAITER_ORDERING'))
+            FilledButton.icon(
+              onPressed: () => showTakeawaySheet(context),
+              icon: const Icon(Icons.shopping_bag_outlined, size: 18),
+              label: Text(l.newTakeaway),
+            ),
+        ]),
+      ),
       Reveal(
         index: 1,
         child: Glass(
@@ -147,9 +157,12 @@ class _AttentionRow extends ConsumerWidget {
     final items = (o['items'] as List).map((i) => '${i['qty']}× ${i['name']}').join(', ');
     final status = o['status'];
     final next = nextStepText(context, o, kitchenMode: (session.me['outlet'] as Map?)?['kitchen_mode'] as String?);
-    final toBill = status == 'SERVED' && o['bill_id'] == null && o['table'] != null && session.can('bill.manage');
+    // Tables are billed per visit (once served); a takeaway order is billed on its own, often before pickup.
+    final toBill = o['bill_id'] == null &&
+        session.can('bill.manage') &&
+        (isTakeaway(o) ? !{'PLACED', 'CANCELLED'}.contains(status) : status == 'SERVED' && o['table'] != null);
     final action = isReady
-        ? (session.can('order.serve') ? (l.markServed, 'serve') : null)
+        ? (session.can('order.serve') ? (isTakeaway(o) ? l.handedOver : l.markServed, 'serve') : null)
         : status == 'PLACED' && session.can('order.confirm')
             ? (l.confirmOrder, 'confirm')
             : null;
@@ -164,7 +177,7 @@ class _AttentionRow extends ConsumerWidget {
         const SizedBox(width: 12),
         Expanded(
           child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text(l.orderNumberTable(o['number'], o['table']?['label'] ?? '-'), style: tt.titleSmall),
+            Text(orderTitle(context, o), style: tt.titleSmall),
             Text(items, maxLines: 1, overflow: TextOverflow.ellipsis, style: tt.bodySmall),
             if (next != null)
               Text(next,
@@ -178,7 +191,7 @@ class _AttentionRow extends ConsumerWidget {
         if (toBill)
           FilledButton.icon(
             onPressed: () async {
-              await showBillDialog(context, o['table'] as Map);
+              await (isTakeaway(o) ? showOrderBillDialog(context, o) : showBillDialog(context, o['table'] as Map));
               ref.invalidate(_openOrdersProvider);
               ref.invalidate(_tablesProvider);
             },
@@ -247,6 +260,12 @@ class _TableTile extends StatelessWidget {
   }
 }
 
+/// Takeaway / counter order: the composer without a table.
+Future<void> showTakeawaySheet(BuildContext context) {
+  final l = AppLocalizations.of(context);
+  return showGlassDialog(context, title: l.takeaway, maxWidth: 720, body: const OrderComposer(table: null, canOrder: true));
+}
+
 /// Table detail: open orders and the order composer.
 Future<void> showTableSheet(BuildContext context, Map<String, dynamic> table, {required bool canOrder}) {
   final l = AppLocalizations.of(context);
@@ -260,7 +279,9 @@ Future<void> showTableSheet(BuildContext context, Map<String, dynamic> table, {r
 
 class OrderComposer extends ConsumerStatefulWidget {
   const OrderComposer({super.key, required this.table, required this.canOrder});
-  final Map<String, dynamic> table;
+
+  /// The table this order is for; null for a takeaway / counter order.
+  final Map<String, dynamic>? table;
   final bool canOrder;
 
   @override
@@ -271,6 +292,8 @@ class _OrderComposerState extends ConsumerState<OrderComposer> {
   final Map<String, int> _qty = {};
   final _note = TextEditingController();
   final _search = TextEditingController();
+  final _guestName = TextEditingController();
+  final _guestPhone = TextEditingController();
   String _cat = '';
   Map<String, dynamic>? _quote;
   Timer? _debounce;
@@ -315,8 +338,13 @@ class _OrderComposerState extends ConsumerState<OrderComposer> {
     final l = AppLocalizations.of(context);
     setState(() => _busy = true);
     final ok = await guard(context, () async {
+      final table = widget.table;
       await ref.read(apiProvider).post('/api/v1/orders', {
-        'table_id': widget.table['id'],
+        if (table != null) 'table_id': table['id'] else ...{
+          'takeaway': true,
+          if (_guestName.text.trim().isNotEmpty) 'customer_name': _guestName.text.trim(),
+          if (_guestPhone.text.trim().isNotEmpty) 'customer_phone': _guestPhone.text.trim(),
+        },
         'items': _lines,
         if (_note.text.trim().isNotEmpty) 'note': _note.text.trim(),
         'client_ref': _clientRef, // same ref on retry => no duplicate order
@@ -337,17 +365,39 @@ class _OrderComposerState extends ConsumerState<OrderComposer> {
     final l = AppLocalizations.of(context);
     final t = context.tokens;
     final tt = Theme.of(context).textTheme;
-    final orders = (ref.watch(_openOrdersProvider).value ?? const [])
-        .where((o) => o['table']?['id'] == widget.table['id'])
-        .toList();
+    final table = widget.table;
+    final orders = table == null
+        ? const <Map<String, dynamic>>[]
+        : (ref.watch(_openOrdersProvider).value ?? const []).where((o) => o['table']?['id'] == table['id']).toList();
     final menu = ref.watch(menuDataProvider);
 
     return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-      if (ref.watch(sessionProvider).value!.can('bill.manage'))
+      if (table == null) ...[
+        // Takeaway: who collects it. Both optional; the order number is the token.
+        Row(children: [
+          Expanded(
+            child: TextField(
+              controller: _guestName,
+              textCapitalization: TextCapitalization.words,
+              decoration: InputDecoration(hintText: l.guestName, prefixIcon: const Icon(Icons.person_outline)),
+            ),
+          ),
+          const SizedBox(width: 10),
+          Expanded(
+            child: TextField(
+              controller: _guestPhone,
+              keyboardType: TextInputType.phone,
+              decoration: InputDecoration(hintText: l.guestPhone, prefixIcon: const Icon(Icons.phone_outlined)),
+            ),
+          ),
+        ]),
+        const SizedBox(height: 4),
+      ],
+      if (table != null && ref.watch(sessionProvider).value!.can('bill.manage'))
         Padding(
           padding: const EdgeInsets.only(bottom: 12),
           child: OutlinedButton.icon(
-            onPressed: () => showBillDialog(context, widget.table),
+            onPressed: () => showBillDialog(context, table),
             icon: const Icon(Icons.receipt_long_outlined, size: 18),
             label: Text(l.billTable),
           ),
