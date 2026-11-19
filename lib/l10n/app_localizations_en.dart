@@ -1783,4 +1783,48 @@ class AppLocalizationsEn extends AppLocalizations {
   String billForOrder(String title) {
     return 'Bill · $title';
   }
+
+  @override
+  String get discount => 'Discount';
+
+  @override
+  String get addDiscount => 'Add discount';
+
+  @override
+  String get discountByPercent => 'Percent';
+
+  @override
+  String get discountByAmount => 'Amount (₹)';
+
+  @override
+  String get discountValue => 'How much';
+
+  @override
+  String get discountReason => 'Reason (printed on the bill)';
+
+  @override
+  String discountLimit(String limit) {
+    return 'Your limit: $limit';
+  }
+
+  @override
+  String get discountHelp =>
+      'Tax is recalculated on the discounted amount. A printed bill is replaced by a new one.';
+
+  @override
+  String get taxableValue => 'Taxable value';
+
+  @override
+  String get maxBillDiscount => 'Max bill discount';
+
+  @override
+  String errDiscountLimit(String limit) {
+    return 'That is more than your role may give ($limit)';
+  }
+
+  @override
+  String get errBadDiscount => 'Enter a valid discount and a reason';
+
+  @override
+  String get noDiscountAllowed => 'Your role cannot give discounts';
 }

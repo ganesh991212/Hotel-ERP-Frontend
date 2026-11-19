@@ -533,5 +533,18 @@
   "nextHandOver": "తదుపరి: అతిథికి అందజేయండి",
   "nextBillOrder": "తదుపరి: ఈ ఆర్డర్‌కి బిల్ చేయండి",
   "channelTakeaway": "టేక్‌అవే",
-  "billForOrder": "బిల్ · {title}"
+  "billForOrder": "బిల్ · {title}",
+  "discount": "డిస్కౌంట్",
+  "addDiscount": "డిస్కౌంట్ ఇవ్వండి",
+  "discountByPercent": "శాతం",
+  "discountByAmount": "మొత్తం (₹)",
+  "discountValue": "ఎంత",
+  "discountReason": "కారణం (బిల్‌పై ముద్రించబడుతుంది)",
+  "discountLimit": "మీ పరిమితి: {limit}",
+  "discountHelp": "డిస్కౌంట్ తర్వాత పన్ను మళ్లీ లెక్కించబడుతుంది. ముద్రించిన బిల్ కొత్తదానితో మార్చబడుతుంది.",
+  "taxableValue": "పన్ను విధించదగిన విలువ",
+  "maxBillDiscount": "గరిష్ట బిల్ డిస్కౌంట్",
+  "errDiscountLimit": "అది మీ పాత్ర ఇవ్వగలిగిన దానికంటే ఎక్కువ ({limit})",
+  "errBadDiscount": "సరైన డిస్కౌంట్ మరియు కారణం ఇవ్వండి",
+  "noDiscountAllowed": "మీ పాత్ర డిస్కౌంట్ ఇవ్వలేదు"
 }

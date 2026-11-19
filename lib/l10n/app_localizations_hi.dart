@@ -1780,4 +1780,48 @@ class AppLocalizationsHi extends AppLocalizations {
   String billForOrder(String title) {
     return 'बिल · $title';
   }
+
+  @override
+  String get discount => 'छूट';
+
+  @override
+  String get addDiscount => 'छूट दें';
+
+  @override
+  String get discountByPercent => 'प्रतिशत';
+
+  @override
+  String get discountByAmount => 'राशि (₹)';
+
+  @override
+  String get discountValue => 'कितना';
+
+  @override
+  String get discountReason => 'कारण (बिल पर छपेगा)';
+
+  @override
+  String discountLimit(String limit) {
+    return 'आपकी सीमा: $limit';
+  }
+
+  @override
+  String get discountHelp =>
+      'छूट के बाद टैक्स दोबारा गिना जाता है। छपा बिल नए बिल से बदल जाता है।';
+
+  @override
+  String get taxableValue => 'कर योग्य मूल्य';
+
+  @override
+  String get maxBillDiscount => 'अधिकतम बिल छूट';
+
+  @override
+  String errDiscountLimit(String limit) {
+    return 'यह आपकी भूमिका की सीमा से अधिक है ($limit)';
+  }
+
+  @override
+  String get errBadDiscount => 'सही छूट और कारण दें';
+
+  @override
+  String get noDiscountAllowed => 'आपकी भूमिका छूट नहीं दे सकती';
 }

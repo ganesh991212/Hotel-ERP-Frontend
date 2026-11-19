@@ -533,5 +533,18 @@
   "nextHandOver": "अगला: मेहमान को सौंपें",
   "nextBillOrder": "अगला: इस ऑर्डर का बिल बनाएँ",
   "channelTakeaway": "टेकअवे",
-  "billForOrder": "बिल · {title}"
+  "billForOrder": "बिल · {title}",
+  "discount": "छूट",
+  "addDiscount": "छूट दें",
+  "discountByPercent": "प्रतिशत",
+  "discountByAmount": "राशि (₹)",
+  "discountValue": "कितना",
+  "discountReason": "कारण (बिल पर छपेगा)",
+  "discountLimit": "आपकी सीमा: {limit}",
+  "discountHelp": "छूट के बाद टैक्स दोबारा गिना जाता है। छपा बिल नए बिल से बदल जाता है।",
+  "taxableValue": "कर योग्य मूल्य",
+  "maxBillDiscount": "अधिकतम बिल छूट",
+  "errDiscountLimit": "यह आपकी भूमिका की सीमा से अधिक है ({limit})",
+  "errBadDiscount": "सही छूट और कारण दें",
+  "noDiscountAllowed": "आपकी भूमिका छूट नहीं दे सकती"
 }

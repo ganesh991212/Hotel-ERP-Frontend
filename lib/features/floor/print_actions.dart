@@ -196,6 +196,59 @@ class _BillPanelState extends ConsumerState<_BillPanel> {
     });
   }
 
+  /// Discount on the bill shown: the server re-issues it (cancelled old bill, new number) with tax recalculated.
+  Future<void> _discount() async {
+    final l = AppLocalizations.of(context);
+    final s = ref.read(sessionProvider).value!;
+    final limit = (s.me['max_discount_bp'] as num?)?.toInt() ?? 0;
+    final value = TextEditingController();
+    final reason = TextEditingController();
+    var byPercent = true;
+    final ok = await showGlassDialog<bool>(
+      context,
+      title: l.addDiscount,
+      body: StatefulBuilder(
+        builder: (ctx, set) => Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+          ChoiceRow<bool>(
+            options: [(true, l.discountByPercent), (false, l.discountByAmount)],
+            value: byPercent,
+            onChanged: (v) => set(() => byPercent = v),
+          ),
+          FieldLabel(l.discountValue, help: l.discountLimit(percentLabel(limit))),
+          TextField(
+            controller: value,
+            autofocus: true,
+            keyboardType: const TextInputType.numberWithOptions(decimal: true),
+            decoration: InputDecoration(suffixText: byPercent ? '%' : '₹'),
+          ),
+          FieldLabel(l.discountReason),
+          TextField(controller: reason, maxLength: 200, decoration: const InputDecoration(counterText: '')),
+          Text(l.discountHelp, style: Theme.of(ctx).textTheme.bodySmall),
+          DialogActions(primary: l.addDiscount, onPrimary: () => Navigator.of(ctx).pop(true)),
+        ]),
+      ),
+    );
+    if (ok != true || !mounted) return;
+    final bp = byPercent ? parsePercentToBp(value.text) : null;
+    final amount = byPercent ? null : parseInrToMinor(value.text);
+    if ((bp == null && amount == null) || (amount != null && amount <= 0) || reason.text.trim().length < 3) {
+      showError(context, ApiException(400, 'bad_discount', ''));
+      return;
+    }
+    setState(() => _busy = true);
+    await guard(context, () async {
+      final b = await ref.read(apiProvider).post('/api/v1/bills', {
+        if (widget.order != null) 'order_id': widget.order!['id'] else 'table_id': _bill!['table_id'] ?? widget.table['id'],
+        'include_unserved': true, // the bill being discounted already covers these orders
+        'discount': {if (bp != null) 'percent_bp': bp else 'amount_minor': amount, 'reason': reason.text.trim()},
+      });
+      setState(() => _bill = Map<String, dynamic>.from(b));
+      final replaced = (b['replaced_invoice_nos'] as List?)?.cast<String>() ?? const [];
+      if (replaced.isNotEmpty && mounted) showDone(context, l.billReplaced(replaced.join(', '), b['invoice_no'] as String));
+    });
+    if (mounted) setState(() => _busy = false);
+  }
+
   Future<void> _settle(String method) async {
     await guard(context, () async {
       final r = await ref.read(apiProvider).post('/api/v1/bills/${_bill!['id']}/settle', {'method': method});
@@ -283,11 +336,12 @@ class _BillPanelState extends ConsumerState<_BillPanel> {
             ]),
           )
         : null;
-    Widget row(String a, int v, {bool strong = false}) => Padding(
+    // `minus` only adds a sign to the displayed text; the client never does arithmetic on money (rule 1).
+    Widget row(String a, int v, {bool strong = false, bool minus = false}) => Padding(
           padding: const EdgeInsets.symmetric(vertical: 2),
           child: Row(children: [
             Expanded(child: Text(a, style: strong ? tt.titleMedium : tt.bodyMedium)),
-            Text(formatInr(v), style: strong ? tt.titleMedium : tt.bodyMedium),
+            Text('${minus ? '− ' : ''}${formatInr(v)}', style: strong ? tt.titleMedium : tt.bodyMedium),
           ]),
         );
     return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
@@ -315,6 +369,11 @@ class _BillPanelState extends ConsumerState<_BillPanel> {
         ),
       Divider(color: t.line),
       row(l.subtotal, b['subtotal_minor']),
+      if ((b['discount_minor'] ?? 0) as int > 0) ...[
+        row('${l.discount}${b['discount_reason'] != null ? ' · ${b['discount_reason']}' : ''}', b['discount_minor'] as int,
+            minus: true),
+        row(l.taxableValue, b['taxable_minor'] as int),
+      ],
       if ((b['cgst_minor'] as int) > 0) row(l.cgst, b['cgst_minor']),
       if ((b['sgst_minor'] as int) > 0) row(l.sgst, b['sgst_minor']),
       if ((b['service_charge_minor'] as int) > 0) row(l.serviceCharge, b['service_charge_minor']),
@@ -325,6 +384,12 @@ class _BillPanelState extends ConsumerState<_BillPanel> {
         icon: const Icon(Icons.print_outlined, size: 18),
         label: Text((b['print_count'] as int) > 0 ? l.printDuplicate : l.printBill),
       ),
+      if (!paid && !cancelled && ((s.me['max_discount_bp'] as num?)?.toInt() ?? 0) > 0)
+        TextButton.icon(
+          onPressed: _busy ? null : _discount,
+          icon: const Icon(Icons.percent_rounded, size: 18),
+          label: Text(l.addDiscount),
+        ),
       if (!paid && !cancelled) ...[
         FieldLabel(l.settlePayment),
         ChoiceRow<String>(

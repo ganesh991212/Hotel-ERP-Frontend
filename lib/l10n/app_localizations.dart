@@ -3303,6 +3303,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Bill · {title}'**
   String billForOrder(String title);
+
+  /// Bill line and button: discount
+  ///
+  /// In en, this message translates to:
+  /// **'Discount'**
+  String get discount;
+
+  /// Bill window button
+  ///
+  /// In en, this message translates to:
+  /// **'Add discount'**
+  String get addDiscount;
+
+  /// Discount kind: percent of the bill
+  ///
+  /// In en, this message translates to:
+  /// **'Percent'**
+  String get discountByPercent;
+
+  /// Discount kind: fixed rupee amount
+  ///
+  /// In en, this message translates to:
+  /// **'Amount (₹)'**
+  String get discountByAmount;
+
+  /// Discount value field
+  ///
+  /// In en, this message translates to:
+  /// **'How much'**
+  String get discountValue;
+
+  /// Discount reason field
+  ///
+  /// In en, this message translates to:
+  /// **'Reason (printed on the bill)'**
+  String get discountReason;
+
+  /// Shown under the discount form
+  ///
+  /// In en, this message translates to:
+  /// **'Your limit: {limit}'**
+  String discountLimit(String limit);
+
+  /// Discount form help
+  ///
+  /// In en, this message translates to:
+  /// **'Tax is recalculated on the discounted amount. A printed bill is replaced by a new one.'**
+  String get discountHelp;
+
+  /// Bill line: subtotal after discount
+  ///
+  /// In en, this message translates to:
+  /// **'Taxable value'**
+  String get taxableValue;
+
+  /// Roles matrix row: largest discount the role may give
+  ///
+  /// In en, this message translates to:
+  /// **'Max bill discount'**
+  String get maxBillDiscount;
+
+  /// Error: discount over the role limit
+  ///
+  /// In en, this message translates to:
+  /// **'That is more than your role may give ({limit})'**
+  String errDiscountLimit(String limit);
+
+  /// Validation: discount form
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid discount and a reason'**
+  String get errBadDiscount;
+
+  /// Shown instead of the discount button
+  ///
+  /// In en, this message translates to:
+  /// **'Your role cannot give discounts'**
+  String get noDiscountAllowed;
 }
 
 class _AppLocalizationsDelegate

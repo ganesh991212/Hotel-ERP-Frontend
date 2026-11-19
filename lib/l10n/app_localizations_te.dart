@@ -1788,4 +1788,48 @@ class AppLocalizationsTe extends AppLocalizations {
   String billForOrder(String title) {
     return 'బిల్ · $title';
   }
+
+  @override
+  String get discount => 'డిస్కౌంట్';
+
+  @override
+  String get addDiscount => 'డిస్కౌంట్ ఇవ్వండి';
+
+  @override
+  String get discountByPercent => 'శాతం';
+
+  @override
+  String get discountByAmount => 'మొత్తం (₹)';
+
+  @override
+  String get discountValue => 'ఎంత';
+
+  @override
+  String get discountReason => 'కారణం (బిల్‌పై ముద్రించబడుతుంది)';
+
+  @override
+  String discountLimit(String limit) {
+    return 'మీ పరిమితి: $limit';
+  }
+
+  @override
+  String get discountHelp =>
+      'డిస్కౌంట్ తర్వాత పన్ను మళ్లీ లెక్కించబడుతుంది. ముద్రించిన బిల్ కొత్తదానితో మార్చబడుతుంది.';
+
+  @override
+  String get taxableValue => 'పన్ను విధించదగిన విలువ';
+
+  @override
+  String get maxBillDiscount => 'గరిష్ట బిల్ డిస్కౌంట్';
+
+  @override
+  String errDiscountLimit(String limit) {
+    return 'అది మీ పాత్ర ఇవ్వగలిగిన దానికంటే ఎక్కువ ($limit)';
+  }
+
+  @override
+  String get errBadDiscount => 'సరైన డిస్కౌంట్ మరియు కారణం ఇవ్వండి';
+
+  @override
+  String get noDiscountAllowed => 'మీ పాత్ర డిస్కౌంట్ ఇవ్వలేదు';
 }

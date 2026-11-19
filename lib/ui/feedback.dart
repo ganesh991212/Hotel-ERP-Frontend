@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:material_ui/material_ui.dart';
 
 import '../core/api/api_client.dart';
+import '../core/money.dart';
 import '../core/theme/tokens.dart';
 import '../l10n/app_localizations.dart';
 
@@ -23,6 +24,8 @@ String errorText(BuildContext context, Object e) {
       'item_unavailable' => l.errSoldOut,
       'session_expired' || 'no_session' => l.errSessionExpired,
       'wrong_password' => l.errWrongPassword,
+      'discount_limit' => l.errDiscountLimit(percentLabel((e.details['max_bp'] as num?)?.toInt() ?? 0)),
+      'bad_discount' => l.errBadDiscount,
       'same_password' => l.errSamePassword,
       'range_too_long' => l.errRangeTooLong,
       'server_error' => l.errGeneric, // server crash: show translated copy, not the server's English text

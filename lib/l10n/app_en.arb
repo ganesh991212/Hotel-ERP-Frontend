@@ -2389,5 +2389,67 @@
         "type": "String"
       }
     }
+  },
+  "discount": "Discount",
+  "@discount": {
+    "description": "Bill line and button: discount"
+  },
+  "addDiscount": "Add discount",
+  "@addDiscount": {
+    "description": "Bill window button"
+  },
+  "discountByPercent": "Percent",
+  "@discountByPercent": {
+    "description": "Discount kind: percent of the bill"
+  },
+  "discountByAmount": "Amount (₹)",
+  "@discountByAmount": {
+    "description": "Discount kind: fixed rupee amount"
+  },
+  "discountValue": "How much",
+  "@discountValue": {
+    "description": "Discount value field"
+  },
+  "discountReason": "Reason (printed on the bill)",
+  "@discountReason": {
+    "description": "Discount reason field"
+  },
+  "discountLimit": "Your limit: {limit}",
+  "@discountLimit": {
+    "description": "Shown under the discount form",
+    "placeholders": {
+      "limit": {
+        "type": "String"
+      }
+    }
+  },
+  "discountHelp": "Tax is recalculated on the discounted amount. A printed bill is replaced by a new one.",
+  "@discountHelp": {
+    "description": "Discount form help"
+  },
+  "taxableValue": "Taxable value",
+  "@taxableValue": {
+    "description": "Bill line: subtotal after discount"
+  },
+  "maxBillDiscount": "Max bill discount",
+  "@maxBillDiscount": {
+    "description": "Roles matrix row: largest discount the role may give"
+  },
+  "errDiscountLimit": "That is more than your role may give ({limit})",
+  "@errDiscountLimit": {
+    "description": "Error: discount over the role limit",
+    "placeholders": {
+      "limit": {
+        "type": "String"
+      }
+    }
+  },
+  "errBadDiscount": "Enter a valid discount and a reason",
+  "@errBadDiscount": {
+    "description": "Validation: discount form"
+  },
+  "noDiscountAllowed": "Your role cannot give discounts",
+  "@noDiscountAllowed": {
+    "description": "Shown instead of the discount button"
   }
 }

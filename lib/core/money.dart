@@ -56,3 +56,19 @@ String minorToInput(int minor) {
   final rupees = d.substring(0, d.length - 2);
   return paise == '00' ? rupees : '$rupees.$paise';
 }
+
+/// Basis points as a percent label: 1000 -> "10%", 1250 -> "12.5%". Integer maths only.
+String percentLabel(int bp) {
+  final whole = bp ~/ 100, frac = bp % 100;
+  if (frac == 0) return '$whole%';
+  final f = frac.toString().padLeft(2, '0').replaceFirst(RegExp(r'0$'), '');
+  return '$whole.$f%';
+}
+
+/// "10" or "12.5" (up to two decimals) -> basis points; null if not a percent between 0.01 and 100.
+int? parsePercentToBp(String input) {
+  final m = RegExp(r'^\s*(\d{1,3})(?:\.(\d{1,2}))?\s*%?\s*$').firstMatch(input);
+  if (m == null) return null;
+  final bp = int.parse(m.group(1)!) * 100 + int.parse((m.group(2) ?? '0').padRight(2, '0'));
+  return bp >= 1 && bp <= 10000 ? bp : null;
+}
