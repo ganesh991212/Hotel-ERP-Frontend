@@ -1472,4 +1472,10 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get errGstin => '15 అక్షరాల GSTIN ఇవ్వండి';
+
+  @override
+  String get settingsSaved => 'సెట్టింగ్‌లు సేవ్ అయ్యాయి';
+
+  @override
+  String get brandingSaved => 'బ్రాండింగ్ సేవ్ అయింది';
 }

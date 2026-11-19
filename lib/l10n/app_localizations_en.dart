@@ -1468,4 +1468,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get errGstin => 'Enter a 15-character GSTIN';
+
+  @override
+  String get settingsSaved => 'Settings saved';
+
+  @override
+  String get brandingSaved => 'Branding saved';
 }
