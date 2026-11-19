@@ -1873,7 +1873,7 @@
   },
   "logoUpdated": "Logo updated",
   "@logoUpdated": {
-    "description": "Snackbar"
+    "description": "Confirmation message after uploading a logo"
   },
   "addressLine": "Address (one line)",
   "@addressLine": {
@@ -1950,5 +1950,13 @@
   "errGstin": "Enter a 15-character GSTIN",
   "@errGstin": {
     "description": "Validation: GSTIN"
+  },
+  "settingsSaved": "Settings saved",
+  "@settingsSaved": {
+    "description": "Confirmation shown after saving hotel settings (the settings dialog closes)"
+  },
+  "brandingSaved": "Branding saved",
+  "@brandingSaved": {
+    "description": "Confirmation shown after saving the hotel address on the Branding tab"
   }
 }

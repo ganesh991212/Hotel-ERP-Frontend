@@ -135,7 +135,10 @@ class _SettingsState extends ConsumerState<_Settings> {
           setState(() => _busy = false);
           if (ok) {
             await ref.read(sessionProvider.notifier).reload();
-            if (mounted) Navigator.of(this.context).pop();
+            if (!mounted) return;
+            // The message lives in the app's top layer, so it stays visible after the dialog closes.
+            showDone(this.context, l.settingsSaved);
+            Navigator.of(this.context).pop();
           }
         },
       ),
@@ -319,6 +322,7 @@ class _BrandingFormState extends ConsumerState<_BrandingForm> {
                   context, () => ref.read(apiProvider).put('/api/v1/branding', {'address_line': _address.text}));
               if (ok && mounted) {
                 ref.invalidate(brandingProvider);
+                showDone(this.context, l.brandingSaved);
                 Navigator.of(this.context).pop();
               }
             },
