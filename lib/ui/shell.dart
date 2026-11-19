@@ -65,7 +65,7 @@ class AppShell extends ConsumerWidget {
     final current = tabs.where((t) => location.startsWith(t.path)).firstOrNull?.path ?? tabs.firstOrNull?.path ?? '';
     final g = context.gutter;
     final phone = context.isPhone;
-    return Scaffold(
+    final scaffold = Scaffold(
       backgroundColor: Colors.transparent,
       body: AppBackground(
         child: Stack(children: [
@@ -96,6 +96,13 @@ class AppShell extends ConsumerWidget {
             ),
         ]),
       ),
+    );
+    // The first tap anywhere unlocks alert sounds for this page load (browser autoplay rule), so a refresh
+    // does not need the "Enable alerts" button again.
+    return Listener(
+      behavior: HitTestBehavior.translucent,
+      onPointerDown: (_) => ref.read(alertSoundProvider).prime(),
+      child: scaffold,
     );
   }
 
@@ -340,13 +347,18 @@ class _EnableAlertsBanner extends ConsumerStatefulWidget {
 }
 
 class _EnableAlertsBannerState extends ConsumerState<_EnableAlertsBanner> {
-  bool _dismissed = false;
-
   @override
   Widget build(BuildContext context) {
     final sound = ref.watch(alertSoundProvider);
+    return ListenableBuilder(listenable: sound, builder: (context, _) => _banner(context, sound));
+  }
+
+  /// Shown only when there is something to decide, and at most once a week per browser:
+  /// notifications already allowed: never (sound unlocks on the first tap anywhere); not yet asked: offer
+  /// to enable; blocked in browser settings: explain, once.
+  Widget _banner(BuildContext context, AlertSound sound) {
     final perm = notificationPermission();
-    if (_dismissed || (sound.unlocked && perm != 'default') || !sound.enabled) return const SizedBox.shrink();
+    if (!sound.loaded || !sound.enabled || perm == 'granted' || sound.recentlyAsked) return const SizedBox.shrink();
     final l = AppLocalizations.of(context);
     final t = context.tokens;
     return Padding(
@@ -371,12 +383,12 @@ class _EnableAlertsBannerState extends ConsumerState<_EnableAlertsBanner> {
                   await ref.read(pushServiceProvider).register(s.userId);
                 }
               }
-              if (mounted) setState(() {});
+              await sound.markAsked();
             },
             icon: const Icon(Icons.notifications_active_outlined, size: 18),
             label: Text(l.enableAlerts),
           ),
-          TextButton(onPressed: () => setState(() => _dismissed = true), child: Text(l.notNow)),
+          TextButton(onPressed: sound.markAsked, child: Text(l.notNow)),
         ]),
       ),
     );
