@@ -2775,6 +2775,156 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Branding saved'**
   String get brandingSaved;
+
+  /// Next-step line on an order waiting for staff confirmation
+  ///
+  /// In en, this message translates to:
+  /// **'Next: confirm this order'**
+  String get nextConfirm;
+
+  /// Next-step line: order is on the chefs' board
+  ///
+  /// In en, this message translates to:
+  /// **'Next: a chef picks it up on the Kitchen screen'**
+  String get nextChefPickup;
+
+  /// Next-step line in auto-assign mode when every chef is busy
+  ///
+  /// In en, this message translates to:
+  /// **'Next: waiting for a free chef'**
+  String get nextFreeChef;
+
+  /// Next-step line in printed-ticket mode
+  ///
+  /// In en, this message translates to:
+  /// **'Next: print the KOT for the kitchen'**
+  String get nextPrintKot;
+
+  /// Next-step line: assigned to a chef who has not started
+  ///
+  /// In en, this message translates to:
+  /// **'Next: {chef} starts cooking'**
+  String nextChefStarts(String chef);
+
+  /// Order line: a chef is cooking it
+  ///
+  /// In en, this message translates to:
+  /// **'{chef} is cooking'**
+  String nowCooking(String chef);
+
+  /// Order line: paper path
+  ///
+  /// In en, this message translates to:
+  /// **'Cooking from the printed KOT. Mark ready when it comes out'**
+  String get nowCookingPaper;
+
+  /// Next-step line: food is ready and a waiter carries it
+  ///
+  /// In en, this message translates to:
+  /// **'Next: serve it to the table'**
+  String get nextServe;
+
+  /// Next-step line: served and not billed yet
+  ///
+  /// In en, this message translates to:
+  /// **'Next: bill the table'**
+  String get nextBill;
+
+  /// Warning chip: no chef took the order within the alert time
+  ///
+  /// In en, this message translates to:
+  /// **'Not picked up in time'**
+  String get notPickedUp;
+
+  /// Alert shown to admins and chefs when an order waits too long
+  ///
+  /// In en, this message translates to:
+  /// **'Order #{number} (Table {table}) has not been picked up'**
+  String pickupOverdueToast(int number, String table);
+
+  /// Table status: food served, not paid yet
+  ///
+  /// In en, this message translates to:
+  /// **'Bill pending'**
+  String get billPending;
+
+  /// Button: open the bill for this table
+  ///
+  /// In en, this message translates to:
+  /// **'Bill'**
+  String get billNow;
+
+  /// Bottom navigation tab: list of all orders
+  ///
+  /// In en, this message translates to:
+  /// **'Orders'**
+  String get tabOrders;
+
+  /// Orders screen filter: last 24 hours
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get ordersToday2;
+
+  /// Empty state on the Orders screen
+  ///
+  /// In en, this message translates to:
+  /// **'No orders yet'**
+  String get noOrdersYet;
+
+  /// Orders screen: the order is on a bill
+  ///
+  /// In en, this message translates to:
+  /// **'Billed'**
+  String get billed;
+
+  /// Settings label: serving mode
+  ///
+  /// In en, this message translates to:
+  /// **'How food reaches the table'**
+  String get servingMode;
+
+  /// Serving mode option
+  ///
+  /// In en, this message translates to:
+  /// **'Waiter serves'**
+  String get serveByWaiter;
+
+  /// Serving mode option
+  ///
+  /// In en, this message translates to:
+  /// **'Diner collects at counter'**
+  String get serveAtCounter;
+
+  /// Settings help for serving mode
+  ///
+  /// In en, this message translates to:
+  /// **'Counter: when food is ready the diner is told to collect it; there is no Served step.'**
+  String get servingModeHelp;
+
+  /// Settings label: no-pickup alert time
+  ///
+  /// In en, this message translates to:
+  /// **'Alert if no chef picks up within'**
+  String get pickupAlert;
+
+  /// Settings help for the no-pickup alert
+  ///
+  /// In en, this message translates to:
+  /// **'Admins and chefs on shift get a loud alert.'**
+  String get pickupAlertHelp;
+
+  /// Option: feature switched off
+  ///
+  /// In en, this message translates to:
+  /// **'Off'**
+  String get off;
+
+  /// Diner page: order ready in counter mode
+  ///
+  /// In en, this message translates to:
+  /// **'Ready! Please collect it from the counter.'**
+  String get collectAtCounter;
 }
 
 class _AppLocalizationsDelegate

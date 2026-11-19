@@ -33,6 +33,9 @@ void showError(BuildContext context, Object e) => _toast(context, errorText(cont
 
 void showDone(BuildContext context, String message) => _toast(context, message, error: false);
 
+/// Something needs attention that is not a failed request (e.g. an order nobody picked up).
+void showWarning(BuildContext context, String message) => _toast(context, message, error: true);
+
 /// The toast on screen, if any. A new message replaces it rather than queueing behind it.
 OverlayEntry? _current;
 

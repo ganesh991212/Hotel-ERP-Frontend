@@ -1474,4 +1474,87 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get brandingSaved => 'Branding saved';
+
+  @override
+  String get nextConfirm => 'Next: confirm this order';
+
+  @override
+  String get nextChefPickup => 'Next: a chef picks it up on the Kitchen screen';
+
+  @override
+  String get nextFreeChef => 'Next: waiting for a free chef';
+
+  @override
+  String get nextPrintKot => 'Next: print the KOT for the kitchen';
+
+  @override
+  String nextChefStarts(String chef) {
+    return 'Next: $chef starts cooking';
+  }
+
+  @override
+  String nowCooking(String chef) {
+    return '$chef is cooking';
+  }
+
+  @override
+  String get nowCookingPaper =>
+      'Cooking from the printed KOT. Mark ready when it comes out';
+
+  @override
+  String get nextServe => 'Next: serve it to the table';
+
+  @override
+  String get nextBill => 'Next: bill the table';
+
+  @override
+  String get notPickedUp => 'Not picked up in time';
+
+  @override
+  String pickupOverdueToast(int number, String table) {
+    return 'Order #$number (Table $table) has not been picked up';
+  }
+
+  @override
+  String get billPending => 'Bill pending';
+
+  @override
+  String get billNow => 'Bill';
+
+  @override
+  String get tabOrders => 'Orders';
+
+  @override
+  String get ordersToday2 => 'Today';
+
+  @override
+  String get noOrdersYet => 'No orders yet';
+
+  @override
+  String get billed => 'Billed';
+
+  @override
+  String get servingMode => 'How food reaches the table';
+
+  @override
+  String get serveByWaiter => 'Waiter serves';
+
+  @override
+  String get serveAtCounter => 'Diner collects at counter';
+
+  @override
+  String get servingModeHelp =>
+      'Counter: when food is ready the diner is told to collect it; there is no Served step.';
+
+  @override
+  String get pickupAlert => 'Alert if no chef picks up within';
+
+  @override
+  String get pickupAlertHelp => 'Admins and chefs on shift get a loud alert.';
+
+  @override
+  String get off => 'Off';
+
+  @override
+  String get collectAtCounter => 'Ready! Please collect it from the counter.';
 }

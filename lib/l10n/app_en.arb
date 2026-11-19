@@ -1958,5 +1958,123 @@
   "brandingSaved": "Branding saved",
   "@brandingSaved": {
     "description": "Confirmation shown after saving the hotel address on the Branding tab"
+  },
+  "nextConfirm": "Next: confirm this order",
+  "@nextConfirm": {
+    "description": "Next-step line on an order waiting for staff confirmation"
+  },
+  "nextChefPickup": "Next: a chef picks it up on the Kitchen screen",
+  "@nextChefPickup": {
+    "description": "Next-step line: order is on the chefs' board"
+  },
+  "nextFreeChef": "Next: waiting for a free chef",
+  "@nextFreeChef": {
+    "description": "Next-step line in auto-assign mode when every chef is busy"
+  },
+  "nextPrintKot": "Next: print the KOT for the kitchen",
+  "@nextPrintKot": {
+    "description": "Next-step line in printed-ticket mode"
+  },
+  "nextChefStarts": "Next: {chef} starts cooking",
+  "@nextChefStarts": {
+    "description": "Next-step line: assigned to a chef who has not started",
+    "placeholders": {
+      "chef": {
+        "type": "String"
+      }
+    }
+  },
+  "nowCooking": "{chef} is cooking",
+  "@nowCooking": {
+    "description": "Order line: a chef is cooking it",
+    "placeholders": {
+      "chef": {
+        "type": "String"
+      }
+    }
+  },
+  "nowCookingPaper": "Cooking from the printed KOT. Mark ready when it comes out",
+  "@nowCookingPaper": {
+    "description": "Order line: paper path"
+  },
+  "nextServe": "Next: serve it to the table",
+  "@nextServe": {
+    "description": "Next-step line: food is ready and a waiter carries it"
+  },
+  "nextBill": "Next: bill the table",
+  "@nextBill": {
+    "description": "Next-step line: served and not billed yet"
+  },
+  "notPickedUp": "Not picked up in time",
+  "@notPickedUp": {
+    "description": "Warning chip: no chef took the order within the alert time"
+  },
+  "pickupOverdueToast": "Order #{number} (Table {table}) has not been picked up",
+  "@pickupOverdueToast": {
+    "description": "Alert shown to admins and chefs when an order waits too long",
+    "placeholders": {
+      "number": {
+        "type": "int"
+      },
+      "table": {
+        "type": "String"
+      }
+    }
+  },
+  "billPending": "Bill pending",
+  "@billPending": {
+    "description": "Table status: food served, not paid yet"
+  },
+  "billNow": "Bill",
+  "@billNow": {
+    "description": "Button: open the bill for this table"
+  },
+  "tabOrders": "Orders",
+  "@tabOrders": {
+    "description": "Bottom navigation tab: list of all orders"
+  },
+  "ordersToday2": "Today",
+  "@ordersToday2": {
+    "description": "Orders screen filter: last 24 hours"
+  },
+  "noOrdersYet": "No orders yet",
+  "@noOrdersYet": {
+    "description": "Empty state on the Orders screen"
+  },
+  "billed": "Billed",
+  "@billed": {
+    "description": "Orders screen: the order is on a bill"
+  },
+  "servingMode": "How food reaches the table",
+  "@servingMode": {
+    "description": "Settings label: serving mode"
+  },
+  "serveByWaiter": "Waiter serves",
+  "@serveByWaiter": {
+    "description": "Serving mode option"
+  },
+  "serveAtCounter": "Diner collects at counter",
+  "@serveAtCounter": {
+    "description": "Serving mode option"
+  },
+  "servingModeHelp": "Counter: when food is ready the diner is told to collect it; there is no Served step.",
+  "@servingModeHelp": {
+    "description": "Settings help for serving mode"
+  },
+  "pickupAlert": "Alert if no chef picks up within",
+  "@pickupAlert": {
+    "description": "Settings label: no-pickup alert time"
+  },
+  "pickupAlertHelp": "Admins and chefs on shift get a loud alert.",
+  "@pickupAlertHelp": {
+    "description": "Settings help for the no-pickup alert"
+  },
+  "off": "Off",
+  "@off": {
+    "description": "Option: feature switched off"
+  },
+  "collectAtCounter": "Ready! Please collect it from the counter.",
+  "@collectAtCounter": {
+    "description": "Diner page: order ready in counter mode"
   }
 }

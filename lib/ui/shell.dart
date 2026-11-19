@@ -40,6 +40,9 @@ List<NavTab> tabsFor(BuildContext context, Session s) {
   return [
     if (s.can('dashboard.view')) NavTab('/h/overview', l.tabOverview, Icons.space_dashboard_outlined),
     if (s.can('order.create') || s.can('order.serve')) NavTab('/h/floor', l.tabFloor, Icons.table_restaurant_outlined),
+    // Every order, for whoever bills or runs the place (waiters and chefs work from Floor and Kitchen).
+    if (s.can('order.view') && (s.can('bill.manage') || s.can('dashboard.view')))
+      NavTab('/h/orders', l.tabOrders, Icons.receipt_long_outlined),
     if (s.can('kitchen.cook') || s.can('kitchen.manage')) NavTab('/h/kitchen', l.tabKitchen, Icons.soup_kitchen_outlined),
     if (s.can('menu.manage') || s.can('menu.availability')) NavTab('/h/menu', l.tabMenu, Icons.restaurant_menu),
     if (s.can('table.manage')) NavTab('/h/tables', l.tabTables, Icons.qr_code_2_rounded),
@@ -58,8 +61,17 @@ class AppShell extends ConsumerWidget {
     final s = ref.watch(sessionProvider).value;
     if (s == null) return const SizedBox.shrink();
     ref.listen(outletEventsProvider, (_, next) {
-      final kind = alertFor(s, next.value);
+      final ev = next.value;
+      final kind = alertFor(s, ev);
       if (kind != null) ref.read(alertSoundProvider).play(kind);
+      // Sound alone is easy to miss in a noisy kitchen: also say which order is waiting.
+      if (ev?['type'] == 'order.pickup_overdue' && kind != null) {
+        final o = ev!['order'] as Map;
+        showWarning(
+          context,
+          AppLocalizations.of(context).pickupOverdueToast(o['number'] as int, (o['table'] as Map?)?['label'] ?? '-'),
+        );
+      }
     });
     final tabs = tabsFor(context, s);
     final current = tabs.where((t) => location.startsWith(t.path)).firstOrNull?.path ?? tabs.firstOrNull?.path ?? '';
@@ -508,7 +520,9 @@ AlertKind? alertFor(Session s, Map<String, dynamic>? ev) {
   final mode = (s.me['outlet'] as Map?)?['kitchen_mode'];
   if (type == 'order.ready' && s.can('order.serve')) return AlertKind.ready;
   if (type == 'order.created' && status == 'PLACED' && s.can('order.confirm')) return AlertKind.newOrder;
-  if (type == 'order.created' && status == 'CONFIRMED') {
+  if (type == 'order.pickup_overdue' && (s.can('kitchen.manage') || s.can('kitchen.cook'))) return AlertKind.newOrder;
+  // 'order.confirmed': a QR order confirmed by staff is new kitchen work, exactly like one placed confirmed.
+  if ((type == 'order.created' || type == 'order.confirmed') && status == 'CONFIRMED') {
     if (mode == 'CHEF_ACCEPT' && s.can('kitchen.cook')) return AlertKind.newOrder;
     if (mode == 'ADMIN_PRINT' && s.can('kot.print')) return AlertKind.newOrder;
   }

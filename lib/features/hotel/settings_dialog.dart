@@ -114,6 +114,19 @@ class _SettingsState extends ConsumerState<_Settings> {
         value: s['max_queue_orders'],
         onChanged: (v) => setState(() => s['max_queue_orders'] = v),
       ),
+      FieldLabel(l.pickupAlert, help: l.pickupAlertHelp),
+      ChoiceRow<int>(
+        // 0 = off (sent as 0; the server stores no limit).
+        options: [(0, l.off), for (final n in [3, 5, 10, 15, 30]) (n, l.minutesShort(n))],
+        value: s['pickup_alert_minutes'] ?? 0,
+        onChanged: (v) => setState(() => s['pickup_alert_minutes'] = v),
+      ),
+      FieldLabel(l.servingMode, help: l.servingModeHelp),
+      ChoiceRow<String>(
+        options: [('SERVER', l.serveByWaiter), ('COUNTER', l.serveAtCounter)],
+        value: s['serve_mode'] ?? 'SERVER',
+        onChanged: (v) => setState(() => s['serve_mode'] = v),
+      ),
       const SizedBox(height: 10),
       SwitchListTile(
         contentPadding: EdgeInsets.zero,
@@ -134,6 +147,8 @@ class _SettingsState extends ConsumerState<_Settings> {
                     'kitchen_mode': s['kitchen_mode'],
                     'max_queue_orders': s['max_queue_orders'],
                     'qr_confirm_required': s['qr_confirm_required'],
+                    'pickup_alert_minutes': s['pickup_alert_minutes'] ?? 0,
+                    'serve_mode': s['serve_mode'] ?? 'SERVER',
                   }));
           if (!mounted) return;
           setState(() => _busy = false);

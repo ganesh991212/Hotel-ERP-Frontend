@@ -1470,4 +1470,88 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get brandingSaved => 'ब्रांडिंग सेव हो गई';
+
+  @override
+  String get nextConfirm => 'अगला: यह ऑर्डर कन्फ़र्म करें';
+
+  @override
+  String get nextChefPickup => 'अगला: किचन स्क्रीन पर कोई शेफ़ इसे लेगा';
+
+  @override
+  String get nextFreeChef => 'अगला: खाली शेफ़ का इंतज़ार';
+
+  @override
+  String get nextPrintKot => 'अगला: किचन के लिए KOT प्रिंट करें';
+
+  @override
+  String nextChefStarts(String chef) {
+    return 'अगला: $chef खाना बनाना शुरू करेंगे';
+  }
+
+  @override
+  String nowCooking(String chef) {
+    return '$chef बना रहे हैं';
+  }
+
+  @override
+  String get nowCookingPaper =>
+      'प्रिंटेड KOT से बन रहा है। तैयार होने पर \'तैयार\' दबाएँ';
+
+  @override
+  String get nextServe => 'अगला: टेबल पर परोसें';
+
+  @override
+  String get nextBill => 'अगला: टेबल का बिल बनाएँ';
+
+  @override
+  String get notPickedUp => 'समय पर किसी ने नहीं लिया';
+
+  @override
+  String pickupOverdueToast(int number, String table) {
+    return 'ऑर्डर #$number (टेबल $table) अभी तक किसी ने नहीं लिया';
+  }
+
+  @override
+  String get billPending => 'बिल बाकी';
+
+  @override
+  String get billNow => 'बिल';
+
+  @override
+  String get tabOrders => 'ऑर्डर';
+
+  @override
+  String get ordersToday2 => 'आज';
+
+  @override
+  String get noOrdersYet => 'अभी कोई ऑर्डर नहीं';
+
+  @override
+  String get billed => 'बिल बना';
+
+  @override
+  String get servingMode => 'खाना टेबल तक कैसे पहुँचता है';
+
+  @override
+  String get serveByWaiter => 'वेटर परोसता है';
+
+  @override
+  String get serveAtCounter => 'ग्राहक काउंटर से लेता है';
+
+  @override
+  String get servingModeHelp =>
+      'काउंटर: तैयार होने पर ग्राहक को लेने के लिए कहा जाता है; \'परोसा\' वाला कदम नहीं होता।';
+
+  @override
+  String get pickupAlert => 'इतने समय में शेफ़ न ले तो अलर्ट';
+
+  @override
+  String get pickupAlertHelp =>
+      'एडमिन और शिफ़्ट पर मौजूद शेफ़ को तेज़ अलर्ट मिलता है।';
+
+  @override
+  String get off => 'बंद';
+
+  @override
+  String get collectAtCounter => 'तैयार! कृपया काउंटर से ले लें।';
 }

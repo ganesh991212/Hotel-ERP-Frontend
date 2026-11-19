@@ -147,7 +147,12 @@ class _DinerPageState extends ConsumerState<DinerPage> {
       _catKeys.putIfAbsent(c['id'], GlobalKey.new);
     }
     final ordering = m['ordering_enabled'] == true;
-    final live = _orders.where((o) => o['status'] != 'SERVED' && o['status'] != 'CANCELLED').toList();
+    final counter = (m['outlet'] as Map?)?['serve_mode'] == 'COUNTER';
+    // Counter mode: "ready" is also "served", so keep it on screen for a while to tell the diner to collect it.
+    bool collecting(Map o) => counter && o['status'] == 'SERVED' && minutesSince(o['served_at'] as String?) < 20;
+    final live = _orders
+        .where((o) => (o['status'] != 'SERVED' && o['status'] != 'CANCELLED') || collecting(o))
+        .toList();
 
     return Scaffold(
       backgroundColor: t.bgTop,
@@ -187,7 +192,7 @@ class _DinerPageState extends ConsumerState<DinerPage> {
                   if (live.isNotEmpty)
                     SliverPadding(
                       padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-                      sliver: SliverToBoxAdapter(child: Reveal(index: 1, child: _Tracker(orders: live))),
+                      sliver: SliverToBoxAdapter(child: Reveal(index: 1, child: _Tracker(orders: live, counter: counter))),
                     ),
                   SliverPersistentHeader(
                     pinned: true,
@@ -436,8 +441,11 @@ class _CartBar extends StatelessWidget {
 
 /// Live order progress: Placed → Confirmed → Preparing → Ready, updated over WebSocket.
 class _Tracker extends StatelessWidget {
-  const _Tracker({required this.orders});
+  const _Tracker({required this.orders, this.counter = false});
   final List<Map<String, dynamic>> orders;
+
+  /// Diner collects at the counter (outlet serve_mode COUNTER).
+  final bool counter;
 
   static const steps = ['PLACED', 'CONFIRMED', 'PREPARING', 'READY'];
 
@@ -460,16 +468,16 @@ class _Tracker extends StatelessWidget {
             ),
           ]),
           const SizedBox(height: 10),
-          _Steps(status: o['status'] == 'ASSIGNED' ? 'CONFIRMED' : o['status']),
+          _Steps(status: switch (o['status']) { 'ASSIGNED' => 'CONFIRMED', 'SERVED' => 'READY', final s => s as String }),
           if (o['chef'] != null && o['status'] == 'PREPARING')
             Padding(
               padding: const EdgeInsets.only(top: 8),
               child: Text(l.chefPreparing(o['chef']['name']), style: tt.bodySmall?.copyWith(color: t.nightDim)),
             ),
-          if (o['status'] == 'READY')
+          if (o['status'] == 'READY' || (counter && o['status'] == 'SERVED'))
             Padding(
               padding: const EdgeInsets.only(top: 8),
-              child: Text(l.readyOnItsWay, style: tt.bodyMedium?.copyWith(color: t.accent)),
+              child: Text(counter ? l.collectAtCounter : l.readyOnItsWay, style: tt.bodyMedium?.copyWith(color: t.accent)),
             ),
           const SizedBox(height: 14),
         ],
