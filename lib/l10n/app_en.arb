@@ -2228,5 +2228,95 @@
   "noWorkYet": "Nothing yet in this period",
   "@noWorkYet": {
     "description": "Empty state"
+  },
+  "newOrdersSinceBill": "{count, plural, =1{1 new order since this bill} other{{count} new orders since this bill}}",
+  "@newOrdersSinceBill": {
+    "description": "Bill window: the guest ordered more after the bill was issued",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "updateBill": "Update bill",
+  "@updateBill": {
+    "description": "Button: replace the unpaid bill with one covering every order"
+  },
+  "updateBillHelp": "The current bill is cancelled and one new bill covers everything.",
+  "@updateBillHelp": {
+    "description": "Help under Update bill"
+  },
+  "billReplaced": "{old} cancelled. {next} has every order.",
+  "@billReplaced": {
+    "description": "Confirmation after a bill replaced an earlier one",
+    "placeholders": {
+      "old": {
+        "type": "String"
+      },
+      "next": {
+        "type": "String"
+      }
+    }
+  },
+  "billCancelled": "Cancelled",
+  "@billCancelled": {
+    "description": "Bill status: void"
+  },
+  "tablesToBill": "Tables to bill",
+  "@tablesToBill": {
+    "description": "Orders screen: tables whose food is served but not paid"
+  },
+  "viewOrders": "Orders",
+  "@viewOrders": {
+    "description": "Orders screen toggle"
+  },
+  "viewBills": "Bills",
+  "@viewBills": {
+    "description": "Orders screen toggle: bills register"
+  },
+  "yesterday": "Yesterday",
+  "@yesterday": {
+    "description": "Date filter"
+  },
+  "pickDates": "Pick dates",
+  "@pickDates": {
+    "description": "Date filter: open a date range picker"
+  },
+  "searchOrdersHint": "Order # or table",
+  "@searchOrdersHint": {
+    "description": "Search box hint on Orders"
+  },
+  "searchBillsHint": "Bill # or table",
+  "@searchBillsHint": {
+    "description": "Search box hint on Bills"
+  },
+  "loadMore": "Load more",
+  "@loadMore": {
+    "description": "Button at the end of a long list"
+  },
+  "noBillsYet": "No bills in this period",
+  "@noBillsYet": {
+    "description": "Empty state on Bills"
+  },
+  "errRangeTooLong": "Pick at most 31 days",
+  "@errRangeTooLong": {
+    "description": "Error: date range too long"
+  },
+  "openBill": "Open bill",
+  "@openBill": {
+    "description": "Button: show this order's bill"
+  },
+  "statusPaid": "Paid",
+  "@statusPaid": {
+    "description": "Bills filter: paid bills"
+  },
+  "printedTimes": "{count, plural, =1{Printed once} other{Printed {count} times}}",
+  "@printedTimes": {
+    "description": "Bills register: how many copies were printed",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
   }
 }

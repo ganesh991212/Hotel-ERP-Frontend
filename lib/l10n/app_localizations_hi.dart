@@ -1663,4 +1663,77 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get noWorkYet => 'इस अवधि में अभी कुछ नहीं';
+
+  @override
+  String newOrdersSinceBill(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'इस बिल के बाद $count नए ऑर्डर',
+      one: 'इस बिल के बाद 1 नया ऑर्डर',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get updateBill => 'बिल अपडेट करें';
+
+  @override
+  String get updateBillHelp =>
+      'मौजूदा बिल रद्द होगा और एक नया बिल सब कुछ कवर करेगा।';
+
+  @override
+  String billReplaced(String old, String next) {
+    return '$old रद्द हुआ। $next में सभी ऑर्डर हैं।';
+  }
+
+  @override
+  String get billCancelled => 'रद्द';
+
+  @override
+  String get tablesToBill => 'बिल बनाने वाली टेबल';
+
+  @override
+  String get viewOrders => 'ऑर्डर';
+
+  @override
+  String get viewBills => 'बिल';
+
+  @override
+  String get yesterday => 'कल';
+
+  @override
+  String get pickDates => 'तारीख चुनें';
+
+  @override
+  String get searchOrdersHint => 'ऑर्डर # या टेबल';
+
+  @override
+  String get searchBillsHint => 'बिल # या टेबल';
+
+  @override
+  String get loadMore => 'और दिखाएँ';
+
+  @override
+  String get noBillsYet => 'इस अवधि में कोई बिल नहीं';
+
+  @override
+  String get errRangeTooLong => 'अधिकतम 31 दिन चुनें';
+
+  @override
+  String get openBill => 'बिल खोलें';
+
+  @override
+  String get statusPaid => 'भुगतान हुआ';
+
+  @override
+  String printedTimes(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count बार प्रिंट हुआ',
+      one: 'एक बार प्रिंट हुआ',
+    );
+    return '$_temp0';
+  }
 }
