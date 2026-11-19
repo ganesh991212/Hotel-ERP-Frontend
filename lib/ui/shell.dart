@@ -386,8 +386,9 @@ class _EnableAlertsBannerState extends ConsumerState<_EnableAlertsBanner> {
 /// Space pages leave at the bottom so the floating dock never covers content.
 const double kDockClearance = 104;
 
-/// Floating glass navigation dock. Phones: icon over label, full width when few tabs, otherwise scrolls
-/// sideways and keeps the selected tab in view. Larger screens: icon + label, centred.
+/// Floating glass navigation dock. Phones: icon over label, full width when few tabs; with more tabs the bar
+/// stays within the screen and the tabs scroll sideways inside it, keeping the selected tab in view.
+/// Larger screens: icon + label, centred, with Dock-style magnification under the mouse.
 class _BottomDock extends StatelessWidget {
   const _BottomDock({required this.tabs, required this.current, required this.onSelect});
   final List<NavTab> tabs;
@@ -405,6 +406,7 @@ class _BottomDock extends StatelessWidget {
       stacked: phone,
       elevated: true,
       expand: phone && tabs.length <= 4,
+      magnify: !phone,
       selected: current,
       onSelect: onSelect,
     );
@@ -420,15 +422,14 @@ class _BottomDock extends StatelessWidget {
       top: false,
       child: Padding(
         padding: EdgeInsets.fromLTRB(g, 0, g, phone ? 10 : 18),
+        // The bar never grows past the screen: PillTabs scrolls its tabs inside it when they do not fit.
         child: LayoutBuilder(builder: (context, c) {
-          final Widget content = phone && tabs.length <= 4
-              ? SizedBox(width: c.maxWidth, child: bar)
-              : SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  physics: const BouncingScrollPhysics(),
-                  child: ConstrainedBox(constraints: BoxConstraints(minWidth: c.maxWidth), child: Center(child: bar)),
-                );
-          return Center(child: content);
+          final fill = phone && tabs.length <= 4;
+          return Center(
+            child: fill
+                ? SizedBox(width: c.maxWidth, child: bar)
+                : ConstrainedBox(constraints: BoxConstraints(maxWidth: c.maxWidth), child: bar),
+          );
         }),
       ),
     );
