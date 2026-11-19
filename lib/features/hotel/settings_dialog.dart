@@ -139,10 +139,9 @@ class _SettingsState extends ConsumerState<_Settings> {
           setState(() => _busy = false);
           if (ok) {
             await ref.read(sessionProvider.notifier).reload();
-            if (!mounted) return;
-            // The message lives in the app's top layer, so it stays visible after the dialog closes.
-            showDone(this.context, l.settingsSaved);
-            Navigator.of(this.context).pop();
+            // Stay open so the owner can keep adjusting; the message shows above the dialog's blur.
+            // A failed save shows its error the same way (guard -> showError) and also keeps the dialog open.
+            if (mounted) showDone(this.context, l.settingsSaved);
           }
         },
       ),
@@ -327,7 +326,6 @@ class _BrandingFormState extends ConsumerState<_BrandingForm> {
               if (ok && mounted) {
                 ref.invalidate(brandingProvider);
                 showDone(this.context, l.brandingSaved);
-                Navigator.of(this.context).pop();
               }
             },
           ),

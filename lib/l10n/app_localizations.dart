@@ -2764,7 +2764,7 @@ abstract class AppLocalizations {
   /// **'Enter a 15-character GSTIN'**
   String get errGstin;
 
-  /// Confirmation shown after saving hotel settings (the settings dialog closes)
+  /// Confirmation shown above the settings dialog after a successful save (the dialog stays open)
   ///
   /// In en, this message translates to:
   /// **'Settings saved'**
