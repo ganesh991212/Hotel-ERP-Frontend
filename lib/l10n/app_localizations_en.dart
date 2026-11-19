@@ -1557,4 +1557,113 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get collectAtCounter => 'Ready! Please collect it from the counter.';
+
+  @override
+  String get changePassword => 'Change password';
+
+  @override
+  String get currentPassword => 'Current password';
+
+  @override
+  String get newPassword => 'New password';
+
+  @override
+  String get confirmNewPassword => 'Type the new password again';
+
+  @override
+  String get passwordsDontMatch => 'The two new passwords don\'t match';
+
+  @override
+  String get passwordChanged =>
+      'Password changed. Other devices are signed out.';
+
+  @override
+  String get errWrongPassword => 'Current password is wrong';
+
+  @override
+  String get errSamePassword => 'Choose a different password';
+
+  @override
+  String get resetPassword => 'Reset password';
+
+  @override
+  String resetPasswordFor(String name) {
+    return 'Reset password for $name';
+  }
+
+  @override
+  String get resetPasswordHelp =>
+      'They are signed out everywhere. Give them the new password in person; they can change it from their profile.';
+
+  @override
+  String passwordResetDone(String name) {
+    return 'Password reset for $name';
+  }
+
+  @override
+  String get periodToday => 'Today';
+
+  @override
+  String get periodWeek => 'Last 7 days';
+
+  @override
+  String get myCooking => 'Your cooking';
+
+  @override
+  String get myServing => 'Your serving';
+
+  @override
+  String get myBilling => 'Your billing';
+
+  @override
+  String get statOrdersCooked => 'Orders cooked';
+
+  @override
+  String get statItemsCooked => 'Items cooked';
+
+  @override
+  String get statAvgCook => 'Avg cooking time';
+
+  @override
+  String get statAvgWaitStart => 'Avg wait to start';
+
+  @override
+  String get statInQueue => 'In your queue now';
+
+  @override
+  String get statOrdersServed => 'Orders served';
+
+  @override
+  String get statTablesServed => 'Tables served';
+
+  @override
+  String get statAvgServe => 'Avg ready to table';
+
+  @override
+  String get statOrdersTaken => 'Orders you took';
+
+  @override
+  String get statReadyNow => 'Ready to serve now';
+
+  @override
+  String get statBillsRaised => 'Bills raised';
+
+  @override
+  String get statCollected => 'Collected';
+
+  @override
+  String get statUnpaidNow => 'Unpaid bills now';
+
+  @override
+  String teamAverage(String value) {
+    return 'Team $value';
+  }
+
+  @override
+  String minutesDecimal(String value) {
+    return '$value min';
+  }
+
+  @override
+  String get noWorkYet => 'Nothing yet in this period';
 }

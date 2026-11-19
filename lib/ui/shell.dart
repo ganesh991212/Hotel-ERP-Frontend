@@ -15,6 +15,7 @@ import '../core/sound/alert_sound.dart';
 import '../features/hotel/printer_dialog.dart';
 import '../features/hotel/settings_dialog.dart';
 import 'feedback.dart';
+import 'password_dialog.dart';
 import '../l10n/app_localizations.dart';
 import 'components.dart';
 import 'status.dart';
@@ -38,7 +39,11 @@ List<NavTab> tabsFor(BuildContext context, Session s) {
     ];
   }
   return [
-    if (s.can('dashboard.view')) NavTab('/h/overview', l.tabOverview, Icons.space_dashboard_outlined),
+    // Overview: the whole hotel for those who run it; everyone else sees their own work (cooking, serving, billing).
+    if (s.can('dashboard.view'))
+      NavTab('/h/overview', l.tabOverview, Icons.space_dashboard_outlined)
+    else
+      NavTab('/h/me', l.tabOverview, Icons.insights_rounded),
     if (s.can('order.create') || s.can('order.serve')) NavTab('/h/floor', l.tabFloor, Icons.table_restaurant_outlined),
     // Every order, for whoever bills or runs the place (waiters and chefs work from Floor and Kitchen).
     if (s.can('order.view') && (s.can('bill.manage') || s.can('dashboard.view')))
@@ -281,6 +286,8 @@ class _ProfileButton extends ConsumerWidget {
             if (context.mounted && sound.lastFailed) showDone(context, l.soundBlocked);
           case 'printer':
             if (context.mounted) showPrinterDialog(context);
+          case 'password':
+            if (context.mounted) showChangePasswordDialog(context);
         }
       },
       itemBuilder: (_) => [
@@ -312,6 +319,11 @@ class _ProfileButton extends ConsumerWidget {
           ])),
           const PopupMenuDivider(),
         ],
+        PopupMenuItem(value: 'password', child: Row(children: [
+          const Icon(Icons.key_rounded, size: 18),
+          const SizedBox(width: 10),
+          Text(l.changePassword),
+        ])),
         PopupMenuItem(value: 'logout', child: Row(children: [
           const Icon(Icons.logout_rounded, size: 18),
           const SizedBox(width: 10),

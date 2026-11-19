@@ -6,6 +6,7 @@ import '../../core/theme/tokens.dart';
 import '../../l10n/app_localizations.dart';
 import '../../ui/components.dart';
 import '../../ui/feedback.dart';
+import '../../ui/password_dialog.dart';
 import '../../ui/shell.dart';
 import '../../ui/status.dart';
 
@@ -192,6 +193,7 @@ class _PersonRowState extends ConsumerState<_PersonRow> {
     final t = context.tokens;
     final tt = Theme.of(context).textTheme;
     final u = widget.user;
+    final me = ref.watch(sessionProvider).value!;
     final active = u['status'] == 'ACTIVE';
     final status = !active
         ? StatusChip(icon: Icons.block, label: l.disabled, color: t.faint)
@@ -206,6 +208,10 @@ class _PersonRowState extends ConsumerState<_PersonRow> {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       onSelected: (v) async {
         final api = ref.read(apiProvider);
+        if (v == 'password') {
+          await showResetPasswordDialog(context, u);
+          return;
+        }
         if (v == 'toggle') {
           await guard(context, () => api.patch('/api/v1/users/${u['id']}', {'status': active ? 'DISABLED' : 'ACTIVE'}));
         } else {
@@ -217,6 +223,10 @@ class _PersonRowState extends ConsumerState<_PersonRow> {
         for (final r in widget.roles.where((r) => r['id'] != u['role_id']))
           PopupMenuItem(value: r['id'] as String, child: Text(l.makeRole(roleLabel(context, r['code'], r['name'])))),
         const PopupMenuDivider(),
+        // Your own password changes from the profile menu (it needs the current one). Only a hotel admin may
+        // reset a hotel admin; the server enforces both, this only hides what would be refused.
+        if (u['id'] != me.userId && (u['role_code'] != 'HOTEL_ADMIN' || me.role == 'HOTEL_ADMIN'))
+          PopupMenuItem(value: 'password', child: Text(l.resetPassword)),
         PopupMenuItem(value: 'toggle', child: Text(active ? l.disableAccount : l.enableAccount)),
       ],
     );

@@ -7,11 +7,18 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 /// API base. Override at build time: --dart-define=API_BASE=https://api.example.com
 /// Empty (the default) means "same origin as the web app", which is how dev and preview builds are served.
+/// Android/iOS builds have no page origin and must pass API_BASE (docs/12); without it they talk to the local
+/// dev server instead of crashing on `Uri.base.origin` (a file:// URI has no origin).
 const _apiBaseDefine = String.fromEnvironment('API_BASE');
-final String apiBase = _apiBaseDefine.isNotEmpty ? _apiBaseDefine : Uri.base.origin;
+final String apiBase = _apiBaseDefine.isNotEmpty ? _apiBaseDefine : _pageOrigin();
+
+String _pageOrigin() {
+  final b = Uri.base;
+  return (b.scheme == 'http' || b.scheme == 'https') ? b.origin : 'http://localhost:8000';
+}
 
 /// Resolves a server-provided link (e.g. a table QR `/#/t/<token>`) against the web origin when relative.
-String absoluteLink(String link) => link.startsWith('http') ? link : '${Uri.base.origin}$link';
+String absoluteLink(String link) => link.startsWith('http') ? link : '${_pageOrigin()}$link';
 
 class ApiException implements Exception {
   ApiException(this.status, this.code, this.message, [this.details = const {}]);
@@ -75,6 +82,13 @@ class ApiClient {
     final t = Tokens(res['access_token'], res['refresh_token'], res['platform'] == true);
     await _save(t);
     return t;
+  }
+
+  /// Changes the signed-in user's password. The server signs out every other device and returns fresh
+  /// tokens for this one; storing them keeps this device signed in.
+  Future<void> changePassword(String current, String next) async {
+    final res = await _authed('POST', '/api/v1/me/password', body: {'current_password': current, 'new_password': next});
+    await _save(Tokens(res['access_token'], res['refresh_token'], res['platform'] == true));
   }
 
   Future<void> logout() async {

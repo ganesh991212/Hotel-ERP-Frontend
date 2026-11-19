@@ -2925,6 +2925,204 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Ready! Please collect it from the counter.'**
   String get collectAtCounter;
+
+  /// Profile menu item and dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'Change password'**
+  String get changePassword;
+
+  /// Field label
+  ///
+  /// In en, this message translates to:
+  /// **'Current password'**
+  String get currentPassword;
+
+  /// Field label
+  ///
+  /// In en, this message translates to:
+  /// **'New password'**
+  String get newPassword;
+
+  /// Field label
+  ///
+  /// In en, this message translates to:
+  /// **'Type the new password again'**
+  String get confirmNewPassword;
+
+  /// Validation
+  ///
+  /// In en, this message translates to:
+  /// **'The two new passwords don\'t match'**
+  String get passwordsDontMatch;
+
+  /// Confirmation after changing own password
+  ///
+  /// In en, this message translates to:
+  /// **'Password changed. Other devices are signed out.'**
+  String get passwordChanged;
+
+  /// Error
+  ///
+  /// In en, this message translates to:
+  /// **'Current password is wrong'**
+  String get errWrongPassword;
+
+  /// Error: new password equals the current one
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a different password'**
+  String get errSamePassword;
+
+  /// Team menu item: set a new password for a staff member
+  ///
+  /// In en, this message translates to:
+  /// **'Reset password'**
+  String get resetPassword;
+
+  /// Dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'Reset password for {name}'**
+  String resetPasswordFor(String name);
+
+  /// Dialog help
+  ///
+  /// In en, this message translates to:
+  /// **'They are signed out everywhere. Give them the new password in person; they can change it from their profile.'**
+  String get resetPasswordHelp;
+
+  /// Confirmation
+  ///
+  /// In en, this message translates to:
+  /// **'Password reset for {name}'**
+  String passwordResetDone(String name);
+
+  /// My work period filter
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get periodToday;
+
+  /// My work period filter
+  ///
+  /// In en, this message translates to:
+  /// **'Last 7 days'**
+  String get periodWeek;
+
+  /// My work section title for chefs
+  ///
+  /// In en, this message translates to:
+  /// **'Your cooking'**
+  String get myCooking;
+
+  /// My work section title for waiters
+  ///
+  /// In en, this message translates to:
+  /// **'Your serving'**
+  String get myServing;
+
+  /// My work section title for cashiers
+  ///
+  /// In en, this message translates to:
+  /// **'Your billing'**
+  String get myBilling;
+
+  /// Stat label
+  ///
+  /// In en, this message translates to:
+  /// **'Orders cooked'**
+  String get statOrdersCooked;
+
+  /// Stat label
+  ///
+  /// In en, this message translates to:
+  /// **'Items cooked'**
+  String get statItemsCooked;
+
+  /// Stat label
+  ///
+  /// In en, this message translates to:
+  /// **'Avg cooking time'**
+  String get statAvgCook;
+
+  /// Stat label: average minutes from order confirmed to this chef starting it
+  ///
+  /// In en, this message translates to:
+  /// **'Avg wait to start'**
+  String get statAvgWaitStart;
+
+  /// Stat label
+  ///
+  /// In en, this message translates to:
+  /// **'In your queue now'**
+  String get statInQueue;
+
+  /// Stat label
+  ///
+  /// In en, this message translates to:
+  /// **'Orders served'**
+  String get statOrdersServed;
+
+  /// Stat label
+  ///
+  /// In en, this message translates to:
+  /// **'Tables served'**
+  String get statTablesServed;
+
+  /// Stat label
+  ///
+  /// In en, this message translates to:
+  /// **'Avg ready to table'**
+  String get statAvgServe;
+
+  /// Stat label
+  ///
+  /// In en, this message translates to:
+  /// **'Orders you took'**
+  String get statOrdersTaken;
+
+  /// Stat label
+  ///
+  /// In en, this message translates to:
+  /// **'Ready to serve now'**
+  String get statReadyNow;
+
+  /// Stat label
+  ///
+  /// In en, this message translates to:
+  /// **'Bills raised'**
+  String get statBillsRaised;
+
+  /// Stat label: money received on your paid bills
+  ///
+  /// In en, this message translates to:
+  /// **'Collected'**
+  String get statCollected;
+
+  /// Stat label (whole hotel)
+  ///
+  /// In en, this message translates to:
+  /// **'Unpaid bills now'**
+  String get statUnpaidNow;
+
+  /// Caption under a personal average, e.g. 'Team 12.5 min'
+  ///
+  /// In en, this message translates to:
+  /// **'Team {value}'**
+  String teamAverage(String value);
+
+  /// Minutes with one decimal, e.g. 12.5 min
+  ///
+  /// In en, this message translates to:
+  /// **'{value} min'**
+  String minutesDecimal(String value);
+
+  /// Empty state
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing yet in this period'**
+  String get noWorkYet;
 }
 
 class _AppLocalizationsDelegate
