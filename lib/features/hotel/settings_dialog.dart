@@ -62,11 +62,15 @@ class _SettingsState extends ConsumerState<_Settings> {
     final l = AppLocalizations.of(context);
     if (_settings == null || _sub == null) return const LoadingBlock(height: 200);
     return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-      PillTabs<String>(
-        expand: true,
-        items: [('kitchen', l.kitchenAndOrdering), ('brand', l.branding), ('billing', l.planAndBilling)],
-        selected: _tab,
-        onSelect: (v) => setState(() => _tab = v),
+      // Natural-width tabs: equal thirds cut long labels ("Plan & billing", and longer still in Telugu/Hindi).
+      // When they do not fit, PillTabs scrolls them sideways.
+      Align(
+        alignment: AlignmentDirectional.centerStart,
+        child: PillTabs<String>(
+          items: [('kitchen', l.kitchenAndOrdering), ('brand', l.branding), ('billing', l.planAndBilling)],
+          selected: _tab,
+          onSelect: (v) => setState(() => _tab = v),
+        ),
       ),
       const SizedBox(height: 8),
       AnimatedSwitcher(
