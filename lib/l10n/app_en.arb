@@ -1953,7 +1953,7 @@
   },
   "settingsSaved": "Settings saved",
   "@settingsSaved": {
-    "description": "Confirmation shown after saving hotel settings (the settings dialog closes)"
+    "description": "Confirmation shown above the settings dialog after a successful save (the dialog stays open)"
   },
   "brandingSaved": "Branding saved",
   "@brandingSaved": {
