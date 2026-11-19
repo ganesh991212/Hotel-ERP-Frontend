@@ -2032,4 +2032,67 @@ class AppLocalizationsHi extends AppLocalizations {
   String unbilledToday(String amount) {
     return 'आज अभी बिल नहीं: $amount';
   }
+
+  @override
+  String get splitByItems => 'आइटम के हिसाब से बाँटें';
+
+  @override
+  String get splitByItemsHelp =>
+      'गेस्ट पर टैप करें तो एक उन्हें; x से वापस। शेयर्ड: टिक किए गेस्ट बराबर हिस्सा देंगे।';
+
+  @override
+  String get guestsCount => 'गेस्ट';
+
+  @override
+  String guestN(int n) {
+    return 'गेस्ट $n';
+  }
+
+  @override
+  String guestUnits(int n, int count) {
+    return 'गेस्ट $n · $count';
+  }
+
+  @override
+  String guestNofM(int n, int m) {
+    return '$m में से गेस्ट $n';
+  }
+
+  @override
+  String splitLeft(int count) {
+    return '$count बाकी';
+  }
+
+  @override
+  String get splitShared => 'शेयर्ड';
+
+  @override
+  String splitCreate(int count) {
+    return '$count बिल बनाएं';
+  }
+
+  @override
+  String get splitIncomplete => 'हर व्यंजन किसी को दें और हर गेस्ट को कुछ मिले';
+
+  @override
+  String splitDone(int count) {
+    return '$count गेस्ट बिल जारी हुए';
+  }
+
+  @override
+  String get guestBills => 'गेस्ट बिल';
+
+  @override
+  String get splitNothing => 'इस टेबल पर बाँटने को अभी कुछ नहीं';
+
+  @override
+  String get errLinesChanged => 'टेबल के आइटम बदल गए। सूची रिफ्रेश हो गई।';
+
+  @override
+  String get errSplitPartlyPaid =>
+      'एक गेस्ट भुगतान कर चुका है, यह बँटवारा रद्द नहीं हो सकता।';
+
+  @override
+  String get errBillDiscounted =>
+      'इस बिल पर छूट है। पहले इसे रद्द करें, फिर आइटम के हिसाब से बाँटें।';
 }

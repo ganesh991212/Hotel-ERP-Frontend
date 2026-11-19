@@ -598,5 +598,21 @@
   "staffCancelled": "{count} बिल हाथ से रद्द",
   "noStaffActivity": "इन तारीखों में स्टाफ के बिल या भुगतान नहीं",
   "errRangeTooLongDays": "अधिकतम {days} दिन चुनें",
-  "unbilledToday": "आज अभी बिल नहीं: {amount}"
+  "unbilledToday": "आज अभी बिल नहीं: {amount}",
+  "splitByItems": "आइटम के हिसाब से बाँटें",
+  "splitByItemsHelp": "गेस्ट पर टैप करें तो एक उन्हें; x से वापस। शेयर्ड: टिक किए गेस्ट बराबर हिस्सा देंगे।",
+  "guestsCount": "गेस्ट",
+  "guestN": "गेस्ट {n}",
+  "guestUnits": "गेस्ट {n} · {count}",
+  "guestNofM": "{m} में से गेस्ट {n}",
+  "splitLeft": "{count} बाकी",
+  "splitShared": "शेयर्ड",
+  "splitCreate": "{count} बिल बनाएं",
+  "splitIncomplete": "हर व्यंजन किसी को दें और हर गेस्ट को कुछ मिले",
+  "splitDone": "{count} गेस्ट बिल जारी हुए",
+  "guestBills": "गेस्ट बिल",
+  "splitNothing": "इस टेबल पर बाँटने को अभी कुछ नहीं",
+  "errLinesChanged": "टेबल के आइटम बदल गए। सूची रिफ्रेश हो गई।",
+  "errSplitPartlyPaid": "एक गेस्ट भुगतान कर चुका है, यह बँटवारा रद्द नहीं हो सकता।",
+  "errBillDiscounted": "इस बिल पर छूट है। पहले इसे रद्द करें, फिर आइटम के हिसाब से बाँटें।"
 }

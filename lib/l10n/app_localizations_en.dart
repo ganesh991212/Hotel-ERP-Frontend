@@ -2053,4 +2053,69 @@ class AppLocalizationsEn extends AppLocalizations {
   String unbilledToday(String amount) {
     return 'Not billed yet today: $amount';
   }
+
+  @override
+  String get splitByItems => 'Split by items';
+
+  @override
+  String get splitByItemsHelp =>
+      'Tap a guest to give them one; the x takes one back. Shared: the ticked guests pay an equal part.';
+
+  @override
+  String get guestsCount => 'Guests';
+
+  @override
+  String guestN(int n) {
+    return 'Guest $n';
+  }
+
+  @override
+  String guestUnits(int n, int count) {
+    return 'Guest $n · $count';
+  }
+
+  @override
+  String guestNofM(int n, int m) {
+    return 'Guest $n of $m';
+  }
+
+  @override
+  String splitLeft(int count) {
+    return '$count left';
+  }
+
+  @override
+  String get splitShared => 'Shared';
+
+  @override
+  String splitCreate(int count) {
+    return 'Create $count bills';
+  }
+
+  @override
+  String get splitIncomplete =>
+      'Give out every dish and give every guest something';
+
+  @override
+  String splitDone(int count) {
+    return '$count guest bills issued';
+  }
+
+  @override
+  String get guestBills => 'Guest bills';
+
+  @override
+  String get splitNothing => 'Nothing to split at this table yet';
+
+  @override
+  String get errLinesChanged =>
+      'The table\'s items changed. The list has been refreshed.';
+
+  @override
+  String get errSplitPartlyPaid =>
+      'A guest has already paid, so this split cannot be cancelled.';
+
+  @override
+  String get errBillDiscounted =>
+      'This bill has a discount. Cancel it first, then split by items.';
 }

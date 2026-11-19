@@ -30,6 +30,10 @@ String errorText(BuildContext context, Object e) {
       'has_payments' => l.errHasPayments,
       'payments_exceed_total' => l.errPaymentsExceedTotal,
       'same_password' => l.errSamePassword,
+      'lines_changed' => l.errLinesChanged,
+      'split_partly_paid' => l.errSplitPartlyPaid,
+      'bill_discounted' => l.errBillDiscounted,
+      'guest_empty' || 'bad_split' => l.splitIncomplete,
       'range_too_long' => e.details['max_days'] is num
           ? l.errRangeTooLongDays((e.details['max_days'] as num).toInt())
           : l.errRangeTooLong,

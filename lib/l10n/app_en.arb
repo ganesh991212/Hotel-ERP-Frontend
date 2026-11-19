@@ -2750,5 +2750,105 @@
         "type": "String"
       }
     }
+  },
+  "splitByItems": "Split by items",
+  "@splitByItems": {
+    "description": "Button: one GST bill per guest, by what each had"
+  },
+  "splitByItemsHelp": "Tap a guest to give them one; the x takes one back. Shared: the ticked guests pay an equal part.",
+  "@splitByItemsHelp": {
+    "description": "How to use the split screen"
+  },
+  "guestsCount": "Guests",
+  "@guestsCount": {
+    "description": "Label for the number of guests"
+  },
+  "guestN": "Guest {n}",
+  "@guestN": {
+    "description": "One guest in a split",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "guestUnits": "Guest {n} · {count}",
+  "@guestUnits": {
+    "description": "Guest chip with how many units they have",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "guestNofM": "Guest {n} of {m}",
+  "@guestNofM": {
+    "description": "Which guest bill this is",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "m": {
+        "type": "int"
+      }
+    }
+  },
+  "splitLeft": "{count} left",
+  "@splitLeft": {
+    "description": "Units of a dish not given to anyone yet",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "splitShared": "Shared",
+  "@splitShared": {
+    "description": "Switch: this dish is shared equally by the ticked guests"
+  },
+  "splitCreate": "Create {count} bills",
+  "@splitCreate": {
+    "description": "Button: issue one bill per guest",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "splitIncomplete": "Give out every dish and give every guest something",
+  "@splitIncomplete": {
+    "description": "Why the split cannot be created yet"
+  },
+  "splitDone": "{count} guest bills issued",
+  "@splitDone": {
+    "description": "Toast after a split",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "guestBills": "Guest bills",
+  "@guestBills": {
+    "description": "Section listing every guest bill of a split"
+  },
+  "splitNothing": "Nothing to split at this table yet",
+  "@splitNothing": {
+    "description": "Empty split screen"
+  },
+  "errLinesChanged": "The table's items changed. The list has been refreshed.",
+  "@errLinesChanged": {
+    "description": "Error: orders changed while splitting"
+  },
+  "errSplitPartlyPaid": "A guest has already paid, so this split cannot be cancelled.",
+  "@errSplitPartlyPaid": {
+    "description": "Error: void refused on a split"
+  },
+  "errBillDiscounted": "This bill has a discount. Cancel it first, then split by items.",
+  "@errBillDiscounted": {
+    "description": "Error: a discounted bill cannot be split by items"
   }
 }

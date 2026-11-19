@@ -3699,6 +3699,102 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Not billed yet today: {amount}'**
   String unbilledToday(String amount);
+
+  /// Button: one GST bill per guest, by what each had
+  ///
+  /// In en, this message translates to:
+  /// **'Split by items'**
+  String get splitByItems;
+
+  /// How to use the split screen
+  ///
+  /// In en, this message translates to:
+  /// **'Tap a guest to give them one; the x takes one back. Shared: the ticked guests pay an equal part.'**
+  String get splitByItemsHelp;
+
+  /// Label for the number of guests
+  ///
+  /// In en, this message translates to:
+  /// **'Guests'**
+  String get guestsCount;
+
+  /// One guest in a split
+  ///
+  /// In en, this message translates to:
+  /// **'Guest {n}'**
+  String guestN(int n);
+
+  /// Guest chip with how many units they have
+  ///
+  /// In en, this message translates to:
+  /// **'Guest {n} · {count}'**
+  String guestUnits(int n, int count);
+
+  /// Which guest bill this is
+  ///
+  /// In en, this message translates to:
+  /// **'Guest {n} of {m}'**
+  String guestNofM(int n, int m);
+
+  /// Units of a dish not given to anyone yet
+  ///
+  /// In en, this message translates to:
+  /// **'{count} left'**
+  String splitLeft(int count);
+
+  /// Switch: this dish is shared equally by the ticked guests
+  ///
+  /// In en, this message translates to:
+  /// **'Shared'**
+  String get splitShared;
+
+  /// Button: issue one bill per guest
+  ///
+  /// In en, this message translates to:
+  /// **'Create {count} bills'**
+  String splitCreate(int count);
+
+  /// Why the split cannot be created yet
+  ///
+  /// In en, this message translates to:
+  /// **'Give out every dish and give every guest something'**
+  String get splitIncomplete;
+
+  /// Toast after a split
+  ///
+  /// In en, this message translates to:
+  /// **'{count} guest bills issued'**
+  String splitDone(int count);
+
+  /// Section listing every guest bill of a split
+  ///
+  /// In en, this message translates to:
+  /// **'Guest bills'**
+  String get guestBills;
+
+  /// Empty split screen
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing to split at this table yet'**
+  String get splitNothing;
+
+  /// Error: orders changed while splitting
+  ///
+  /// In en, this message translates to:
+  /// **'The table\'s items changed. The list has been refreshed.'**
+  String get errLinesChanged;
+
+  /// Error: void refused on a split
+  ///
+  /// In en, this message translates to:
+  /// **'A guest has already paid, so this split cannot be cancelled.'**
+  String get errSplitPartlyPaid;
+
+  /// Error: a discounted bill cannot be split by items
+  ///
+  /// In en, this message translates to:
+  /// **'This bill has a discount. Cancel it first, then split by items.'**
+  String get errBillDiscounted;
 }
 
 class _AppLocalizationsDelegate
