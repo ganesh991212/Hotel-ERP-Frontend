@@ -3123,6 +3123,114 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Nothing yet in this period'**
   String get noWorkYet;
+
+  /// Bill window: the guest ordered more after the bill was issued
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 new order since this bill} other{{count} new orders since this bill}}'**
+  String newOrdersSinceBill(int count);
+
+  /// Button: replace the unpaid bill with one covering every order
+  ///
+  /// In en, this message translates to:
+  /// **'Update bill'**
+  String get updateBill;
+
+  /// Help under Update bill
+  ///
+  /// In en, this message translates to:
+  /// **'The current bill is cancelled and one new bill covers everything.'**
+  String get updateBillHelp;
+
+  /// Confirmation after a bill replaced an earlier one
+  ///
+  /// In en, this message translates to:
+  /// **'{old} cancelled. {next} has every order.'**
+  String billReplaced(String old, String next);
+
+  /// Bill status: void
+  ///
+  /// In en, this message translates to:
+  /// **'Cancelled'**
+  String get billCancelled;
+
+  /// Orders screen: tables whose food is served but not paid
+  ///
+  /// In en, this message translates to:
+  /// **'Tables to bill'**
+  String get tablesToBill;
+
+  /// Orders screen toggle
+  ///
+  /// In en, this message translates to:
+  /// **'Orders'**
+  String get viewOrders;
+
+  /// Orders screen toggle: bills register
+  ///
+  /// In en, this message translates to:
+  /// **'Bills'**
+  String get viewBills;
+
+  /// Date filter
+  ///
+  /// In en, this message translates to:
+  /// **'Yesterday'**
+  String get yesterday;
+
+  /// Date filter: open a date range picker
+  ///
+  /// In en, this message translates to:
+  /// **'Pick dates'**
+  String get pickDates;
+
+  /// Search box hint on Orders
+  ///
+  /// In en, this message translates to:
+  /// **'Order # or table'**
+  String get searchOrdersHint;
+
+  /// Search box hint on Bills
+  ///
+  /// In en, this message translates to:
+  /// **'Bill # or table'**
+  String get searchBillsHint;
+
+  /// Button at the end of a long list
+  ///
+  /// In en, this message translates to:
+  /// **'Load more'**
+  String get loadMore;
+
+  /// Empty state on Bills
+  ///
+  /// In en, this message translates to:
+  /// **'No bills in this period'**
+  String get noBillsYet;
+
+  /// Error: date range too long
+  ///
+  /// In en, this message translates to:
+  /// **'Pick at most 31 days'**
+  String get errRangeTooLong;
+
+  /// Button: show this order's bill
+  ///
+  /// In en, this message translates to:
+  /// **'Open bill'**
+  String get openBill;
+
+  /// Bills filter: paid bills
+  ///
+  /// In en, this message translates to:
+  /// **'Paid'**
+  String get statusPaid;
+
+  /// Bills register: how many copies were printed
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{Printed once} other{Printed {count} times}}'**
+  String printedTimes(int count);
 }
 
 class _AppLocalizationsDelegate

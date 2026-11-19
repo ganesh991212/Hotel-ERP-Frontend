@@ -56,14 +56,34 @@ Future<void> printKotFlow(BuildContext context, WidgetRef ref, Map order) async 
   );
 }
 
+/// The table's bill for this visit: create it, update it when the guest ordered more, print, settle.
 Future<void> showBillDialog(BuildContext context, Map table) {
   final l = AppLocalizations.of(context);
   return showGlassDialog(context, title: l.billForTable(table['label']), maxWidth: 520, body: _BillPanel(table: table));
 }
 
+/// One specific bill from the register (paid or cancelled included): view and print again.
+Future<void> showBillById(BuildContext context, WidgetRef ref, String billId) async {
+  try {
+    final b = Map<String, dynamic>.from(await ref.read(apiProvider).get('/api/v1/bills/$billId'));
+    if (!context.mounted) return;
+    await showGlassDialog(
+      context,
+      title: b['invoice_no'] as String,
+      maxWidth: 520,
+      body: _BillPanel(table: {'id': b['table_id'], 'label': b['table_label']}, initial: b),
+    );
+  } catch (e) {
+    if (context.mounted) showError(context, e);
+  }
+}
+
 class _BillPanel extends ConsumerStatefulWidget {
-  const _BillPanel({required this.table});
+  const _BillPanel({required this.table, this.initial});
   final Map table;
+
+  /// Opened from the bills register: show this bill as it is, without looking up the table's open bill.
+  final Map<String, dynamic>? initial;
 
   @override
   ConsumerState<_BillPanel> createState() => _BillPanelState();
@@ -75,16 +95,32 @@ class _BillPanelState extends ConsumerState<_BillPanel> {
   bool _busy = false;
   List? _unserved;
 
+  /// Orders at this table not on any bill yet. With an unpaid bill open, these are what the guest ordered after
+  /// it was issued: offer "Update bill" so the visit still ends with one bill.
+  int _newOrders = 0;
+
   @override
   void initState() {
     super.initState();
-    _loadOpen();
+    if (widget.initial != null) {
+      _bill = widget.initial;
+      _loading = false;
+    } else {
+      _loadOpen();
+    }
   }
 
   Future<void> _loadOpen() async {
     try {
-      final r = (await ref.read(apiProvider).get('/api/v1/bills?scope=open&table_id=${widget.table['id']}')) as List;
-      if (mounted) setState(() => _bill = r.isEmpty ? null : Map<String, dynamic>.from(r.first));
+      final api = ref.read(apiProvider);
+      final r = (await api.get('/api/v1/bills?scope=open&table_id=${widget.table['id']}')) as List;
+      final orders = (await api.get('/api/v1/orders?scope=attention&table_id=${widget.table['id']}')) as List;
+      if (mounted) {
+        setState(() {
+          _bill = r.isEmpty ? null : Map<String, dynamic>.from(r.first);
+          _newOrders = orders.where((o) => o['bill_id'] == null && o['status'] != 'PLACED').length;
+        });
+      }
     } catch (e) {
       if (mounted) showError(context, e);
     }
@@ -98,10 +134,15 @@ class _BillPanelState extends ConsumerState<_BillPanel> {
         'table_id': widget.table['id'],
         'include_unserved': includeUnserved,
       });
+      final replaced = (b['replaced_invoice_nos'] as List?)?.cast<String>() ?? const [];
       setState(() {
         _bill = Map<String, dynamic>.from(b);
         _unserved = null;
+        _newOrders = 0;
       });
+      if (replaced.isNotEmpty && mounted) {
+        showDone(context, AppLocalizations.of(context).billReplaced(replaced.join(', '), b['invoice_no'] as String));
+      }
     } on ApiException catch (e) {
       if (e.code == 'orders_not_served') {
         setState(() => _unserved = e.details['orders'] as List?);
@@ -148,10 +189,11 @@ class _BillPanelState extends ConsumerState<_BillPanel> {
     );
     if (ok != true || !mounted) return;
     await guard(context, () async {
-      await ref.read(apiProvider).post('/api/v1/bills/${_bill!['id']}/void', {
+      final r = await ref.read(apiProvider).post('/api/v1/bills/${_bill!['id']}/void', {
         'reason': reason.text.trim().length < 3 ? l.voidBill : reason.text.trim(),
       });
-      setState(() => _bill = null);
+      // From the register: show it as cancelled. From the table: back to "create bill" for this visit.
+      setState(() => _bill = widget.initial != null ? Map<String, dynamic>.from(r) : null);
     });
   }
 
@@ -186,6 +228,31 @@ class _BillPanelState extends ConsumerState<_BillPanel> {
       ]);
     }
     final paid = b['status'] == 'PAID';
+    final cancelled = b['status'] == 'VOID';
+    final update = (!paid && !cancelled && _newOrders > 0)
+        ? Container(
+            margin: const EdgeInsets.only(bottom: 12),
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(color: t.warn.withValues(alpha: .12), borderRadius: BorderRadius.circular(Rad.tile)),
+            child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+              Row(children: [
+                Icon(Icons.add_circle_outline, color: t.warn),
+                const SizedBox(width: 8),
+                Expanded(child: Text(l.newOrdersSinceBill(_newOrders), style: tt.titleSmall)),
+              ]),
+              Text(l.updateBillHelp, style: tt.bodySmall),
+              if (_unserved != null) ...[
+                const SizedBox(height: 8),
+                Text(l.notServedYet(_unserved!.join(', #'))),
+                const SizedBox(height: 6),
+                OutlinedButton(onPressed: _busy ? null : () => _create(includeUnserved: true), child: Text(l.billAnyway)),
+              ] else ...[
+                const SizedBox(height: 8),
+                FilledButton(onPressed: _busy ? null : _create, child: Text(l.updateBill)),
+              ],
+            ]),
+          )
+        : null;
     Widget row(String a, int v, {bool strong = false}) => Padding(
           padding: const EdgeInsets.symmetric(vertical: 2),
           child: Row(children: [
@@ -194,14 +261,18 @@ class _BillPanelState extends ConsumerState<_BillPanel> {
           ]),
         );
     return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+      ?update,
       Row(children: [
         Expanded(child: Text(b['invoice_no'], style: tt.titleLarge)),
-        StatusChip(
-          icon: paid ? Icons.check_circle_outline : Icons.pending_outlined,
-          label: paid ? l.billPaid(b['payment_method']) : l.billUnpaid,
-          color: paid ? t.ok : t.warn,
-        ),
+        cancelled
+            ? StatusChip(icon: Icons.cancel_outlined, label: l.billCancelled, color: t.danger)
+            : StatusChip(
+                icon: paid ? Icons.check_circle_outline : Icons.pending_outlined,
+                label: paid ? l.billPaid(b['payment_method']) : l.billUnpaid,
+                color: paid ? t.ok : t.warn,
+              ),
       ]),
+      if (cancelled && b['void_reason'] != null) Text(b['void_reason'], style: tt.bodySmall?.copyWith(color: t.danger)),
       Text(l.ordersIncluded(b['orders'].join(', #')), style: tt.bodySmall),
       const SizedBox(height: 10),
       for (final ln in (b['lines'] as List))
@@ -224,7 +295,7 @@ class _BillPanelState extends ConsumerState<_BillPanel> {
         icon: const Icon(Icons.print_outlined, size: 18),
         label: Text((b['print_count'] as int) > 0 ? l.printDuplicate : l.printBill),
       ),
-      if (!paid) ...[
+      if (!paid && !cancelled) ...[
         FieldLabel(l.settlePayment),
         ChoiceRow<String>(
           options: [('CASH', l.payCash), ('UPI', l.payUpi), ('CARD', l.payCard)],
@@ -232,7 +303,7 @@ class _BillPanelState extends ConsumerState<_BillPanel> {
           onChanged: _settle,
         ),
       ],
-      if (s.can('bill.void')) ...[
+      if (s.can('bill.void') && !cancelled) ...[
         const SizedBox(height: 8),
         TextButton(onPressed: _void, child: Text(l.voidBill, style: TextStyle(color: t.danger))),
       ],

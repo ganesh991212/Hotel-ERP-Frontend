@@ -24,6 +24,7 @@ String errorText(BuildContext context, Object e) {
       'session_expired' || 'no_session' => l.errSessionExpired,
       'wrong_password' => l.errWrongPassword,
       'same_password' => l.errSamePassword,
+      'range_too_long' => l.errRangeTooLong,
       'server_error' => l.errGeneric, // server crash: show translated copy, not the server's English text
       _ => e.message.isEmpty ? l.errGeneric : e.message,
     };

@@ -1666,4 +1666,77 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noWorkYet => 'Nothing yet in this period';
+
+  @override
+  String newOrdersSinceBill(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count new orders since this bill',
+      one: '1 new order since this bill',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get updateBill => 'Update bill';
+
+  @override
+  String get updateBillHelp =>
+      'The current bill is cancelled and one new bill covers everything.';
+
+  @override
+  String billReplaced(String old, String next) {
+    return '$old cancelled. $next has every order.';
+  }
+
+  @override
+  String get billCancelled => 'Cancelled';
+
+  @override
+  String get tablesToBill => 'Tables to bill';
+
+  @override
+  String get viewOrders => 'Orders';
+
+  @override
+  String get viewBills => 'Bills';
+
+  @override
+  String get yesterday => 'Yesterday';
+
+  @override
+  String get pickDates => 'Pick dates';
+
+  @override
+  String get searchOrdersHint => 'Order # or table';
+
+  @override
+  String get searchBillsHint => 'Bill # or table';
+
+  @override
+  String get loadMore => 'Load more';
+
+  @override
+  String get noBillsYet => 'No bills in this period';
+
+  @override
+  String get errRangeTooLong => 'Pick at most 31 days';
+
+  @override
+  String get openBill => 'Open bill';
+
+  @override
+  String get statusPaid => 'Paid';
+
+  @override
+  String printedTimes(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Printed $count times',
+      one: 'Printed once',
+    );
+    return '$_temp0';
+  }
 }

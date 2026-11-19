@@ -58,8 +58,11 @@ class _FloorPageState extends ConsumerState<FloorPage> {
         ? orders.where((o) => o['status'] == 'CONFIRMED' && !isPickupOverdue(o)).toList()
         : <Map<String, dynamic>>[];
     final onPaper = orders.where((o) => o['on_paper'] == true && o['status'] == 'PREPARING').toList();
-    // Served, not billed: the table still owes money.
-    final toBill = s.can('bill.manage') ? orders.where((o) => o['status'] == 'SERVED').toList() : <Map<String, dynamic>>[];
+    // Served, not billed: the table still owes money. One row (one Bill button) per table: a visit gets one bill.
+    final billedTables = <Object?>{};
+    final toBill = s.can('bill.manage')
+        ? orders.where((o) => o['status'] == 'SERVED' && billedTables.add(o['table']?['id'])).toList()
+        : <Map<String, dynamic>>[];
     final attention = [...overdue, ...ready, ...placed, ...onPaper, ...waiting, ...toBill];
 
     return PageBody(children: [

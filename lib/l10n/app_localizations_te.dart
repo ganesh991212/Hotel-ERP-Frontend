@@ -1671,4 +1671,77 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get noWorkYet => 'ఈ కాలంలో ఇంకా ఏమీ లేదు';
+
+  @override
+  String newOrdersSinceBill(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'ఈ బిల్ తర్వాత $count కొత్త ఆర్డర్లు',
+      one: 'ఈ బిల్ తర్వాత 1 కొత్త ఆర్డర్',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get updateBill => 'బిల్ అప్‌డేట్ చేయండి';
+
+  @override
+  String get updateBillHelp =>
+      'ప్రస్తుత బిల్ రద్దవుతుంది; ఒకే కొత్త బిల్‌లో అన్నీ ఉంటాయి.';
+
+  @override
+  String billReplaced(String old, String next) {
+    return '$old రద్దయింది. $nextలో అన్ని ఆర్డర్లు ఉన్నాయి.';
+  }
+
+  @override
+  String get billCancelled => 'రద్దయింది';
+
+  @override
+  String get tablesToBill => 'బిల్ చేయాల్సిన టేబుల్స్';
+
+  @override
+  String get viewOrders => 'ఆర్డర్లు';
+
+  @override
+  String get viewBills => 'బిల్లులు';
+
+  @override
+  String get yesterday => 'నిన్న';
+
+  @override
+  String get pickDates => 'తేదీలు ఎంచుకోండి';
+
+  @override
+  String get searchOrdersHint => 'ఆర్డర్ # లేదా టేబుల్';
+
+  @override
+  String get searchBillsHint => 'బిల్ # లేదా టేబుల్';
+
+  @override
+  String get loadMore => 'మరిన్ని చూపించు';
+
+  @override
+  String get noBillsYet => 'ఈ కాలంలో బిల్లులు లేవు';
+
+  @override
+  String get errRangeTooLong => 'గరిష్టంగా 31 రోజులు ఎంచుకోండి';
+
+  @override
+  String get openBill => 'బిల్ తెరవండి';
+
+  @override
+  String get statusPaid => 'చెల్లించారు';
+
+  @override
+  String printedTimes(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count సార్లు ప్రింట్ అయింది',
+      one: 'ఒకసారి ప్రింట్ అయింది',
+    );
+    return '$_temp0';
+  }
 }
