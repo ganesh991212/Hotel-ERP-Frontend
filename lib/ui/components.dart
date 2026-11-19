@@ -1,3 +1,4 @@
+import 'dart:math' as math;
 import 'dart:ui' show ImageFilter;
 
 import 'package:material_ui/material_ui.dart';
@@ -178,6 +179,10 @@ class _RevealState extends State<Reveal> with SingleTickerProviderStateMixin {
 
 /// Segmented pill navigation with a sliding dark indicator. The leading edge moves first and the
 /// trailing edge follows, giving the stretch-then-settle motion of the reference.
+///
+/// When the items are wider than the space given, the bar stays inside that space and the items scroll
+/// sideways within it (the indicator scrolls with them). With a mouse, [magnify] enlarges the item under the
+/// pointer and, less, its neighbours, like the macOS Dock.
 class PillTabs<T> extends StatefulWidget {
   const PillTabs({
     super.key,
@@ -188,6 +193,7 @@ class PillTabs<T> extends StatefulWidget {
     this.icons,
     this.stacked = false,
     this.elevated = false,
+    this.magnify = false,
   });
   final List<(T, String)> items;
   final T selected;
@@ -201,6 +207,13 @@ class PillTabs<T> extends StatefulWidget {
   /// Stronger glass + shadow when floating over content (bottom dock).
   final bool elevated;
 
+  /// Mouse hover magnification (macOS Dock style). No effect on touch screens, which have no hover.
+  final bool magnify;
+
+  /// Largest scale of the item directly under the pointer, and how far (logical px) the effect reaches.
+  static const maxScale = 1.22;
+  static const reach = 110.0;
+
   @override
   State<PillTabs<T>> createState() => _PillTabsState<T>();
 }
@@ -210,6 +223,21 @@ class _PillTabsState<T> extends State<PillTabs<T>> {
   final _stackKey = GlobalKey();
   Rect? _rect;
   Rect? _prev;
+
+  /// Pointer x in the item row's coordinates while a mouse hovers the bar; null otherwise.
+  double? _hoverX;
+
+  double _scaleFor(int i) {
+    final x = _hoverX;
+    if (x == null || i >= _keys.length) return 1;
+    final box = _keys[i].currentContext?.findRenderObject() as RenderBox?;
+    final stack = _stackKey.currentContext?.findRenderObject() as RenderBox?;
+    if (box == null || stack == null || !box.hasSize) return 1;
+    final centre = box.localToGlobal(box.size.center(Offset.zero), ancestor: stack).dx;
+    final d = (x - centre) / PillTabs.reach;
+    // Gaussian falloff: full size under the pointer, neighbours partly, far items untouched.
+    return 1 + (PillTabs.maxScale - 1) * math.exp(-d * d * 2.2);
+  }
 
   @override
   void didUpdateWidget(covariant PillTabs<T> old) {
@@ -261,19 +289,35 @@ class _PillTabsState<T> extends State<PillTabs<T>> {
         borderRadius: BorderRadius.circular(Rad.pill),
         border: Border.all(color: t.hair),
       ),
-      child: Stack(key: _stackKey, children: [
-        if (_rect != null)
-          TweenAnimationBuilder<double>(
-            key: ValueKey(_rect),
-            tween: Tween(begin: _prev == null ? 1 : 0, end: 1),
-            duration: Motion.medium,
-            builder: (_, v, _) => _Indicator(
-                from: _prev ?? _rect!, to: _rect!, progress: v, movingRight: movingRight, color: t.night),
-          ),
-        widget.expand
-            ? Row(children: [for (final w in items) Expanded(child: w)])
-            : Row(mainAxisSize: MainAxisSize.min, children: items),
-      ]),
+      child: widget.expand
+          ? _row(movingRight, Row(children: [for (final w in items) Expanded(child: w)]))
+          // Sized to its items when they fit; otherwise as wide as allowed, with the items scrolling inside.
+          : SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              physics: const BouncingScrollPhysics(),
+              child: _row(movingRight, Row(mainAxisSize: MainAxisSize.min, children: items)),
+            ),
+    );
+  }
+
+  Widget _row(bool movingRight, Widget row) {
+    final t = context.tokens;
+    final stack = Stack(key: _stackKey, children: [
+      if (_rect != null)
+        TweenAnimationBuilder<double>(
+          key: ValueKey(_rect),
+          tween: Tween(begin: _prev == null ? 1 : 0, end: 1),
+          duration: Motion.medium,
+          builder: (_, v, _) => _Indicator(
+              from: _prev ?? _rect!, to: _rect!, progress: v, movingRight: movingRight, color: t.night),
+        ),
+      row,
+    ]);
+    if (!widget.magnify || MediaQuery.disableAnimationsOf(context)) return stack;
+    return MouseRegion(
+      onHover: (e) => setState(() => _hoverX = e.localPosition.dx),
+      onExit: (_) => setState(() => _hoverX = null),
+      child: stack,
     );
   }
 
@@ -291,7 +335,12 @@ class _PillTabsState<T> extends State<PillTabs<T>> {
           padding: widget.stacked
               ? const EdgeInsets.symmetric(horizontal: 12, vertical: 7)
               : const EdgeInsets.symmetric(horizontal: 18, vertical: 11),
-          child: _label(context, i, item.$2, sel ? t.onNight : t.dim),
+          child: AnimatedScale(
+            scale: _scaleFor(i),
+            duration: _hoverX == null ? Motion.fast : const Duration(milliseconds: 90),
+            curve: Motion.ease,
+            child: _label(context, i, item.$2, sel ? t.onNight : t.dim),
+          ),
         ),
       ),
     );
