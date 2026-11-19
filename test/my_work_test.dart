@@ -78,6 +78,12 @@ void main() {
       }),
     ));
     expect(waiter.first.path, '/h/me');
+    // Regression: '/h/menu' starts with '/h/me', so the dock highlighted Overview on the Menu page and the
+    // route guard admitted '/h/menu' for anyone who had '/h/me'.
+    expect(isUnderTab('/h/menu', '/h/me'), isFalse);
+    expect(isUnderTab('/h/me', '/h/me'), isTrue);
+    expect(isUnderTab('/h/menu/items', '/h/menu'), isTrue);
+    expect(waiter.where((t) => isUnderTab('/h/menu', t.path)), isEmpty, reason: 'no Menu permission, no Menu page');
     expect(admin.first.path, '/h/overview');
     expect(admin.any((t) => t.path == '/h/me'), isFalse);
   });
