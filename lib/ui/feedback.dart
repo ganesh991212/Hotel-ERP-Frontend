@@ -22,6 +22,7 @@ String errorText(BuildContext context, Object e) {
       'not_head' => l.errNotHead,
       'item_unavailable' => l.errSoldOut,
       'session_expired' || 'no_session' => l.errSessionExpired,
+      'server_error' => l.errGeneric, // server crash: show translated copy, not the server's English text
       _ => e.message.isEmpty ? l.errGeneric : e.message,
     };
   }
