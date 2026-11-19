@@ -30,7 +30,9 @@ String errorText(BuildContext context, Object e) {
       'has_payments' => l.errHasPayments,
       'payments_exceed_total' => l.errPaymentsExceedTotal,
       'same_password' => l.errSamePassword,
-      'range_too_long' => l.errRangeTooLong,
+      'range_too_long' => e.details['max_days'] is num
+          ? l.errRangeTooLongDays((e.details['max_days'] as num).toInt())
+          : l.errRangeTooLong,
       'server_error' => l.errGeneric, // server crash: show translated copy, not the server's English text
       _ => e.message.isEmpty ? l.errGeneric : e.message,
     };

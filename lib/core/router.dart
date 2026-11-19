@@ -9,6 +9,7 @@ import '../features/hotel/expenses_page.dart';
 import '../features/hotel/menu_page.dart';
 import '../features/hotel/my_work_page.dart';
 import '../features/hotel/orders_page.dart';
+import '../features/hotel/reports_page.dart';
 import '../features/hotel/overview_page.dart';
 import '../features/hotel/tables_page.dart';
 import '../features/hotel/team_page.dart';
@@ -52,7 +53,9 @@ final routerProvider = Provider<GoRouter>((ref) {
       final home = _home(context, s);
       if (loc == '/login' || loc == '/') return home;
       if (s.platform != loc.startsWith('/p/')) return home;
-      final allowed = tabsFor(context, s).any((t) => isUnderTab(loc, t.path));
+      // Pages reached from a button rather than the dock are allowed by their own permission.
+      final extra = loc == '/h/overview/reports' && s.can('report.view');
+      final allowed = extra || tabsFor(context, s).any((t) => isUnderTab(loc, t.path));
       return allowed ? null : home;
     },
     routes: [
@@ -68,6 +71,7 @@ final routerProvider = Provider<GoRouter>((ref) {
           GoRoute(path: '/p/categories', pageBuilder: (_, s) => _fade(s, const CategoriesPage())),
           GoRoute(path: '/h/overview', pageBuilder: (_, s) => _fade(s, const HotelOverviewPage())),
           GoRoute(path: '/h/me', pageBuilder: (_, s) => _fade(s, const MyWorkPage())),
+          GoRoute(path: '/h/overview/reports', pageBuilder: (_, s) => _fade(s, const ReportsPage())),
           GoRoute(path: '/h/floor', pageBuilder: (_, s) => _fade(s, const FloorPage())),
           GoRoute(path: '/h/orders', pageBuilder: (_, s) => _fade(s, const OrdersPage())),
           GoRoute(path: '/h/kitchen', pageBuilder: (_, s) => _fade(s, const KitchenPage())),

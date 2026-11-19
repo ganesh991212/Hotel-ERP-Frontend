@@ -121,14 +121,33 @@ class ApiClient {
 
   Future<dynamic> get(String path, {Map<String, String>? headers}) => _authed('GET', path, headers: headers);
 
-  /// Raw bytes (images). Same auth and refresh handling as JSON calls.
+  /// Raw bytes (images, CSV exports). Same auth and refresh handling as JSON calls; server errors keep their code
+  /// (e.g. `feature_locked`) so the user sees the right message.
   Future<Uint8List> getBytes(String path) async {
     Future<http.Response> once() => _http
         .get(Uri.parse('$apiBase$path'), headers: {if (_tokens != null) 'Authorization': 'Bearer ${_tokens!.access}'})
         .timeout(const Duration(seconds: 20));
-    var res = await once();
-    if (res.statusCode == 401 && await _refresh()) res = await once();
-    if (res.statusCode >= 400) throw ApiException(res.statusCode, 'http_${res.statusCode}', res.reasonPhrase ?? '');
+    http.Response res;
+    try {
+      res = await once();
+      if (res.statusCode == 401 && await _refresh()) res = await once();
+    } on TimeoutException {
+      throw ApiException(0, 'timeout', 'timeout');
+    } on ApiException {
+      rethrow;
+    } catch (_) {
+      throw ApiException(0, 'offline', 'offline');
+    }
+    if (res.statusCode >= 400) {
+      Object? data;
+      try {
+        data = jsonDecode(utf8.decode(res.bodyBytes));
+      } catch (_) {}
+      if (data is Map && data['code'] != null) {
+        throw ApiException(res.statusCode, data['code'], data['message'] ?? '', Map.from(data['details'] ?? {}));
+      }
+      throw ApiException(res.statusCode, 'http_${res.statusCode}', res.reasonPhrase ?? '');
+    }
     return res.bodyBytes;
   }
   Future<dynamic> post(String path, [Object? body, Map<String, String>? headers]) =>

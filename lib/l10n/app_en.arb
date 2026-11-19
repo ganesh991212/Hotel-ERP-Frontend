@@ -2524,5 +2524,231 @@
   "payWholeDue": "Pay what is due",
   "@payWholeDue": {
     "description": "Label above the method buttons"
+  },
+  "reportsTitle": "Reports",
+  "@reportsTitle": {
+    "description": "Reports screen title and the Overview button that opens it"
+  },
+  "reportSales": "Sales",
+  "@reportSales": {
+    "description": "Reports tab: sales by day"
+  },
+  "reportItems": "Items",
+  "@reportItems": {
+    "description": "Reports tab: item-wise sales"
+  },
+  "reportGst": "GST",
+  "@reportGst": {
+    "description": "Reports tab: GST summary"
+  },
+  "reportStaff": "Staff",
+  "@reportStaff": {
+    "description": "Reports tab: per staff member"
+  },
+  "downloadCsv": "Download CSV",
+  "@downloadCsv": {
+    "description": "Button: save this report as a spreadsheet file"
+  },
+  "billsRegisterCsv": "Bills register (CSV)",
+  "@billsRegisterCsv": {
+    "description": "Button: every bill in the dates, for the accountant"
+  },
+  "fileSaved": "Saved {name}",
+  "@fileSaved": {
+    "description": "Toast after a file download",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "basisSales": "Counts bills issued on the hotel's calendar day. Cancelled bills are left out and shown separately.",
+  "@basisSales": {
+    "description": "What the sales report counts (shown under the title)"
+  },
+  "basisItems": "Dishes on issued bills, as printed. Cancelled bills are left out.",
+  "@basisItems": {
+    "description": "What the items report counts"
+  },
+  "basisGst": "Tax per rate exactly as printed on each bill. B2C, within the state (CGST + SGST). SAC {sac}.",
+  "@basisGst": {
+    "description": "What the GST summary counts; sac is the services code",
+    "placeholders": {
+      "sac": {
+        "type": "String"
+      }
+    }
+  },
+  "basisStaff": "Bills each person raised, discounts they gave and money they received.",
+  "@basisStaff": {
+    "description": "What the staff report counts"
+  },
+  "ladderGross": "Gross (menu value)",
+  "@ladderGross": {
+    "description": "Report line: value at menu prices before discounts"
+  },
+  "ladderDiscount": "Discounts",
+  "@ladderDiscount": {
+    "description": "Report line: total discounts (shown with a minus)"
+  },
+  "ladderTaxable": "Taxable value",
+  "@ladderTaxable": {
+    "description": "Report line: gross minus discounts"
+  },
+  "ladderOtherTax": "Other tax",
+  "@ladderOtherTax": {
+    "description": "Report line: tax that is not CGST/SGST"
+  },
+  "ladderRoundOff": "Round off",
+  "@ladderRoundOff": {
+    "description": "Report line: rounding difference"
+  },
+  "ladderTotal": "Bill total",
+  "@ladderTotal": {
+    "description": "Report line: what guests were billed"
+  },
+  "repBills": "{count, plural, =1{1 bill} other{{count} bills}}",
+  "@repBills": {
+    "description": "Count of bills",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "repReplaced": "{count, plural, =1{1 bill replaced when more food was added} other{{count} bills replaced when more food was added}}",
+  "@repReplaced": {
+    "description": "Note: replaced bills are counted once (the new bill)",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "repReceived": "Money received",
+  "@repReceived": {
+    "description": "Report section: cash/UPI/card actually taken"
+  },
+  "repUnbilled": "Not billed yet: {count, plural, =1{1 order} other{{count} orders}}, {amount}",
+  "@repUnbilled": {
+    "description": "Warning: food ordered with no bill",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "repUnbilledHelp": "Bill these or cancel the order. They are not counted as sales.",
+  "@repUnbilledHelp": {
+    "description": "Explains the not-billed warning"
+  },
+  "repByDay": "By day",
+  "@repByDay": {
+    "description": "Report section: one row per day"
+  },
+  "repNoBills": "No bills in these dates",
+  "@repNoBills": {
+    "description": "Empty report"
+  },
+  "repSold": "{qty} sold",
+  "@repSold": {
+    "description": "Item quantity sold",
+    "placeholders": {
+      "qty": {
+        "type": "int"
+      }
+    }
+  },
+  "gstRate": "GST {rate}",
+  "@gstRate": {
+    "description": "Row title for one GST rate, e.g. GST 5%",
+    "placeholders": {
+      "rate": {
+        "type": "String"
+      }
+    }
+  },
+  "gstDocuments": "Documents issued",
+  "@gstDocuments": {
+    "description": "GST summary section (GSTR-1 table 13)"
+  },
+  "gstDocCounts": "{from} to {to}: {count} issued, {cancelled} cancelled, {net} net",
+  "@gstDocCounts": {
+    "description": "Invoice number range and counts",
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      },
+      "cancelled": {
+        "type": "int"
+      },
+      "net": {
+        "type": "int"
+      }
+    }
+  },
+  "docTaxInvoice": "Tax invoice",
+  "@docTaxInvoice": {
+    "description": "Bill document type (GST registered)"
+  },
+  "docBillOfSupply": "Bill of supply",
+  "@docBillOfSupply": {
+    "description": "Bill document type (composition scheme)"
+  },
+  "docBill": "Bill",
+  "@docBill": {
+    "description": "Bill document type (not GST registered)"
+  },
+  "staffDiscounts": "{count, plural, =1{1 discount} other{{count} discounts}} · {amount}",
+  "@staffDiscounts": {
+    "description": "Staff report: discounts given",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "staffCancelled": "{count, plural, =1{1 bill cancelled by hand} other{{count} bills cancelled by hand}}",
+  "@staffCancelled": {
+    "description": "Staff report: bills this person cancelled",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "noStaffActivity": "No bills or payments by staff in these dates",
+  "@noStaffActivity": {
+    "description": "Empty staff report"
+  },
+  "errRangeTooLongDays": "Pick at most {days} days",
+  "@errRangeTooLongDays": {
+    "description": "Error: date range too long",
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "unbilledToday": "Not billed yet today: {amount}",
+  "@unbilledToday": {
+    "description": "Overview warning: food ordered today that is on no bill; tap opens Orders",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
   }
 }

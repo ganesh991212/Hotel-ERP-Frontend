@@ -3471,6 +3471,234 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Pay what is due'**
   String get payWholeDue;
+
+  /// Reports screen title and the Overview button that opens it
+  ///
+  /// In en, this message translates to:
+  /// **'Reports'**
+  String get reportsTitle;
+
+  /// Reports tab: sales by day
+  ///
+  /// In en, this message translates to:
+  /// **'Sales'**
+  String get reportSales;
+
+  /// Reports tab: item-wise sales
+  ///
+  /// In en, this message translates to:
+  /// **'Items'**
+  String get reportItems;
+
+  /// Reports tab: GST summary
+  ///
+  /// In en, this message translates to:
+  /// **'GST'**
+  String get reportGst;
+
+  /// Reports tab: per staff member
+  ///
+  /// In en, this message translates to:
+  /// **'Staff'**
+  String get reportStaff;
+
+  /// Button: save this report as a spreadsheet file
+  ///
+  /// In en, this message translates to:
+  /// **'Download CSV'**
+  String get downloadCsv;
+
+  /// Button: every bill in the dates, for the accountant
+  ///
+  /// In en, this message translates to:
+  /// **'Bills register (CSV)'**
+  String get billsRegisterCsv;
+
+  /// Toast after a file download
+  ///
+  /// In en, this message translates to:
+  /// **'Saved {name}'**
+  String fileSaved(String name);
+
+  /// What the sales report counts (shown under the title)
+  ///
+  /// In en, this message translates to:
+  /// **'Counts bills issued on the hotel\'s calendar day. Cancelled bills are left out and shown separately.'**
+  String get basisSales;
+
+  /// What the items report counts
+  ///
+  /// In en, this message translates to:
+  /// **'Dishes on issued bills, as printed. Cancelled bills are left out.'**
+  String get basisItems;
+
+  /// What the GST summary counts; sac is the services code
+  ///
+  /// In en, this message translates to:
+  /// **'Tax per rate exactly as printed on each bill. B2C, within the state (CGST + SGST). SAC {sac}.'**
+  String basisGst(String sac);
+
+  /// What the staff report counts
+  ///
+  /// In en, this message translates to:
+  /// **'Bills each person raised, discounts they gave and money they received.'**
+  String get basisStaff;
+
+  /// Report line: value at menu prices before discounts
+  ///
+  /// In en, this message translates to:
+  /// **'Gross (menu value)'**
+  String get ladderGross;
+
+  /// Report line: total discounts (shown with a minus)
+  ///
+  /// In en, this message translates to:
+  /// **'Discounts'**
+  String get ladderDiscount;
+
+  /// Report line: gross minus discounts
+  ///
+  /// In en, this message translates to:
+  /// **'Taxable value'**
+  String get ladderTaxable;
+
+  /// Report line: tax that is not CGST/SGST
+  ///
+  /// In en, this message translates to:
+  /// **'Other tax'**
+  String get ladderOtherTax;
+
+  /// Report line: rounding difference
+  ///
+  /// In en, this message translates to:
+  /// **'Round off'**
+  String get ladderRoundOff;
+
+  /// Report line: what guests were billed
+  ///
+  /// In en, this message translates to:
+  /// **'Bill total'**
+  String get ladderTotal;
+
+  /// Count of bills
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 bill} other{{count} bills}}'**
+  String repBills(int count);
+
+  /// Note: replaced bills are counted once (the new bill)
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 bill replaced when more food was added} other{{count} bills replaced when more food was added}}'**
+  String repReplaced(int count);
+
+  /// Report section: cash/UPI/card actually taken
+  ///
+  /// In en, this message translates to:
+  /// **'Money received'**
+  String get repReceived;
+
+  /// Warning: food ordered with no bill
+  ///
+  /// In en, this message translates to:
+  /// **'Not billed yet: {count, plural, =1{1 order} other{{count} orders}}, {amount}'**
+  String repUnbilled(int count, String amount);
+
+  /// Explains the not-billed warning
+  ///
+  /// In en, this message translates to:
+  /// **'Bill these or cancel the order. They are not counted as sales.'**
+  String get repUnbilledHelp;
+
+  /// Report section: one row per day
+  ///
+  /// In en, this message translates to:
+  /// **'By day'**
+  String get repByDay;
+
+  /// Empty report
+  ///
+  /// In en, this message translates to:
+  /// **'No bills in these dates'**
+  String get repNoBills;
+
+  /// Item quantity sold
+  ///
+  /// In en, this message translates to:
+  /// **'{qty} sold'**
+  String repSold(int qty);
+
+  /// Row title for one GST rate, e.g. GST 5%
+  ///
+  /// In en, this message translates to:
+  /// **'GST {rate}'**
+  String gstRate(String rate);
+
+  /// GST summary section (GSTR-1 table 13)
+  ///
+  /// In en, this message translates to:
+  /// **'Documents issued'**
+  String get gstDocuments;
+
+  /// Invoice number range and counts
+  ///
+  /// In en, this message translates to:
+  /// **'{from} to {to}: {count} issued, {cancelled} cancelled, {net} net'**
+  String gstDocCounts(
+    String from,
+    String to,
+    int count,
+    int cancelled,
+    int net,
+  );
+
+  /// Bill document type (GST registered)
+  ///
+  /// In en, this message translates to:
+  /// **'Tax invoice'**
+  String get docTaxInvoice;
+
+  /// Bill document type (composition scheme)
+  ///
+  /// In en, this message translates to:
+  /// **'Bill of supply'**
+  String get docBillOfSupply;
+
+  /// Bill document type (not GST registered)
+  ///
+  /// In en, this message translates to:
+  /// **'Bill'**
+  String get docBill;
+
+  /// Staff report: discounts given
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 discount} other{{count} discounts}} · {amount}'**
+  String staffDiscounts(int count, String amount);
+
+  /// Staff report: bills this person cancelled
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 bill cancelled by hand} other{{count} bills cancelled by hand}}'**
+  String staffCancelled(int count);
+
+  /// Empty staff report
+  ///
+  /// In en, this message translates to:
+  /// **'No bills or payments by staff in these dates'**
+  String get noStaffActivity;
+
+  /// Error: date range too long
+  ///
+  /// In en, this message translates to:
+  /// **'Pick at most {days} days'**
+  String errRangeTooLongDays(int days);
+
+  /// Overview warning: food ordered today that is on no bill; tap opens Orders
+  ///
+  /// In en, this message translates to:
+  /// **'Not billed yet today: {amount}'**
+  String unbilledToday(String amount);
 }
 
 class _AppLocalizationsDelegate

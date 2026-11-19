@@ -1878,4 +1878,179 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get payWholeDue => 'Pay what is due';
+
+  @override
+  String get reportsTitle => 'Reports';
+
+  @override
+  String get reportSales => 'Sales';
+
+  @override
+  String get reportItems => 'Items';
+
+  @override
+  String get reportGst => 'GST';
+
+  @override
+  String get reportStaff => 'Staff';
+
+  @override
+  String get downloadCsv => 'Download CSV';
+
+  @override
+  String get billsRegisterCsv => 'Bills register (CSV)';
+
+  @override
+  String fileSaved(String name) {
+    return 'Saved $name';
+  }
+
+  @override
+  String get basisSales =>
+      'Counts bills issued on the hotel\'s calendar day. Cancelled bills are left out and shown separately.';
+
+  @override
+  String get basisItems =>
+      'Dishes on issued bills, as printed. Cancelled bills are left out.';
+
+  @override
+  String basisGst(String sac) {
+    return 'Tax per rate exactly as printed on each bill. B2C, within the state (CGST + SGST). SAC $sac.';
+  }
+
+  @override
+  String get basisStaff =>
+      'Bills each person raised, discounts they gave and money they received.';
+
+  @override
+  String get ladderGross => 'Gross (menu value)';
+
+  @override
+  String get ladderDiscount => 'Discounts';
+
+  @override
+  String get ladderTaxable => 'Taxable value';
+
+  @override
+  String get ladderOtherTax => 'Other tax';
+
+  @override
+  String get ladderRoundOff => 'Round off';
+
+  @override
+  String get ladderTotal => 'Bill total';
+
+  @override
+  String repBills(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count bills',
+      one: '1 bill',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String repReplaced(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count bills replaced when more food was added',
+      one: '1 bill replaced when more food was added',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get repReceived => 'Money received';
+
+  @override
+  String repUnbilled(int count, String amount) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count orders',
+      one: '1 order',
+    );
+    return 'Not billed yet: $_temp0, $amount';
+  }
+
+  @override
+  String get repUnbilledHelp =>
+      'Bill these or cancel the order. They are not counted as sales.';
+
+  @override
+  String get repByDay => 'By day';
+
+  @override
+  String get repNoBills => 'No bills in these dates';
+
+  @override
+  String repSold(int qty) {
+    return '$qty sold';
+  }
+
+  @override
+  String gstRate(String rate) {
+    return 'GST $rate';
+  }
+
+  @override
+  String get gstDocuments => 'Documents issued';
+
+  @override
+  String gstDocCounts(
+    String from,
+    String to,
+    int count,
+    int cancelled,
+    int net,
+  ) {
+    return '$from to $to: $count issued, $cancelled cancelled, $net net';
+  }
+
+  @override
+  String get docTaxInvoice => 'Tax invoice';
+
+  @override
+  String get docBillOfSupply => 'Bill of supply';
+
+  @override
+  String get docBill => 'Bill';
+
+  @override
+  String staffDiscounts(int count, String amount) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count discounts',
+      one: '1 discount',
+    );
+    return '$_temp0 · $amount';
+  }
+
+  @override
+  String staffCancelled(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count bills cancelled by hand',
+      one: '1 bill cancelled by hand',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get noStaffActivity => 'No bills or payments by staff in these dates';
+
+  @override
+  String errRangeTooLongDays(int days) {
+    return 'Pick at most $days days';
+  }
+
+  @override
+  String unbilledToday(String amount) {
+    return 'Not billed yet today: $amount';
+  }
 }

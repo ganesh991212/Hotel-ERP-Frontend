@@ -30,15 +30,16 @@ class HotelOverviewPage extends ConsumerWidget {
     return data.when(
       loading: () => const LoadingBlock(height: 400),
       error: (e, _) => Center(child: EmptyState(icon: Icons.cloud_off_rounded, title: l.errGeneric)),
-      data: (d) => _Dashboard(d: d, name: s.firstName),
+      data: (d) => _Dashboard(d: d, name: s.firstName, canReports: s.can('report.view')),
     );
   }
 }
 
 class _Dashboard extends StatelessWidget {
-  const _Dashboard({required this.d, required this.name});
+  const _Dashboard({required this.d, required this.name, required this.canReports});
   final Map<String, dynamic> d;
   final String name;
+  final bool canReports;
 
   @override
   Widget build(BuildContext context) {
@@ -114,7 +115,32 @@ class _Dashboard extends StatelessWidget {
     }
 
     return PageBody(children: [
-      Reveal(index: 0, child: Text(greeting, style: context.isPhone ? tt.displaySmall : tt.displayMedium)),
+      Reveal(
+        index: 0,
+        child: Row(children: [
+          Expanded(child: Text(greeting, style: context.isPhone ? tt.displaySmall : tt.displayMedium)),
+          if (canReports)
+            OutlinedButton.icon(
+              onPressed: () => context.go('/h/overview/reports'),
+              icon: const Icon(Icons.bar_chart_rounded, size: 18),
+              label: Text(l.reportsTitle),
+            ),
+        ]),
+      ),
+      if (((d['unbilled_today_minor'] as num?)?.toInt() ?? 0) > 0) ...[
+        const SizedBox(height: 10),
+        Reveal(
+          index: 0,
+          child: Align(
+            alignment: AlignmentDirectional.centerStart,
+            child: ActionChip(
+              avatar: Icon(Icons.warning_amber_rounded, size: 18, color: context.tokens.warn),
+              label: Text(l.unbilledToday(formatInr((d['unbilled_today_minor'] as num).toInt(), showPaise: false))),
+              onPressed: () => context.go('/h/orders'),
+            ),
+          ),
+        ),
+      ],
       const SizedBox(height: 18),
       Reveal(index: 0, child: _StatusStrip(d: d)),
       const SizedBox(height: 18),

@@ -1875,4 +1875,161 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get payWholeDue => 'पूरा बकाया चुकाएँ';
+
+  @override
+  String get reportsTitle => 'रिपोर्ट';
+
+  @override
+  String get reportSales => 'बिक्री';
+
+  @override
+  String get reportItems => 'आइटम';
+
+  @override
+  String get reportGst => 'GST';
+
+  @override
+  String get reportStaff => 'स्टाफ';
+
+  @override
+  String get downloadCsv => 'CSV डाउनलोड';
+
+  @override
+  String get billsRegisterCsv => 'बिल रजिस्टर (CSV)';
+
+  @override
+  String fileSaved(String name) {
+    return '$name सेव हो गई';
+  }
+
+  @override
+  String get basisSales =>
+      'होटल की तारीख पर जारी बिल। रद्द बिल अलग दिखते हैं, बिक्री में नहीं जुड़ते।';
+
+  @override
+  String get basisItems =>
+      'जारी बिलों के व्यंजन, जैसे छपे। रद्द बिल शामिल नहीं।';
+
+  @override
+  String basisGst(String sac) {
+    return 'हर बिल पर छपा टैक्स, दर के अनुसार। B2C, राज्य के भीतर (CGST + SGST)। SAC $sac।';
+  }
+
+  @override
+  String get basisStaff =>
+      'हर व्यक्ति के बनाए बिल, दी गई छूट और लिया गया पैसा।';
+
+  @override
+  String get ladderGross => 'कुल (मेनू मूल्य)';
+
+  @override
+  String get ladderDiscount => 'छूट';
+
+  @override
+  String get ladderTaxable => 'कर योग्य मूल्य';
+
+  @override
+  String get ladderOtherTax => 'अन्य कर';
+
+  @override
+  String get ladderRoundOff => 'राउंड ऑफ';
+
+  @override
+  String get ladderTotal => 'बिल कुल';
+
+  @override
+  String repBills(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count बिल',
+      one: '1 बिल',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String repReplaced(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'और खाना जुड़ने पर $count बिल बदले गए',
+      one: 'और खाना जुड़ने पर 1 बिल बदला गया',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get repReceived => 'मिला पैसा';
+
+  @override
+  String repUnbilled(int count, String amount) {
+    return 'अभी बिल नहीं: $count ऑर्डर, $amount';
+  }
+
+  @override
+  String get repUnbilledHelp =>
+      'इनका बिल बनाएं या ऑर्डर रद्द करें। ये बिक्री में नहीं गिने जाते।';
+
+  @override
+  String get repByDay => 'दिन के अनुसार';
+
+  @override
+  String get repNoBills => 'इन तारीखों में कोई बिल नहीं';
+
+  @override
+  String repSold(int qty) {
+    return '$qty बिके';
+  }
+
+  @override
+  String gstRate(String rate) {
+    return 'GST $rate';
+  }
+
+  @override
+  String get gstDocuments => 'जारी दस्तावेज़';
+
+  @override
+  String gstDocCounts(
+    String from,
+    String to,
+    int count,
+    int cancelled,
+    int net,
+  ) {
+    return '$from से $to: $count जारी, $cancelled रद्द, $net शुद्ध';
+  }
+
+  @override
+  String get docTaxInvoice => 'टैक्स इनवॉइस';
+
+  @override
+  String get docBillOfSupply => 'बिल ऑफ सप्लाई';
+
+  @override
+  String get docBill => 'बिल';
+
+  @override
+  String staffDiscounts(int count, String amount) {
+    return '$count छूट · $amount';
+  }
+
+  @override
+  String staffCancelled(int count) {
+    return '$count बिल हाथ से रद्द';
+  }
+
+  @override
+  String get noStaffActivity => 'इन तारीखों में स्टाफ के बिल या भुगतान नहीं';
+
+  @override
+  String errRangeTooLongDays(int days) {
+    return 'अधिकतम $days दिन चुनें';
+  }
+
+  @override
+  String unbilledToday(String amount) {
+    return 'आज अभी बिल नहीं: $amount';
+  }
 }
