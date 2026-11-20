@@ -2982,4 +2982,45 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get myNextShifts => 'నా తదుపరి షిఫ్ట్‌లు';
+
+  @override
+  String get handover => 'అప్పగించండి';
+
+  @override
+  String get handoverHelp =>
+      'ఎంత ఉండాలో చూడకముందే డ్రాయర్‌లో నగదు లెక్కించండి. లెక్క టైప్ చేసినట్లే సేవ్ అవుతుంది, మార్చలేరు.';
+
+  @override
+  String get cashInDrawerNow => 'ఇప్పుడు డ్రాయర్‌లో నగదు';
+
+  @override
+  String get handingOverTo => 'ఎవరికి అప్పగిస్తున్నారు';
+
+  @override
+  String get saveCount => 'లెక్క సేవ్';
+
+  @override
+  String get handoverSaved => 'అప్పగింత సేవ్ అయింది';
+
+  @override
+  String get whyOverShort => 'ఎందుకు ఎక్కువ లేదా తక్కువ?';
+
+  @override
+  String get saveNote => 'కారణం సేవ్';
+
+  @override
+  String get done => 'పూర్తి';
+
+  @override
+  String get handoversToday => 'ఈరోజు షిఫ్ట్ అప్పగింతలు';
+
+  @override
+  String handoverLine(String time, String from, String to) {
+    return '$time: $from → $to';
+  }
+
+  @override
+  String countedOf(String counted, String expected) {
+    return '$expected లో $counted లెక్కించారు';
+  }
 }

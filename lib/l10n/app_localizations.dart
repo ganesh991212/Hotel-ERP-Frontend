@@ -5277,6 +5277,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'My next shifts'**
   String get myNextShifts;
+
+  /// Close day: button and dialog title for a cash count at a shift change
+  ///
+  /// In en, this message translates to:
+  /// **'Hand over'**
+  String get handover;
+
+  /// Hand over dialog: explains the blind count
+  ///
+  /// In en, this message translates to:
+  /// **'Count the cash in the drawer before you see what it should be. The count is saved as typed and can\'t be changed.'**
+  String get handoverHelp;
+
+  /// Hand over dialog: field for the counted cash
+  ///
+  /// In en, this message translates to:
+  /// **'Cash in the drawer now'**
+  String get cashInDrawerNow;
+
+  /// Hand over dialog: the cashier taking over
+  ///
+  /// In en, this message translates to:
+  /// **'Handing over to'**
+  String get handingOverTo;
+
+  /// Hand over dialog: confirm
+  ///
+  /// In en, this message translates to:
+  /// **'Save count'**
+  String get saveCount;
+
+  /// Dialog title after the count is saved
+  ///
+  /// In en, this message translates to:
+  /// **'Handover saved'**
+  String get handoverSaved;
+
+  /// Hand over result: reason field
+  ///
+  /// In en, this message translates to:
+  /// **'Why is it over or short?'**
+  String get whyOverShort;
+
+  /// Hand over result: save the reason
+  ///
+  /// In en, this message translates to:
+  /// **'Save reason'**
+  String get saveNote;
+
+  /// Generic close button
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get done;
+
+  /// Close day: heading over today's handovers
+  ///
+  /// In en, this message translates to:
+  /// **'Shift handovers today'**
+  String get handoversToday;
+
+  /// A handover: when, who handed over, who took over
+  ///
+  /// In en, this message translates to:
+  /// **'{time}: {from} → {to}'**
+  String handoverLine(String time, String from, String to);
+
+  /// A handover's counted and expected cash
+  ///
+  /// In en, this message translates to:
+  /// **'Counted {counted} of {expected} expected'**
+  String countedOf(String counted, String expected);
 }
 
 class _AppLocalizationsDelegate

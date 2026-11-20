@@ -861,5 +861,17 @@
   "shiftNotIn": "రాలేదు · {minutes} నిమి. ఆలస్యం",
   "shiftNoShow": "రాలేదు",
   "shiftUpcoming": "రాబోయేది",
-  "myNextShifts": "నా తదుపరి షిఫ్ట్‌లు"
+  "myNextShifts": "నా తదుపరి షిఫ్ట్‌లు",
+  "handover": "అప్పగించండి",
+  "handoverHelp": "ఎంత ఉండాలో చూడకముందే డ్రాయర్‌లో నగదు లెక్కించండి. లెక్క టైప్ చేసినట్లే సేవ్ అవుతుంది, మార్చలేరు.",
+  "cashInDrawerNow": "ఇప్పుడు డ్రాయర్‌లో నగదు",
+  "handingOverTo": "ఎవరికి అప్పగిస్తున్నారు",
+  "saveCount": "లెక్క సేవ్",
+  "handoverSaved": "అప్పగింత సేవ్ అయింది",
+  "whyOverShort": "ఎందుకు ఎక్కువ లేదా తక్కువ?",
+  "saveNote": "కారణం సేవ్",
+  "done": "పూర్తి",
+  "handoversToday": "ఈరోజు షిఫ్ట్ అప్పగింతలు",
+  "handoverLine": "{time}: {from} → {to}",
+  "countedOf": "{expected} లో {counted} లెక్కించారు"
 }

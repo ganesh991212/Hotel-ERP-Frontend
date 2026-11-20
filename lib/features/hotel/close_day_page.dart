@@ -11,6 +11,7 @@ import '../../l10n/app_localizations.dart';
 import '../../ui/components.dart';
 import '../../ui/feedback.dart';
 import '../../ui/shell.dart';
+import 'handover.dart';
 
 /// Close the day / cash drawer (backend docs/03 "Day close"). The server works out what the drawer should hold
 /// and, as the cashier types, whether it is over or short; this screen never does arithmetic on money (rule 1).
@@ -128,7 +129,16 @@ class _CloseDayPageState extends ConsumerState<CloseDayPage> {
     return PageBody(
       maxWidth: 820,
       children: [
-        Reveal(index: 0, child: PageHeading(l.closeDay)),
+        Reveal(
+          index: 0,
+          child: PageHeading(l.closeDay, actions: [
+            OutlinedButton.icon(
+              onPressed: () => showHandover(context, ref, onDone: _load),
+              icon: const Icon(Icons.swap_horiz_rounded, size: 18),
+              label: Text(l.handover),
+            ),
+          ]),
+        ),
         Reveal(
           index: 1,
           child: Align(
@@ -160,7 +170,13 @@ class _CloseDayPageState extends ConsumerState<CloseDayPage> {
     final l = AppLocalizations.of(context);
     final t = context.tokens;
     final tt = Theme.of(context).textTheme;
-    if (p['closed'] != null) return Glass(child: ClosedDay(c: Map<String, dynamic>.from(p['closed'] as Map)));
+    final handovers = ((p['handovers'] as List?) ?? const []).cast<Map>().map(Map<String, dynamic>.from).toList();
+    if (p['closed'] != null) {
+      return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+        Glass(child: ClosedDay(c: Map<String, dynamic>.from(p['closed'] as Map))),
+        if (handovers.isNotEmpty) ...[const SizedBox(height: 12), HandoversList(items: handovers)],
+      ]);
+    }
     final check = p['check'] as Map?;
     final unpaid = Map<String, dynamic>.from(p['unpaid_bills'] as Map);
     final firstClose = p['carried_float_minor'] == null;
@@ -261,6 +277,7 @@ class _CloseDayPageState extends ConsumerState<CloseDayPage> {
             ],
           ),
         ),
+        if (handovers.isNotEmpty) ...[const SizedBox(height: 12), HandoversList(items: handovers)],
       ],
     );
   }

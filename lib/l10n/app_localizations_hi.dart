@@ -2974,4 +2974,45 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get myNextShifts => 'मेरी अगली शिफ्ट';
+
+  @override
+  String get handover => 'सौंपें';
+
+  @override
+  String get handoverHelp =>
+      'कितना होना चाहिए देखने से पहले दराज़ का कैश गिनें। गिनती जैसी टाइप की वैसी सेव होती है, बदली नहीं जा सकती।';
+
+  @override
+  String get cashInDrawerNow => 'अभी दराज़ में कैश';
+
+  @override
+  String get handingOverTo => 'किसे सौंप रहे हैं';
+
+  @override
+  String get saveCount => 'गिनती सेव करें';
+
+  @override
+  String get handoverSaved => 'सौंपना सेव हुआ';
+
+  @override
+  String get whyOverShort => 'ज़्यादा या कम क्यों है?';
+
+  @override
+  String get saveNote => 'कारण सेव करें';
+
+  @override
+  String get done => 'हो गया';
+
+  @override
+  String get handoversToday => 'आज की शिफ्ट सौंपनी';
+
+  @override
+  String handoverLine(String time, String from, String to) {
+    return '$time: $from → $to';
+  }
+
+  @override
+  String countedOf(String counted, String expected) {
+    return '$expected में से $counted गिना';
+  }
 }

@@ -3045,4 +3045,45 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get myNextShifts => 'My next shifts';
+
+  @override
+  String get handover => 'Hand over';
+
+  @override
+  String get handoverHelp =>
+      'Count the cash in the drawer before you see what it should be. The count is saved as typed and can\'t be changed.';
+
+  @override
+  String get cashInDrawerNow => 'Cash in the drawer now';
+
+  @override
+  String get handingOverTo => 'Handing over to';
+
+  @override
+  String get saveCount => 'Save count';
+
+  @override
+  String get handoverSaved => 'Handover saved';
+
+  @override
+  String get whyOverShort => 'Why is it over or short?';
+
+  @override
+  String get saveNote => 'Save reason';
+
+  @override
+  String get done => 'Done';
+
+  @override
+  String get handoversToday => 'Shift handovers today';
+
+  @override
+  String handoverLine(String time, String from, String to) {
+    return '$time: $from → $to';
+  }
+
+  @override
+  String countedOf(String counted, String expected) {
+    return 'Counted $counted of $expected expected';
+  }
 }

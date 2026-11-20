@@ -861,5 +861,17 @@
   "shiftNotIn": "नहीं आए · {minutes} मिनट देर",
   "shiftNoShow": "नहीं आए",
   "shiftUpcoming": "आने वाली",
-  "myNextShifts": "मेरी अगली शिफ्ट"
+  "myNextShifts": "मेरी अगली शिफ्ट",
+  "handover": "सौंपें",
+  "handoverHelp": "कितना होना चाहिए देखने से पहले दराज़ का कैश गिनें। गिनती जैसी टाइप की वैसी सेव होती है, बदली नहीं जा सकती।",
+  "cashInDrawerNow": "अभी दराज़ में कैश",
+  "handingOverTo": "किसे सौंप रहे हैं",
+  "saveCount": "गिनती सेव करें",
+  "handoverSaved": "सौंपना सेव हुआ",
+  "whyOverShort": "ज़्यादा या कम क्यों है?",
+  "saveNote": "कारण सेव करें",
+  "done": "हो गया",
+  "handoversToday": "आज की शिफ्ट सौंपनी",
+  "handoverLine": "{time}: {from} → {to}",
+  "countedOf": "{expected} में से {counted} गिना"
 }

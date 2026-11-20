@@ -4192,5 +4192,72 @@
   "myNextShifts": "My next shifts",
   "@myNextShifts": {
     "description": "My work: the person's planned shifts for the coming week"
+  },
+  "handover": "Hand over",
+  "@handover": {
+    "description": "Close day: button and dialog title for a cash count at a shift change"
+  },
+  "handoverHelp": "Count the cash in the drawer before you see what it should be. The count is saved as typed and can't be changed.",
+  "@handoverHelp": {
+    "description": "Hand over dialog: explains the blind count"
+  },
+  "cashInDrawerNow": "Cash in the drawer now",
+  "@cashInDrawerNow": {
+    "description": "Hand over dialog: field for the counted cash"
+  },
+  "handingOverTo": "Handing over to",
+  "@handingOverTo": {
+    "description": "Hand over dialog: the cashier taking over"
+  },
+  "saveCount": "Save count",
+  "@saveCount": {
+    "description": "Hand over dialog: confirm"
+  },
+  "handoverSaved": "Handover saved",
+  "@handoverSaved": {
+    "description": "Dialog title after the count is saved"
+  },
+  "whyOverShort": "Why is it over or short?",
+  "@whyOverShort": {
+    "description": "Hand over result: reason field"
+  },
+  "saveNote": "Save reason",
+  "@saveNote": {
+    "description": "Hand over result: save the reason"
+  },
+  "done": "Done",
+  "@done": {
+    "description": "Generic close button"
+  },
+  "handoversToday": "Shift handovers today",
+  "@handoversToday": {
+    "description": "Close day: heading over today's handovers"
+  },
+  "handoverLine": "{time}: {from} → {to}",
+  "@handoverLine": {
+    "description": "A handover: when, who handed over, who took over",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      },
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "countedOf": "Counted {counted} of {expected} expected",
+  "@countedOf": {
+    "description": "A handover's counted and expected cash",
+    "placeholders": {
+      "counted": {
+        "type": "String"
+      },
+      "expected": {
+        "type": "String"
+      }
+    }
   }
 }

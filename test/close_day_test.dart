@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hotel_erp/core/theme/theme.dart';
 import 'package:hotel_erp/features/hotel/close_day_page.dart';
+import 'package:hotel_erp/features/hotel/handover.dart';
 import 'package:hotel_erp/l10n/app_localizations.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -65,5 +66,27 @@ void main() {
     );
     expect(find.text('1 short day'), findsOneWidget);
     expect(find.text('Net over/short: −₹10'), findsOneWidget);
+  });
+
+  testWidgets('each handover shows who, when and its own over / short from the server', (tester) async {
+    await tester.pumpWidget(MaterialApp(
+      theme: buildTheme(Brightness.light),
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      home: Scaffold(
+        body: HandoversList(items: [
+          {'at': '2026-11-20T09:30:00Z', 'handed_by': 'Asha', 'taken_by': 'Kiran', 'counted_minor': 95000,
+            'expected_minor': 100000, 'difference_minor': -5000, 'result': 'SHORT', 'note': 'Gave change twice'},
+          {'at': '2026-11-20T15:30:00Z', 'handed_by': 'Kiran', 'taken_by': 'Asha', 'counted_minor': 120000,
+            'expected_minor': 120000, 'difference_minor': 0, 'result': 'EXACT', 'note': null},
+        ]),
+      ),
+    ));
+    expect(find.text('Shift handovers today'), findsOneWidget);
+    expect(find.textContaining('Asha → Kiran'), findsOneWidget);
+    expect(find.text('Counted ₹950 of ₹1,000 expected'), findsOneWidget);
+    expect(find.text('Gave change twice'), findsOneWidget);
+    expect(find.text('Short ₹50'), findsOneWidget);
+    expect(find.text('Exact'), findsOneWidget);
   });
 }
