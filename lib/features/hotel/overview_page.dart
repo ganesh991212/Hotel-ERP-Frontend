@@ -30,16 +30,22 @@ class HotelOverviewPage extends ConsumerWidget {
     return data.when(
       loading: () => const LoadingBlock(height: 400),
       error: (e, _) => Center(child: EmptyState(icon: Icons.cloud_off_rounded, title: l.errGeneric)),
-      data: (d) => _Dashboard(d: d, name: s.firstName, canReports: s.can('report.view')),
+      data: (d) => _Dashboard(
+        d: d,
+        name: s.firstName,
+        canReports: s.can('report.view'),
+        canCloseDay: s.can('dayclose.manage'),
+      ),
     );
   }
 }
 
 class _Dashboard extends StatelessWidget {
-  const _Dashboard({required this.d, required this.name, required this.canReports});
+  const _Dashboard({required this.d, required this.name, required this.canReports, required this.canCloseDay});
   final Map<String, dynamic> d;
   final String name;
   final bool canReports;
+  final bool canCloseDay;
 
   @override
   Widget build(BuildContext context) {
@@ -119,6 +125,15 @@ class _Dashboard extends StatelessWidget {
         index: 0,
         child: Row(children: [
           Expanded(child: Text(greeting, style: context.isPhone ? tt.displaySmall : tt.displayMedium)),
+          if (canCloseDay)
+            Padding(
+              padding: const EdgeInsets.only(right: 8),
+              child: OutlinedButton.icon(
+                onPressed: () => context.go('/h/overview/close-day'),
+                icon: const Icon(Icons.lock_clock_outlined, size: 18),
+                label: Text(l.closeDay),
+              ),
+            ),
           if (canReports)
             OutlinedButton.icon(
               onPressed: () => context.go('/h/overview/reports'),

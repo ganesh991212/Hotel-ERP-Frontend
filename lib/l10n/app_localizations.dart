@@ -4155,6 +4155,156 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Not served at this time'**
   String get errOutsideHours;
+
+  /// Overview button and screen title: count the cash drawer
+  ///
+  /// In en, this message translates to:
+  /// **'Close day'**
+  String get closeDay;
+
+  /// Explains the close day screen
+  ///
+  /// In en, this message translates to:
+  /// **'What the drawer should hold, from everything recorded on every device today. Count the cash and enter it below.'**
+  String get closeDayHelp;
+
+  /// Tab
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get today;
+
+  /// Tab
+  ///
+  /// In en, this message translates to:
+  /// **'History'**
+  String get history;
+
+  /// Cash in the drawer at the start of the day
+  ///
+  /// In en, this message translates to:
+  /// **'Opening float'**
+  String get openingFloat;
+
+  /// Cash payments taken today
+  ///
+  /// In en, this message translates to:
+  /// **'Cash received'**
+  String get cashReceived;
+
+  /// Cash expenses paid from the drawer
+  ///
+  /// In en, this message translates to:
+  /// **'Cash paid out (expenses)'**
+  String get cashPaidOut;
+
+  /// Expected cash
+  ///
+  /// In en, this message translates to:
+  /// **'Should be in the drawer'**
+  String get expectedInDrawer;
+
+  /// Input: what is in the drawer
+  ///
+  /// In en, this message translates to:
+  /// **'Cash counted'**
+  String get countedCash;
+
+  /// Input: tomorrow's opening float
+  ///
+  /// In en, this message translates to:
+  /// **'Keep in the drawer for tomorrow'**
+  String get keepForTomorrow;
+
+  /// Counted minus kept
+  ///
+  /// In en, this message translates to:
+  /// **'To the bank: {amount}'**
+  String toDeposit(String amount);
+
+  /// Result: more cash than expected
+  ///
+  /// In en, this message translates to:
+  /// **'Over {amount}'**
+  String cashOver(String amount);
+
+  /// Result: less cash than expected
+  ///
+  /// In en, this message translates to:
+  /// **'Short {amount}'**
+  String cashShort(String amount);
+
+  /// Result: no difference
+  ///
+  /// In en, this message translates to:
+  /// **'Exact'**
+  String get cashExact;
+
+  /// Note label when over or short
+  ///
+  /// In en, this message translates to:
+  /// **'Why is it different? (needed)'**
+  String get whyDifferent;
+
+  /// Button: save the final close
+  ///
+  /// In en, this message translates to:
+  /// **'Close the day'**
+  String get closeDayButton;
+
+  /// Confirm before closing
+  ///
+  /// In en, this message translates to:
+  /// **'This is final. Tomorrow\'s opening float will be what you keep in the drawer.'**
+  String get closeDayConfirm;
+
+  /// Who closed the day
+  ///
+  /// In en, this message translates to:
+  /// **'Closed by {name} at {time}'**
+  String dayClosedBy(String name, String time);
+
+  /// Cash payments after the close
+  ///
+  /// In en, this message translates to:
+  /// **'Cash taken after closing: {amount}'**
+  String cashAfterClose(String amount);
+
+  /// Warning before closing
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 bill is still unpaid} other{{count} bills are still unpaid}} ({amount})'**
+  String unpaidBillsWarning(int count, String amount);
+
+  /// History summary
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{No short days} =1{1 short day} other{{count} short days}}'**
+  String shortDays(int count);
+
+  /// History summary
+  ///
+  /// In en, this message translates to:
+  /// **'Net over/short: {amount}'**
+  String netOverShort(String amount);
+
+  /// Empty history
+  ///
+  /// In en, this message translates to:
+  /// **'No days closed yet'**
+  String get noCloses;
+
+  /// Error
+  ///
+  /// In en, this message translates to:
+  /// **'Say why the cash is over or short'**
+  String get errNoteRequired;
+
+  /// Error
+  ///
+  /// In en, this message translates to:
+  /// **'This day is already closed'**
+  String get errAlreadyClosed;
 }
 
 class _AppLocalizationsDelegate

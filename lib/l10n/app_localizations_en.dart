@@ -2326,4 +2326,110 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get errOutsideHours => 'Not served at this time';
+
+  @override
+  String get closeDay => 'Close day';
+
+  @override
+  String get closeDayHelp =>
+      'What the drawer should hold, from everything recorded on every device today. Count the cash and enter it below.';
+
+  @override
+  String get today => 'Today';
+
+  @override
+  String get history => 'History';
+
+  @override
+  String get openingFloat => 'Opening float';
+
+  @override
+  String get cashReceived => 'Cash received';
+
+  @override
+  String get cashPaidOut => 'Cash paid out (expenses)';
+
+  @override
+  String get expectedInDrawer => 'Should be in the drawer';
+
+  @override
+  String get countedCash => 'Cash counted';
+
+  @override
+  String get keepForTomorrow => 'Keep in the drawer for tomorrow';
+
+  @override
+  String toDeposit(String amount) {
+    return 'To the bank: $amount';
+  }
+
+  @override
+  String cashOver(String amount) {
+    return 'Over $amount';
+  }
+
+  @override
+  String cashShort(String amount) {
+    return 'Short $amount';
+  }
+
+  @override
+  String get cashExact => 'Exact';
+
+  @override
+  String get whyDifferent => 'Why is it different? (needed)';
+
+  @override
+  String get closeDayButton => 'Close the day';
+
+  @override
+  String get closeDayConfirm =>
+      'This is final. Tomorrow\'s opening float will be what you keep in the drawer.';
+
+  @override
+  String dayClosedBy(String name, String time) {
+    return 'Closed by $name at $time';
+  }
+
+  @override
+  String cashAfterClose(String amount) {
+    return 'Cash taken after closing: $amount';
+  }
+
+  @override
+  String unpaidBillsWarning(int count, String amount) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count bills are still unpaid',
+      one: '1 bill is still unpaid',
+    );
+    return '$_temp0 ($amount)';
+  }
+
+  @override
+  String shortDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count short days',
+      one: '1 short day',
+      zero: 'No short days',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String netOverShort(String amount) {
+    return 'Net over/short: $amount';
+  }
+
+  @override
+  String get noCloses => 'No days closed yet';
+
+  @override
+  String get errNoteRequired => 'Say why the cash is over or short';
+
+  @override
+  String get errAlreadyClosed => 'This day is already closed';
 }

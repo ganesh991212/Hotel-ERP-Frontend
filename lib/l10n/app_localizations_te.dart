@@ -2314,4 +2314,96 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get errOutsideHours => 'ఈ సమయంలో వడ్డించరు';
+
+  @override
+  String get closeDay => 'రోజు ముగించు';
+
+  @override
+  String get closeDayHelp =>
+      'ఈరోజు ప్రతి డివైస్‌లో నమోదైన దాని ప్రకారం డ్రాయర్‌లో ఉండాల్సిన మొత్తం. నగదు లెక్కించి క్రింద ఇవ్వండి.';
+
+  @override
+  String get today => 'ఈరోజు';
+
+  @override
+  String get history => 'చరిత్ర';
+
+  @override
+  String get openingFloat => 'ప్రారంభ నగదు';
+
+  @override
+  String get cashReceived => 'వచ్చిన నగదు';
+
+  @override
+  String get cashPaidOut => 'చెల్లించిన నగదు (ఖర్చులు)';
+
+  @override
+  String get expectedInDrawer => 'డ్రాయర్‌లో ఉండాల్సింది';
+
+  @override
+  String get countedCash => 'లెక్కించిన నగదు';
+
+  @override
+  String get keepForTomorrow => 'రేపటికి డ్రాయర్‌లో ఉంచేది';
+
+  @override
+  String toDeposit(String amount) {
+    return 'బ్యాంకుకు: $amount';
+  }
+
+  @override
+  String cashOver(String amount) {
+    return 'ఎక్కువ $amount';
+  }
+
+  @override
+  String cashShort(String amount) {
+    return 'తక్కువ $amount';
+  }
+
+  @override
+  String get cashExact => 'సరిగ్గా';
+
+  @override
+  String get whyDifferent => 'ఎందుకు తేడా? (అవసరం)';
+
+  @override
+  String get closeDayButton => 'రోజు ముగించండి';
+
+  @override
+  String get closeDayConfirm => 'ఇది తుది. రేపటి ప్రారంభ నగదు మీరు ఉంచేదే.';
+
+  @override
+  String dayClosedBy(String name, String time) {
+    return '$time కి $name ముగించారు';
+  }
+
+  @override
+  String cashAfterClose(String amount) {
+    return 'ముగించిన తర్వాత వచ్చిన నగదు: $amount';
+  }
+
+  @override
+  String unpaidBillsWarning(int count, String amount) {
+    return '$count బిల్లులు ఇంకా చెల్లించలేదు ($amount)';
+  }
+
+  @override
+  String shortDays(int count) {
+    return '$count తక్కువ రోజులు';
+  }
+
+  @override
+  String netOverShort(String amount) {
+    return 'మొత్తం ఎక్కువ/తక్కువ: $amount';
+  }
+
+  @override
+  String get noCloses => 'ఇంకా ఏ రోజూ ముగించలేదు';
+
+  @override
+  String get errNoteRequired => 'నగదు ఎందుకు ఎక్కువ/తక్కువో చెప్పండి';
+
+  @override
+  String get errAlreadyClosed => 'ఈ రోజు ఇప్పటికే ముగిసింది';
 }

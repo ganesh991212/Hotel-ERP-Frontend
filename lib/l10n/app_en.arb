@@ -3164,5 +3164,151 @@
   "errOutsideHours": "Not served at this time",
   "@errOutsideHours": {
     "description": "Error for diners"
+  },
+  "closeDay": "Close day",
+  "@closeDay": {
+    "description": "Overview button and screen title: count the cash drawer"
+  },
+  "closeDayHelp": "What the drawer should hold, from everything recorded on every device today. Count the cash and enter it below.",
+  "@closeDayHelp": {
+    "description": "Explains the close day screen"
+  },
+  "today": "Today",
+  "@today": {
+    "description": "Tab"
+  },
+  "history": "History",
+  "@history": {
+    "description": "Tab"
+  },
+  "openingFloat": "Opening float",
+  "@openingFloat": {
+    "description": "Cash in the drawer at the start of the day"
+  },
+  "cashReceived": "Cash received",
+  "@cashReceived": {
+    "description": "Cash payments taken today"
+  },
+  "cashPaidOut": "Cash paid out (expenses)",
+  "@cashPaidOut": {
+    "description": "Cash expenses paid from the drawer"
+  },
+  "expectedInDrawer": "Should be in the drawer",
+  "@expectedInDrawer": {
+    "description": "Expected cash"
+  },
+  "countedCash": "Cash counted",
+  "@countedCash": {
+    "description": "Input: what is in the drawer"
+  },
+  "keepForTomorrow": "Keep in the drawer for tomorrow",
+  "@keepForTomorrow": {
+    "description": "Input: tomorrow's opening float"
+  },
+  "toDeposit": "To the bank: {amount}",
+  "@toDeposit": {
+    "description": "Counted minus kept",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "cashOver": "Over {amount}",
+  "@cashOver": {
+    "description": "Result: more cash than expected",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "cashShort": "Short {amount}",
+  "@cashShort": {
+    "description": "Result: less cash than expected",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "cashExact": "Exact",
+  "@cashExact": {
+    "description": "Result: no difference"
+  },
+  "whyDifferent": "Why is it different? (needed)",
+  "@whyDifferent": {
+    "description": "Note label when over or short"
+  },
+  "closeDayButton": "Close the day",
+  "@closeDayButton": {
+    "description": "Button: save the final close"
+  },
+  "closeDayConfirm": "This is final. Tomorrow's opening float will be what you keep in the drawer.",
+  "@closeDayConfirm": {
+    "description": "Confirm before closing"
+  },
+  "dayClosedBy": "Closed by {name} at {time}",
+  "@dayClosedBy": {
+    "description": "Who closed the day",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "cashAfterClose": "Cash taken after closing: {amount}",
+  "@cashAfterClose": {
+    "description": "Cash payments after the close",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "unpaidBillsWarning": "{count, plural, =1{1 bill is still unpaid} other{{count} bills are still unpaid}} ({amount})",
+  "@unpaidBillsWarning": {
+    "description": "Warning before closing",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "shortDays": "{count, plural, =0{No short days} =1{1 short day} other{{count} short days}}",
+  "@shortDays": {
+    "description": "History summary",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "netOverShort": "Net over/short: {amount}",
+  "@netOverShort": {
+    "description": "History summary",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "noCloses": "No days closed yet",
+  "@noCloses": {
+    "description": "Empty history"
+  },
+  "errNoteRequired": "Say why the cash is over or short",
+  "@errNoteRequired": {
+    "description": "Error"
+  },
+  "errAlreadyClosed": "This day is already closed",
+  "@errAlreadyClosed": {
+    "description": "Error"
   }
 }

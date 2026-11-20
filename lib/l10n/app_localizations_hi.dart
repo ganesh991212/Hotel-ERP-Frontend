@@ -2303,4 +2303,97 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get errOutsideHours => 'इस समय नहीं परोसा जाता';
+
+  @override
+  String get closeDay => 'दिन बंद करें';
+
+  @override
+  String get closeDayHelp =>
+      'आज हर डिवाइस पर दर्ज के हिसाब से दराज़ में कितना होना चाहिए। नकद गिनकर नीचे लिखें।';
+
+  @override
+  String get today => 'आज';
+
+  @override
+  String get history => 'इतिहास';
+
+  @override
+  String get openingFloat => 'शुरुआती नकद';
+
+  @override
+  String get cashReceived => 'मिला नकद';
+
+  @override
+  String get cashPaidOut => 'दिया गया नकद (खर्च)';
+
+  @override
+  String get expectedInDrawer => 'दराज़ में होना चाहिए';
+
+  @override
+  String get countedCash => 'गिना गया नकद';
+
+  @override
+  String get keepForTomorrow => 'कल के लिए दराज़ में रखें';
+
+  @override
+  String toDeposit(String amount) {
+    return 'बैंक में: $amount';
+  }
+
+  @override
+  String cashOver(String amount) {
+    return 'ज़्यादा $amount';
+  }
+
+  @override
+  String cashShort(String amount) {
+    return 'कम $amount';
+  }
+
+  @override
+  String get cashExact => 'बिल्कुल सही';
+
+  @override
+  String get whyDifferent => 'अंतर क्यों? (ज़रूरी)';
+
+  @override
+  String get closeDayButton => 'दिन बंद करें';
+
+  @override
+  String get closeDayConfirm =>
+      'यह अंतिम है। कल का शुरुआती नकद वही होगा जो आप रखेंगे।';
+
+  @override
+  String dayClosedBy(String name, String time) {
+    return '$time पर $name ने बंद किया';
+  }
+
+  @override
+  String cashAfterClose(String amount) {
+    return 'बंद करने के बाद मिला नकद: $amount';
+  }
+
+  @override
+  String unpaidBillsWarning(int count, String amount) {
+    return '$count बिल अभी बाकी हैं ($amount)';
+  }
+
+  @override
+  String shortDays(int count) {
+    return '$count कम वाले दिन';
+  }
+
+  @override
+  String netOverShort(String amount) {
+    return 'कुल ज़्यादा/कम: $amount';
+  }
+
+  @override
+  String get noCloses => 'अभी कोई दिन बंद नहीं';
+
+  @override
+  String get errNoteRequired => 'बताएं कि नकद ज़्यादा/कम क्यों है';
+
+  @override
+  String get errAlreadyClosed => 'यह दिन पहले ही बंद है';
 }
