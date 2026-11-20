@@ -3471,6 +3471,330 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Pay what is due'**
   String get payWholeDue;
+
+  /// Reports screen title and the Overview button that opens it
+  ///
+  /// In en, this message translates to:
+  /// **'Reports'**
+  String get reportsTitle;
+
+  /// Reports tab: sales by day
+  ///
+  /// In en, this message translates to:
+  /// **'Sales'**
+  String get reportSales;
+
+  /// Reports tab: item-wise sales
+  ///
+  /// In en, this message translates to:
+  /// **'Items'**
+  String get reportItems;
+
+  /// Reports tab: GST summary
+  ///
+  /// In en, this message translates to:
+  /// **'GST'**
+  String get reportGst;
+
+  /// Reports tab: per staff member
+  ///
+  /// In en, this message translates to:
+  /// **'Staff'**
+  String get reportStaff;
+
+  /// Button: save this report as a spreadsheet file
+  ///
+  /// In en, this message translates to:
+  /// **'Download CSV'**
+  String get downloadCsv;
+
+  /// Button: every bill in the dates, for the accountant
+  ///
+  /// In en, this message translates to:
+  /// **'Bills register (CSV)'**
+  String get billsRegisterCsv;
+
+  /// Toast after a file download
+  ///
+  /// In en, this message translates to:
+  /// **'Saved {name}'**
+  String fileSaved(String name);
+
+  /// What the sales report counts (shown under the title)
+  ///
+  /// In en, this message translates to:
+  /// **'Counts bills issued on the hotel\'s calendar day. Cancelled bills are left out and shown separately.'**
+  String get basisSales;
+
+  /// What the items report counts
+  ///
+  /// In en, this message translates to:
+  /// **'Dishes on issued bills, as printed. Cancelled bills are left out.'**
+  String get basisItems;
+
+  /// What the GST summary counts; sac is the services code
+  ///
+  /// In en, this message translates to:
+  /// **'Tax per rate exactly as printed on each bill. B2C, within the state (CGST + SGST). SAC {sac}.'**
+  String basisGst(String sac);
+
+  /// What the staff report counts
+  ///
+  /// In en, this message translates to:
+  /// **'Bills each person raised, discounts they gave and money they received.'**
+  String get basisStaff;
+
+  /// Report line: value at menu prices before discounts
+  ///
+  /// In en, this message translates to:
+  /// **'Gross (menu value)'**
+  String get ladderGross;
+
+  /// Report line: total discounts (shown with a minus)
+  ///
+  /// In en, this message translates to:
+  /// **'Discounts'**
+  String get ladderDiscount;
+
+  /// Report line: gross minus discounts
+  ///
+  /// In en, this message translates to:
+  /// **'Taxable value'**
+  String get ladderTaxable;
+
+  /// Report line: tax that is not CGST/SGST
+  ///
+  /// In en, this message translates to:
+  /// **'Other tax'**
+  String get ladderOtherTax;
+
+  /// Report line: rounding difference
+  ///
+  /// In en, this message translates to:
+  /// **'Round off'**
+  String get ladderRoundOff;
+
+  /// Report line: what guests were billed
+  ///
+  /// In en, this message translates to:
+  /// **'Bill total'**
+  String get ladderTotal;
+
+  /// Count of bills
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 bill} other{{count} bills}}'**
+  String repBills(int count);
+
+  /// Note: replaced bills are counted once (the new bill)
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 bill replaced when more food was added} other{{count} bills replaced when more food was added}}'**
+  String repReplaced(int count);
+
+  /// Report section: cash/UPI/card actually taken
+  ///
+  /// In en, this message translates to:
+  /// **'Money received'**
+  String get repReceived;
+
+  /// Warning: food ordered with no bill
+  ///
+  /// In en, this message translates to:
+  /// **'Not billed yet: {count, plural, =1{1 order} other{{count} orders}}, {amount}'**
+  String repUnbilled(int count, String amount);
+
+  /// Explains the not-billed warning
+  ///
+  /// In en, this message translates to:
+  /// **'Bill these or cancel the order. They are not counted as sales.'**
+  String get repUnbilledHelp;
+
+  /// Report section: one row per day
+  ///
+  /// In en, this message translates to:
+  /// **'By day'**
+  String get repByDay;
+
+  /// Empty report
+  ///
+  /// In en, this message translates to:
+  /// **'No bills in these dates'**
+  String get repNoBills;
+
+  /// Item quantity sold
+  ///
+  /// In en, this message translates to:
+  /// **'{qty} sold'**
+  String repSold(int qty);
+
+  /// Row title for one GST rate, e.g. GST 5%
+  ///
+  /// In en, this message translates to:
+  /// **'GST {rate}'**
+  String gstRate(String rate);
+
+  /// GST summary section (GSTR-1 table 13)
+  ///
+  /// In en, this message translates to:
+  /// **'Documents issued'**
+  String get gstDocuments;
+
+  /// Invoice number range and counts
+  ///
+  /// In en, this message translates to:
+  /// **'{from} to {to}: {count} issued, {cancelled} cancelled, {net} net'**
+  String gstDocCounts(
+    String from,
+    String to,
+    int count,
+    int cancelled,
+    int net,
+  );
+
+  /// Bill document type (GST registered)
+  ///
+  /// In en, this message translates to:
+  /// **'Tax invoice'**
+  String get docTaxInvoice;
+
+  /// Bill document type (composition scheme)
+  ///
+  /// In en, this message translates to:
+  /// **'Bill of supply'**
+  String get docBillOfSupply;
+
+  /// Bill document type (not GST registered)
+  ///
+  /// In en, this message translates to:
+  /// **'Bill'**
+  String get docBill;
+
+  /// Staff report: discounts given
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 discount} other{{count} discounts}} · {amount}'**
+  String staffDiscounts(int count, String amount);
+
+  /// Staff report: bills this person cancelled
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 bill cancelled by hand} other{{count} bills cancelled by hand}}'**
+  String staffCancelled(int count);
+
+  /// Empty staff report
+  ///
+  /// In en, this message translates to:
+  /// **'No bills or payments by staff in these dates'**
+  String get noStaffActivity;
+
+  /// Error: date range too long
+  ///
+  /// In en, this message translates to:
+  /// **'Pick at most {days} days'**
+  String errRangeTooLongDays(int days);
+
+  /// Overview warning: food ordered today that is on no bill; tap opens Orders
+  ///
+  /// In en, this message translates to:
+  /// **'Not billed yet today: {amount}'**
+  String unbilledToday(String amount);
+
+  /// Button: one GST bill per guest, by what each had
+  ///
+  /// In en, this message translates to:
+  /// **'Split by items'**
+  String get splitByItems;
+
+  /// How to use the split screen
+  ///
+  /// In en, this message translates to:
+  /// **'Tap a guest to give them one; the x takes one back. Shared: the ticked guests pay an equal part.'**
+  String get splitByItemsHelp;
+
+  /// Label for the number of guests
+  ///
+  /// In en, this message translates to:
+  /// **'Guests'**
+  String get guestsCount;
+
+  /// One guest in a split
+  ///
+  /// In en, this message translates to:
+  /// **'Guest {n}'**
+  String guestN(int n);
+
+  /// Guest chip with how many units they have
+  ///
+  /// In en, this message translates to:
+  /// **'Guest {n} · {count}'**
+  String guestUnits(int n, int count);
+
+  /// Which guest bill this is
+  ///
+  /// In en, this message translates to:
+  /// **'Guest {n} of {m}'**
+  String guestNofM(int n, int m);
+
+  /// Units of a dish not given to anyone yet
+  ///
+  /// In en, this message translates to:
+  /// **'{count} left'**
+  String splitLeft(int count);
+
+  /// Switch: this dish is shared equally by the ticked guests
+  ///
+  /// In en, this message translates to:
+  /// **'Shared'**
+  String get splitShared;
+
+  /// Button: issue one bill per guest
+  ///
+  /// In en, this message translates to:
+  /// **'Create {count} bills'**
+  String splitCreate(int count);
+
+  /// Why the split cannot be created yet
+  ///
+  /// In en, this message translates to:
+  /// **'Give out every dish and give every guest something'**
+  String get splitIncomplete;
+
+  /// Toast after a split
+  ///
+  /// In en, this message translates to:
+  /// **'{count} guest bills issued'**
+  String splitDone(int count);
+
+  /// Section listing every guest bill of a split
+  ///
+  /// In en, this message translates to:
+  /// **'Guest bills'**
+  String get guestBills;
+
+  /// Empty split screen
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing to split at this table yet'**
+  String get splitNothing;
+
+  /// Error: orders changed while splitting
+  ///
+  /// In en, this message translates to:
+  /// **'The table\'s items changed. The list has been refreshed.'**
+  String get errLinesChanged;
+
+  /// Error: void refused on a split
+  ///
+  /// In en, this message translates to:
+  /// **'A guest has already paid, so this split cannot be cancelled.'**
+  String get errSplitPartlyPaid;
+
+  /// Error: a discounted bill cannot be split by items
+  ///
+  /// In en, this message translates to:
+  /// **'This bill has a discount. Cancel it first, then split by items.'**
+  String get errBillDiscounted;
 }
 
 class _AppLocalizationsDelegate

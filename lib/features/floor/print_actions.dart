@@ -10,6 +10,7 @@ import '../../l10n/app_localizations.dart';
 import '../../ui/components.dart';
 import '../../ui/feedback.dart';
 import '../../ui/status.dart';
+import 'split_items.dart';
 
 /// Prints a KOT. With [sendToKitchen] a waiting order moves to the paper path (leaves the chefs' board).
 Future<void> printKot(BuildContext context, WidgetRef ref, Map order, {required bool sendToKitchen}) async {
@@ -181,6 +182,25 @@ class _BillPanelState extends ConsumerState<_BillPanel> {
       }
     }
     if (mounted) setState(() => _busy = false);
+  }
+
+  /// One GST bill per guest (the server cancels this table's ordinary unpaid bill, if any).
+  Future<void> _splitItems() async {
+    final tableId = (widget.table['id'] ?? _bill?['table_id']) as String;
+    final bills = await showSplitByItems(context, tableId);
+    if (bills == null || bills.isEmpty || !mounted) return;
+    setState(() {
+      _bill = bills.first;
+      _newOrders = 0;
+      _unserved = null;
+    });
+  }
+
+  Future<void> _openBill(String id) async {
+    await guard(context, () async {
+      final b = Map<String, dynamic>.from(await ref.read(apiProvider).get('/api/v1/bills/$id'));
+      if (mounted) setState(() => _bill = b);
+    });
   }
 
   Future<void> _print() async {
@@ -408,6 +428,14 @@ class _BillPanelState extends ConsumerState<_BillPanel> {
             icon: const Icon(Icons.receipt_long_outlined, size: 18),
             label: Text(l.createBill),
           ),
+          if (widget.order == null) ...[
+            const SizedBox(height: 8),
+            OutlinedButton.icon(
+              onPressed: _busy ? null : _splitItems,
+              icon: const Icon(Icons.alt_route_rounded, size: 18),
+              label: Text(l.splitByItems),
+            ),
+          ],
         ],
       ]);
     }
@@ -457,8 +485,15 @@ class _BillPanelState extends ConsumerState<_BillPanel> {
                 color: paid ? t.ok : t.warn,
               ),
       ]),
+      if (b['split'] != null)
+        Text(l.guestNofM((b['split']['guest_no'] as num).toInt(), (b['split']['guest_count'] as num).toInt()),
+            style: tt.titleSmall),
       if (cancelled && b['void_reason'] != null) Text(b['void_reason'], style: tt.bodySmall?.copyWith(color: t.danger)),
       Text(l.ordersIncluded(b['orders'].join(', #')), style: tt.bodySmall),
+      if (b['split'] != null) ...[
+        const SizedBox(height: 6),
+        GuestBillsStrip(split: b['split'] as Map, currentId: b['id'] as String, onOpen: _openBill),
+      ],
       const SizedBox(height: 10),
       for (final ln in (b['lines'] as List))
         Padding(
@@ -485,7 +520,8 @@ class _BillPanelState extends ConsumerState<_BillPanel> {
         icon: const Icon(Icons.print_outlined, size: 18),
         label: Text((b['print_count'] as int) > 0 ? l.printDuplicate : l.printBill),
       ),
-      if (!paid && !cancelled && ((s.me['max_discount_bp'] as num?)?.toInt() ?? 0) > 0)
+      // Guest bills of a split are not discounted (yet): the discount would not follow the guest's items.
+      if (!paid && !cancelled && b['split'] == null && ((s.me['max_discount_bp'] as num?)?.toInt() ?? 0) > 0)
         TextButton.icon(
           onPressed: _busy ? null : _discount,
           icon: const Icon(Icons.percent_rounded, size: 18),
@@ -528,6 +564,16 @@ class _BillPanelState extends ConsumerState<_BillPanel> {
             icon: const Icon(Icons.groups_outlined, size: 18),
             label: Text(l.splitEqually),
           ),
+          // A guest bill each, by what they had: only before any money is taken on the table's one bill.
+          if (b['table_id'] != null &&
+              b['split'] == null &&
+              ((b['paid_minor'] ?? 0) as int) == 0 &&
+              ((b['discount_minor'] ?? 0) as int) == 0)
+            TextButton.icon(
+              onPressed: _busy ? null : _splitItems,
+              icon: const Icon(Icons.alt_route_rounded, size: 18),
+              label: Text(l.splitByItems),
+            ),
         ]),
       ],
       if (s.can('bill.void') && !cancelled) ...[

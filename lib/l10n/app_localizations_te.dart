@@ -1883,4 +1883,226 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get payWholeDue => 'బకాయి మొత్తం చెల్లించండి';
+
+  @override
+  String get reportsTitle => 'రిపోర్టులు';
+
+  @override
+  String get reportSales => 'అమ్మకాలు';
+
+  @override
+  String get reportItems => 'ఐటమ్స్';
+
+  @override
+  String get reportGst => 'GST';
+
+  @override
+  String get reportStaff => 'సిబ్బంది';
+
+  @override
+  String get downloadCsv => 'CSV డౌన్‌లోడ్';
+
+  @override
+  String get billsRegisterCsv => 'బిల్లుల రిజిస్టర్ (CSV)';
+
+  @override
+  String fileSaved(String name) {
+    return '$name సేవ్ అయింది';
+  }
+
+  @override
+  String get basisSales =>
+      'హోటల్ తేదీలో ఇచ్చిన బిల్లులు. రద్దైన బిల్లులు వేరుగా చూపబడతాయి, అమ్మకాల్లో కలపవు.';
+
+  @override
+  String get basisItems =>
+      'ఇచ్చిన బిల్లుల్లోని వంటకాలు, ప్రింట్ అయినట్లే. రద్దైన బిల్లులు లేవు.';
+
+  @override
+  String basisGst(String sac) {
+    return 'ప్రతి బిల్లుపై ప్రింట్ అయిన పన్ను, రేటు వారీగా. B2C, రాష్ట్రం లోపల (CGST + SGST). SAC $sac.';
+  }
+
+  @override
+  String get basisStaff =>
+      'ప్రతి వ్యక్తి చేసిన బిల్లులు, ఇచ్చిన డిస్కౌంట్లు, తీసుకున్న డబ్బు.';
+
+  @override
+  String get ladderGross => 'మొత్తం (మెనూ విలువ)';
+
+  @override
+  String get ladderDiscount => 'డిస్కౌంట్లు';
+
+  @override
+  String get ladderTaxable => 'పన్ను విధించే విలువ';
+
+  @override
+  String get ladderOtherTax => 'ఇతర పన్ను';
+
+  @override
+  String get ladderRoundOff => 'రౌండ్ ఆఫ్';
+
+  @override
+  String get ladderTotal => 'బిల్లు మొత్తం';
+
+  @override
+  String repBills(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count బిల్లులు',
+      one: '1 బిల్లు',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String repReplaced(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'ఎక్కువ ఆర్డర్ వల్ల $count బిల్లులు మార్చబడ్డాయి',
+      one: 'ఎక్కువ ఆర్డర్ వల్ల 1 బిల్లు మార్చబడింది',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get repReceived => 'వచ్చిన డబ్బు';
+
+  @override
+  String repUnbilled(int count, String amount) {
+    return 'ఇంకా బిల్ కాలేదు: $count ఆర్డర్లు, $amount';
+  }
+
+  @override
+  String get repUnbilledHelp =>
+      'వీటికి బిల్ చేయండి లేదా ఆర్డర్ రద్దు చేయండి. ఇవి అమ్మకాల్లో లెక్కించబడవు.';
+
+  @override
+  String get repByDay => 'రోజు వారీగా';
+
+  @override
+  String get repNoBills => 'ఈ తేదీల్లో బిల్లులు లేవు';
+
+  @override
+  String repSold(int qty) {
+    return '$qty అమ్ముడయ్యాయి';
+  }
+
+  @override
+  String gstRate(String rate) {
+    return 'GST $rate';
+  }
+
+  @override
+  String get gstDocuments => 'జారీ చేసిన పత్రాలు';
+
+  @override
+  String gstDocCounts(
+    String from,
+    String to,
+    int count,
+    int cancelled,
+    int net,
+  ) {
+    return '$from నుండి $to: $count జారీ, $cancelled రద్దు, $net నికరం';
+  }
+
+  @override
+  String get docTaxInvoice => 'టాక్స్ ఇన్వాయిస్';
+
+  @override
+  String get docBillOfSupply => 'బిల్ ఆఫ్ సప్లై';
+
+  @override
+  String get docBill => 'బిల్లు';
+
+  @override
+  String staffDiscounts(int count, String amount) {
+    return '$count డిస్కౌంట్లు · $amount';
+  }
+
+  @override
+  String staffCancelled(int count) {
+    return '$count బిల్లులు చేతితో రద్దు';
+  }
+
+  @override
+  String get noStaffActivity =>
+      'ఈ తేదీల్లో సిబ్బంది బిల్లులు లేదా చెల్లింపులు లేవు';
+
+  @override
+  String errRangeTooLongDays(int days) {
+    return 'గరిష్టంగా $days రోజులు ఎంచుకోండి';
+  }
+
+  @override
+  String unbilledToday(String amount) {
+    return 'ఈరోజు ఇంకా బిల్ కానివి: $amount';
+  }
+
+  @override
+  String get splitByItems => 'ఐటమ్స్ వారీగా విభజించండి';
+
+  @override
+  String get splitByItemsHelp =>
+      'ఒక గెస్ట్‌ను నొక్కితే ఒకటి వారికి; x తో వెనక్కి. షేర్డ్: టిక్ చేసిన గెస్ట్‌లు సమానంగా చెల్లిస్తారు.';
+
+  @override
+  String get guestsCount => 'గెస్ట్‌లు';
+
+  @override
+  String guestN(int n) {
+    return 'గెస్ట్ $n';
+  }
+
+  @override
+  String guestUnits(int n, int count) {
+    return 'గెస్ట్ $n · $count';
+  }
+
+  @override
+  String guestNofM(int n, int m) {
+    return '$m లో గెస్ట్ $n';
+  }
+
+  @override
+  String splitLeft(int count) {
+    return '$count మిగిలాయి';
+  }
+
+  @override
+  String get splitShared => 'షేర్డ్';
+
+  @override
+  String splitCreate(int count) {
+    return '$count బిల్లులు చేయండి';
+  }
+
+  @override
+  String get splitIncomplete =>
+      'ప్రతి వంటకం ఎవరికైనా ఇవ్వండి, ప్రతి గెస్ట్‌కు ఏదో ఒకటి ఉండాలి';
+
+  @override
+  String splitDone(int count) {
+    return '$count గెస్ట్ బిల్లులు జారీ అయ్యాయి';
+  }
+
+  @override
+  String get guestBills => 'గెస్ట్ బిల్లులు';
+
+  @override
+  String get splitNothing => 'ఈ టేబుల్‌లో విభజించడానికి ఇంకా ఏమీ లేదు';
+
+  @override
+  String get errLinesChanged => 'టేబుల్ ఐటమ్స్ మారాయి. జాబితా రిఫ్రెష్ అయింది.';
+
+  @override
+  String get errSplitPartlyPaid =>
+      'ఒక గెస్ట్ ఇప్పటికే చెల్లించారు, ఈ విభజనను రద్దు చేయలేరు.';
+
+  @override
+  String get errBillDiscounted =>
+      'ఈ బిల్లుకు డిస్కౌంట్ ఉంది. ముందు దాన్ని రద్దు చేసి, తర్వాత విభజించండి.';
 }
