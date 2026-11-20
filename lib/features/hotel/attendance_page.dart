@@ -8,6 +8,7 @@ import '../../l10n/app_localizations.dart';
 import '../../ui/components.dart';
 import '../../ui/feedback.dart';
 import '../../ui/shell.dart';
+import 'rota.dart';
 
 /// Attendance (backend docs/03 "Attendance", docs/14): clock in / out on your own login; managers see everyone,
 /// with missed clock-outs flagged (never closed by the system) and corrections that need a reason.
@@ -57,6 +58,7 @@ class AttendancePage extends ConsumerStatefulWidget {
 
 class _AttendancePageState extends ConsumerState<AttendancePage> {
   int _days = 1; // today, or the last 7 days
+  String _view = 'attendance'; // or 'rota'
   Map<String, dynamic>? _data;
   Object? _error;
 
@@ -134,7 +136,18 @@ class _AttendancePageState extends ConsumerState<AttendancePage> {
     final d = _data;
     final fmt = DateFormat.MMMd(Localizations.localeOf(context).toLanguageTag()).add_jm();
     return PageBody(children: [
-      Reveal(index: 0, child: PageHeading(l.attendance, actions: [const ClockButton()])),
+      Reveal(
+        index: 0,
+        child: PageHeading(l.attendance, actions: [
+          PillTabs<String>(
+            items: [('attendance', l.attendance), ('rota', l.rota)],
+            selected: _view,
+            onSelect: (v) => setState(() => _view = v),
+          ),
+          const ClockButton(),
+        ]),
+      ),
+      if (_view == 'rota') const RotaView() else ...[
       Wrap(spacing: 8, children: [
         for (final (n, label) in [(1, l.periodToday), (7, l.lastDays(7))])
           CountChip(
@@ -199,6 +212,7 @@ class _AttendancePageState extends ConsumerState<AttendancePage> {
               ),
           ]),
         ),
+      ],
       ],
     ]);
   }

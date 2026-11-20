@@ -2911,4 +2911,67 @@ class AppLocalizationsHi extends AppLocalizations {
   String correctedBecause(String reason) {
     return 'ठीक किया गया: $reason';
   }
+
+  @override
+  String get rota => 'रोटा';
+
+  @override
+  String get addShift => 'शिफ्ट जोड़ें';
+
+  @override
+  String get person => 'व्यक्ति';
+
+  @override
+  String get day => 'दिन';
+
+  @override
+  String get shiftStart => 'शुरू';
+
+  @override
+  String get shiftEnd => 'खत्म';
+
+  @override
+  String get shiftOvernight => 'आधी रात के बाद खत्म (अगला दिन)';
+
+  @override
+  String get copyLastWeek => 'पिछला हफ़्ता कॉपी करें';
+
+  @override
+  String weekCopied(int copied, int skipped) {
+    return '$copied शिफ्ट कॉपी, $skipped छोड़ी (पहले से थीं)';
+  }
+
+  @override
+  String get previousWeek => 'पिछला हफ़्ता';
+
+  @override
+  String get nextWeek => 'अगला हफ़्ता';
+
+  @override
+  String get noShiftsPlanned => 'कोई शिफ्ट नहीं';
+
+  @override
+  String get removeShift => 'शिफ्ट हटाएँ';
+
+  @override
+  String get shiftOnTime => 'समय पर';
+
+  @override
+  String shiftLate(int minutes) {
+    return '$minutes मिनट देर';
+  }
+
+  @override
+  String shiftNotIn(int minutes) {
+    return 'नहीं आए · $minutes मिनट देर';
+  }
+
+  @override
+  String get shiftNoShow => 'नहीं आए';
+
+  @override
+  String get shiftUpcoming => 'आने वाली';
+
+  @override
+  String get myNextShifts => 'मेरी अगली शिफ्ट';
 }

@@ -2982,4 +2982,67 @@ class AppLocalizationsEn extends AppLocalizations {
   String correctedBecause(String reason) {
     return 'Corrected: $reason';
   }
+
+  @override
+  String get rota => 'Rota';
+
+  @override
+  String get addShift => 'Add shift';
+
+  @override
+  String get person => 'Person';
+
+  @override
+  String get day => 'Day';
+
+  @override
+  String get shiftStart => 'Starts';
+
+  @override
+  String get shiftEnd => 'Ends';
+
+  @override
+  String get shiftOvernight => 'Ends after midnight (next day)';
+
+  @override
+  String get copyLastWeek => 'Copy last week';
+
+  @override
+  String weekCopied(int copied, int skipped) {
+    return '$copied shifts copied, $skipped skipped (already planned)';
+  }
+
+  @override
+  String get previousWeek => 'Previous week';
+
+  @override
+  String get nextWeek => 'Next week';
+
+  @override
+  String get noShiftsPlanned => 'No shifts planned';
+
+  @override
+  String get removeShift => 'Remove shift';
+
+  @override
+  String get shiftOnTime => 'On time';
+
+  @override
+  String shiftLate(int minutes) {
+    return 'Late $minutes min';
+  }
+
+  @override
+  String shiftNotIn(int minutes) {
+    return 'Not in · $minutes min late';
+  }
+
+  @override
+  String get shiftNoShow => 'No-show';
+
+  @override
+  String get shiftUpcoming => 'Upcoming';
+
+  @override
+  String get myNextShifts => 'My next shifts';
 }

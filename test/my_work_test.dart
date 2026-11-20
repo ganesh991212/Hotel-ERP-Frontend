@@ -38,6 +38,9 @@ void main() {
     addTearDown(tester.view.reset);
     String? asked;
     final api = ApiClient(httpClient: MockClient((req) async {
+      if (req.url.path.endsWith('/rota/me')) {
+        return http.Response(jsonEncode({'shifts': []}), 200, headers: {'content-type': 'application/json'});
+      }
       if (req.url.path.endsWith('/attendance/me')) {
         return http.Response(jsonEncode({'clocked_in': false, 'shift': null}), 200,
             headers: {'content-type': 'application/json'});

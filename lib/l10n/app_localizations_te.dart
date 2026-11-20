@@ -2919,4 +2919,67 @@ class AppLocalizationsTe extends AppLocalizations {
   String correctedBecause(String reason) {
     return 'సరిచేయబడింది: $reason';
   }
+
+  @override
+  String get rota => 'రోటా';
+
+  @override
+  String get addShift => 'షిఫ్ట్ జోడించండి';
+
+  @override
+  String get person => 'వ్యక్తి';
+
+  @override
+  String get day => 'రోజు';
+
+  @override
+  String get shiftStart => 'మొదలు';
+
+  @override
+  String get shiftEnd => 'ముగింపు';
+
+  @override
+  String get shiftOvernight => 'అర్ధరాత్రి తర్వాత ముగుస్తుంది (తర్వాతి రోజు)';
+
+  @override
+  String get copyLastWeek => 'గత వారం కాపీ చేయండి';
+
+  @override
+  String weekCopied(int copied, int skipped) {
+    return '$copied షిఫ్ట్‌లు కాపీ, $skipped వదిలేశాం (ఇప్పటికే ఉన్నాయి)';
+  }
+
+  @override
+  String get previousWeek => 'గత వారం';
+
+  @override
+  String get nextWeek => 'తర్వాతి వారం';
+
+  @override
+  String get noShiftsPlanned => 'షిఫ్ట్‌లు లేవు';
+
+  @override
+  String get removeShift => 'షిఫ్ట్ తీసివేయండి';
+
+  @override
+  String get shiftOnTime => 'సమయానికి';
+
+  @override
+  String shiftLate(int minutes) {
+    return '$minutes నిమి. ఆలస్యం';
+  }
+
+  @override
+  String shiftNotIn(int minutes) {
+    return 'రాలేదు · $minutes నిమి. ఆలస్యం';
+  }
+
+  @override
+  String get shiftNoShow => 'రాలేదు';
+
+  @override
+  String get shiftUpcoming => 'రాబోయేది';
+
+  @override
+  String get myNextShifts => 'నా తదుపరి షిఫ్ట్‌లు';
 }

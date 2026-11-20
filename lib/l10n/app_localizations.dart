@@ -5163,6 +5163,120 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Corrected: {reason}'**
   String correctedBecause(String reason);
+
+  /// Attendance screen tab: planned shifts
+  ///
+  /// In en, this message translates to:
+  /// **'Rota'**
+  String get rota;
+
+  /// Rota: button and dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'Add shift'**
+  String get addShift;
+
+  /// Rota: who works the shift
+  ///
+  /// In en, this message translates to:
+  /// **'Person'**
+  String get person;
+
+  /// Rota: the day the shift starts
+  ///
+  /// In en, this message translates to:
+  /// **'Day'**
+  String get day;
+
+  /// Rota: shift start time
+  ///
+  /// In en, this message translates to:
+  /// **'Starts'**
+  String get shiftStart;
+
+  /// Rota: shift end time
+  ///
+  /// In en, this message translates to:
+  /// **'Ends'**
+  String get shiftEnd;
+
+  /// Rota: shown when the end time is before the start time
+  ///
+  /// In en, this message translates to:
+  /// **'Ends after midnight (next day)'**
+  String get shiftOvernight;
+
+  /// Rota: fill this week from the week before
+  ///
+  /// In en, this message translates to:
+  /// **'Copy last week'**
+  String get copyLastWeek;
+
+  /// Toast after copying last week's rota
+  ///
+  /// In en, this message translates to:
+  /// **'{copied} shifts copied, {skipped} skipped (already planned)'**
+  String weekCopied(int copied, int skipped);
+
+  /// Tooltip
+  ///
+  /// In en, this message translates to:
+  /// **'Previous week'**
+  String get previousWeek;
+
+  /// Tooltip
+  ///
+  /// In en, this message translates to:
+  /// **'Next week'**
+  String get nextWeek;
+
+  /// Rota: empty day
+  ///
+  /// In en, this message translates to:
+  /// **'No shifts planned'**
+  String get noShiftsPlanned;
+
+  /// Tooltip
+  ///
+  /// In en, this message translates to:
+  /// **'Remove shift'**
+  String get removeShift;
+
+  /// Rota: clocked in on time
+  ///
+  /// In en, this message translates to:
+  /// **'On time'**
+  String get shiftOnTime;
+
+  /// Rota: clocked in this many minutes after the start
+  ///
+  /// In en, this message translates to:
+  /// **'Late {minutes} min'**
+  String shiftLate(int minutes);
+
+  /// Rota: shift started, not clocked in yet
+  ///
+  /// In en, this message translates to:
+  /// **'Not in · {minutes} min late'**
+  String shiftNotIn(int minutes);
+
+  /// Rota: never clocked in for the shift
+  ///
+  /// In en, this message translates to:
+  /// **'No-show'**
+  String get shiftNoShow;
+
+  /// Rota: shift not started yet
+  ///
+  /// In en, this message translates to:
+  /// **'Upcoming'**
+  String get shiftUpcoming;
+
+  /// My work: the person's planned shifts for the coming week
+  ///
+  /// In en, this message translates to:
+  /// **'My next shifts'**
+  String get myNextShifts;
 }
 
 class _AppLocalizationsDelegate

@@ -9,6 +9,7 @@ import '../../ui/components.dart';
 import '../../ui/feedback.dart';
 import '../../ui/shell.dart';
 import 'attendance_page.dart';
+import 'rota.dart';
 
 /// The signed-in person's own work: cooking, serving, billing, depending on what their role does. The server
 /// decides which sections apply and computes every number; this page only lays them out.
@@ -39,6 +40,8 @@ class _MyWorkPageState extends ConsumerState<MyWorkPage> {
           CountChip(label: l.periodWeek, count: null, selected: _period == 'week', onTap: () => setState(() => _period = 'week')),
         ]),
       ),
+      const SizedBox(height: Gap.m),
+      const MyShiftsCard(),
       const SizedBox(height: Gap.m),
       data.when(
         loading: () => const LoadingBlock(),

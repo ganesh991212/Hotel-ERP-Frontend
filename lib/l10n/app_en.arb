@@ -4098,5 +4098,99 @@
         "type": "String"
       }
     }
+  },
+  "rota": "Rota",
+  "@rota": {
+    "description": "Attendance screen tab: planned shifts"
+  },
+  "addShift": "Add shift",
+  "@addShift": {
+    "description": "Rota: button and dialog title"
+  },
+  "person": "Person",
+  "@person": {
+    "description": "Rota: who works the shift"
+  },
+  "day": "Day",
+  "@day": {
+    "description": "Rota: the day the shift starts"
+  },
+  "shiftStart": "Starts",
+  "@shiftStart": {
+    "description": "Rota: shift start time"
+  },
+  "shiftEnd": "Ends",
+  "@shiftEnd": {
+    "description": "Rota: shift end time"
+  },
+  "shiftOvernight": "Ends after midnight (next day)",
+  "@shiftOvernight": {
+    "description": "Rota: shown when the end time is before the start time"
+  },
+  "copyLastWeek": "Copy last week",
+  "@copyLastWeek": {
+    "description": "Rota: fill this week from the week before"
+  },
+  "weekCopied": "{copied} shifts copied, {skipped} skipped (already planned)",
+  "@weekCopied": {
+    "description": "Toast after copying last week's rota",
+    "placeholders": {
+      "copied": {
+        "type": "int"
+      },
+      "skipped": {
+        "type": "int"
+      }
+    }
+  },
+  "previousWeek": "Previous week",
+  "@previousWeek": {
+    "description": "Tooltip"
+  },
+  "nextWeek": "Next week",
+  "@nextWeek": {
+    "description": "Tooltip"
+  },
+  "noShiftsPlanned": "No shifts planned",
+  "@noShiftsPlanned": {
+    "description": "Rota: empty day"
+  },
+  "removeShift": "Remove shift",
+  "@removeShift": {
+    "description": "Tooltip"
+  },
+  "shiftOnTime": "On time",
+  "@shiftOnTime": {
+    "description": "Rota: clocked in on time"
+  },
+  "shiftLate": "Late {minutes} min",
+  "@shiftLate": {
+    "description": "Rota: clocked in this many minutes after the start",
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "shiftNotIn": "Not in · {minutes} min late",
+  "@shiftNotIn": {
+    "description": "Rota: shift started, not clocked in yet",
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "shiftNoShow": "No-show",
+  "@shiftNoShow": {
+    "description": "Rota: never clocked in for the shift"
+  },
+  "shiftUpcoming": "Upcoming",
+  "@shiftUpcoming": {
+    "description": "Rota: shift not started yet"
+  },
+  "myNextShifts": "My next shifts",
+  "@myNextShifts": {
+    "description": "My work: the person's planned shifts for the coming week"
   }
 }
