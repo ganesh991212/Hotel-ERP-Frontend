@@ -46,6 +46,10 @@ String errorText(BuildContext context, Object e) {
           : l.errOutsideHours,
       'item_in_combo' => l.errItemInCombo,
       'hold_gone' => l.errHoldGone,
+      'bad_gstin' => l.errBadGstin,
+      'interstate_b2b' => l.errInterstateB2b,
+      'not_tax_invoice' => l.errNotTaxInvoice,
+      'bill_has_buyer' => l.errBillHasBuyer,
       'addon_count' || 'bad_addon' || 'bad_variant' => l.errAddonCount,
       'guest_empty' || 'bad_split' => l.splitIncomplete,
       'range_too_long' => e.details['max_days'] is num

@@ -96,6 +96,21 @@ void main() {
     });
   }
 
+  testWidgets('GST summary lists company (B2B) bills one per line', (tester) async {
+    final d = {
+      ..._gst,
+      'b2b': [
+        {'invoice_no': 'A/2', 'buyer_name': 'Acme Foods', 'buyer_gstin': '36PQRST5678K1Z3', 'rate_bp': 500,
+          'taxable_minor': 20000, 'tax_minor': 1000, 'cgst_minor': 500, 'sgst_minor': 500, 'invoice_total_minor': 21000},
+      ],
+    };
+    await _show(tester, GstReport(d: d), 380);
+    expect(tester.takeException(), isNull);
+    expect(find.text('Company (B2B) bills'), findsOneWidget);
+    expect(find.text('A/2 · Acme Foods'), findsOneWidget);
+    expect(find.textContaining('GSTIN 36PQRST5678K1Z3'), findsOneWidget);
+  });
+
   testWidgets('GST summary shows each rate and the documents issued', (tester) async {
     await _show(tester, GstReport(d: _gst), 380);
     expect(tester.takeException(), isNull);

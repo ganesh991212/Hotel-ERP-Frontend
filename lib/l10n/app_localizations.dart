@@ -4821,6 +4821,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'On time today: {pct}% ({onTime} of {ready} orders ready by their due time)'**
   String onTimeToday(String pct, int onTime, int ready);
+
+  /// Bill window: button and dialog title to put a company's GSTIN on the tax invoice (B2B)
+  ///
+  /// In en, this message translates to:
+  /// **'Company GST bill'**
+  String get companyBill;
+
+  /// Company GST bill: the buyer's registered name
+  ///
+  /// In en, this message translates to:
+  /// **'Company name'**
+  String get buyerName;
+
+  /// Company GST bill: the buyer's 15-character GSTIN
+  ///
+  /// In en, this message translates to:
+  /// **'Company GSTIN'**
+  String get buyerGstin;
+
+  /// Company GST bill: the buyer's address
+  ///
+  /// In en, this message translates to:
+  /// **'Company address (optional)'**
+  String get buyerAddress;
+
+  /// Company GST bill dialog help
+  ///
+  /// In en, this message translates to:
+  /// **'The bill is re-issued with the company\'s details (the old number stays in the register as cancelled). The GSTIN must be valid and from this state.'**
+  String get companyBillHelp;
+
+  /// Bill window: the company the tax invoice is issued to
+  ///
+  /// In en, this message translates to:
+  /// **'Bill to: {name}'**
+  String billTo(String name);
+
+  /// Error: the buyer's GSTIN failed the format or check digit
+  ///
+  /// In en, this message translates to:
+  /// **'That GSTIN is not valid. Check it with the guest.'**
+  String get errBadGstin;
+
+  /// Error: inter-state B2B is not supported yet
+  ///
+  /// In en, this message translates to:
+  /// **'This GSTIN is from another state. Bills for other-state companies need IGST, which is not supported yet.'**
+  String get errInterstateB2b;
+
+  /// Error: B2B bills need a GST-registered hotel
+  ///
+  /// In en, this message translates to:
+  /// **'Only a GST-registered hotel can issue a company (B2B) bill.'**
+  String get errNotTaxInvoice;
+
+  /// Error: splitting a B2B bill by items
+  ///
+  /// In en, this message translates to:
+  /// **'This is a company bill; it cannot be split by items.'**
+  String get errBillHasBuyer;
+
+  /// GST report: heading over bills issued to a company's GSTIN, one per line (GSTR-1 B2B)
+  ///
+  /// In en, this message translates to:
+  /// **'Company (B2B) bills'**
+  String get gstB2b;
 }
 
 class _AppLocalizationsDelegate

@@ -3809,5 +3809,54 @@
         "type": "int"
       }
     }
+  },
+  "companyBill": "Company GST bill",
+  "@companyBill": {
+    "description": "Bill window: button and dialog title to put a company's GSTIN on the tax invoice (B2B)"
+  },
+  "buyerName": "Company name",
+  "@buyerName": {
+    "description": "Company GST bill: the buyer's registered name"
+  },
+  "buyerGstin": "Company GSTIN",
+  "@buyerGstin": {
+    "description": "Company GST bill: the buyer's 15-character GSTIN"
+  },
+  "buyerAddress": "Company address (optional)",
+  "@buyerAddress": {
+    "description": "Company GST bill: the buyer's address"
+  },
+  "companyBillHelp": "The bill is re-issued with the company's details (the old number stays in the register as cancelled). The GSTIN must be valid and from this state.",
+  "@companyBillHelp": {
+    "description": "Company GST bill dialog help"
+  },
+  "billTo": "Bill to: {name}",
+  "@billTo": {
+    "description": "Bill window: the company the tax invoice is issued to",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "errBadGstin": "That GSTIN is not valid. Check it with the guest.",
+  "@errBadGstin": {
+    "description": "Error: the buyer's GSTIN failed the format or check digit"
+  },
+  "errInterstateB2b": "This GSTIN is from another state. Bills for other-state companies need IGST, which is not supported yet.",
+  "@errInterstateB2b": {
+    "description": "Error: inter-state B2B is not supported yet"
+  },
+  "errNotTaxInvoice": "Only a GST-registered hotel can issue a company (B2B) bill.",
+  "@errNotTaxInvoice": {
+    "description": "Error: B2B bills need a GST-registered hotel"
+  },
+  "errBillHasBuyer": "This is a company bill; it cannot be split by items.",
+  "@errBillHasBuyer": {
+    "description": "Error: splitting a B2B bill by items"
+  },
+  "gstB2b": "Company (B2B) bills",
+  "@gstB2b": {
+    "description": "GST report: heading over bills issued to a company's GSTIN, one per line (GSTR-1 B2B)"
   }
 }

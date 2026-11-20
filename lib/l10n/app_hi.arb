@@ -785,5 +785,16 @@
   "dueIn": "{minutes} मिनट में",
   "readyDueNow": "अभी तैयार होना है",
   "delayedBy": "{minutes} मिनट देर",
-  "onTimeToday": "आज समय पर: {pct}% ({ready} में से {onTime} ऑर्डर समय पर तैयार)"
+  "onTimeToday": "आज समय पर: {pct}% ({ready} में से {onTime} ऑर्डर समय पर तैयार)",
+  "companyBill": "कंपनी GST बिल",
+  "buyerName": "कंपनी का नाम",
+  "buyerGstin": "कंपनी GSTIN",
+  "buyerAddress": "कंपनी का पता (वैकल्पिक)",
+  "companyBillHelp": "बिल कंपनी के विवरण के साथ दोबारा जारी होगा (पुराना नंबर रद्द के रूप में रजिस्टर में रहेगा)। GSTIN सही और इसी राज्य का होना चाहिए।",
+  "billTo": "बिल प्राप्तकर्ता: {name}",
+  "errBadGstin": "यह GSTIN सही नहीं है। मेहमान से जाँचें।",
+  "errInterstateB2b": "यह GSTIN दूसरे राज्य का है। दूसरे राज्य की कंपनी के बिल में IGST चाहिए, जो अभी उपलब्ध नहीं है।",
+  "errNotTaxInvoice": "केवल GST पंजीकृत होटल ही कंपनी (B2B) बिल जारी कर सकता है।",
+  "errBillHasBuyer": "यह कंपनी बिल है; व्यंजनों के अनुसार नहीं बाँटा जा सकता।",
+  "gstB2b": "कंपनी (B2B) बिल"
 }

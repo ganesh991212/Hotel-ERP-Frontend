@@ -601,6 +601,29 @@ class GstReport extends StatelessWidget {
             ],
           ),
         ),
+        // Company (B2B) bills one per line, as GSTR-1 lists them; the rates above include them (B2C is the rest).
+        if (((d['b2b'] as List?) ?? const []).isNotEmpty) ...[
+          const SizedBox(height: 12),
+          Glass(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CardTitle(l.gstB2b),
+                const SizedBox(height: 6),
+                for (final (i, x) in (d['b2b'] as List).cast<Map>().indexed) ...[
+                  if (i > 0) Divider(height: 1, color: t.hair),
+                  _Line(
+                    '${x['invoice_no']} · ${x['buyer_name']}',
+                    _i(x['tax_minor']),
+                    sub:
+                        'GSTIN ${x['buyer_gstin']} · ${l.gstRate(percentLabel(_i(x['rate_bp'])))} · '
+                        '${l.ladderTaxable} ${formatInr(_i(x['taxable_minor']))}',
+                  ),
+                ],
+              ],
+            ),
+          ),
+        ],
         const SizedBox(height: 12),
         Glass(
           child: Column(

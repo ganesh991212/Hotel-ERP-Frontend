@@ -2776,4 +2776,43 @@ class AppLocalizationsEn extends AppLocalizations {
   String onTimeToday(String pct, int onTime, int ready) {
     return 'On time today: $pct% ($onTime of $ready orders ready by their due time)';
   }
+
+  @override
+  String get companyBill => 'Company GST bill';
+
+  @override
+  String get buyerName => 'Company name';
+
+  @override
+  String get buyerGstin => 'Company GSTIN';
+
+  @override
+  String get buyerAddress => 'Company address (optional)';
+
+  @override
+  String get companyBillHelp =>
+      'The bill is re-issued with the company\'s details (the old number stays in the register as cancelled). The GSTIN must be valid and from this state.';
+
+  @override
+  String billTo(String name) {
+    return 'Bill to: $name';
+  }
+
+  @override
+  String get errBadGstin => 'That GSTIN is not valid. Check it with the guest.';
+
+  @override
+  String get errInterstateB2b =>
+      'This GSTIN is from another state. Bills for other-state companies need IGST, which is not supported yet.';
+
+  @override
+  String get errNotTaxInvoice =>
+      'Only a GST-registered hotel can issue a company (B2B) bill.';
+
+  @override
+  String get errBillHasBuyer =>
+      'This is a company bill; it cannot be split by items.';
+
+  @override
+  String get gstB2b => 'Company (B2B) bills';
 }

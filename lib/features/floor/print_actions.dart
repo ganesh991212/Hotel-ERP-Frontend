@@ -224,6 +224,15 @@ class _BillPanelState extends ConsumerState<_BillPanel> {
     });
   }
 
+  /// What a re-issued bill (discount, company details) is for: the takeaway order, else the table; a takeaway bill
+  /// opened on its own (Orders > Open bill) re-issues by its one order.
+  Map<String, dynamic> _reissueTarget() {
+    if (widget.order != null) return {'order_id': widget.order!['id']};
+    final table = _bill!['table_id'] ?? widget.table['id'];
+    if (table != null) return {'table_id': table};
+    return {'order_id': (_bill!['order_ids'] as List).single};
+  }
+
   /// Discount on the bill shown: the server re-issues it (cancelled old bill, new number) with tax recalculated.
   Future<void> _discount() async {
     final l = AppLocalizations.of(context);
@@ -266,9 +275,56 @@ class _BillPanelState extends ConsumerState<_BillPanel> {
     setState(() => _busy = true);
     await guard(context, () async {
       final b = await ref.read(apiProvider).post('/api/v1/bills', {
-        if (widget.order != null) 'order_id': widget.order!['id'] else 'table_id': _bill!['table_id'] ?? widget.table['id'],
+        ..._reissueTarget(),
         'include_unserved': true, // the bill being discounted already covers these orders
         'discount': {if (bp != null) 'percent_bp': bp else 'amount_minor': amount, 'reason': reason.text.trim()},
+      });
+      setState(() => _bill = Map<String, dynamic>.from(b));
+      final replaced = (b['replaced_invoice_nos'] as List?)?.cast<String>() ?? const [];
+      if (replaced.isNotEmpty && mounted) showDone(context, l.billReplaced(replaced.join(', '), b['invoice_no'] as String));
+    });
+    if (mounted) setState(() => _busy = false);
+  }
+
+  /// B2B: the buyer's name, GSTIN and address on the tax invoice. The server checks the GSTIN and re-issues the
+  /// unpaid bill with them (an issued invoice is never edited).
+  Future<void> _buyer() async {
+    final l = AppLocalizations.of(context);
+    final name = TextEditingController();
+    final gstin = TextEditingController();
+    final address = TextEditingController();
+    final ok = await showGlassDialog<bool>(
+      context,
+      title: l.companyBill,
+      body: Builder(
+        builder: (ctx) => Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+          FieldLabel(l.buyerName),
+          TextField(controller: name, autofocus: true, maxLength: 120, decoration: const InputDecoration(counterText: '')),
+          FieldLabel(l.buyerGstin),
+          TextField(
+            controller: gstin,
+            maxLength: 15,
+            textCapitalization: TextCapitalization.characters,
+            decoration: const InputDecoration(counterText: '', hintText: '36ABCDE1234F1Z5'),
+          ),
+          FieldLabel(l.buyerAddress),
+          TextField(controller: address, maxLength: 300, maxLines: 2, decoration: const InputDecoration(counterText: '')),
+          Text(l.companyBillHelp, style: Theme.of(ctx).textTheme.bodySmall),
+          DialogActions(primary: l.companyBill, onPrimary: () => Navigator.of(ctx).pop(true)),
+        ]),
+      ),
+    );
+    if (ok != true || !mounted) return;
+    setState(() => _busy = true);
+    await guard(context, () async {
+      final b = await ref.read(apiProvider).post('/api/v1/bills', {
+        ..._reissueTarget(),
+        'include_unserved': true, // the bill being re-issued already covers these orders
+        'buyer': {
+          'name': name.text.trim(),
+          'gstin': gstin.text.trim().toUpperCase(),
+          if (address.text.trim().isNotEmpty) 'address': address.text.trim(),
+        },
       });
       setState(() => _bill = Map<String, dynamic>.from(b));
       final replaced = (b['replaced_invoice_nos'] as List?)?.cast<String>() ?? const [];
@@ -497,6 +553,24 @@ class _BillPanelState extends ConsumerState<_BillPanel> {
         Text(l.guestNofM((b['split']['guest_no'] as num).toInt(), (b['split']['guest_count'] as num).toInt()),
             style: tt.titleSmall),
       if (cancelled && b['void_reason'] != null) Text(b['void_reason'], style: tt.bodySmall?.copyWith(color: t.danger)),
+      if (b['buyer'] is Map)
+        Padding(
+          padding: const EdgeInsets.only(top: 4),
+          child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Icon(Icons.business_outlined, size: 16, color: t.dim),
+            const SizedBox(width: 6),
+            Expanded(
+              child: Text(
+                [
+                  l.billTo('${b['buyer']['name']}'),
+                  'GSTIN ${b['buyer']['gstin']}',
+                  if (b['buyer']['address'] != null) '${b['buyer']['address']}',
+                ].join('\n'),
+                style: tt.bodySmall,
+              ),
+            ),
+          ]),
+        ),
       Text(l.ordersIncluded(b['orders'].join(', #')), style: tt.bodySmall),
       if (b['split'] != null) ...[
         const SizedBox(height: 6),
@@ -534,6 +608,13 @@ class _BillPanelState extends ConsumerState<_BillPanel> {
           onPressed: _busy ? null : _discount,
           icon: const Icon(Icons.percent_rounded, size: 18),
           label: Text(l.addDiscount),
+        ),
+      // B2B: only on a tax invoice (GST-registered hotel), only while unpaid, not on a split's guest bills.
+      if (!paid && !cancelled && b['split'] == null && b['doc_type'] == 'TAX_INVOICE' && b['buyer'] == null)
+        TextButton.icon(
+          onPressed: _busy ? null : _buyer,
+          icon: const Icon(Icons.business_outlined, size: 18),
+          label: Text(l.companyBill),
         ),
       // Parts paid so far (removable until the bill is paid) and what is still due. Amounts come from the server.
       for (final p in (b['payments'] as List? ?? const []))
@@ -576,7 +657,8 @@ class _BillPanelState extends ConsumerState<_BillPanel> {
           if (b['table_id'] != null &&
               b['split'] == null &&
               ((b['paid_minor'] ?? 0) as int) == 0 &&
-              ((b['discount_minor'] ?? 0) as int) == 0)
+              ((b['discount_minor'] ?? 0) as int) == 0 &&
+              b['buyer'] == null)
             TextButton.icon(
               onPressed: _busy ? null : _splitItems,
               icon: const Icon(Icons.alt_route_rounded, size: 18),
