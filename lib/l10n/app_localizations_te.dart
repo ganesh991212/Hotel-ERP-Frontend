@@ -2634,4 +2634,22 @@ class AppLocalizationsTe extends AppLocalizations {
   String sharePct(String pct) {
     return '$pct%';
   }
+
+  @override
+  String get repByCategory => 'కేటగిరీ వారీగా';
+
+  @override
+  String repCategoryLine(int dishes, String qty, String pct) {
+    return '$dishes వంటకాలు · $qty అమ్ముడయ్యాయి · అమ్మకాల్లో $pct%';
+  }
+
+  @override
+  String get repNotRecorded => 'నమోదు కాలేదు';
+
+  @override
+  String get basisCategories =>
+      'ప్రతి వంటకం బిల్లు అయినప్పుడు ఉన్న కేటగిరీలోనే లెక్కించబడుతుంది; తర్వాత మార్చినా పాత రిపోర్టులు మారవు.';
+
+  @override
+  String get categoriesCsv => 'కేటగిరీలు (CSV)';
 }

@@ -763,5 +763,10 @@
   "sameAsLastWeek": "पिछले हफ़्ते जितना",
   "noSalesToCompare": "तुलना के लिए बिक्री नहीं",
   "receivedToday": "आज मिला पैसा",
-  "sharePct": "{pct}%"
+  "sharePct": "{pct}%",
+  "repByCategory": "कैटेगरी के अनुसार",
+  "repCategoryLine": "{dishes} व्यंजन · {qty} बिके · बिक्री का {pct}%",
+  "repNotRecorded": "दर्ज नहीं",
+  "basisCategories": "हर व्यंजन उसी कैटेगरी में गिना जाता है जो बिल बनते समय थी; बाद में बदलने से पुरानी रिपोर्ट नहीं बदलती।",
+  "categoriesCsv": "कैटेगरी (CSV)"
 }

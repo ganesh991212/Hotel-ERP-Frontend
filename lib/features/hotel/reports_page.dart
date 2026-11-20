@@ -124,6 +124,12 @@ class _ReportsPageState extends ConsumerState<ReportsPage> {
                 icon: const Icon(Icons.download_rounded, size: 18),
                 label: Text(l.downloadCsv),
               ),
+              if (_kind == ReportKind.items)
+                OutlinedButton.icon(
+                  onPressed: _from == null ? null : () => _download('categories'),
+                  icon: const Icon(Icons.category_outlined, size: 18),
+                  label: Text(l.categoriesCsv),
+                ),
               if (_kind == ReportKind.sales)
                 OutlinedButton.icon(
                   onPressed: _from == null ? null : () => _download('register'),
@@ -496,7 +502,8 @@ class ItemsReport extends StatelessWidget {
         child: EmptyState(icon: Icons.restaurant_menu, title: l.repNoBills, body: l.basisItems),
       );
     }
-    return Glass(
+    final cats = ((d['categories'] as List?) ?? const []).cast<Map>().map(Map<String, dynamic>.from).toList();
+    final itemsCard = Glass(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -515,6 +522,33 @@ class ItemsReport extends StatelessWidget {
           _Line(l.ladderTaxable, _i(tot['taxable_minor']), strong: true, sub: l.repSold(_i(tot['qty']))),
         ],
       ),
+    );
+    if (cats.isEmpty) return itemsCard;
+    // Categories come from the same bill lines as the items, so they add up to the same taxable total.
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Glass(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(l.repByCategory, style: Theme.of(context).textTheme.titleMedium),
+              const SizedBox(height: 4),
+              _Basis(l.basisCategories),
+              for (final (i, c) in cats.indexed) ...[
+                if (i > 0) Divider(height: 1, color: t.hair),
+                _Line(
+                  c['category'] == 'Not recorded' ? l.repNotRecorded : c['category'] as String,
+                  _i(c['taxable_minor']),
+                  sub: l.repCategoryLine(_i(c['items']), '${c['qty']}', '${c['share_pct']}'),
+                ),
+              ],
+            ],
+          ),
+        ),
+        const SizedBox(height: Gap.m),
+        itemsCard,
+      ],
     );
   }
 }

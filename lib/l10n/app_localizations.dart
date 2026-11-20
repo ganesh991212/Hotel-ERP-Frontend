@@ -4689,6 +4689,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{pct}%'**
   String sharePct(String pct);
+
+  /// Reports, Items: heading over sales grouped by menu category (Starters, Mains...)
+  ///
+  /// In en, this message translates to:
+  /// **'By category'**
+  String get repByCategory;
+
+  /// Reports: one menu category's line. dishes and qty are counts, pct a number like 42.5
+  ///
+  /// In en, this message translates to:
+  /// **'{dishes, plural, =1{1 dish} other{{dishes} dishes}} · {qty} sold · {pct}% of sales'**
+  String repCategoryLine(int dishes, String qty, String pct);
+
+  /// Reports: category for bills issued before categories were kept on bills
+  ///
+  /// In en, this message translates to:
+  /// **'Not recorded'**
+  String get repNotRecorded;
+
+  /// Reports: explains that categories are as they were when billed
+  ///
+  /// In en, this message translates to:
+  /// **'Each dish counts under the category it had when it was billed; moving it later does not change past reports.'**
+  String get basisCategories;
+
+  /// Reports: button to download sales by category as a CSV file
+  ///
+  /// In en, this message translates to:
+  /// **'Categories (CSV)'**
+  String get categoriesCsv;
 }
 
 class _AppLocalizationsDelegate

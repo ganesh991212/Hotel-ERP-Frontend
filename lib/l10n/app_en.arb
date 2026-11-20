@@ -3669,5 +3669,36 @@
         "type": "String"
       }
     }
+  },
+  "repByCategory": "By category",
+  "@repByCategory": {
+    "description": "Reports, Items: heading over sales grouped by menu category (Starters, Mains...)"
+  },
+  "repCategoryLine": "{dishes, plural, =1{1 dish} other{{dishes} dishes}} · {qty} sold · {pct}% of sales",
+  "@repCategoryLine": {
+    "description": "Reports: one menu category's line. dishes and qty are counts, pct a number like 42.5",
+    "placeholders": {
+      "dishes": {
+        "type": "int"
+      },
+      "qty": {
+        "type": "String"
+      },
+      "pct": {
+        "type": "String"
+      }
+    }
+  },
+  "repNotRecorded": "Not recorded",
+  "@repNotRecorded": {
+    "description": "Reports: category for bills issued before categories were kept on bills"
+  },
+  "basisCategories": "Each dish counts under the category it had when it was billed; moving it later does not change past reports.",
+  "@basisCategories": {
+    "description": "Reports: explains that categories are as they were when billed"
+  },
+  "categoriesCsv": "Categories (CSV)",
+  "@categoriesCsv": {
+    "description": "Reports: button to download sales by category as a CSV file"
   }
 }

@@ -763,5 +763,10 @@
   "sameAsLastWeek": "గత వారం లాగానే",
   "noSalesToCompare": "పోల్చడానికి అమ్మకాలు లేవు",
   "receivedToday": "ఈరోజు వచ్చిన డబ్బు",
-  "sharePct": "{pct}%"
+  "sharePct": "{pct}%",
+  "repByCategory": "కేటగిరీ వారీగా",
+  "repCategoryLine": "{dishes} వంటకాలు · {qty} అమ్ముడయ్యాయి · అమ్మకాల్లో {pct}%",
+  "repNotRecorded": "నమోదు కాలేదు",
+  "basisCategories": "ప్రతి వంటకం బిల్లు అయినప్పుడు ఉన్న కేటగిరీలోనే లెక్కించబడుతుంది; తర్వాత మార్చినా పాత రిపోర్టులు మారవు.",
+  "categoriesCsv": "కేటగిరీలు (CSV)"
 }

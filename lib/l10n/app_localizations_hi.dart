@@ -2624,4 +2624,22 @@ class AppLocalizationsHi extends AppLocalizations {
   String sharePct(String pct) {
     return '$pct%';
   }
+
+  @override
+  String get repByCategory => 'कैटेगरी के अनुसार';
+
+  @override
+  String repCategoryLine(int dishes, String qty, String pct) {
+    return '$dishes व्यंजन · $qty बिके · बिक्री का $pct%';
+  }
+
+  @override
+  String get repNotRecorded => 'दर्ज नहीं';
+
+  @override
+  String get basisCategories =>
+      'हर व्यंजन उसी कैटेगरी में गिना जाता है जो बिल बनते समय थी; बाद में बदलने से पुरानी रिपोर्ट नहीं बदलती।';
+
+  @override
+  String get categoriesCsv => 'कैटेगरी (CSV)';
 }

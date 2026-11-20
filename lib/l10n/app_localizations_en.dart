@@ -2679,4 +2679,28 @@ class AppLocalizationsEn extends AppLocalizations {
   String sharePct(String pct) {
     return '$pct%';
   }
+
+  @override
+  String get repByCategory => 'By category';
+
+  @override
+  String repCategoryLine(int dishes, String qty, String pct) {
+    String _temp0 = intl.Intl.pluralLogic(
+      dishes,
+      locale: localeName,
+      other: '$dishes dishes',
+      one: '1 dish',
+    );
+    return '$_temp0 · $qty sold · $pct% of sales';
+  }
+
+  @override
+  String get repNotRecorded => 'Not recorded';
+
+  @override
+  String get basisCategories =>
+      'Each dish counts under the category it had when it was billed; moving it later does not change past reports.';
+
+  @override
+  String get categoriesCsv => 'Categories (CSV)';
 }
