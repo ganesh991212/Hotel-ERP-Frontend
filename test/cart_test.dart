@@ -152,4 +152,21 @@ void main() {
     expect(find.text('Happy hour −20% till 19:00'), findsOneWidget);
     expect(find.byIcon(Icons.local_offer_outlined), findsOneWidget, reason: 'no badge without an offer');
   });
+
+  test('the kitchen sees every dish in a combo and every add-on, times the quantity', () {
+    final line = {
+      'qty': 2,
+      'components': [
+        {'item_id': 'b', 'name': 'Biryani', 'qty': 1},
+        {'item_id': 'n', 'name': 'Naan', 'qty': 2},
+      ],
+      'addons': [
+        {'name': 'Lassi', 'qty': 1},
+        {'name': 'Cheese', 'qty': 2},
+      ],
+    };
+    expect(orderLineDetails(line), ['2 × Biryani', '4 × Naan', '+ Lassi', '+ 2 × Cheese']);
+    expect(orderLineDetails({'qty': 1}), isEmpty);
+    expect(comboContents({'components': line['components']}), '1 Biryani + 2 Naan');
+  });
 }

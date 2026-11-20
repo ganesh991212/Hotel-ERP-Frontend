@@ -9,7 +9,7 @@ import '../../ui/components.dart';
 import '../../ui/feedback.dart';
 import '../../ui/shell.dart';
 import '../floor/floor_page.dart' show VegMark, menuDataProvider;
-import '../floor/cart.dart' show OfferBadge;
+import '../floor/cart.dart' show OfferBadge, comboContents;
 import 'menu_options.dart';
 
 class MenuPage extends ConsumerStatefulWidget {
@@ -215,10 +215,15 @@ class _ItemRow extends ConsumerWidget {
             PopupMenuButton<int>(
               tooltip: '${l.sizes} / ${l.addons}',
               icon: const Icon(Icons.more_vert_rounded, size: 18),
-              onSelected: (v) => v == 0 ? showSizesDialog(context, item) : showItemAddonsDialog(context, item),
+              onSelected: (v) => switch (v) {
+                0 => showSizesDialog(context, item),
+                1 => showItemAddonsDialog(context, item),
+                _ => showComboDialog(context, item),
+              },
               itemBuilder: (_) => [
                 PopupMenuItem(value: 0, child: Text(l.sizes)),
                 PopupMenuItem(value: 1, child: Text(l.addons)),
+                PopupMenuItem(value: 2, child: Text(l.combo)),
               ],
             ),
           ])
@@ -230,6 +235,7 @@ class _ItemRow extends ConsumerWidget {
         : variants.map((v) => '${v['name']} ${formatInr(v['price_minor'])}').join(' / ');
     final groups = (item['addon_groups'] as List?) ?? const [];
     final extras = Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      if (comboContents(item).isNotEmpty) Text('${l.combo}: ${comboContents(item)}', style: tt.labelSmall),
       OfferBadge(item: item),
       if (variants.isNotEmpty) Padding(padding: const EdgeInsets.only(top: 4), child: SizeAvailabilityChips(item: item)),
       if (groups.isNotEmpty)

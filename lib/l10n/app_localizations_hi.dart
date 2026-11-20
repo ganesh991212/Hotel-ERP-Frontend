@@ -2256,4 +2256,23 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get errSameTimes => 'शुरू और खत्म का समय अलग होना चाहिए';
+
+  @override
+  String get combo => 'कॉम्बो';
+
+  @override
+  String get comboHelp =>
+      'इस कॉम्बो के व्यंजन चुनें। कीमत और टैक्स इसके अपने रहेंगे। चुनाव के लिए (जैसे ड्रिंक) 1 चुनने वाला ऐड-ऑन ग्रुप जोड़ें।';
+
+  @override
+  String get comboNeedsTwo =>
+      'कॉम्बो में कम से कम दो व्यंजन चाहिए। सामान्य व्यंजन बनाने के लिए सब हटा दें।';
+
+  @override
+  String get errBadCombo =>
+      'यह कॉम्बो मान्य नहीं (कॉम्बो में खुद या दूसरा कॉम्बो नहीं हो सकता, और दो व्यंजन चाहिए)';
+
+  @override
+  String get errItemInCombo =>
+      'यह व्यंजन एक कॉम्बो में है। पहले उसे कॉम्बो से हटाएं, या सोल्ड आउट करें।';
 }

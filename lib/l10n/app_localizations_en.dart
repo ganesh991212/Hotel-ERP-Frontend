@@ -2279,4 +2279,23 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get errSameTimes => 'Start and end times must differ';
+
+  @override
+  String get combo => 'Combo';
+
+  @override
+  String get comboHelp =>
+      'List the dishes in this combo. It keeps its own price and tax. For a choice (e.g. a drink), attach an add-on group set to choose 1.';
+
+  @override
+  String get comboNeedsTwo =>
+      'A combo needs at least two dishes. Remove them all to make it an ordinary dish.';
+
+  @override
+  String get errBadCombo =>
+      'That combo isn\'t allowed (a combo can\'t contain itself or another combo, and needs two dishes)';
+
+  @override
+  String get errItemInCombo =>
+      'This dish is in a combo. Take it out of the combo first, or mark it sold out.';
 }

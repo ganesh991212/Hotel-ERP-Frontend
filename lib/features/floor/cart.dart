@@ -247,3 +247,18 @@ class OfferBadge extends StatelessWidget {
     );
   }
 }
+
+/// What the kitchen must know beyond the dish name: a combo's dishes ("2 × Naan", times the ordered quantity) and the
+/// add-ons ("+ Raita", "+ 2 × Cheese"). From the order line's server snapshot; no money involved.
+List<String> orderLineDetails(Map it) {
+  final qty = (it['qty'] as num?)?.toInt() ?? 1;
+  return [
+    for (final c in _maps(it['components'])) '${(c['qty'] as num).toInt() * qty} × ${c['name']}',
+    for (final a in _maps(it['addons']))
+      (a['qty'] as num? ?? 1) > 1 ? '+ ${a['qty']} × ${a['name']}' : '+ ${a['name']}',
+  ];
+}
+
+/// "1 Biryani + 2 Naan": a combo's contents under its name in dish lists.
+String comboContents(Map item) =>
+    _maps(item['components']).map((c) => '${c['qty']} ${c['name']}').join(' + ');

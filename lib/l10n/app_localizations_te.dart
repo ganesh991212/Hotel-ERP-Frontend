@@ -2267,4 +2267,23 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get errSameTimes => 'ప్రారంభ, ముగింపు సమయాలు వేరుగా ఉండాలి';
+
+  @override
+  String get combo => 'కాంబో';
+
+  @override
+  String get comboHelp =>
+      'ఈ కాంబోలోని వంటకాలను జాబితా చేయండి. దాని ధర, పన్ను దానివే. ఎంపిక కోసం (ఉదా. డ్రింక్) 1 ఎంచుకునే యాడ్-ఆన్ గ్రూప్ జోడించండి.';
+
+  @override
+  String get comboNeedsTwo =>
+      'కాంబోకు కనీసం రెండు వంటకాలు కావాలి. సాధారణ వంటకంగా చేయాలంటే అన్నీ తీసివేయండి.';
+
+  @override
+  String get errBadCombo =>
+      'ఆ కాంబో అనుమతించబడదు (కాంబోలో తానే లేదా మరో కాంబో ఉండకూడదు, రెండు వంటకాలు కావాలి)';
+
+  @override
+  String get errItemInCombo =>
+      'ఈ వంటకం ఒక కాంబోలో ఉంది. ముందు కాంబో నుండి తీసివేయండి, లేదా సోల్డ్ అవుట్ చేయండి.';
 }

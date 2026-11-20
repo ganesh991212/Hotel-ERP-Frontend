@@ -34,6 +34,8 @@ String errorText(BuildContext context, Object e) {
       'split_partly_paid' => l.errSplitPartlyPaid,
       'bill_discounted' => l.errBillDiscounted,
       'variant_required' => l.errVariantRequired,
+      'bad_combo' => l.errBadCombo,
+      'item_in_combo' => l.errItemInCombo,
       'addon_count' || 'bad_addon' || 'bad_variant' => l.errAddonCount,
       'guest_empty' || 'bad_split' => l.splitIncomplete,
       'range_too_long' => e.details['max_days'] is num

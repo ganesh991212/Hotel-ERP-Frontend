@@ -4077,6 +4077,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Start and end times must differ'**
   String get errSameTimes;
+
+  /// Menu: a dish made of other dishes
+  ///
+  /// In en, this message translates to:
+  /// **'Combo'**
+  String get combo;
+
+  /// Explains combos
+  ///
+  /// In en, this message translates to:
+  /// **'List the dishes in this combo. It keeps its own price and tax. For a choice (e.g. a drink), attach an add-on group set to choose 1.'**
+  String get comboHelp;
+
+  /// Validation
+  ///
+  /// In en, this message translates to:
+  /// **'A combo needs at least two dishes. Remove them all to make it an ordinary dish.'**
+  String get comboNeedsTwo;
+
+  /// Error from the server
+  ///
+  /// In en, this message translates to:
+  /// **'That combo isn\'t allowed (a combo can\'t contain itself or another combo, and needs two dishes)'**
+  String get errBadCombo;
+
+  /// Error: delete refused
+  ///
+  /// In en, this message translates to:
+  /// **'This dish is in a combo. Take it out of the combo first, or mark it sold out.'**
+  String get errItemInCombo;
 }
 
 class _AppLocalizationsDelegate

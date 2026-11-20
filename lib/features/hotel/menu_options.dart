@@ -775,3 +775,96 @@ class _RuleFormState extends ConsumerState<_RuleForm> {
     );
   }
 }
+
+// ---------- combos ----------
+
+Future<void> showComboDialog(BuildContext context, Map<String, dynamic> item) => showGlassDialog(
+  context,
+  title: '${AppLocalizations.of(context).combo} · ${item['name']}',
+  maxWidth: 560,
+  body: _ComboForm(item: item),
+);
+
+class _ComboForm extends ConsumerStatefulWidget {
+  const _ComboForm({required this.item});
+  final Map<String, dynamic> item;
+
+  @override
+  ConsumerState<_ComboForm> createState() => _ComboFormState();
+}
+
+class _ComboFormState extends ConsumerState<_ComboForm> {
+  /// Dish id -> how many in one combo (a count of dishes, not money).
+  late final Map<String, int> _qty = {
+    for (final c in _maps(widget.item['components'])) c['item_id'] as String: (c['qty'] as num).toInt(),
+  };
+  bool _busy = false;
+
+  Future<void> _save() async {
+    final l = AppLocalizations.of(context);
+    final total = _qty.values.fold(0, (a, b) => a + b);
+    if (total == 1) return showWarning(context, l.comboNeedsTwo);
+    setState(() => _busy = true);
+    final ok = await guard(context, () async {
+      await ref.read(apiProvider).put('/api/v1/items/${widget.item['id']}/components', {
+        'components': [
+          for (final e in _qty.entries) {'item_id': e.key, 'qty': e.value},
+        ],
+      });
+      ref.invalidate(menuDataProvider);
+    });
+    if (!mounted) return;
+    setState(() => _busy = false);
+    if (ok) {
+      Navigator.of(context).pop();
+      showDone(context, l.saved);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
+    final tt = Theme.of(context).textTheme;
+    final items = ref.watch(menuDataProvider).value?.$2 ?? const <Map<String, dynamic>>[];
+    // Any dish except this one and other combos (no combos inside combos).
+    final choices = items.where((i) => i['id'] != widget.item['id'] && _maps(i['components']).isEmpty).toList();
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Text(l.comboHelp, style: tt.bodySmall),
+        const SizedBox(height: 10),
+        ConstrainedBox(
+          constraints: const BoxConstraints(maxHeight: 360),
+          child: ListView(
+            shrinkWrap: true,
+            children: [
+              for (final i in choices)
+                Row(
+                  children: [
+                    Expanded(child: Text(i['name'] as String)),
+                    IconButton(
+                      onPressed: (_qty[i['id']] ?? 0) > 0
+                          ? () => setState(() {
+                              final n = _qty[i['id']]! - 1;
+                              n == 0 ? _qty.remove(i['id']) : _qty[i['id'] as String] = n;
+                            })
+                          : null,
+                      icon: const Icon(Icons.remove_circle_outline),
+                    ),
+                    SizedBox(width: 24, child: Text('${_qty[i['id']] ?? 0}', textAlign: TextAlign.center)),
+                    IconButton(
+                      onPressed: (_qty[i['id']] ?? 0) < 20
+                          ? () => setState(() => _qty[i['id'] as String] = (_qty[i['id']] ?? 0) + 1)
+                          : null,
+                      icon: const Icon(Icons.add_circle_outline),
+                    ),
+                  ],
+                ),
+            ],
+          ),
+        ),
+        DialogActions(primary: l.save, busy: _busy, onPrimary: _busy ? null : _save),
+      ],
+    );
+  }
+}

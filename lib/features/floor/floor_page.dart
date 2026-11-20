@@ -530,6 +530,7 @@ class _MenuLine extends StatelessWidget {
           child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Text(item['name'], style: tt.bodyMedium?.copyWith(color: available ? t.ink : t.faint)),
             Text(available ? listPrice(item) : l.soldOut, style: tt.labelSmall),
+            if (comboContents(item).isNotEmpty) Text(comboContents(item), style: tt.labelSmall),
             if (available) OfferBadge(item: item),
           ]),
         ),
