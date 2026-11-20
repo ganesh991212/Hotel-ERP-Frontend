@@ -5031,6 +5031,138 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'PDF'**
   String get downloadPdf;
+
+  /// Screen title: staff clock-in / clock-out
+  ///
+  /// In en, this message translates to:
+  /// **'Attendance'**
+  String get attendance;
+
+  /// Button: start your shift
+  ///
+  /// In en, this message translates to:
+  /// **'Clock in'**
+  String get clockIn;
+
+  /// Button: end your shift; time is when you clocked in
+  ///
+  /// In en, this message translates to:
+  /// **'Clock out (in since {time})'**
+  String clockOutSince(String time);
+
+  /// Toast after clocking in
+  ///
+  /// In en, this message translates to:
+  /// **'Clocked in'**
+  String get clockedIn;
+
+  /// Toast after clocking out
+  ///
+  /// In en, this message translates to:
+  /// **'Clocked out'**
+  String get clockedOut;
+
+  /// Hours and minutes worked, e.g. 7 h 05 m
+  ///
+  /// In en, this message translates to:
+  /// **'{h} h {m} m'**
+  String hoursMinutes(int h, String m);
+
+  /// Date chip
+  ///
+  /// In en, this message translates to:
+  /// **'Last {count} days'**
+  String lastDays(int count);
+
+  /// Attendance: empty state
+  ///
+  /// In en, this message translates to:
+  /// **'No one has clocked in yet'**
+  String get noShifts;
+
+  /// Attendance: how it works
+  ///
+  /// In en, this message translates to:
+  /// **'Staff clock in and out on their own login, from Overview or My work.'**
+  String get attendanceHelp;
+
+  /// Attendance: a person's days and hours in the period
+  ///
+  /// In en, this message translates to:
+  /// **'{days, plural, =1{1 day} other{{days} days}} · {hours}'**
+  String attendanceLine(int days, String hours);
+
+  /// Attendance: a shift still open after 16 hours, for a manager to fix
+  ///
+  /// In en, this message translates to:
+  /// **'No clock-out'**
+  String get noClockOut;
+
+  /// Attendance: clocked in now
+  ///
+  /// In en, this message translates to:
+  /// **'On shift'**
+  String get onShiftNow;
+
+  /// Attendance: heading over the list of shifts
+  ///
+  /// In en, this message translates to:
+  /// **'Shifts'**
+  String get shifts;
+
+  /// Dialog title: a manager corrects a shift
+  ///
+  /// In en, this message translates to:
+  /// **'Fix {name}\'s shift'**
+  String fixShift(String name);
+
+  /// Tooltip: correct a shift's times
+  ///
+  /// In en, this message translates to:
+  /// **'Fix shift'**
+  String get fixShiftShort;
+
+  /// Fix shift dialog: when the shift started
+  ///
+  /// In en, this message translates to:
+  /// **'Clocked in {time}'**
+  String clockedInAt(String time);
+
+  /// Fix shift dialog: field label
+  ///
+  /// In en, this message translates to:
+  /// **'Clock-out time'**
+  String get clockOutTime;
+
+  /// Button: open the time picker
+  ///
+  /// In en, this message translates to:
+  /// **'Pick a time'**
+  String get pickTime;
+
+  /// Fix shift dialog: why the times are being corrected
+  ///
+  /// In en, this message translates to:
+  /// **'Reason'**
+  String get fixReason;
+
+  /// Fix shift dialog help
+  ///
+  /// In en, this message translates to:
+  /// **'The original times are kept and the change is recorded with your name and reason.'**
+  String get fixShiftHelp;
+
+  /// Fix shift dialog: confirm
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get saveFix;
+
+  /// Attendance: a shift a manager corrected, with the reason
+  ///
+  /// In en, this message translates to:
+  /// **'Corrected: {reason}'**
+  String correctedBecause(String reason);
 }
 
 class _AppLocalizationsDelegate

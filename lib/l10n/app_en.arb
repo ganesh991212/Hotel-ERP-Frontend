@@ -3969,5 +3969,134 @@
   "downloadPdf": "PDF",
   "@downloadPdf": {
     "description": "Reports: button to print, save or share the report as an A4 PDF"
+  },
+  "attendance": "Attendance",
+  "@attendance": {
+    "description": "Screen title: staff clock-in / clock-out"
+  },
+  "clockIn": "Clock in",
+  "@clockIn": {
+    "description": "Button: start your shift"
+  },
+  "clockOutSince": "Clock out (in since {time})",
+  "@clockOutSince": {
+    "description": "Button: end your shift; time is when you clocked in",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "clockedIn": "Clocked in",
+  "@clockedIn": {
+    "description": "Toast after clocking in"
+  },
+  "clockedOut": "Clocked out",
+  "@clockedOut": {
+    "description": "Toast after clocking out"
+  },
+  "hoursMinutes": "{h} h {m} m",
+  "@hoursMinutes": {
+    "description": "Hours and minutes worked, e.g. 7 h 05 m",
+    "placeholders": {
+      "h": {
+        "type": "int"
+      },
+      "m": {
+        "type": "String"
+      }
+    }
+  },
+  "lastDays": "Last {count} days",
+  "@lastDays": {
+    "description": "Date chip",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "noShifts": "No one has clocked in yet",
+  "@noShifts": {
+    "description": "Attendance: empty state"
+  },
+  "attendanceHelp": "Staff clock in and out on their own login, from Overview or My work.",
+  "@attendanceHelp": {
+    "description": "Attendance: how it works"
+  },
+  "attendanceLine": "{days, plural, =1{1 day} other{{days} days}} · {hours}",
+  "@attendanceLine": {
+    "description": "Attendance: a person's days and hours in the period",
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "hours": {
+        "type": "String"
+      }
+    }
+  },
+  "noClockOut": "No clock-out",
+  "@noClockOut": {
+    "description": "Attendance: a shift still open after 16 hours, for a manager to fix"
+  },
+  "onShiftNow": "On shift",
+  "@onShiftNow": {
+    "description": "Attendance: clocked in now"
+  },
+  "shifts": "Shifts",
+  "@shifts": {
+    "description": "Attendance: heading over the list of shifts"
+  },
+  "fixShift": "Fix {name}'s shift",
+  "@fixShift": {
+    "description": "Dialog title: a manager corrects a shift",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "fixShiftShort": "Fix shift",
+  "@fixShiftShort": {
+    "description": "Tooltip: correct a shift's times"
+  },
+  "clockedInAt": "Clocked in {time}",
+  "@clockedInAt": {
+    "description": "Fix shift dialog: when the shift started",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "clockOutTime": "Clock-out time",
+  "@clockOutTime": {
+    "description": "Fix shift dialog: field label"
+  },
+  "pickTime": "Pick a time",
+  "@pickTime": {
+    "description": "Button: open the time picker"
+  },
+  "fixReason": "Reason",
+  "@fixReason": {
+    "description": "Fix shift dialog: why the times are being corrected"
+  },
+  "fixShiftHelp": "The original times are kept and the change is recorded with your name and reason.",
+  "@fixShiftHelp": {
+    "description": "Fix shift dialog help"
+  },
+  "saveFix": "Save",
+  "@saveFix": {
+    "description": "Fix shift dialog: confirm"
+  },
+  "correctedBecause": "Corrected: {reason}",
+  "@correctedBecause": {
+    "description": "Attendance: a shift a manager corrected, with the reason",
+    "placeholders": {
+      "reason": {
+        "type": "String"
+      }
+    }
   }
 }

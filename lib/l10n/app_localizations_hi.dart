@@ -2829,4 +2829,86 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get downloadPdf => 'PDF';
+
+  @override
+  String get attendance => 'हाज़िरी';
+
+  @override
+  String get clockIn => 'क्लॉक इन';
+
+  @override
+  String clockOutSince(String time) {
+    return 'क्लॉक आउट ($time से)';
+  }
+
+  @override
+  String get clockedIn => 'क्लॉक इन हो गया';
+
+  @override
+  String get clockedOut => 'क्लॉक आउट हो गया';
+
+  @override
+  String hoursMinutes(int h, String m) {
+    return '$h घं $m मि';
+  }
+
+  @override
+  String lastDays(int count) {
+    return 'पिछले $count दिन';
+  }
+
+  @override
+  String get noShifts => 'अभी किसी ने क्लॉक इन नहीं किया';
+
+  @override
+  String get attendanceHelp =>
+      'स्टाफ अपने लॉगिन से ओवरव्यू या मेरा काम से क्लॉक इन/आउट करता है।';
+
+  @override
+  String attendanceLine(int days, String hours) {
+    return '$days दिन · $hours';
+  }
+
+  @override
+  String get noClockOut => 'क्लॉक आउट नहीं';
+
+  @override
+  String get onShiftNow => 'शिफ्ट पर';
+
+  @override
+  String get shifts => 'शिफ्ट';
+
+  @override
+  String fixShift(String name) {
+    return '$name की शिफ्ट ठीक करें';
+  }
+
+  @override
+  String get fixShiftShort => 'शिफ्ट ठीक करें';
+
+  @override
+  String clockedInAt(String time) {
+    return '$time पर क्लॉक इन';
+  }
+
+  @override
+  String get clockOutTime => 'क्लॉक आउट समय';
+
+  @override
+  String get pickTime => 'समय चुनें';
+
+  @override
+  String get fixReason => 'कारण';
+
+  @override
+  String get fixShiftHelp =>
+      'मूल समय रखे जाते हैं; बदलाव आपके नाम और कारण के साथ दर्ज होता है।';
+
+  @override
+  String get saveFix => 'सेव';
+
+  @override
+  String correctedBecause(String reason) {
+    return 'ठीक किया गया: $reason';
+  }
 }

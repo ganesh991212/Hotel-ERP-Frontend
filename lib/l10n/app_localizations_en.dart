@@ -2894,4 +2894,92 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get downloadPdf => 'PDF';
+
+  @override
+  String get attendance => 'Attendance';
+
+  @override
+  String get clockIn => 'Clock in';
+
+  @override
+  String clockOutSince(String time) {
+    return 'Clock out (in since $time)';
+  }
+
+  @override
+  String get clockedIn => 'Clocked in';
+
+  @override
+  String get clockedOut => 'Clocked out';
+
+  @override
+  String hoursMinutes(int h, String m) {
+    return '$h h $m m';
+  }
+
+  @override
+  String lastDays(int count) {
+    return 'Last $count days';
+  }
+
+  @override
+  String get noShifts => 'No one has clocked in yet';
+
+  @override
+  String get attendanceHelp =>
+      'Staff clock in and out on their own login, from Overview or My work.';
+
+  @override
+  String attendanceLine(int days, String hours) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$days days',
+      one: '1 day',
+    );
+    return '$_temp0 · $hours';
+  }
+
+  @override
+  String get noClockOut => 'No clock-out';
+
+  @override
+  String get onShiftNow => 'On shift';
+
+  @override
+  String get shifts => 'Shifts';
+
+  @override
+  String fixShift(String name) {
+    return 'Fix $name\'s shift';
+  }
+
+  @override
+  String get fixShiftShort => 'Fix shift';
+
+  @override
+  String clockedInAt(String time) {
+    return 'Clocked in $time';
+  }
+
+  @override
+  String get clockOutTime => 'Clock-out time';
+
+  @override
+  String get pickTime => 'Pick a time';
+
+  @override
+  String get fixReason => 'Reason';
+
+  @override
+  String get fixShiftHelp =>
+      'The original times are kept and the change is recorded with your name and reason.';
+
+  @override
+  String get saveFix => 'Save';
+
+  @override
+  String correctedBecause(String reason) {
+    return 'Corrected: $reason';
+  }
 }

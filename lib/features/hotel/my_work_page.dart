@@ -8,6 +8,7 @@ import '../../l10n/app_localizations.dart';
 import '../../ui/components.dart';
 import '../../ui/feedback.dart';
 import '../../ui/shell.dart';
+import 'attendance_page.dart';
 
 /// The signed-in person's own work: cooking, serving, billing, depending on what their role does. The server
 /// decides which sections apply and computes every number; this page only lays them out.
@@ -30,7 +31,7 @@ class _MyWorkPageState extends ConsumerState<MyWorkPage> {
     final l = AppLocalizations.of(context);
     final data = ref.watch(_myWorkProvider(_period));
     return PageBody(children: [
-      Reveal(index: 0, child: PageHeading(l.tabOverview)),
+      Reveal(index: 0, child: PageHeading(l.tabOverview, actions: const [ClockButton()])),
       Reveal(
         index: 1,
         child: Wrap(spacing: 8, children: [

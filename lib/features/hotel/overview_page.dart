@@ -13,6 +13,7 @@ import '../../l10n/app_localizations.dart';
 import '../../ui/components.dart';
 import '../../ui/shell.dart';
 import '../../ui/status.dart';
+import 'attendance_page.dart';
 
 final dashboardProvider = liveProvider<Map<String, dynamic>>(
   (api) async => Map<String, dynamic>.from(await api.get('/api/v1/dashboard/summary')),
@@ -35,17 +36,25 @@ class HotelOverviewPage extends ConsumerWidget {
         name: s.firstName,
         canReports: s.can('report.view'),
         canCloseDay: s.can('dayclose.manage'),
+        canAttendance: s.can('attendance.manage'),
       ),
     );
   }
 }
 
 class _Dashboard extends StatelessWidget {
-  const _Dashboard({required this.d, required this.name, required this.canReports, required this.canCloseDay});
+  const _Dashboard({
+    required this.d,
+    required this.name,
+    required this.canReports,
+    required this.canCloseDay,
+    required this.canAttendance,
+  });
   final Map<String, dynamic> d;
   final String name;
   final bool canReports;
   final bool canCloseDay;
+  final bool canAttendance;
 
   @override
   Widget build(BuildContext context) {
@@ -132,6 +141,13 @@ class _Dashboard extends StatelessWidget {
           children: [
             Text(greeting, style: context.isPhone ? tt.displaySmall : tt.displayMedium),
             Wrap(spacing: 8, runSpacing: 8, children: [
+              const ClockButton(),
+              if (canAttendance)
+                OutlinedButton.icon(
+                  onPressed: () => context.go('/h/overview/attendance'),
+                  icon: const Icon(Icons.badge_outlined, size: 18),
+                  label: Text(l.attendance),
+                ),
               if (canCloseDay)
                 OutlinedButton.icon(
                   onPressed: () => context.go('/h/overview/close-day'),

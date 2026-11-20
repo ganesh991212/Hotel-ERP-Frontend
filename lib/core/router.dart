@@ -11,6 +11,7 @@ import '../features/hotel/my_work_page.dart';
 import '../features/floor/bookings_page.dart';
 import '../features/hotel/close_day_page.dart';
 import '../features/hotel/orders_page.dart';
+import '../features/hotel/attendance_page.dart';
 import '../features/hotel/reports_page.dart';
 import '../features/hotel/overview_page.dart';
 import '../features/hotel/tables_page.dart';
@@ -57,7 +58,8 @@ final routerProvider = Provider<GoRouter>((ref) {
       if (s.platform != loc.startsWith('/p/')) return home;
       // Pages reached from a button rather than the dock are allowed by their own permission.
       final extra = (loc == '/h/overview/reports' && s.can('report.view')) ||
-          (loc == '/h/overview/close-day' && s.can('dayclose.manage'));
+          (loc == '/h/overview/close-day' && s.can('dayclose.manage')) ||
+          (loc == '/h/overview/attendance' && s.can('attendance.manage'));
       final allowed = extra || tabsFor(context, s).any((t) => isUnderTab(loc, t.path));
       return allowed ? null : home;
     },
@@ -76,6 +78,7 @@ final routerProvider = Provider<GoRouter>((ref) {
           GoRoute(path: '/h/me', pageBuilder: (_, s) => _fade(s, const MyWorkPage())),
           GoRoute(path: '/h/overview/reports', pageBuilder: (_, s) => _fade(s, const ReportsPage())),
           GoRoute(path: '/h/overview/close-day', pageBuilder: (_, s) => _fade(s, const CloseDayPage())),
+          GoRoute(path: '/h/overview/attendance', pageBuilder: (_, s) => _fade(s, const AttendancePage())),
           GoRoute(path: '/h/floor', pageBuilder: (_, s) => _fade(s, const FloorPage())),
           GoRoute(path: '/h/floor/bookings', pageBuilder: (_, s) => _fade(s, const BookingsPage())),
           GoRoute(path: '/h/orders', pageBuilder: (_, s) => _fade(s, const OrdersPage())),

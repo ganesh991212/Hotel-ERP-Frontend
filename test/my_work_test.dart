@@ -38,6 +38,10 @@ void main() {
     addTearDown(tester.view.reset);
     String? asked;
     final api = ApiClient(httpClient: MockClient((req) async {
+      if (req.url.path.endsWith('/attendance/me')) {
+        return http.Response(jsonEncode({'clocked_in': false, 'shift': null}), 200,
+            headers: {'content-type': 'application/json'});
+      }
       asked = req.url.toString();
       return http.Response(jsonEncode(_serving), 200, headers: {'content-type': 'application/json'});
     }));
@@ -55,6 +59,7 @@ void main() {
     expect(asked, endsWith('/api/v1/dashboard/me?period=today'));
     expect(find.text('Your serving'), findsOneWidget);
     expect(find.text('Your cooking'), findsNothing, reason: 'only the sections the server sends');
+    expect(find.text('Clock in'), findsOneWidget, reason: 'everyone clocks in on their own login');
     expect(find.text('14'), findsOneWidget);
     expect(find.text('2.4 min'), findsOneWidget);
     expect(find.text('Team 3.1 min'), findsOneWidget);

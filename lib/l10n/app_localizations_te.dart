@@ -2837,4 +2837,86 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get downloadPdf => 'PDF';
+
+  @override
+  String get attendance => 'హాజరు';
+
+  @override
+  String get clockIn => 'క్లాక్ ఇన్';
+
+  @override
+  String clockOutSince(String time) {
+    return 'క్లాక్ అవుట్ ($time నుండి)';
+  }
+
+  @override
+  String get clockedIn => 'క్లాక్ ఇన్ అయింది';
+
+  @override
+  String get clockedOut => 'క్లాక్ అవుట్ అయింది';
+
+  @override
+  String hoursMinutes(int h, String m) {
+    return '$h గం $m ని';
+  }
+
+  @override
+  String lastDays(int count) {
+    return 'గత $count రోజులు';
+  }
+
+  @override
+  String get noShifts => 'ఇంకా ఎవరూ క్లాక్ ఇన్ కాలేదు';
+
+  @override
+  String get attendanceHelp =>
+      'సిబ్బంది తమ లాగిన్‌తో ఓవర్‌వ్యూ లేదా నా పని నుండి క్లాక్ ఇన్/అవుట్ చేస్తారు.';
+
+  @override
+  String attendanceLine(int days, String hours) {
+    return '$days రోజులు · $hours';
+  }
+
+  @override
+  String get noClockOut => 'క్లాక్ అవుట్ లేదు';
+
+  @override
+  String get onShiftNow => 'షిఫ్ట్‌లో';
+
+  @override
+  String get shifts => 'షిఫ్ట్‌లు';
+
+  @override
+  String fixShift(String name) {
+    return '$name షిఫ్ట్ సరిచేయండి';
+  }
+
+  @override
+  String get fixShiftShort => 'షిఫ్ట్ సరిచేయండి';
+
+  @override
+  String clockedInAt(String time) {
+    return '$timeకి క్లాక్ ఇన్';
+  }
+
+  @override
+  String get clockOutTime => 'క్లాక్ అవుట్ సమయం';
+
+  @override
+  String get pickTime => 'సమయం ఎంచుకోండి';
+
+  @override
+  String get fixReason => 'కారణం';
+
+  @override
+  String get fixShiftHelp =>
+      'అసలు సమయాలు ఉంచబడతాయి; మార్పు మీ పేరు, కారణంతో నమోదవుతుంది.';
+
+  @override
+  String get saveFix => 'సేవ్';
+
+  @override
+  String correctedBecause(String reason) {
+    return 'సరిచేయబడింది: $reason';
+  }
 }
