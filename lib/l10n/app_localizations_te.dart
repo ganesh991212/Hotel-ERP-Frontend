@@ -2406,4 +2406,60 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get errAlreadyClosed => 'ఈ రోజు ఇప్పటికే ముగిసింది';
+
+  @override
+  String get seated => 'కూర్చున్నారు';
+
+  @override
+  String get cleaning => 'శుభ్రం చేస్తున్నారు';
+
+  @override
+  String get reserved => 'రిజర్వ్';
+
+  @override
+  String get seatGuests => 'అతిథులను కూర్చోబెట్టు';
+
+  @override
+  String get guestsCountLabel => 'ఎంత మంది అతిథులు?';
+
+  @override
+  String guestsAndTime(String guests, int minutes) {
+    return '$guests · $minutes ని';
+  }
+
+  @override
+  String guestsN(int count) {
+    return '$count అతిథులు';
+  }
+
+  @override
+  String get markClean => 'శుభ్రం';
+
+  @override
+  String get reserve => 'రిజర్వ్ చేయి';
+
+  @override
+  String get reserveNoteHint => 'ఉదా. రాత్రి 8, 4 మంది';
+
+  @override
+  String get cancelReservation => 'రిజర్వేషన్ రద్దు';
+
+  @override
+  String get guestsLeft => 'అతిథులు వెళ్లారు (టేబుల్ ఖాళీ)';
+
+  @override
+  String get changeGuests => 'అతిథుల సంఖ్య మార్చు';
+
+  @override
+  String coversLine(int covers) {
+    return '$covers అతిథులు';
+  }
+
+  @override
+  String avgPerGuest(String amount) {
+    return 'ఒక్కో అతిథికి సగటు: $amount';
+  }
+
+  @override
+  String get errTableInUse => 'ఈ టేబుల్ వద్ద అతిథులు ఉన్నారు';
 }

@@ -699,5 +699,21 @@
   "netOverShort": "कुल ज़्यादा/कम: {amount}",
   "noCloses": "अभी कोई दिन बंद नहीं",
   "errNoteRequired": "बताएं कि नकद ज़्यादा/कम क्यों है",
-  "errAlreadyClosed": "यह दिन पहले ही बंद है"
+  "errAlreadyClosed": "यह दिन पहले ही बंद है",
+  "seated": "बैठे हैं",
+  "cleaning": "सफ़ाई",
+  "reserved": "आरक्षित",
+  "seatGuests": "मेहमान बैठाएं",
+  "guestsCountLabel": "कितने मेहमान?",
+  "guestsAndTime": "{guests} · {minutes} मि",
+  "guestsN": "{count} मेहमान",
+  "markClean": "साफ़",
+  "reserve": "आरक्षित करें",
+  "reserveNoteHint": "जैसे रात 8 बजे, 4 लोग",
+  "cancelReservation": "आरक्षण रद्द करें",
+  "guestsLeft": "मेहमान चले गए (टेबल खाली)",
+  "changeGuests": "मेहमान बदलें",
+  "coversLine": "{covers} मेहमान",
+  "avgPerGuest": "प्रति मेहमान औसत: {amount}",
+  "errTableInUse": "इस टेबल पर मेहमान हैं"
 }

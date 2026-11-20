@@ -2396,4 +2396,60 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get errAlreadyClosed => 'यह दिन पहले ही बंद है';
+
+  @override
+  String get seated => 'बैठे हैं';
+
+  @override
+  String get cleaning => 'सफ़ाई';
+
+  @override
+  String get reserved => 'आरक्षित';
+
+  @override
+  String get seatGuests => 'मेहमान बैठाएं';
+
+  @override
+  String get guestsCountLabel => 'कितने मेहमान?';
+
+  @override
+  String guestsAndTime(String guests, int minutes) {
+    return '$guests · $minutes मि';
+  }
+
+  @override
+  String guestsN(int count) {
+    return '$count मेहमान';
+  }
+
+  @override
+  String get markClean => 'साफ़';
+
+  @override
+  String get reserve => 'आरक्षित करें';
+
+  @override
+  String get reserveNoteHint => 'जैसे रात 8 बजे, 4 लोग';
+
+  @override
+  String get cancelReservation => 'आरक्षण रद्द करें';
+
+  @override
+  String get guestsLeft => 'मेहमान चले गए (टेबल खाली)';
+
+  @override
+  String get changeGuests => 'मेहमान बदलें';
+
+  @override
+  String coversLine(int covers) {
+    return '$covers मेहमान';
+  }
+
+  @override
+  String avgPerGuest(String amount) {
+    return 'प्रति मेहमान औसत: $amount';
+  }
+
+  @override
+  String get errTableInUse => 'इस टेबल पर मेहमान हैं';
 }

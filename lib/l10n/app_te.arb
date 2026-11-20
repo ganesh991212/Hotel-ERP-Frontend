@@ -699,5 +699,21 @@
   "netOverShort": "మొత్తం ఎక్కువ/తక్కువ: {amount}",
   "noCloses": "ఇంకా ఏ రోజూ ముగించలేదు",
   "errNoteRequired": "నగదు ఎందుకు ఎక్కువ/తక్కువో చెప్పండి",
-  "errAlreadyClosed": "ఈ రోజు ఇప్పటికే ముగిసింది"
+  "errAlreadyClosed": "ఈ రోజు ఇప్పటికే ముగిసింది",
+  "seated": "కూర్చున్నారు",
+  "cleaning": "శుభ్రం చేస్తున్నారు",
+  "reserved": "రిజర్వ్",
+  "seatGuests": "అతిథులను కూర్చోబెట్టు",
+  "guestsCountLabel": "ఎంత మంది అతిథులు?",
+  "guestsAndTime": "{guests} · {minutes} ని",
+  "guestsN": "{count} అతిథులు",
+  "markClean": "శుభ్రం",
+  "reserve": "రిజర్వ్ చేయి",
+  "reserveNoteHint": "ఉదా. రాత్రి 8, 4 మంది",
+  "cancelReservation": "రిజర్వేషన్ రద్దు",
+  "guestsLeft": "అతిథులు వెళ్లారు (టేబుల్ ఖాళీ)",
+  "changeGuests": "అతిథుల సంఖ్య మార్చు",
+  "coversLine": "{covers} అతిథులు",
+  "avgPerGuest": "ఒక్కో అతిథికి సగటు: {amount}",
+  "errTableInUse": "ఈ టేబుల్ వద్ద అతిథులు ఉన్నారు"
 }

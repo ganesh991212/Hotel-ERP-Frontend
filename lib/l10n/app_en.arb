@@ -3310,5 +3310,92 @@
   "errAlreadyClosed": "This day is already closed",
   "@errAlreadyClosed": {
     "description": "Error"
+  },
+  "seated": "Seated",
+  "@seated": {
+    "description": "Table state: guests sat, nothing ordered yet"
+  },
+  "cleaning": "Cleaning",
+  "@cleaning": {
+    "description": "Table state: paid, needs clearing"
+  },
+  "reserved": "Reserved",
+  "@reserved": {
+    "description": "Table state: held for a booking"
+  },
+  "seatGuests": "Seat guests",
+  "@seatGuests": {
+    "description": "Button: start a table visit"
+  },
+  "guestsCountLabel": "How many guests?",
+  "@guestsCountLabel": {
+    "description": "Question when seating"
+  },
+  "guestsAndTime": "{guests} · {minutes} min",
+  "@guestsAndTime": {
+    "description": "Seated line on a table, e.g. 4 guests · 25 min",
+    "placeholders": {
+      "guests": {
+        "type": "String"
+      },
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "guestsN": "{count, plural, =1{1 guest} other{{count} guests}}",
+  "@guestsN": {
+    "description": "Guest count",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "markClean": "Clean",
+  "@markClean": {
+    "description": "Button: the table is ready again"
+  },
+  "reserve": "Reserve",
+  "@reserve": {
+    "description": "Button: hold a free table"
+  },
+  "reserveNoteHint": "e.g. 8 pm, 4 people",
+  "@reserveNoteHint": {
+    "description": "Hint for the reservation note"
+  },
+  "cancelReservation": "Cancel reservation",
+  "@cancelReservation": {
+    "description": "Button"
+  },
+  "guestsLeft": "Guests left (free table)",
+  "@guestsLeft": {
+    "description": "Button: end a visit with no orders"
+  },
+  "changeGuests": "Change guests",
+  "@changeGuests": {
+    "description": "Button"
+  },
+  "coversLine": "{covers, plural, =0{No guests recorded} =1{1 guest} other{{covers} guests}}",
+  "@coversLine": {
+    "description": "Report: covers",
+    "placeholders": {
+      "covers": {
+        "type": "int"
+      }
+    }
+  },
+  "avgPerGuest": "Average per guest: {amount}",
+  "@avgPerGuest": {
+    "description": "Report: average spend per cover",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "errTableInUse": "Guests are at this table",
+  "@errTableInUse": {
+    "description": "Error"
   }
 }

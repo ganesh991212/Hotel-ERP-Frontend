@@ -2432,4 +2432,73 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get errAlreadyClosed => 'This day is already closed';
+
+  @override
+  String get seated => 'Seated';
+
+  @override
+  String get cleaning => 'Cleaning';
+
+  @override
+  String get reserved => 'Reserved';
+
+  @override
+  String get seatGuests => 'Seat guests';
+
+  @override
+  String get guestsCountLabel => 'How many guests?';
+
+  @override
+  String guestsAndTime(String guests, int minutes) {
+    return '$guests · $minutes min';
+  }
+
+  @override
+  String guestsN(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count guests',
+      one: '1 guest',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get markClean => 'Clean';
+
+  @override
+  String get reserve => 'Reserve';
+
+  @override
+  String get reserveNoteHint => 'e.g. 8 pm, 4 people';
+
+  @override
+  String get cancelReservation => 'Cancel reservation';
+
+  @override
+  String get guestsLeft => 'Guests left (free table)';
+
+  @override
+  String get changeGuests => 'Change guests';
+
+  @override
+  String coversLine(int covers) {
+    String _temp0 = intl.Intl.pluralLogic(
+      covers,
+      locale: localeName,
+      other: '$covers guests',
+      one: '1 guest',
+      zero: 'No guests recorded',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String avgPerGuest(String amount) {
+    return 'Average per guest: $amount';
+  }
+
+  @override
+  String get errTableInUse => 'Guests are at this table';
 }

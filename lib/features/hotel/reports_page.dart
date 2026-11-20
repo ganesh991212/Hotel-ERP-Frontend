@@ -331,6 +331,21 @@ class SalesReport extends StatelessWidget {
               ),
             ],
           ),
+          // Covers: guests counted once per visit; the average comes from the server.
+          if (_i(tot['covers']) > 0)
+            Padding(
+              padding: const EdgeInsets.only(top: 8),
+              child: Row(children: [
+                Icon(Icons.groups_outlined, size: 16, color: context.tokens.dim),
+                const SizedBox(width: 6),
+                Expanded(
+                  child: Text(
+                    '${l.coversLine(_i(tot['covers']))} · ${l.avgPerGuest(formatInr(_i(tot['avg_per_cover_minor'])))}',
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                ),
+              ]),
+            ),
           const SizedBox(height: 12),
           _Ladder(r: tot),
         ],

@@ -4305,6 +4305,102 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'This day is already closed'**
   String get errAlreadyClosed;
+
+  /// Table state: guests sat, nothing ordered yet
+  ///
+  /// In en, this message translates to:
+  /// **'Seated'**
+  String get seated;
+
+  /// Table state: paid, needs clearing
+  ///
+  /// In en, this message translates to:
+  /// **'Cleaning'**
+  String get cleaning;
+
+  /// Table state: held for a booking
+  ///
+  /// In en, this message translates to:
+  /// **'Reserved'**
+  String get reserved;
+
+  /// Button: start a table visit
+  ///
+  /// In en, this message translates to:
+  /// **'Seat guests'**
+  String get seatGuests;
+
+  /// Question when seating
+  ///
+  /// In en, this message translates to:
+  /// **'How many guests?'**
+  String get guestsCountLabel;
+
+  /// Seated line on a table, e.g. 4 guests · 25 min
+  ///
+  /// In en, this message translates to:
+  /// **'{guests} · {minutes} min'**
+  String guestsAndTime(String guests, int minutes);
+
+  /// Guest count
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 guest} other{{count} guests}}'**
+  String guestsN(int count);
+
+  /// Button: the table is ready again
+  ///
+  /// In en, this message translates to:
+  /// **'Clean'**
+  String get markClean;
+
+  /// Button: hold a free table
+  ///
+  /// In en, this message translates to:
+  /// **'Reserve'**
+  String get reserve;
+
+  /// Hint for the reservation note
+  ///
+  /// In en, this message translates to:
+  /// **'e.g. 8 pm, 4 people'**
+  String get reserveNoteHint;
+
+  /// Button
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel reservation'**
+  String get cancelReservation;
+
+  /// Button: end a visit with no orders
+  ///
+  /// In en, this message translates to:
+  /// **'Guests left (free table)'**
+  String get guestsLeft;
+
+  /// Button
+  ///
+  /// In en, this message translates to:
+  /// **'Change guests'**
+  String get changeGuests;
+
+  /// Report: covers
+  ///
+  /// In en, this message translates to:
+  /// **'{covers, plural, =0{No guests recorded} =1{1 guest} other{{covers} guests}}'**
+  String coversLine(int covers);
+
+  /// Report: average spend per cover
+  ///
+  /// In en, this message translates to:
+  /// **'Average per guest: {amount}'**
+  String avgPerGuest(String amount);
+
+  /// Error
+  ///
+  /// In en, this message translates to:
+  /// **'Guests are at this table'**
+  String get errTableInUse;
 }
 
 class _AppLocalizationsDelegate

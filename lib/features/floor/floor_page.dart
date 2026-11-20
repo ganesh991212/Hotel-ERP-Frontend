@@ -15,6 +15,7 @@ import '../../ui/shell.dart';
 import '../../ui/status.dart';
 import 'cart.dart';
 import 'print_actions.dart';
+import 'table_visit.dart';
 
 final _tablesProvider = liveProvider<List<Map<String, dynamic>>>(
     (api) async => ((await api.get('/api/v1/tables')) as List).cast<Map<String, dynamic>>());
@@ -256,7 +257,8 @@ class _TableTile extends StatelessWidget {
             color: t.warn,
           )
         else
-          StatusChip(icon: Icons.check_circle_outline, label: l.free, color: t.ok),
+          visitChip(context, table) ?? StatusChip(icon: Icons.check_circle_outline, label: l.free, color: t.ok),
+        if (!inactive) Padding(padding: const EdgeInsets.only(top: 4), child: SeatedLine(table: table)),
       ]),
     );
   }
@@ -275,7 +277,12 @@ Future<void> showTableSheet(BuildContext context, Map<String, dynamic> table, {r
     context,
     title: l.tableLabel(table['label']),
     maxWidth: 720,
-    body: OrderComposer(table: table, canOrder: canOrder),
+    body: Consumer(
+      builder: (context, ref, _) => Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+        if (canOrder) TableVisitActions(table: table, onChanged: () => ref.invalidate(_tablesProvider)),
+        OrderComposer(table: table, canOrder: canOrder),
+      ]),
+    ),
   );
 }
 
