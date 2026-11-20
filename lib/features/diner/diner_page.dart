@@ -387,6 +387,7 @@ class _DishRow extends StatelessWidget {
             Text(item['name'], style: tt.titleMedium?.copyWith(color: available ? t.ink : t.faint)),
             const SizedBox(height: 2),
             Text(listPrice(item), style: tt.bodyMedium),
+            if (available) OfferBadge(item: item),
             if (item['description'] != null)
               Padding(padding: const EdgeInsets.only(top: 4), child: Text(item['description'], style: tt.bodySmall)),
           ]),

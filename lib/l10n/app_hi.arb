@@ -644,5 +644,22 @@
   "addonsForItem": "{item} के साथ कौन से ऐड-ऑन ग्रुप दें, चुनें।",
   "noAddonGroups": "अभी कोई ऐड-ऑन ग्रुप नहीं। ऐड-ऑन ग्रुप में एक बनाएं।",
   "deleteGroupConfirm": "{name} हटाएं? इसे इस्तेमाल करने वाले व्यंजन इसे नहीं देंगे। पहले के ऑर्डर नहीं बदलेंगे।",
-  "saved": "सेव हो गया"
+  "saved": "सेव हो गया",
+  "offerBadge": "{name} −{percent} {time} तक",
+  "happyHour": "हैप्पी आवर",
+  "happyHourHelp": "चुने दिनों और समय पर व्यंजन या साइज़ की कीमत पर प्रतिशत छूट, हर ऑर्डर पर (वेटर या QR)। ऐड-ऑन की कीमत वही; ऑफ़र जुड़ते नहीं।",
+  "newOffer": "नया ऑफ़र",
+  "offerNameHint": "जैसे हैप्पी आवर",
+  "percentOff": "प्रतिशत छूट",
+  "days": "दिन",
+  "fromTime": "से",
+  "toTime": "तक",
+  "appliesTo": "किस पर लागू",
+  "wholeMenu": "पूरा मेनू",
+  "offerOn": "चालू",
+  "noOffers": "अभी कोई ऑफ़र नहीं",
+  "offerSummary": "{percent} छूट · {days} · {from}–{to}",
+  "everyDay": "हर दिन",
+  "errBadPercent": "0.01 से 90 के बीच प्रतिशत डालें",
+  "errSameTimes": "शुरू और खत्म का समय अलग होना चाहिए"
 }

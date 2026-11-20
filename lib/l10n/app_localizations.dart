@@ -3975,6 +3975,108 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Saved'**
   String get saved;
+
+  /// Badge on a dish while a happy-hour offer runs
+  ///
+  /// In en, this message translates to:
+  /// **'{name} −{percent} till {time}'**
+  String offerBadge(String name, String percent, String time);
+
+  /// Menu: time-based offers
+  ///
+  /// In en, this message translates to:
+  /// **'Happy hour'**
+  String get happyHour;
+
+  /// Explains happy hour
+  ///
+  /// In en, this message translates to:
+  /// **'Percent off the dish or size price on chosen days and times, for every order (waiter or QR). Add-ons keep their price; overlapping offers never add up.'**
+  String get happyHourHelp;
+
+  /// Button
+  ///
+  /// In en, this message translates to:
+  /// **'New offer'**
+  String get newOffer;
+
+  /// Hint
+  ///
+  /// In en, this message translates to:
+  /// **'e.g. Happy hour'**
+  String get offerNameHint;
+
+  /// Field label
+  ///
+  /// In en, this message translates to:
+  /// **'Percent off'**
+  String get percentOff;
+
+  /// Field label
+  ///
+  /// In en, this message translates to:
+  /// **'Days'**
+  String get days;
+
+  /// Start time
+  ///
+  /// In en, this message translates to:
+  /// **'From'**
+  String get fromTime;
+
+  /// End time
+  ///
+  /// In en, this message translates to:
+  /// **'To'**
+  String get toTime;
+
+  /// Field label: which categories
+  ///
+  /// In en, this message translates to:
+  /// **'Applies to'**
+  String get appliesTo;
+
+  /// No category chosen = whole menu
+  ///
+  /// In en, this message translates to:
+  /// **'Whole menu'**
+  String get wholeMenu;
+
+  /// Switch label: offer is switched on
+  ///
+  /// In en, this message translates to:
+  /// **'On'**
+  String get offerOn;
+
+  /// Empty state
+  ///
+  /// In en, this message translates to:
+  /// **'No offers yet'**
+  String get noOffers;
+
+  /// One offer in the list
+  ///
+  /// In en, this message translates to:
+  /// **'{percent} off · {days} · {from}–{to}'**
+  String offerSummary(String percent, String days, String from, String to);
+
+  /// All seven days
+  ///
+  /// In en, this message translates to:
+  /// **'Every day'**
+  String get everyDay;
+
+  /// Validation
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a percent between 0.01 and 90'**
+  String get errBadPercent;
+
+  /// Validation
+  ///
+  /// In en, this message translates to:
+  /// **'Start and end times must differ'**
+  String get errSameTimes;
 }
 
 class _AppLocalizationsDelegate

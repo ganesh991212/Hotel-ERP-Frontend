@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:material_ui/material_ui.dart';
 
 import '../../core/auth/session.dart';
@@ -505,6 +506,271 @@ class SizeAvailabilityChips extends ConsumerWidget {
               ref.invalidate(menuDataProvider);
             }),
           ),
+      ],
+    );
+  }
+}
+
+// ---------- happy hour ----------
+
+final priceRulesProvider = FutureProvider.autoDispose<List<Map<String, dynamic>>>(
+  (ref) async => _maps(await ref.read(apiProvider).get('/api/v1/price-rules')),
+);
+
+/// Monday = bit 0 ... Sunday = bit 6, as the server stores it.
+List<String> _dayNames(BuildContext context) {
+  final f = DateFormat.E(Localizations.localeOf(context).toLanguageTag());
+  return [for (var d = 0; d < 7; d++) f.format(DateTime(2026, 11, 16 + d))]; // 16 Nov 2026 is a Monday
+}
+
+String _daysText(BuildContext context, int mask) {
+  if (mask == 127) return AppLocalizations.of(context).everyDay;
+  final names = _dayNames(context);
+  return [
+    for (var d = 0; d < 7; d++)
+      if (mask & (1 << d) != 0) names[d],
+  ].join(', ');
+}
+
+Future<void> showPriceRulesDialog(BuildContext context) =>
+    showGlassDialog(context, title: AppLocalizations.of(context).happyHour, maxWidth: 600, body: const _RulesList());
+
+class _RulesList extends ConsumerWidget {
+  const _RulesList();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l = AppLocalizations.of(context);
+    final t = context.tokens;
+    final tt = Theme.of(context).textTheme;
+    final rules = ref.watch(priceRulesProvider);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Text(l.happyHourHelp, style: tt.bodySmall),
+        const SizedBox(height: 10),
+        rules.when(
+          loading: () => const LoadingBlock(height: 100),
+          error: (e, _) => EmptyState(icon: Icons.cloud_off_rounded, title: errorText(context, e)),
+          data: (rs) => rs.isEmpty
+              ? EmptyState(icon: Icons.local_offer_outlined, title: l.noOffers)
+              : Column(
+                  children: [
+                    for (final r in rs)
+                      Container(
+                        padding: const EdgeInsets.symmetric(vertical: 6),
+                        decoration: BoxDecoration(
+                          border: Border(top: BorderSide(color: t.line)),
+                        ),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(r['name'] as String, style: tt.titleSmall),
+                                  Text(
+                                    l.offerSummary(
+                                      percentLabel((r['percent_bp'] as num).toInt()),
+                                      _daysText(context, (r['days'] as num).toInt()),
+                                      r['start_time'],
+                                      r['end_time'],
+                                    ),
+                                    style: tt.bodySmall,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            // Switch off without deleting (icon + label, not colour alone).
+                            StatusChip(
+                              icon: r['is_active'] == true ? Icons.check_circle_outline : Icons.pause_circle_outline,
+                              label: r['is_active'] == true ? l.offerOn : l.off,
+                              color: r['is_active'] == true ? t.ok : t.dim,
+                            ),
+                            IconButton(
+                              tooltip: l.edit,
+                              onPressed: () => showRuleForm(context, r),
+                              icon: const Icon(Icons.edit_outlined, size: 18),
+                            ),
+                            IconButton(
+                              tooltip: l.delete,
+                              onPressed: () => guard(context, () async {
+                                await ref.read(apiProvider).delete('/api/v1/price-rules/${r['id']}');
+                                ref.invalidate(priceRulesProvider);
+                                ref.invalidate(menuDataProvider);
+                              }),
+                              icon: Icon(Icons.delete_outline, size: 18, color: t.danger),
+                            ),
+                          ],
+                        ),
+                      ),
+                  ],
+                ),
+        ),
+        const SizedBox(height: 8),
+        Align(
+          alignment: AlignmentDirectional.centerStart,
+          child: FilledButton.icon(
+            onPressed: () => showRuleForm(context, null),
+            icon: const Icon(Icons.add_rounded, size: 18),
+            label: Text(l.newOffer),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+Future<void> showRuleForm(BuildContext context, Map<String, dynamic>? rule) => showGlassDialog(
+  context,
+  title: rule == null ? AppLocalizations.of(context).newOffer : rule['name'] as String,
+  maxWidth: 560,
+  body: _RuleForm(rule: rule),
+);
+
+class _RuleForm extends ConsumerStatefulWidget {
+  const _RuleForm({this.rule});
+  final Map<String, dynamic>? rule;
+
+  @override
+  ConsumerState<_RuleForm> createState() => _RuleFormState();
+}
+
+class _RuleFormState extends ConsumerState<_RuleForm> {
+  late final _name = TextEditingController(text: widget.rule?['name'] as String? ?? '');
+  late final _percent = TextEditingController(
+    text: widget.rule == null ? '' : percentLabel((widget.rule!['percent_bp'] as num).toInt()).replaceAll('%', ''),
+  );
+  late int _days = (widget.rule?['days'] as num?)?.toInt() ?? 127;
+  late TimeOfDay _from = _parse(widget.rule?['start_time'] as String? ?? '17:00');
+  late TimeOfDay _to = _parse(widget.rule?['end_time'] as String? ?? '19:00');
+  late final Set<String> _cats = {...((widget.rule?['category_ids'] as List?) ?? const []).cast<String>()};
+  late bool _active = widget.rule?['is_active'] as bool? ?? true;
+  bool _busy = false;
+
+  static TimeOfDay _parse(String s) => TimeOfDay(hour: int.parse(s.split(':')[0]), minute: int.parse(s.split(':')[1]));
+  static String _fmt(TimeOfDay t) => '${t.hour.toString().padLeft(2, '0')}:${t.minute.toString().padLeft(2, '0')}';
+
+  @override
+  void dispose() {
+    _name.dispose();
+    _percent.dispose();
+    super.dispose();
+  }
+
+  Future<void> _pick(bool start) async {
+    final t = await showTimePicker(context: context, initialTime: start ? _from : _to);
+    if (t != null) setState(() => start ? _from = t : _to = t);
+  }
+
+  Future<void> _save() async {
+    final l = AppLocalizations.of(context);
+    final bp = parsePercentToBp(_percent.text);
+    if (_name.text.trim().isEmpty || bp == null || bp < 1 || bp > 9000) return showWarning(context, l.errBadPercent);
+    if (_fmt(_from) == _fmt(_to)) return showWarning(context, l.errSameTimes);
+    setState(() => _busy = true);
+    final body = {
+      'name': _name.text.trim(),
+      'percent_bp': bp,
+      'days': _days,
+      'start_time': _fmt(_from),
+      'end_time': _fmt(_to),
+      'category_ids': _cats.isEmpty ? null : _cats.toList(),
+      'is_active': _active,
+    };
+    final ok = await guard(context, () async {
+      final api = ref.read(apiProvider);
+      widget.rule == null
+          ? await api.post('/api/v1/price-rules', body)
+          : await api.put('/api/v1/price-rules/${widget.rule!['id']}', body);
+      ref.invalidate(priceRulesProvider);
+      ref.invalidate(menuDataProvider);
+    });
+    if (!mounted) return;
+    setState(() => _busy = false);
+    if (ok) {
+      Navigator.of(context).pop();
+      showDone(context, l.saved);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
+    final names = _dayNames(context);
+    final cats = ref.watch(menuDataProvider).value?.$1 ?? const <Map<String, dynamic>>[];
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        FieldLabel(l.name),
+        TextField(
+          controller: _name,
+          decoration: InputDecoration(hintText: l.offerNameHint),
+        ),
+        FieldLabel(l.percentOff),
+        TextField(
+          controller: _percent,
+          keyboardType: const TextInputType.numberWithOptions(decimal: true),
+          decoration: const InputDecoration(suffixText: '%', hintText: '20'),
+        ),
+        FieldLabel(l.days),
+        Wrap(
+          spacing: 6,
+          runSpacing: 6,
+          children: [
+            for (var d = 0; d < 7; d++)
+              FilterChip(
+                label: Text(names[d]),
+                selected: _days & (1 << d) != 0,
+                // At least one day stays selected (the server needs 1..127).
+                onSelected: (on) => setState(() {
+                  final next = on ? _days | (1 << d) : _days & ~(1 << d);
+                  if (next != 0) _days = next;
+                }),
+              ),
+          ],
+        ),
+        const SizedBox(height: 8),
+        Row(
+          children: [
+            Expanded(
+              child: OutlinedButton.icon(
+                onPressed: () => _pick(true),
+                icon: const Icon(Icons.schedule_rounded, size: 18),
+                label: Text('${l.fromTime} ${_fmt(_from)}'),
+              ),
+            ),
+            const SizedBox(width: 8),
+            Expanded(
+              child: OutlinedButton.icon(
+                onPressed: () => _pick(false),
+                icon: const Icon(Icons.schedule_rounded, size: 18),
+                label: Text('${l.toTime} ${_fmt(_to)}'),
+              ),
+            ),
+          ],
+        ),
+        FieldLabel(l.appliesTo),
+        Wrap(
+          spacing: 6,
+          runSpacing: 6,
+          children: [
+            FilterChip(label: Text(l.wholeMenu), selected: _cats.isEmpty, onSelected: (_) => setState(_cats.clear)),
+            for (final c in cats)
+              FilterChip(
+                label: Text(c['name'] as String),
+                selected: _cats.contains(c['id']),
+                onSelected: (on) => setState(() => on ? _cats.add(c['id'] as String) : _cats.remove(c['id'])),
+              ),
+          ],
+        ),
+        SwitchListTile(
+          contentPadding: EdgeInsets.zero,
+          value: _active,
+          onChanged: (v) => setState(() => _active = v),
+          title: Text(l.offerOn),
+        ),
+        DialogActions(primary: l.save, busy: _busy, onPrimary: _busy ? null : _save),
       ],
     );
   }

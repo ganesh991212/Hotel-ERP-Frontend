@@ -2200,4 +2200,60 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get saved => 'सेव हो गया';
+
+  @override
+  String offerBadge(String name, String percent, String time) {
+    return '$name −$percent $time तक';
+  }
+
+  @override
+  String get happyHour => 'हैप्पी आवर';
+
+  @override
+  String get happyHourHelp =>
+      'चुने दिनों और समय पर व्यंजन या साइज़ की कीमत पर प्रतिशत छूट, हर ऑर्डर पर (वेटर या QR)। ऐड-ऑन की कीमत वही; ऑफ़र जुड़ते नहीं।';
+
+  @override
+  String get newOffer => 'नया ऑफ़र';
+
+  @override
+  String get offerNameHint => 'जैसे हैप्पी आवर';
+
+  @override
+  String get percentOff => 'प्रतिशत छूट';
+
+  @override
+  String get days => 'दिन';
+
+  @override
+  String get fromTime => 'से';
+
+  @override
+  String get toTime => 'तक';
+
+  @override
+  String get appliesTo => 'किस पर लागू';
+
+  @override
+  String get wholeMenu => 'पूरा मेनू';
+
+  @override
+  String get offerOn => 'चालू';
+
+  @override
+  String get noOffers => 'अभी कोई ऑफ़र नहीं';
+
+  @override
+  String offerSummary(String percent, String days, String from, String to) {
+    return '$percent छूट · $days · $from–$to';
+  }
+
+  @override
+  String get everyDay => 'हर दिन';
+
+  @override
+  String get errBadPercent => '0.01 से 90 के बीच प्रतिशत डालें';
+
+  @override
+  String get errSameTimes => 'शुरू और खत्म का समय अलग होना चाहिए';
 }

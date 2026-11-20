@@ -128,4 +128,28 @@ void main() {
     });
     expect(got?.label, 'Biryani (Half) + Roti, Raita, 2 x Cheese');
   });
+
+  testWidgets('a running offer shows as a badge with icon and label', (tester) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: buildTheme(Brightness.light),
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        home: const Scaffold(
+          body: Column(
+            children: [
+              OfferBadge(
+                item: {
+                  'offer': {'name': 'Happy hour', 'percent_bp': 2000, 'until': '19:00'},
+                },
+              ),
+              OfferBadge(item: {'offer': null}),
+            ],
+          ),
+        ),
+      ),
+    );
+    expect(find.text('Happy hour −20% till 19:00'), findsOneWidget);
+    expect(find.byIcon(Icons.local_offer_outlined), findsOneWidget, reason: 'no badge without an offer');
+  });
 }

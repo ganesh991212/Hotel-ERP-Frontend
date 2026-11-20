@@ -9,6 +9,7 @@ import '../../ui/components.dart';
 import '../../ui/feedback.dart';
 import '../../ui/shell.dart';
 import '../floor/floor_page.dart' show VegMark, menuDataProvider;
+import '../floor/cart.dart' show OfferBadge;
 import 'menu_options.dart';
 
 class MenuPage extends ConsumerStatefulWidget {
@@ -40,6 +41,12 @@ class _MenuPageState extends ConsumerState<MenuPage> {
               decoration: InputDecoration(prefixIcon: const Icon(Icons.search), hintText: l.searchMenu),
             ),
           ),
+          if (canEdit)
+            OutlinedButton.icon(
+              onPressed: () => showPriceRulesDialog(context),
+              icon: const Icon(Icons.local_offer_outlined, size: 18),
+              label: Text(l.happyHour),
+            ),
           if (canEdit)
             OutlinedButton.icon(
               onPressed: () => showAddonGroupsDialog(context),
@@ -223,6 +230,7 @@ class _ItemRow extends ConsumerWidget {
         : variants.map((v) => '${v['name']} ${formatInr(v['price_minor'])}').join(' / ');
     final groups = (item['addon_groups'] as List?) ?? const [];
     final extras = Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      OfferBadge(item: item),
       if (variants.isNotEmpty) Padding(padding: const EdgeInsets.only(top: 4), child: SizeAvailabilityChips(item: item)),
       if (groups.isNotEmpty)
         Padding(

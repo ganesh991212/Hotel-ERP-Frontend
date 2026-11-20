@@ -2223,4 +2223,60 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get saved => 'Saved';
+
+  @override
+  String offerBadge(String name, String percent, String time) {
+    return '$name −$percent till $time';
+  }
+
+  @override
+  String get happyHour => 'Happy hour';
+
+  @override
+  String get happyHourHelp =>
+      'Percent off the dish or size price on chosen days and times, for every order (waiter or QR). Add-ons keep their price; overlapping offers never add up.';
+
+  @override
+  String get newOffer => 'New offer';
+
+  @override
+  String get offerNameHint => 'e.g. Happy hour';
+
+  @override
+  String get percentOff => 'Percent off';
+
+  @override
+  String get days => 'Days';
+
+  @override
+  String get fromTime => 'From';
+
+  @override
+  String get toTime => 'To';
+
+  @override
+  String get appliesTo => 'Applies to';
+
+  @override
+  String get wholeMenu => 'Whole menu';
+
+  @override
+  String get offerOn => 'On';
+
+  @override
+  String get noOffers => 'No offers yet';
+
+  @override
+  String offerSummary(String percent, String days, String from, String to) {
+    return '$percent off · $days · $from–$to';
+  }
+
+  @override
+  String get everyDay => 'Every day';
+
+  @override
+  String get errBadPercent => 'Enter a percent between 0.01 and 90';
+
+  @override
+  String get errSameTimes => 'Start and end times must differ';
 }

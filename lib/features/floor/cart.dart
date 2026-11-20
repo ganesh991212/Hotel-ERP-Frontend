@@ -226,3 +226,24 @@ String listPrice(Map item) {
   if (sizes.isEmpty) return formatInr((item['price_minor'] as num).toInt());
   return sizes.map((v) => '${v['name']} ${formatInr((v['price_minor'] as num).toInt())}').join(' / ');
 }
+
+/// "Happy hour −20% till 19:00" while an offer runs for the dish (from the server; the price is the quote's).
+class OfferBadge extends StatelessWidget {
+  const OfferBadge({super.key, required this.item});
+  final Map item;
+
+  @override
+  Widget build(BuildContext context) {
+    final o = item['offer'];
+    if (o is! Map) return const SizedBox.shrink();
+    final l = AppLocalizations.of(context);
+    return Padding(
+      padding: const EdgeInsets.only(top: 3),
+      child: StatusChip(
+        icon: Icons.local_offer_outlined,
+        label: l.offerBadge(o['name'] as String, percentLabel((o['percent_bp'] as num).toInt()), o['until'] as String),
+        color: context.tokens.accent,
+      ),
+    );
+  }
+}

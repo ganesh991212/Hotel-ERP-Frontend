@@ -2211,4 +2211,60 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get saved => 'సేవ్ అయింది';
+
+  @override
+  String offerBadge(String name, String percent, String time) {
+    return '$name −$percent $time వరకు';
+  }
+
+  @override
+  String get happyHour => 'హ్యాపీ అవర్';
+
+  @override
+  String get happyHourHelp =>
+      'ఎంచుకున్న రోజులు, సమయాల్లో వంటకం లేదా సైజ్ ధరపై శాతం తగ్గింపు, ప్రతి ఆర్డర్‌కు (వెయిటర్ లేదా QR). యాడ్-ఆన్‌ల ధర మారదు; ఆఫర్లు కలవవు.';
+
+  @override
+  String get newOffer => 'కొత్త ఆఫర్';
+
+  @override
+  String get offerNameHint => 'ఉదా. హ్యాపీ అవర్';
+
+  @override
+  String get percentOff => 'శాతం తగ్గింపు';
+
+  @override
+  String get days => 'రోజులు';
+
+  @override
+  String get fromTime => 'నుండి';
+
+  @override
+  String get toTime => 'వరకు';
+
+  @override
+  String get appliesTo => 'వర్తించేది';
+
+  @override
+  String get wholeMenu => 'మొత్తం మెనూ';
+
+  @override
+  String get offerOn => 'ఆన్';
+
+  @override
+  String get noOffers => 'ఇంకా ఆఫర్లు లేవు';
+
+  @override
+  String offerSummary(String percent, String days, String from, String to) {
+    return '$percent తగ్గింపు · $days · $from–$to';
+  }
+
+  @override
+  String get everyDay => 'ప్రతి రోజు';
+
+  @override
+  String get errBadPercent => '0.01 నుండి 90 మధ్య శాతం ఇవ్వండి';
+
+  @override
+  String get errSameTimes => 'ప్రారంభ, ముగింపు సమయాలు వేరుగా ఉండాలి';
 }

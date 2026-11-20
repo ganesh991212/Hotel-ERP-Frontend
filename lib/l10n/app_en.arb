@@ -3003,5 +3003,98 @@
   "saved": "Saved",
   "@saved": {
     "description": "Toast"
+  },
+  "offerBadge": "{name} −{percent} till {time}",
+  "@offerBadge": {
+    "description": "Badge on a dish while a happy-hour offer runs",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "percent": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "happyHour": "Happy hour",
+  "@happyHour": {
+    "description": "Menu: time-based offers"
+  },
+  "happyHourHelp": "Percent off the dish or size price on chosen days and times, for every order (waiter or QR). Add-ons keep their price; overlapping offers never add up.",
+  "@happyHourHelp": {
+    "description": "Explains happy hour"
+  },
+  "newOffer": "New offer",
+  "@newOffer": {
+    "description": "Button"
+  },
+  "offerNameHint": "e.g. Happy hour",
+  "@offerNameHint": {
+    "description": "Hint"
+  },
+  "percentOff": "Percent off",
+  "@percentOff": {
+    "description": "Field label"
+  },
+  "days": "Days",
+  "@days": {
+    "description": "Field label"
+  },
+  "fromTime": "From",
+  "@fromTime": {
+    "description": "Start time"
+  },
+  "toTime": "To",
+  "@toTime": {
+    "description": "End time"
+  },
+  "appliesTo": "Applies to",
+  "@appliesTo": {
+    "description": "Field label: which categories"
+  },
+  "wholeMenu": "Whole menu",
+  "@wholeMenu": {
+    "description": "No category chosen = whole menu"
+  },
+  "offerOn": "On",
+  "@offerOn": {
+    "description": "Switch label: offer is switched on"
+  },
+  "noOffers": "No offers yet",
+  "@noOffers": {
+    "description": "Empty state"
+  },
+  "offerSummary": "{percent} off · {days} · {from}–{to}",
+  "@offerSummary": {
+    "description": "One offer in the list",
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      },
+      "days": {
+        "type": "String"
+      },
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "everyDay": "Every day",
+  "@everyDay": {
+    "description": "All seven days"
+  },
+  "errBadPercent": "Enter a percent between 0.01 and 90",
+  "@errBadPercent": {
+    "description": "Validation"
+  },
+  "errSameTimes": "Start and end times must differ",
+  "@errSameTimes": {
+    "description": "Validation"
   }
 }
