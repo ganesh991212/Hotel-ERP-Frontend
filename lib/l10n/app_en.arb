@@ -3397,5 +3397,51 @@
   "errTableInUse": "Guests are at this table",
   "@errTableInUse": {
     "description": "Error"
+  },
+  "moveTable": "Move",
+  "@moveTable": {
+    "description": "Button: the guests changed tables"
+  },
+  "mergeTables": "Merge",
+  "@mergeTables": {
+    "description": "Button: one party across several tables"
+  },
+  "moveTo": "Move to which table?",
+  "@moveTo": {
+    "description": "Move picker title"
+  },
+  "mergeWhich": "Which tables join this one?",
+  "@mergeWhich": {
+    "description": "Merge picker title"
+  },
+  "noFreeTables": "No free table right now",
+  "@noFreeTables": {
+    "description": "Empty move picker"
+  },
+  "noOtherBusy": "No other table has guests",
+  "@noOtherBusy": {
+    "description": "Empty merge picker"
+  },
+  "movedTo": "Moved to table {label}",
+  "@movedTo": {
+    "description": "Toast after a move",
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "mergedInto": "Merged into table {label}",
+  "@mergedInto": {
+    "description": "Toast after a merge",
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "errTableHasBill": "This table already has a bill. Settle or cancel it first.",
+  "@errTableHasBill": {
+    "description": "Error"
   }
 }

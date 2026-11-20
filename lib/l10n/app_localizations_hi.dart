@@ -2452,4 +2452,36 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get errTableInUse => 'इस टेबल पर मेहमान हैं';
+
+  @override
+  String get moveTable => 'बदलें';
+
+  @override
+  String get mergeTables => 'मिलाएं';
+
+  @override
+  String get moveTo => 'किस टेबल पर ले जाएं?';
+
+  @override
+  String get mergeWhich => 'कौन सी टेबल इसमें मिलें?';
+
+  @override
+  String get noFreeTables => 'अभी कोई खाली टेबल नहीं';
+
+  @override
+  String get noOtherBusy => 'किसी और टेबल पर मेहमान नहीं';
+
+  @override
+  String movedTo(String label) {
+    return 'टेबल $label पर ले गए';
+  }
+
+  @override
+  String mergedInto(String label) {
+    return 'टेबल $label में मिलाया';
+  }
+
+  @override
+  String get errTableHasBill =>
+      'इस टेबल का बिल बन चुका है। पहले भुगतान करें या रद्द करें।';
 }

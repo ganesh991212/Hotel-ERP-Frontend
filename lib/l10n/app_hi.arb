@@ -715,5 +715,14 @@
   "changeGuests": "मेहमान बदलें",
   "coversLine": "{covers} मेहमान",
   "avgPerGuest": "प्रति मेहमान औसत: {amount}",
-  "errTableInUse": "इस टेबल पर मेहमान हैं"
+  "errTableInUse": "इस टेबल पर मेहमान हैं",
+  "moveTable": "बदलें",
+  "mergeTables": "मिलाएं",
+  "moveTo": "किस टेबल पर ले जाएं?",
+  "mergeWhich": "कौन सी टेबल इसमें मिलें?",
+  "noFreeTables": "अभी कोई खाली टेबल नहीं",
+  "noOtherBusy": "किसी और टेबल पर मेहमान नहीं",
+  "movedTo": "टेबल {label} पर ले गए",
+  "mergedInto": "टेबल {label} में मिलाया",
+  "errTableHasBill": "इस टेबल का बिल बन चुका है। पहले भुगतान करें या रद्द करें।"
 }

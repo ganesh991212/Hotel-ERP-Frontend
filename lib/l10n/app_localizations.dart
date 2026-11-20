@@ -4401,6 +4401,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Guests are at this table'**
   String get errTableInUse;
+
+  /// Button: the guests changed tables
+  ///
+  /// In en, this message translates to:
+  /// **'Move'**
+  String get moveTable;
+
+  /// Button: one party across several tables
+  ///
+  /// In en, this message translates to:
+  /// **'Merge'**
+  String get mergeTables;
+
+  /// Move picker title
+  ///
+  /// In en, this message translates to:
+  /// **'Move to which table?'**
+  String get moveTo;
+
+  /// Merge picker title
+  ///
+  /// In en, this message translates to:
+  /// **'Which tables join this one?'**
+  String get mergeWhich;
+
+  /// Empty move picker
+  ///
+  /// In en, this message translates to:
+  /// **'No free table right now'**
+  String get noFreeTables;
+
+  /// Empty merge picker
+  ///
+  /// In en, this message translates to:
+  /// **'No other table has guests'**
+  String get noOtherBusy;
+
+  /// Toast after a move
+  ///
+  /// In en, this message translates to:
+  /// **'Moved to table {label}'**
+  String movedTo(String label);
+
+  /// Toast after a merge
+  ///
+  /// In en, this message translates to:
+  /// **'Merged into table {label}'**
+  String mergedInto(String label);
+
+  /// Error
+  ///
+  /// In en, this message translates to:
+  /// **'This table already has a bill. Settle or cancel it first.'**
+  String get errTableHasBill;
 }
 
 class _AppLocalizationsDelegate

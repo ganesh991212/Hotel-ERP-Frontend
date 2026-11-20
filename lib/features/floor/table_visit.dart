@@ -133,6 +133,61 @@ class _TableVisitActionsState extends ConsumerState<TableVisitActions> {
     note.dispose();
   }
 
+  /// Move: pick a free table. Merge: pick other tables with guests. A move closes this sheet (the visit left).
+  Future<void> _moveOrMerge(bool merge) async {
+    final l = AppLocalizations.of(context);
+    final all = ((await ref.read(apiProvider).get('/api/v1/tables')) as List).cast<Map>();
+    const busy = {'SEATED', 'OCCUPIED', 'BILL_PENDING'};
+    final choices = all
+        .where((t) => t['id'] != _t['id'] && t['status'] == 'ACTIVE')
+        .where((t) => merge ? busy.contains(t['state']) : !busy.contains(t['state']))
+        .toList();
+    if (!mounted) return;
+    final picked = <String>{};
+    final ok = await showGlassDialog<bool>(
+      context,
+      title: merge ? l.mergeWhich : l.moveTo,
+      body: StatefulBuilder(
+        builder: (ctx, set) => Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+          if (choices.isEmpty)
+            EmptyState(icon: Icons.table_restaurant_outlined, title: merge ? l.noOtherBusy : l.noFreeTables)
+          else
+            Wrap(spacing: 8, runSpacing: 8, children: [
+              for (final t in choices)
+                merge
+                    ? FilterChip(
+                        label: Text('${t['label']}'),
+                        selected: picked.contains(t['id']),
+                        onSelected: (on) => set(() => on ? picked.add(t['id'] as String) : picked.remove(t['id'])),
+                      )
+                    : ChoiceChip(
+                        label: Text('${t['label']}'),
+                        selected: picked.contains(t['id']),
+                        onSelected: (_) => set(() {
+                          picked
+                            ..clear()
+                            ..add(t['id'] as String);
+                        }),
+                      ),
+            ]),
+          DialogActions(
+            primary: merge ? l.mergeTables : l.moveTable,
+            onPrimary: picked.isEmpty ? null : () => Navigator.of(ctx).pop(true),
+          ),
+        ]),
+      ),
+    );
+    if (ok != true || !mounted) return;
+    final done = await guard(context, () async {
+      final r = merge
+          ? await ref.read(apiProvider).post('/api/v1/tables/${_t['id']}/merge', {'from_table_ids': picked.toList()})
+          : await ref.read(apiProvider).post('/api/v1/tables/${_t['id']}/move', {'to_table_id': picked.first});
+      widget.onChanged();
+      if (mounted) showDone(context, merge ? l.mergedInto('${r['label']}') : l.movedTo('${r['label']}'));
+    });
+    if (done && mounted && !merge) Navigator.of(context).pop();
+  }
+
   @override
   Widget build(BuildContext context) {
     final l = AppLocalizations.of(context);
@@ -164,6 +219,18 @@ class _TableVisitActionsState extends ConsumerState<TableVisitActions> {
           icon: const Icon(Icons.groups_outlined, size: 18),
           label: Text(l.changeGuests),
         ),
+      if (state == 'SEATED' || state == 'OCCUPIED' || state == 'BILL_PENDING') ...[
+        OutlinedButton.icon(
+          onPressed: () => _moveOrMerge(false),
+          icon: const Icon(Icons.swap_horiz_rounded, size: 18),
+          label: Text(l.moveTable),
+        ),
+        OutlinedButton.icon(
+          onPressed: () => _moveOrMerge(true),
+          icon: const Icon(Icons.merge_rounded, size: 18),
+          label: Text(l.mergeTables),
+        ),
+      ],
       if (state == 'SEATED') TextButton(onPressed: () => _post('hold', {'state': 'FREE'}), child: Text(l.guestsLeft)),
     ];
     final chip = visitChip(context, _t);

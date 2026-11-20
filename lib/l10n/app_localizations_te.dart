@@ -2462,4 +2462,36 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get errTableInUse => 'ఈ టేబుల్ వద్ద అతిథులు ఉన్నారు';
+
+  @override
+  String get moveTable => 'మార్చు';
+
+  @override
+  String get mergeTables => 'కలపండి';
+
+  @override
+  String get moveTo => 'ఏ టేబుల్‌కు మార్చాలి?';
+
+  @override
+  String get mergeWhich => 'ఏ టేబుల్‌లు దీనితో కలవాలి?';
+
+  @override
+  String get noFreeTables => 'ఇప్పుడు ఖాళీ టేబుల్ లేదు';
+
+  @override
+  String get noOtherBusy => 'వేరే టేబుల్‌లో అతిథులు లేరు';
+
+  @override
+  String movedTo(String label) {
+    return 'టేబుల్ $label కు మార్చారు';
+  }
+
+  @override
+  String mergedInto(String label) {
+    return 'టేబుల్ $label లో కలిపారు';
+  }
+
+  @override
+  String get errTableHasBill =>
+      'ఈ టేబుల్‌కు బిల్లు ఉంది. ముందు చెల్లించండి లేదా రద్దు చేయండి.';
 }

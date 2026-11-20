@@ -37,6 +37,7 @@ String errorText(BuildContext context, Object e) {
       'bad_combo' => l.errBadCombo,
       'note_required' => l.errNoteRequired,
       'table_in_use' => l.errTableInUse,
+      'table_has_bill' => l.errTableHasBill,
       'already_closed' => l.errAlreadyClosed,
       'outside_hours' => e.details['hours'] is String
           ? '${l.errOutsideHours} (${e.details['category']} ${e.details['hours']})'

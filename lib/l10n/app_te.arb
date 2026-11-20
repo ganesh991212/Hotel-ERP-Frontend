@@ -715,5 +715,14 @@
   "changeGuests": "అతిథుల సంఖ్య మార్చు",
   "coversLine": "{covers} అతిథులు",
   "avgPerGuest": "ఒక్కో అతిథికి సగటు: {amount}",
-  "errTableInUse": "ఈ టేబుల్ వద్ద అతిథులు ఉన్నారు"
+  "errTableInUse": "ఈ టేబుల్ వద్ద అతిథులు ఉన్నారు",
+  "moveTable": "మార్చు",
+  "mergeTables": "కలపండి",
+  "moveTo": "ఏ టేబుల్‌కు మార్చాలి?",
+  "mergeWhich": "ఏ టేబుల్‌లు దీనితో కలవాలి?",
+  "noFreeTables": "ఇప్పుడు ఖాళీ టేబుల్ లేదు",
+  "noOtherBusy": "వేరే టేబుల్‌లో అతిథులు లేరు",
+  "movedTo": "టేబుల్ {label} కు మార్చారు",
+  "mergedInto": "టేబుల్ {label} లో కలిపారు",
+  "errTableHasBill": "ఈ టేబుల్‌కు బిల్లు ఉంది. ముందు చెల్లించండి లేదా రద్దు చేయండి."
 }

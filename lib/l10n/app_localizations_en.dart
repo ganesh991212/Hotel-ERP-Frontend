@@ -2501,4 +2501,36 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get errTableInUse => 'Guests are at this table';
+
+  @override
+  String get moveTable => 'Move';
+
+  @override
+  String get mergeTables => 'Merge';
+
+  @override
+  String get moveTo => 'Move to which table?';
+
+  @override
+  String get mergeWhich => 'Which tables join this one?';
+
+  @override
+  String get noFreeTables => 'No free table right now';
+
+  @override
+  String get noOtherBusy => 'No other table has guests';
+
+  @override
+  String movedTo(String label) {
+    return 'Moved to table $label';
+  }
+
+  @override
+  String mergedInto(String label) {
+    return 'Merged into table $label';
+  }
+
+  @override
+  String get errTableHasBill =>
+      'This table already has a bill. Settle or cancel it first.';
 }
