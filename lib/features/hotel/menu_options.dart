@@ -868,3 +868,123 @@ class _ComboFormState extends ConsumerState<_ComboForm> {
     );
   }
 }
+
+// ---------- categories and serving hours ----------
+
+Future<void> showCategoryForm(BuildContext context, Map<String, dynamic>? category) => showGlassDialog(
+  context,
+  title: category == null ? AppLocalizations.of(context).addCategory : AppLocalizations.of(context).editCategory,
+  maxWidth: 520,
+  body: _CategoryForm(category: category),
+);
+
+class _CategoryForm extends ConsumerStatefulWidget {
+  const _CategoryForm({this.category});
+  final Map<String, dynamic>? category;
+
+  @override
+  ConsumerState<_CategoryForm> createState() => _CategoryFormState();
+}
+
+class _CategoryFormState extends ConsumerState<_CategoryForm> {
+  late final _name = TextEditingController(text: widget.category?['name'] as String? ?? '');
+  late int _days = (widget.category?['days'] as num?)?.toInt() ?? 127;
+  late bool _allDay = widget.category?['available_from'] == null;
+  late TimeOfDay _from = _RuleFormState._parse(widget.category?['available_from'] as String? ?? '07:00');
+  late TimeOfDay _to = _RuleFormState._parse(widget.category?['available_to'] as String? ?? '11:00');
+  bool _busy = false;
+
+  @override
+  void dispose() {
+    _name.dispose();
+    super.dispose();
+  }
+
+  Future<void> _pick(bool start) async {
+    final t = await showTimePicker(context: context, initialTime: start ? _from : _to);
+    if (t != null) setState(() => start ? _from = t : _to = t);
+  }
+
+  Future<void> _save() async {
+    final l = AppLocalizations.of(context);
+    if (_name.text.trim().isEmpty) return;
+    if (!_allDay && _RuleFormState._fmt(_from) == _RuleFormState._fmt(_to)) return showWarning(context, l.errSameTimes);
+    setState(() => _busy = true);
+    final body = {
+      'name': _name.text.trim(),
+      if (widget.category != null) 'sort': widget.category!['sort'],
+      'days': _days,
+      'available_from': _allDay ? null : _RuleFormState._fmt(_from),
+      'available_to': _allDay ? null : _RuleFormState._fmt(_to),
+    };
+    final ok = await guard(context, () async {
+      final api = ref.read(apiProvider);
+      widget.category == null
+          ? await api.post('/api/v1/categories', body)
+          : await api.put('/api/v1/categories/${widget.category!['id']}', body);
+      ref.invalidate(menuDataProvider);
+    });
+    if (!mounted) return;
+    setState(() => _busy = false);
+    if (ok) {
+      Navigator.of(context).pop();
+      showDone(context, l.saved);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
+    final names = _dayNames(context);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        FieldLabel(l.name),
+        TextField(controller: _name, autofocus: widget.category == null),
+        FieldLabel(l.servingHours),
+        Wrap(
+          spacing: 6,
+          runSpacing: 6,
+          children: [
+            for (var d = 0; d < 7; d++)
+              FilterChip(
+                label: Text(names[d]),
+                selected: _days & (1 << d) != 0,
+                onSelected: (on) => setState(() {
+                  final next = on ? _days | (1 << d) : _days & ~(1 << d);
+                  if (next != 0) _days = next;
+                }),
+              ),
+          ],
+        ),
+        SwitchListTile(
+          contentPadding: EdgeInsets.zero,
+          value: _allDay,
+          onChanged: (v) => setState(() => _allDay = v),
+          title: Text(l.servedAllDay),
+        ),
+        if (!_allDay)
+          Row(
+            children: [
+              Expanded(
+                child: OutlinedButton.icon(
+                  onPressed: () => _pick(true),
+                  icon: const Icon(Icons.schedule_rounded, size: 18),
+                  label: Text('${l.fromTime} ${_RuleFormState._fmt(_from)}'),
+                ),
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: OutlinedButton.icon(
+                  onPressed: () => _pick(false),
+                  icon: const Icon(Icons.schedule_rounded, size: 18),
+                  label: Text('${l.toTime} ${_RuleFormState._fmt(_to)}'),
+                ),
+              ),
+            ],
+          ),
+        DialogActions(primary: l.save, busy: _busy, onPrimary: _busy ? null : _save),
+      ],
+    );
+  }
+}

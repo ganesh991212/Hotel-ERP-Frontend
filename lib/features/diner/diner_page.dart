@@ -238,12 +238,25 @@ class _DinerPageState extends ConsumerState<DinerPage> {
                             key: _catKeys[c['id']],
                             child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
                               Text(c['name'], style: tt.titleLarge),
+                              // Outside its serving hours: say when it is served; its dishes can't be added.
+                              if (c['open_now'] == false && c['hours'] != null)
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 4),
+                                  child: Align(
+                                    alignment: AlignmentDirectional.centerStart,
+                                    child: StatusChip(
+                                      icon: Icons.schedule_rounded,
+                                      label: l.servedHours(c['hours'] as String),
+                                      color: context.tokens.dim,
+                                    ),
+                                  ),
+                                ),
                               const SizedBox(height: 6),
                               for (final i in (c['items'] as List).cast<Map<String, dynamic>>())
                                 _DishRow(
                                   item: i,
                                   qty: _cart.qtyOf(i['id']),
-                                  ordering: ordering,
+                                  ordering: ordering && c['open_now'] != false,
                                   onAdd: () => _addDish(i),
                                   onRemove: () => _changeCart(() => _cart.removeLastOf(i['id'])),
                                 ),

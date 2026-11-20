@@ -55,7 +55,7 @@ class _MenuPageState extends ConsumerState<MenuPage> {
             ),
           if (canEdit)
             OutlinedButton.icon(
-              onPressed: () => _categoryDialog(context),
+              onPressed: () => showCategoryForm(context, null),
               icon: const Icon(Icons.create_new_folder_outlined, size: 18),
               label: Text(l.addCategory),
             ),
@@ -90,6 +90,13 @@ class _MenuPageState extends ConsumerState<MenuPage> {
                     selected: _cat == c['id'],
                     onTap: () => setState(() => _cat = c['id']),
                   ),
+                // Rename the selected category and set its serving hours.
+                if (canEdit && _cat.isNotEmpty)
+                  TextButton.icon(
+                    onPressed: () => showCategoryForm(context, cats.firstWhere((c) => c['id'] == _cat)),
+                    icon: const Icon(Icons.edit_outlined, size: 18),
+                    label: Text(l.editCategory),
+                  ),
               ]),
             ),
             const SizedBox(height: 16),
@@ -117,31 +124,6 @@ class _MenuPageState extends ConsumerState<MenuPage> {
         },
       ),
     ]);
-  }
-
-  Future<void> _categoryDialog(BuildContext context) async {
-    final l = AppLocalizations.of(context);
-    final name = TextEditingController();
-    await showGlassDialog(
-      context,
-      title: l.addCategory,
-      body: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-        FieldLabel(l.name),
-        TextField(controller: name, autofocus: true),
-        Builder(
-          builder: (ctx) => DialogActions(
-            primary: l.save,
-            onPrimary: () async {
-              final ok = await guard(ctx, () => ref.read(apiProvider).post('/api/v1/categories', {'name': name.text.trim()}));
-              if (ok && ctx.mounted) {
-                ref.invalidate(menuDataProvider);
-                Navigator.of(ctx).pop();
-              }
-            },
-          ),
-        ),
-      ]),
-    );
   }
 
   Future<void> _itemDialog(BuildContext context, List<Map<String, dynamic>> cats, Map<String, dynamic>? item) async {

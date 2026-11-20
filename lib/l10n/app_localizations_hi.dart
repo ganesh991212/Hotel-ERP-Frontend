@@ -2275,4 +2275,32 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String get errItemInCombo =>
       'यह व्यंजन एक कॉम्बो में है। पहले उसे कॉम्बो से हटाएं, या सोल्ड आउट करें।';
+
+  @override
+  String get editCategory => 'कैटेगरी बदलें';
+
+  @override
+  String get servingHours => 'परोसने का समय';
+
+  @override
+  String get servedAllDay => 'पूरे दिन परोसा जाता है';
+
+  @override
+  String servedHours(String hours) {
+    return '$hours परोसा जाता है';
+  }
+
+  @override
+  String get outsideHoursTitle => 'अभी नहीं परोसा जाता';
+
+  @override
+  String outsideHoursBody(String items, String category, String hours) {
+    return '$items ($category, $hours) परोसने के समय से बाहर हैं। फिर भी ऑर्डर करें?';
+  }
+
+  @override
+  String get orderAnyway => 'फिर भी ऑर्डर करें';
+
+  @override
+  String get errOutsideHours => 'इस समय नहीं परोसा जाता';
 }

@@ -4107,6 +4107,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'This dish is in a combo. Take it out of the combo first, or mark it sold out.'**
   String get errItemInCombo;
+
+  /// Button: rename a category and set its serving hours
+  ///
+  /// In en, this message translates to:
+  /// **'Edit category'**
+  String get editCategory;
+
+  /// Field label: when a category's dishes can be ordered
+  ///
+  /// In en, this message translates to:
+  /// **'Serving hours'**
+  String get servingHours;
+
+  /// Switch: no time window
+  ///
+  /// In en, this message translates to:
+  /// **'Served all day'**
+  String get servedAllDay;
+
+  /// Label on a section outside its hours, e.g. Served 07:00-11:00
+  ///
+  /// In en, this message translates to:
+  /// **'Served {hours}'**
+  String servedHours(String hours);
+
+  /// Warning title
+  ///
+  /// In en, this message translates to:
+  /// **'Not served now'**
+  String get outsideHoursTitle;
+
+  /// Staff warning before ordering outside hours
+  ///
+  /// In en, this message translates to:
+  /// **'{items} ({category}, {hours}) are outside their serving hours. Order anyway?'**
+  String outsideHoursBody(String items, String category, String hours);
+
+  /// Button: send the order despite the serving hours
+  ///
+  /// In en, this message translates to:
+  /// **'Order anyway'**
+  String get orderAnyway;
+
+  /// Error for diners
+  ///
+  /// In en, this message translates to:
+  /// **'Not served at this time'**
+  String get errOutsideHours;
 }
 
 class _AppLocalizationsDelegate

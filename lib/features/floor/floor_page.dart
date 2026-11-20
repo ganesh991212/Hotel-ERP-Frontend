@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_ui/material_ui.dart';
 
+import '../../core/api/api_client.dart';
 import '../../core/auth/session.dart';
 import '../../core/money.dart';
 import '../../core/theme/tokens.dart';
@@ -340,11 +341,54 @@ class _OrderComposerState extends ConsumerState<OrderComposer> {
     }
   }
 
-  Future<void> _place() async {
+  /// Dishes outside their serving hours: the server warns (`outside_hours`); staff may order anyway (a late guest).
+  Future<bool> _confirmOutsideHours(ApiException e) async {
+    final l = AppLocalizations.of(context);
+    final ok = await showGlassDialog<bool>(
+      context,
+      title: l.outsideHoursTitle,
+      body: Builder(
+        builder: (ctx) => Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+          Text(l.outsideHoursBody(
+            ((e.details['items'] as List?) ?? const []).join(', '),
+            '${e.details['category'] ?? ''}',
+            '${e.details['hours'] ?? ''}',
+          )),
+          DialogActions(primary: l.orderAnyway, onPrimary: () => Navigator.of(ctx).pop(true)),
+        ]),
+      ),
+    );
+    return ok == true;
+  }
+
+  Future<void> _place({bool allowOutsideHours = false}) async {
     final l = AppLocalizations.of(context);
     setState(() => _busy = true);
+    ApiException? warned;
     final ok = await guard(context, () async {
-      final table = widget.table;
+      try {
+        await _send(widget.table, allowOutsideHours);
+      } on ApiException catch (e) {
+        if (e.code != 'outside_hours' || allowOutsideHours) rethrow;
+        warned = e; // asked below, outside guard: cancelling is not an error
+      }
+    });
+    if (!mounted) return;
+    if (warned != null) {
+      if (await _confirmOutsideHours(warned!)) return _place(allowOutsideHours: true);
+      if (mounted) setState(() => _busy = false);
+      return;
+    }
+    setState(() => _busy = false);
+    if (ok) {
+      ref.invalidate(_openOrdersProvider);
+      _clientRef = newClientRef();
+      Navigator.of(context).pop();
+      showDone(context, l.orderSent);
+    }
+  }
+
+  Future<void> _send(Map<String, dynamic>? table, bool allowOutsideHours) async {
       await ref.read(apiProvider).post('/api/v1/orders', {
         if (table != null) 'table_id': table['id'] else ...{
           'takeaway': true,
@@ -354,16 +398,8 @@ class _OrderComposerState extends ConsumerState<OrderComposer> {
         'items': _lines,
         if (_note.text.trim().isNotEmpty) 'note': _note.text.trim(),
         'client_ref': _clientRef, // same ref on retry => no duplicate order
+        if (allowOutsideHours) 'allow_outside_hours': true,
       });
-    });
-    if (!mounted) return;
-    setState(() => _busy = false);
-    if (ok) {
-      ref.invalidate(_openOrdersProvider);
-      _clientRef = newClientRef();
-      Navigator.of(context).pop();
-      showDone(context, l.orderSent);
-    }
   }
 
   @override

@@ -2286,4 +2286,32 @@ class AppLocalizationsTe extends AppLocalizations {
   @override
   String get errItemInCombo =>
       'ఈ వంటకం ఒక కాంబోలో ఉంది. ముందు కాంబో నుండి తీసివేయండి, లేదా సోల్డ్ అవుట్ చేయండి.';
+
+  @override
+  String get editCategory => 'కేటగిరీ మార్చు';
+
+  @override
+  String get servingHours => 'వడ్డించే సమయం';
+
+  @override
+  String get servedAllDay => 'రోజంతా వడ్డిస్తారు';
+
+  @override
+  String servedHours(String hours) {
+    return '$hours వడ్డిస్తారు';
+  }
+
+  @override
+  String get outsideHoursTitle => 'ఇప్పుడు వడ్డించరు';
+
+  @override
+  String outsideHoursBody(String items, String category, String hours) {
+    return '$items ($category, $hours) వడ్డించే సమయం దాటింది. అయినా ఆర్డర్ చేయాలా?';
+  }
+
+  @override
+  String get orderAnyway => 'అయినా ఆర్డర్ చేయి';
+
+  @override
+  String get errOutsideHours => 'ఈ సమయంలో వడ్డించరు';
 }

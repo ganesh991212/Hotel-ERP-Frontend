@@ -2298,4 +2298,32 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get errItemInCombo =>
       'This dish is in a combo. Take it out of the combo first, or mark it sold out.';
+
+  @override
+  String get editCategory => 'Edit category';
+
+  @override
+  String get servingHours => 'Serving hours';
+
+  @override
+  String get servedAllDay => 'Served all day';
+
+  @override
+  String servedHours(String hours) {
+    return 'Served $hours';
+  }
+
+  @override
+  String get outsideHoursTitle => 'Not served now';
+
+  @override
+  String outsideHoursBody(String items, String category, String hours) {
+    return '$items ($category, $hours) are outside their serving hours. Order anyway?';
+  }
+
+  @override
+  String get orderAnyway => 'Order anyway';
+
+  @override
+  String get errOutsideHours => 'Not served at this time';
 }

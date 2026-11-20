@@ -3116,5 +3116,53 @@
   "errItemInCombo": "This dish is in a combo. Take it out of the combo first, or mark it sold out.",
   "@errItemInCombo": {
     "description": "Error: delete refused"
+  },
+  "editCategory": "Edit category",
+  "@editCategory": {
+    "description": "Button: rename a category and set its serving hours"
+  },
+  "servingHours": "Serving hours",
+  "@servingHours": {
+    "description": "Field label: when a category's dishes can be ordered"
+  },
+  "servedAllDay": "Served all day",
+  "@servedAllDay": {
+    "description": "Switch: no time window"
+  },
+  "servedHours": "Served {hours}",
+  "@servedHours": {
+    "description": "Label on a section outside its hours, e.g. Served 07:00-11:00",
+    "placeholders": {
+      "hours": {
+        "type": "String"
+      }
+    }
+  },
+  "outsideHoursTitle": "Not served now",
+  "@outsideHoursTitle": {
+    "description": "Warning title"
+  },
+  "outsideHoursBody": "{items} ({category}, {hours}) are outside their serving hours. Order anyway?",
+  "@outsideHoursBody": {
+    "description": "Staff warning before ordering outside hours",
+    "placeholders": {
+      "items": {
+        "type": "String"
+      },
+      "category": {
+        "type": "String"
+      },
+      "hours": {
+        "type": "String"
+      }
+    }
+  },
+  "orderAnyway": "Order anyway",
+  "@orderAnyway": {
+    "description": "Button: send the order despite the serving hours"
+  },
+  "errOutsideHours": "Not served at this time",
+  "@errOutsideHours": {
+    "description": "Error for diners"
   }
 }
