@@ -2595,4 +2595,33 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get errStationExists => 'इस नाम का स्टेशन पहले से है';
+
+  @override
+  String vsLastWeek(String weekday) {
+    return 'पिछले $weekday इसी समय की तुलना में';
+  }
+
+  @override
+  String upBy(String amount, String pct) {
+    return '$amount ज़्यादा ($pct%)';
+  }
+
+  @override
+  String downBy(String amount, String pct) {
+    return '$amount कम ($pct%)';
+  }
+
+  @override
+  String get sameAsLastWeek => 'पिछले हफ़्ते जितना';
+
+  @override
+  String get noSalesToCompare => 'तुलना के लिए बिक्री नहीं';
+
+  @override
+  String get receivedToday => 'आज मिला पैसा';
+
+  @override
+  String sharePct(String pct) {
+    return '$pct%';
+  }
 }

@@ -51,7 +51,7 @@ class _Dashboard extends StatelessWidget {
   Widget build(BuildContext context) {
     final l = AppLocalizations.of(context);
     final tt = Theme.of(context).textTheme;
-    final hour = DateTime.now().hour;
+    final hour = (d['now_hour'] as int?) ?? DateTime.now().hour; // hotel-local, from the server
     final greeting = hour < 12 ? l.goodMorning(name) : (hour < 17 ? l.goodAfternoon(name) : l.goodEvening(name));
     final w = context.width;
 
@@ -123,24 +123,30 @@ class _Dashboard extends StatelessWidget {
     return PageBody(children: [
       Reveal(
         index: 0,
-        child: Row(children: [
-          Expanded(child: Text(greeting, style: context.isPhone ? tt.displaySmall : tt.displayMedium)),
-          if (canCloseDay)
-            Padding(
-              padding: const EdgeInsets.only(right: 8),
-              child: OutlinedButton.icon(
-                onPressed: () => context.go('/h/overview/close-day'),
-                icon: const Icon(Icons.lock_clock_outlined, size: 18),
-                label: Text(l.closeDay),
-              ),
-            ),
-          if (canReports)
-            OutlinedButton.icon(
-              onPressed: () => context.go('/h/overview/reports'),
-              icon: const Icon(Icons.bar_chart_rounded, size: 18),
-              label: Text(l.reportsTitle),
-            ),
-        ]),
+        // On phones the buttons go under the greeting so it never breaks mid-word.
+        child: Wrap(
+          alignment: WrapAlignment.spaceBetween,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          spacing: 8,
+          runSpacing: 10,
+          children: [
+            Text(greeting, style: context.isPhone ? tt.displaySmall : tt.displayMedium),
+            Wrap(spacing: 8, runSpacing: 8, children: [
+              if (canCloseDay)
+                OutlinedButton.icon(
+                  onPressed: () => context.go('/h/overview/close-day'),
+                  icon: const Icon(Icons.lock_clock_outlined, size: 18),
+                  label: Text(l.closeDay),
+                ),
+              if (canReports)
+                OutlinedButton.icon(
+                  onPressed: () => context.go('/h/overview/reports'),
+                  icon: const Icon(Icons.bar_chart_rounded, size: 18),
+                  label: Text(l.reportsTitle),
+                ),
+            ]),
+          ],
+        ),
       ),
       if (((d['unbilled_today_minor'] as num?)?.toInt() ?? 0) > 0) ...[
         const SizedBox(height: 10),
@@ -158,6 +164,10 @@ class _Dashboard extends StatelessWidget {
       ],
       const SizedBox(height: 18),
       Reveal(index: 0, child: _StatusStrip(d: d)),
+      if (d['vs_last_week'] != null) ...[
+        const SizedBox(height: 18),
+        Reveal(index: 0, child: _TodayMoneyCard(d: d)),
+      ],
       const SizedBox(height: 18),
       grid,
       const SizedBox(height: Gap.m),
@@ -223,6 +233,103 @@ class _StatusStrip extends StatelessWidget {
       const SizedBox(width: 28),
       for (final (i, s) in stats.indexed) ...[if (i > 0) const SizedBox(width: 28), s],
     ]);
+  }
+}
+
+/// Today against the same weekday last week (to the same time) and money received by method. Every number and
+/// percentage comes from the server; this only formats them. Direction is an icon plus words, never colour alone.
+class _TodayMoneyCard extends StatelessWidget {
+  const _TodayMoneyCard({required this.d});
+  final Map<String, dynamic> d;
+
+  @override
+  Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
+    final t = context.tokens;
+    final tt = Theme.of(context).textTheme;
+    final v = Map<String, dynamic>.from(d['vs_last_week'] as Map);
+    final mix = Map<String, dynamic>.from(d['payment_mix'] as Map);
+    final until = DateTime.parse(v['until'] as String);
+    final amount = formatInr((v['difference_minor'] as num).toInt(), showPaise: false);
+    final pct = v['change_pct'] as num?;
+    // Last week had no sales up to now: no percentage and no "up" either, just say so (docs/14).
+    final (IconData icon, String text) = switch (v['direction']) {
+      _ when pct == null => (Icons.remove_rounded, l.noSalesToCompare),
+      'UP' => (Icons.trending_up_rounded, l.upBy(amount, pct.toString())),
+      'DOWN' => (Icons.trending_down_rounded, l.downBy(amount, pct.toString())),
+      _ => (Icons.trending_flat_rounded, l.sameAsLastWeek),
+    };
+    String method(String m) => switch (m) {
+      'CASH' => l.payCash,
+      'UPI' => l.payUpi,
+      'CARD' => l.payCard,
+      _ => m,
+    };
+    IconData methodIcon(String m) => switch (m) {
+      'CASH' => Icons.payments_outlined,
+      'UPI' => Icons.qr_code_2_rounded,
+      'CARD' => Icons.credit_card_rounded,
+      _ => Icons.account_balance_wallet_outlined,
+    };
+
+    final compare = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          l.vsLastWeek(DateFormat.EEEE(Localizations.localeOf(context).toLanguageTag()).format(until)),
+          style: tt.labelMedium?.copyWith(color: t.dim),
+        ),
+        const SizedBox(height: 6),
+        Row(
+          children: [
+            Icon(icon, size: 22, color: t.ink),
+            const SizedBox(width: 8),
+            Flexible(child: Text(text, style: tt.titleMedium)),
+          ],
+        ),
+      ],
+    );
+    final payments = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(l.receivedToday, style: tt.labelMedium?.copyWith(color: t.dim)),
+        const SizedBox(height: 6),
+        Wrap(
+          spacing: 16,
+          runSpacing: 8,
+          children: [
+            for (final m in (mix['methods'] as List).cast<Map>())
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(methodIcon(m['method'] as String), size: 18, color: t.dim),
+                  const SizedBox(width: 6),
+                  Text(method(m['method'] as String), style: tt.bodyMedium),
+                  const SizedBox(width: 6),
+                  Text(formatInr((m['amount_minor'] as num).toInt(), showPaise: false), style: tt.titleSmall),
+                  const SizedBox(width: 4),
+                  Text(l.sharePct('${m['share_pct']}'), style: tt.bodySmall?.copyWith(color: t.dim)),
+                ],
+              ),
+          ],
+        ),
+      ],
+    );
+    return Glass(
+      child: context.isPhone
+          ? Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [compare, const SizedBox(height: 14), payments],
+            )
+          : Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(child: compare),
+                const SizedBox(width: 24),
+                Expanded(flex: 2, child: payments),
+              ],
+            ),
+    );
   }
 }
 

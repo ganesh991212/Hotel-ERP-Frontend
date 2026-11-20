@@ -756,5 +756,12 @@
   "followCategory": "కేటగిరీ లాగే",
   "allStations": "అన్ని స్టేషన్లు",
   "goesTo": "వెళ్తుంది: {station}",
-  "errStationExists": "ఈ పేరుతో స్టేషన్ ఇప్పటికే ఉంది"
+  "errStationExists": "ఈ పేరుతో స్టేషన్ ఇప్పటికే ఉంది",
+  "vsLastWeek": "గత {weekday} ఇదే సమయంతో పోలిస్తే",
+  "upBy": "{amount} పెరిగింది ({pct}%)",
+  "downBy": "{amount} తగ్గింది ({pct}%)",
+  "sameAsLastWeek": "గత వారం లాగానే",
+  "noSalesToCompare": "పోల్చడానికి అమ్మకాలు లేవు",
+  "receivedToday": "ఈరోజు వచ్చిన డబ్బు",
+  "sharePct": "{pct}%"
 }

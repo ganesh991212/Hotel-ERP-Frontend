@@ -4647,6 +4647,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'A station with this name already exists'**
   String get errStationExists;
+
+  /// Overview: today's revenue so far against the same weekday last week up to the same time. weekday is a day name, e.g. Tuesday
+  ///
+  /// In en, this message translates to:
+  /// **'Compared with last {weekday} at this time'**
+  String vsLastWeek(String weekday);
+
+  /// Overview: revenue is higher than the same time last week. amount is money, pct a number like 12.5
+  ///
+  /// In en, this message translates to:
+  /// **'Up {amount} ({pct}%)'**
+  String upBy(String amount, String pct);
+
+  /// Overview: revenue is lower than the same time last week. amount is money, pct a number like 12.5
+  ///
+  /// In en, this message translates to:
+  /// **'Down {amount} ({pct}%)'**
+  String downBy(String amount, String pct);
+
+  /// Overview: revenue equals the same time last week
+  ///
+  /// In en, this message translates to:
+  /// **'Same as last week'**
+  String get sameAsLastWeek;
+
+  /// Overview: there were no sales at this time last week, so no comparison is shown
+  ///
+  /// In en, this message translates to:
+  /// **'No sales to compare'**
+  String get noSalesToCompare;
+
+  /// Overview: heading over today's payments by cash / UPI / card
+  ///
+  /// In en, this message translates to:
+  /// **'Money received today'**
+  String get receivedToday;
+
+  /// Overview: a payment method's share of money received today, e.g. 40%
+  ///
+  /// In en, this message translates to:
+  /// **'{pct}%'**
+  String sharePct(String pct);
 }
 
 class _AppLocalizationsDelegate

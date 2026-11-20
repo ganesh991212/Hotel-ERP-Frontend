@@ -2650,4 +2650,33 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get errStationExists => 'A station with this name already exists';
+
+  @override
+  String vsLastWeek(String weekday) {
+    return 'Compared with last $weekday at this time';
+  }
+
+  @override
+  String upBy(String amount, String pct) {
+    return 'Up $amount ($pct%)';
+  }
+
+  @override
+  String downBy(String amount, String pct) {
+    return 'Down $amount ($pct%)';
+  }
+
+  @override
+  String get sameAsLastWeek => 'Same as last week';
+
+  @override
+  String get noSalesToCompare => 'No sales to compare';
+
+  @override
+  String get receivedToday => 'Money received today';
+
+  @override
+  String sharePct(String pct) {
+    return '$pct%';
+  }
 }

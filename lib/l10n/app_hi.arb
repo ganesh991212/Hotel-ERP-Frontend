@@ -756,5 +756,12 @@
   "followCategory": "कैटेगरी जैसा",
   "allStations": "सभी स्टेशन",
   "goesTo": "जाता है: {station}",
-  "errStationExists": "इस नाम का स्टेशन पहले से है"
+  "errStationExists": "इस नाम का स्टेशन पहले से है",
+  "vsLastWeek": "पिछले {weekday} इसी समय की तुलना में",
+  "upBy": "{amount} ज़्यादा ({pct}%)",
+  "downBy": "{amount} कम ({pct}%)",
+  "sameAsLastWeek": "पिछले हफ़्ते जितना",
+  "noSalesToCompare": "तुलना के लिए बिक्री नहीं",
+  "receivedToday": "आज मिला पैसा",
+  "sharePct": "{pct}%"
 }

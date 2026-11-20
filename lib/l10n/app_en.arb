@@ -3615,5 +3615,59 @@
   "errStationExists": "A station with this name already exists",
   "@errStationExists": {
     "description": "Error"
+  },
+  "vsLastWeek": "Compared with last {weekday} at this time",
+  "@vsLastWeek": {
+    "description": "Overview: today's revenue so far against the same weekday last week up to the same time. weekday is a day name, e.g. Tuesday",
+    "placeholders": {
+      "weekday": {
+        "type": "String"
+      }
+    }
+  },
+  "upBy": "Up {amount} ({pct}%)",
+  "@upBy": {
+    "description": "Overview: revenue is higher than the same time last week. amount is money, pct a number like 12.5",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "pct": {
+        "type": "String"
+      }
+    }
+  },
+  "downBy": "Down {amount} ({pct}%)",
+  "@downBy": {
+    "description": "Overview: revenue is lower than the same time last week. amount is money, pct a number like 12.5",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "pct": {
+        "type": "String"
+      }
+    }
+  },
+  "sameAsLastWeek": "Same as last week",
+  "@sameAsLastWeek": {
+    "description": "Overview: revenue equals the same time last week"
+  },
+  "noSalesToCompare": "No sales to compare",
+  "@noSalesToCompare": {
+    "description": "Overview: there were no sales at this time last week, so no comparison is shown"
+  },
+  "receivedToday": "Money received today",
+  "@receivedToday": {
+    "description": "Overview: heading over today's payments by cash / UPI / card"
+  },
+  "sharePct": "{pct}%",
+  "@sharePct": {
+    "description": "Overview: a payment method's share of money received today, e.g. 40%",
+    "placeholders": {
+      "pct": {
+        "type": "String"
+      }
+    }
   }
 }

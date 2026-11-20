@@ -2605,4 +2605,33 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get errStationExists => 'ఈ పేరుతో స్టేషన్ ఇప్పటికే ఉంది';
+
+  @override
+  String vsLastWeek(String weekday) {
+    return 'గత $weekday ఇదే సమయంతో పోలిస్తే';
+  }
+
+  @override
+  String upBy(String amount, String pct) {
+    return '$amount పెరిగింది ($pct%)';
+  }
+
+  @override
+  String downBy(String amount, String pct) {
+    return '$amount తగ్గింది ($pct%)';
+  }
+
+  @override
+  String get sameAsLastWeek => 'గత వారం లాగానే';
+
+  @override
+  String get noSalesToCompare => 'పోల్చడానికి అమ్మకాలు లేవు';
+
+  @override
+  String get receivedToday => 'ఈరోజు వచ్చిన డబ్బు';
+
+  @override
+  String sharePct(String pct) {
+    return '$pct%';
+  }
 }
