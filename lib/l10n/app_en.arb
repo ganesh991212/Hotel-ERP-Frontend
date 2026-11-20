@@ -3116,5 +3116,589 @@
   "errItemInCombo": "This dish is in a combo. Take it out of the combo first, or mark it sold out.",
   "@errItemInCombo": {
     "description": "Error: delete refused"
+  },
+  "editCategory": "Edit category",
+  "@editCategory": {
+    "description": "Button: rename a category and set its serving hours"
+  },
+  "servingHours": "Serving hours",
+  "@servingHours": {
+    "description": "Field label: when a category's dishes can be ordered"
+  },
+  "servedAllDay": "Served all day",
+  "@servedAllDay": {
+    "description": "Switch: no time window"
+  },
+  "servedHours": "Served {hours}",
+  "@servedHours": {
+    "description": "Label on a section outside its hours, e.g. Served 07:00-11:00",
+    "placeholders": {
+      "hours": {
+        "type": "String"
+      }
+    }
+  },
+  "outsideHoursTitle": "Not served now",
+  "@outsideHoursTitle": {
+    "description": "Warning title"
+  },
+  "outsideHoursBody": "{items} ({category}, {hours}) are outside their serving hours. Order anyway?",
+  "@outsideHoursBody": {
+    "description": "Staff warning before ordering outside hours",
+    "placeholders": {
+      "items": {
+        "type": "String"
+      },
+      "category": {
+        "type": "String"
+      },
+      "hours": {
+        "type": "String"
+      }
+    }
+  },
+  "orderAnyway": "Order anyway",
+  "@orderAnyway": {
+    "description": "Button: send the order despite the serving hours"
+  },
+  "errOutsideHours": "Not served at this time",
+  "@errOutsideHours": {
+    "description": "Error for diners"
+  },
+  "closeDay": "Close day",
+  "@closeDay": {
+    "description": "Overview button and screen title: count the cash drawer"
+  },
+  "closeDayHelp": "What the drawer should hold, from everything recorded on every device today. Count the cash and enter it below.",
+  "@closeDayHelp": {
+    "description": "Explains the close day screen"
+  },
+  "today": "Today",
+  "@today": {
+    "description": "Tab"
+  },
+  "history": "History",
+  "@history": {
+    "description": "Tab"
+  },
+  "openingFloat": "Opening float",
+  "@openingFloat": {
+    "description": "Cash in the drawer at the start of the day"
+  },
+  "cashReceived": "Cash received",
+  "@cashReceived": {
+    "description": "Cash payments taken today"
+  },
+  "cashPaidOut": "Cash paid out (expenses)",
+  "@cashPaidOut": {
+    "description": "Cash expenses paid from the drawer"
+  },
+  "expectedInDrawer": "Should be in the drawer",
+  "@expectedInDrawer": {
+    "description": "Expected cash"
+  },
+  "countedCash": "Cash counted",
+  "@countedCash": {
+    "description": "Input: what is in the drawer"
+  },
+  "keepForTomorrow": "Keep in the drawer for tomorrow",
+  "@keepForTomorrow": {
+    "description": "Input: tomorrow's opening float"
+  },
+  "toDeposit": "To the bank: {amount}",
+  "@toDeposit": {
+    "description": "Counted minus kept",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "cashOver": "Over {amount}",
+  "@cashOver": {
+    "description": "Result: more cash than expected",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "cashShort": "Short {amount}",
+  "@cashShort": {
+    "description": "Result: less cash than expected",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "cashExact": "Exact",
+  "@cashExact": {
+    "description": "Result: no difference"
+  },
+  "whyDifferent": "Why is it different? (needed)",
+  "@whyDifferent": {
+    "description": "Note label when over or short"
+  },
+  "closeDayButton": "Close the day",
+  "@closeDayButton": {
+    "description": "Button: save the final close"
+  },
+  "closeDayConfirm": "This is final. Tomorrow's opening float will be what you keep in the drawer.",
+  "@closeDayConfirm": {
+    "description": "Confirm before closing"
+  },
+  "dayClosedBy": "Closed by {name} at {time}",
+  "@dayClosedBy": {
+    "description": "Who closed the day",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "cashAfterClose": "Cash taken after closing: {amount}",
+  "@cashAfterClose": {
+    "description": "Cash payments after the close",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "unpaidBillsWarning": "{count, plural, =1{1 bill is still unpaid} other{{count} bills are still unpaid}} ({amount})",
+  "@unpaidBillsWarning": {
+    "description": "Warning before closing",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "shortDays": "{count, plural, =0{No short days} =1{1 short day} other{{count} short days}}",
+  "@shortDays": {
+    "description": "History summary",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "netOverShort": "Net over/short: {amount}",
+  "@netOverShort": {
+    "description": "History summary",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "noCloses": "No days closed yet",
+  "@noCloses": {
+    "description": "Empty history"
+  },
+  "errNoteRequired": "Say why the cash is over or short",
+  "@errNoteRequired": {
+    "description": "Error"
+  },
+  "errAlreadyClosed": "This day is already closed",
+  "@errAlreadyClosed": {
+    "description": "Error"
+  },
+  "seated": "Seated",
+  "@seated": {
+    "description": "Table state: guests sat, nothing ordered yet"
+  },
+  "cleaning": "Cleaning",
+  "@cleaning": {
+    "description": "Table state: paid, needs clearing"
+  },
+  "reserved": "Reserved",
+  "@reserved": {
+    "description": "Table state: held for a booking"
+  },
+  "seatGuests": "Seat guests",
+  "@seatGuests": {
+    "description": "Button: start a table visit"
+  },
+  "guestsCountLabel": "How many guests?",
+  "@guestsCountLabel": {
+    "description": "Question when seating"
+  },
+  "guestsAndTime": "{guests} · {minutes} min",
+  "@guestsAndTime": {
+    "description": "Seated line on a table, e.g. 4 guests · 25 min",
+    "placeholders": {
+      "guests": {
+        "type": "String"
+      },
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "guestsN": "{count, plural, =1{1 guest} other{{count} guests}}",
+  "@guestsN": {
+    "description": "Guest count",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "markClean": "Clean",
+  "@markClean": {
+    "description": "Button: the table is ready again"
+  },
+  "reserve": "Reserve",
+  "@reserve": {
+    "description": "Button: hold a free table"
+  },
+  "reserveNoteHint": "e.g. 8 pm, 4 people",
+  "@reserveNoteHint": {
+    "description": "Hint for the reservation note"
+  },
+  "cancelReservation": "Cancel reservation",
+  "@cancelReservation": {
+    "description": "Button"
+  },
+  "guestsLeft": "Guests left (free table)",
+  "@guestsLeft": {
+    "description": "Button: end a visit with no orders"
+  },
+  "changeGuests": "Change guests",
+  "@changeGuests": {
+    "description": "Button"
+  },
+  "coversLine": "{covers, plural, =0{No guests recorded} =1{1 guest} other{{covers} guests}}",
+  "@coversLine": {
+    "description": "Report: covers",
+    "placeholders": {
+      "covers": {
+        "type": "int"
+      }
+    }
+  },
+  "avgPerGuest": "Average per guest: {amount}",
+  "@avgPerGuest": {
+    "description": "Report: average spend per cover",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "errTableInUse": "Guests are at this table",
+  "@errTableInUse": {
+    "description": "Error"
+  },
+  "moveTable": "Move",
+  "@moveTable": {
+    "description": "Button: the guests changed tables"
+  },
+  "mergeTables": "Merge",
+  "@mergeTables": {
+    "description": "Button: one party across several tables"
+  },
+  "moveTo": "Move to which table?",
+  "@moveTo": {
+    "description": "Move picker title"
+  },
+  "mergeWhich": "Which tables join this one?",
+  "@mergeWhich": {
+    "description": "Merge picker title"
+  },
+  "noFreeTables": "No free table right now",
+  "@noFreeTables": {
+    "description": "Empty move picker"
+  },
+  "noOtherBusy": "No other table has guests",
+  "@noOtherBusy": {
+    "description": "Empty merge picker"
+  },
+  "movedTo": "Moved to table {label}",
+  "@movedTo": {
+    "description": "Toast after a move",
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "mergedInto": "Merged into table {label}",
+  "@mergedInto": {
+    "description": "Toast after a merge",
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "errTableHasBill": "This table already has a bill. Settle or cancel it first.",
+  "@errTableHasBill": {
+    "description": "Error"
+  },
+  "bookings": "Bookings",
+  "@bookings": {
+    "description": "Floor button and screen title"
+  },
+  "waitlist": "Waitlist",
+  "@waitlist": {
+    "description": "Tab: walk-ins waiting"
+  },
+  "newBooking": "New booking",
+  "@newBooking": {
+    "description": "Button"
+  },
+  "addToWaitlist": "Add to waitlist",
+  "@addToWaitlist": {
+    "description": "Button"
+  },
+  "tableOptional": "Table (optional)",
+  "@tableOptional": {
+    "description": "Field"
+  },
+  "anyTable": "Any table",
+  "@anyTable": {
+    "description": "No table chosen"
+  },
+  "quotedWait": "Wait told to the guest (minutes)",
+  "@quotedWait": {
+    "description": "Field"
+  },
+  "avgWaitToday": "Today's real average wait: {minutes} min",
+  "@avgWaitToday": {
+    "description": "Hint next to the quote",
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "waitedOfQuoted": "Waiting {waited} min (told {quoted})",
+  "@waitedOfQuoted": {
+    "description": "Waitlist row",
+    "placeholders": {
+      "waited": {
+        "type": "int"
+      },
+      "quoted": {
+        "type": "int"
+      }
+    }
+  },
+  "waitedMin": "Waiting {waited} min",
+  "@waitedMin": {
+    "description": "Waitlist row without a quote",
+    "placeholders": {
+      "waited": {
+        "type": "int"
+      }
+    }
+  },
+  "seat": "Seat",
+  "@seat": {
+    "description": "Button: seat this party"
+  },
+  "noShow": "No-show",
+  "@noShow": {
+    "description": "Button / status"
+  },
+  "cancelBooking": "Cancel",
+  "@cancelBooking": {
+    "description": "Button: cancel a booking"
+  },
+  "noShowsBefore": "{count, plural, =1{1 no-show before} other{{count} no-shows before}}",
+  "@noShowsBefore": {
+    "description": "Warning on a booking",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "noBookingsDay": "No bookings for this day",
+  "@noBookingsDay": {
+    "description": "Empty"
+  },
+  "nobodyWaiting": "Nobody is waiting",
+  "@nobodyWaiting": {
+    "description": "Empty"
+  },
+  "bookedAt": "Booked {time} · {name}",
+  "@bookedAt": {
+    "description": "Badge on a table",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "pickTable": "Pick a table",
+  "@pickTable": {
+    "description": "Seat dialog title"
+  },
+  "bookingStatusSeated": "Seated",
+  "@bookingStatusSeated": {
+    "description": "Booking status"
+  },
+  "bookingStatusCancelled": "Cancelled",
+  "@bookingStatusCancelled": {
+    "description": "Booking status"
+  },
+  "tableBookedWarn": "{name} has this table at {time}. Book anyway?",
+  "@tableBookedWarn": {
+    "description": "Overlap warning",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "bookAnyway": "Book anyway",
+  "@bookAnyway": {
+    "description": "Button"
+  },
+  "errPastTime": "That time has passed",
+  "@errPastTime": {
+    "description": "Error"
+  },
+  "stations": "Stations",
+  "@stations": {
+    "description": "Menu button: kitchen stations"
+  },
+  "stationsHelp": "Sections of the kitchen that get their own ticket and screen, e.g. Bar, Tandoor. Dishes without a station go to the main Kitchen.",
+  "@stationsHelp": {
+    "description": "Explains stations"
+  },
+  "newStationHint": "e.g. Bar",
+  "@newStationHint": {
+    "description": "Hint"
+  },
+  "mainKitchen": "Kitchen",
+  "@mainKitchen": {
+    "description": "The main kitchen (dishes without a station)"
+  },
+  "station": "Station",
+  "@station": {
+    "description": "Field / menu option"
+  },
+  "followCategory": "Same as category",
+  "@followCategory": {
+    "description": "Dish station: follow its category"
+  },
+  "allStations": "All stations",
+  "@allStations": {
+    "description": "Kitchen screen filter"
+  },
+  "goesTo": "Goes to: {station}",
+  "@goesTo": {
+    "description": "Where a dish's ticket goes",
+    "placeholders": {
+      "station": {
+        "type": "String"
+      }
+    }
+  },
+  "errStationExists": "A station with this name already exists",
+  "@errStationExists": {
+    "description": "Error"
+  },
+  "vsLastWeek": "Compared with last {weekday} at this time",
+  "@vsLastWeek": {
+    "description": "Overview: today's revenue so far against the same weekday last week up to the same time. weekday is a day name, e.g. Tuesday",
+    "placeholders": {
+      "weekday": {
+        "type": "String"
+      }
+    }
+  },
+  "upBy": "Up {amount} ({pct}%)",
+  "@upBy": {
+    "description": "Overview: revenue is higher than the same time last week. amount is money, pct a number like 12.5",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "pct": {
+        "type": "String"
+      }
+    }
+  },
+  "downBy": "Down {amount} ({pct}%)",
+  "@downBy": {
+    "description": "Overview: revenue is lower than the same time last week. amount is money, pct a number like 12.5",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "pct": {
+        "type": "String"
+      }
+    }
+  },
+  "sameAsLastWeek": "Same as last week",
+  "@sameAsLastWeek": {
+    "description": "Overview: revenue equals the same time last week"
+  },
+  "noSalesToCompare": "No sales to compare",
+  "@noSalesToCompare": {
+    "description": "Overview: there were no sales at this time last week, so no comparison is shown"
+  },
+  "receivedToday": "Money received today",
+  "@receivedToday": {
+    "description": "Overview: heading over today's payments by cash / UPI / card"
+  },
+  "sharePct": "{pct}%",
+  "@sharePct": {
+    "description": "Overview: a payment method's share of money received today, e.g. 40%",
+    "placeholders": {
+      "pct": {
+        "type": "String"
+      }
+    }
+  },
+  "repByCategory": "By category",
+  "@repByCategory": {
+    "description": "Reports, Items: heading over sales grouped by menu category (Starters, Mains...)"
+  },
+  "repCategoryLine": "{dishes, plural, =1{1 dish} other{{dishes} dishes}} · {qty} sold · {pct}% of sales",
+  "@repCategoryLine": {
+    "description": "Reports: one menu category's line. dishes and qty are counts, pct a number like 42.5",
+    "placeholders": {
+      "dishes": {
+        "type": "int"
+      },
+      "qty": {
+        "type": "String"
+      },
+      "pct": {
+        "type": "String"
+      }
+    }
+  },
+  "repNotRecorded": "Not recorded",
+  "@repNotRecorded": {
+    "description": "Reports: category for bills issued before categories were kept on bills"
+  },
+  "basisCategories": "Each dish counts under the category it had when it was billed; moving it later does not change past reports.",
+  "@basisCategories": {
+    "description": "Reports: explains that categories are as they were when billed"
+  },
+  "categoriesCsv": "Categories (CSV)",
+  "@categoriesCsv": {
+    "description": "Reports: button to download sales by category as a CSV file"
   }
 }

@@ -4107,6 +4107,618 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'This dish is in a combo. Take it out of the combo first, or mark it sold out.'**
   String get errItemInCombo;
+
+  /// Button: rename a category and set its serving hours
+  ///
+  /// In en, this message translates to:
+  /// **'Edit category'**
+  String get editCategory;
+
+  /// Field label: when a category's dishes can be ordered
+  ///
+  /// In en, this message translates to:
+  /// **'Serving hours'**
+  String get servingHours;
+
+  /// Switch: no time window
+  ///
+  /// In en, this message translates to:
+  /// **'Served all day'**
+  String get servedAllDay;
+
+  /// Label on a section outside its hours, e.g. Served 07:00-11:00
+  ///
+  /// In en, this message translates to:
+  /// **'Served {hours}'**
+  String servedHours(String hours);
+
+  /// Warning title
+  ///
+  /// In en, this message translates to:
+  /// **'Not served now'**
+  String get outsideHoursTitle;
+
+  /// Staff warning before ordering outside hours
+  ///
+  /// In en, this message translates to:
+  /// **'{items} ({category}, {hours}) are outside their serving hours. Order anyway?'**
+  String outsideHoursBody(String items, String category, String hours);
+
+  /// Button: send the order despite the serving hours
+  ///
+  /// In en, this message translates to:
+  /// **'Order anyway'**
+  String get orderAnyway;
+
+  /// Error for diners
+  ///
+  /// In en, this message translates to:
+  /// **'Not served at this time'**
+  String get errOutsideHours;
+
+  /// Overview button and screen title: count the cash drawer
+  ///
+  /// In en, this message translates to:
+  /// **'Close day'**
+  String get closeDay;
+
+  /// Explains the close day screen
+  ///
+  /// In en, this message translates to:
+  /// **'What the drawer should hold, from everything recorded on every device today. Count the cash and enter it below.'**
+  String get closeDayHelp;
+
+  /// Tab
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get today;
+
+  /// Tab
+  ///
+  /// In en, this message translates to:
+  /// **'History'**
+  String get history;
+
+  /// Cash in the drawer at the start of the day
+  ///
+  /// In en, this message translates to:
+  /// **'Opening float'**
+  String get openingFloat;
+
+  /// Cash payments taken today
+  ///
+  /// In en, this message translates to:
+  /// **'Cash received'**
+  String get cashReceived;
+
+  /// Cash expenses paid from the drawer
+  ///
+  /// In en, this message translates to:
+  /// **'Cash paid out (expenses)'**
+  String get cashPaidOut;
+
+  /// Expected cash
+  ///
+  /// In en, this message translates to:
+  /// **'Should be in the drawer'**
+  String get expectedInDrawer;
+
+  /// Input: what is in the drawer
+  ///
+  /// In en, this message translates to:
+  /// **'Cash counted'**
+  String get countedCash;
+
+  /// Input: tomorrow's opening float
+  ///
+  /// In en, this message translates to:
+  /// **'Keep in the drawer for tomorrow'**
+  String get keepForTomorrow;
+
+  /// Counted minus kept
+  ///
+  /// In en, this message translates to:
+  /// **'To the bank: {amount}'**
+  String toDeposit(String amount);
+
+  /// Result: more cash than expected
+  ///
+  /// In en, this message translates to:
+  /// **'Over {amount}'**
+  String cashOver(String amount);
+
+  /// Result: less cash than expected
+  ///
+  /// In en, this message translates to:
+  /// **'Short {amount}'**
+  String cashShort(String amount);
+
+  /// Result: no difference
+  ///
+  /// In en, this message translates to:
+  /// **'Exact'**
+  String get cashExact;
+
+  /// Note label when over or short
+  ///
+  /// In en, this message translates to:
+  /// **'Why is it different? (needed)'**
+  String get whyDifferent;
+
+  /// Button: save the final close
+  ///
+  /// In en, this message translates to:
+  /// **'Close the day'**
+  String get closeDayButton;
+
+  /// Confirm before closing
+  ///
+  /// In en, this message translates to:
+  /// **'This is final. Tomorrow\'s opening float will be what you keep in the drawer.'**
+  String get closeDayConfirm;
+
+  /// Who closed the day
+  ///
+  /// In en, this message translates to:
+  /// **'Closed by {name} at {time}'**
+  String dayClosedBy(String name, String time);
+
+  /// Cash payments after the close
+  ///
+  /// In en, this message translates to:
+  /// **'Cash taken after closing: {amount}'**
+  String cashAfterClose(String amount);
+
+  /// Warning before closing
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 bill is still unpaid} other{{count} bills are still unpaid}} ({amount})'**
+  String unpaidBillsWarning(int count, String amount);
+
+  /// History summary
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{No short days} =1{1 short day} other{{count} short days}}'**
+  String shortDays(int count);
+
+  /// History summary
+  ///
+  /// In en, this message translates to:
+  /// **'Net over/short: {amount}'**
+  String netOverShort(String amount);
+
+  /// Empty history
+  ///
+  /// In en, this message translates to:
+  /// **'No days closed yet'**
+  String get noCloses;
+
+  /// Error
+  ///
+  /// In en, this message translates to:
+  /// **'Say why the cash is over or short'**
+  String get errNoteRequired;
+
+  /// Error
+  ///
+  /// In en, this message translates to:
+  /// **'This day is already closed'**
+  String get errAlreadyClosed;
+
+  /// Table state: guests sat, nothing ordered yet
+  ///
+  /// In en, this message translates to:
+  /// **'Seated'**
+  String get seated;
+
+  /// Table state: paid, needs clearing
+  ///
+  /// In en, this message translates to:
+  /// **'Cleaning'**
+  String get cleaning;
+
+  /// Table state: held for a booking
+  ///
+  /// In en, this message translates to:
+  /// **'Reserved'**
+  String get reserved;
+
+  /// Button: start a table visit
+  ///
+  /// In en, this message translates to:
+  /// **'Seat guests'**
+  String get seatGuests;
+
+  /// Question when seating
+  ///
+  /// In en, this message translates to:
+  /// **'How many guests?'**
+  String get guestsCountLabel;
+
+  /// Seated line on a table, e.g. 4 guests · 25 min
+  ///
+  /// In en, this message translates to:
+  /// **'{guests} · {minutes} min'**
+  String guestsAndTime(String guests, int minutes);
+
+  /// Guest count
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 guest} other{{count} guests}}'**
+  String guestsN(int count);
+
+  /// Button: the table is ready again
+  ///
+  /// In en, this message translates to:
+  /// **'Clean'**
+  String get markClean;
+
+  /// Button: hold a free table
+  ///
+  /// In en, this message translates to:
+  /// **'Reserve'**
+  String get reserve;
+
+  /// Hint for the reservation note
+  ///
+  /// In en, this message translates to:
+  /// **'e.g. 8 pm, 4 people'**
+  String get reserveNoteHint;
+
+  /// Button
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel reservation'**
+  String get cancelReservation;
+
+  /// Button: end a visit with no orders
+  ///
+  /// In en, this message translates to:
+  /// **'Guests left (free table)'**
+  String get guestsLeft;
+
+  /// Button
+  ///
+  /// In en, this message translates to:
+  /// **'Change guests'**
+  String get changeGuests;
+
+  /// Report: covers
+  ///
+  /// In en, this message translates to:
+  /// **'{covers, plural, =0{No guests recorded} =1{1 guest} other{{covers} guests}}'**
+  String coversLine(int covers);
+
+  /// Report: average spend per cover
+  ///
+  /// In en, this message translates to:
+  /// **'Average per guest: {amount}'**
+  String avgPerGuest(String amount);
+
+  /// Error
+  ///
+  /// In en, this message translates to:
+  /// **'Guests are at this table'**
+  String get errTableInUse;
+
+  /// Button: the guests changed tables
+  ///
+  /// In en, this message translates to:
+  /// **'Move'**
+  String get moveTable;
+
+  /// Button: one party across several tables
+  ///
+  /// In en, this message translates to:
+  /// **'Merge'**
+  String get mergeTables;
+
+  /// Move picker title
+  ///
+  /// In en, this message translates to:
+  /// **'Move to which table?'**
+  String get moveTo;
+
+  /// Merge picker title
+  ///
+  /// In en, this message translates to:
+  /// **'Which tables join this one?'**
+  String get mergeWhich;
+
+  /// Empty move picker
+  ///
+  /// In en, this message translates to:
+  /// **'No free table right now'**
+  String get noFreeTables;
+
+  /// Empty merge picker
+  ///
+  /// In en, this message translates to:
+  /// **'No other table has guests'**
+  String get noOtherBusy;
+
+  /// Toast after a move
+  ///
+  /// In en, this message translates to:
+  /// **'Moved to table {label}'**
+  String movedTo(String label);
+
+  /// Toast after a merge
+  ///
+  /// In en, this message translates to:
+  /// **'Merged into table {label}'**
+  String mergedInto(String label);
+
+  /// Error
+  ///
+  /// In en, this message translates to:
+  /// **'This table already has a bill. Settle or cancel it first.'**
+  String get errTableHasBill;
+
+  /// Floor button and screen title
+  ///
+  /// In en, this message translates to:
+  /// **'Bookings'**
+  String get bookings;
+
+  /// Tab: walk-ins waiting
+  ///
+  /// In en, this message translates to:
+  /// **'Waitlist'**
+  String get waitlist;
+
+  /// Button
+  ///
+  /// In en, this message translates to:
+  /// **'New booking'**
+  String get newBooking;
+
+  /// Button
+  ///
+  /// In en, this message translates to:
+  /// **'Add to waitlist'**
+  String get addToWaitlist;
+
+  /// Field
+  ///
+  /// In en, this message translates to:
+  /// **'Table (optional)'**
+  String get tableOptional;
+
+  /// No table chosen
+  ///
+  /// In en, this message translates to:
+  /// **'Any table'**
+  String get anyTable;
+
+  /// Field
+  ///
+  /// In en, this message translates to:
+  /// **'Wait told to the guest (minutes)'**
+  String get quotedWait;
+
+  /// Hint next to the quote
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s real average wait: {minutes} min'**
+  String avgWaitToday(int minutes);
+
+  /// Waitlist row
+  ///
+  /// In en, this message translates to:
+  /// **'Waiting {waited} min (told {quoted})'**
+  String waitedOfQuoted(int waited, int quoted);
+
+  /// Waitlist row without a quote
+  ///
+  /// In en, this message translates to:
+  /// **'Waiting {waited} min'**
+  String waitedMin(int waited);
+
+  /// Button: seat this party
+  ///
+  /// In en, this message translates to:
+  /// **'Seat'**
+  String get seat;
+
+  /// Button / status
+  ///
+  /// In en, this message translates to:
+  /// **'No-show'**
+  String get noShow;
+
+  /// Button: cancel a booking
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancelBooking;
+
+  /// Warning on a booking
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 no-show before} other{{count} no-shows before}}'**
+  String noShowsBefore(int count);
+
+  /// Empty
+  ///
+  /// In en, this message translates to:
+  /// **'No bookings for this day'**
+  String get noBookingsDay;
+
+  /// Empty
+  ///
+  /// In en, this message translates to:
+  /// **'Nobody is waiting'**
+  String get nobodyWaiting;
+
+  /// Badge on a table
+  ///
+  /// In en, this message translates to:
+  /// **'Booked {time} · {name}'**
+  String bookedAt(String time, String name);
+
+  /// Seat dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'Pick a table'**
+  String get pickTable;
+
+  /// Booking status
+  ///
+  /// In en, this message translates to:
+  /// **'Seated'**
+  String get bookingStatusSeated;
+
+  /// Booking status
+  ///
+  /// In en, this message translates to:
+  /// **'Cancelled'**
+  String get bookingStatusCancelled;
+
+  /// Overlap warning
+  ///
+  /// In en, this message translates to:
+  /// **'{name} has this table at {time}. Book anyway?'**
+  String tableBookedWarn(String name, String time);
+
+  /// Button
+  ///
+  /// In en, this message translates to:
+  /// **'Book anyway'**
+  String get bookAnyway;
+
+  /// Error
+  ///
+  /// In en, this message translates to:
+  /// **'That time has passed'**
+  String get errPastTime;
+
+  /// Menu button: kitchen stations
+  ///
+  /// In en, this message translates to:
+  /// **'Stations'**
+  String get stations;
+
+  /// Explains stations
+  ///
+  /// In en, this message translates to:
+  /// **'Sections of the kitchen that get their own ticket and screen, e.g. Bar, Tandoor. Dishes without a station go to the main Kitchen.'**
+  String get stationsHelp;
+
+  /// Hint
+  ///
+  /// In en, this message translates to:
+  /// **'e.g. Bar'**
+  String get newStationHint;
+
+  /// The main kitchen (dishes without a station)
+  ///
+  /// In en, this message translates to:
+  /// **'Kitchen'**
+  String get mainKitchen;
+
+  /// Field / menu option
+  ///
+  /// In en, this message translates to:
+  /// **'Station'**
+  String get station;
+
+  /// Dish station: follow its category
+  ///
+  /// In en, this message translates to:
+  /// **'Same as category'**
+  String get followCategory;
+
+  /// Kitchen screen filter
+  ///
+  /// In en, this message translates to:
+  /// **'All stations'**
+  String get allStations;
+
+  /// Where a dish's ticket goes
+  ///
+  /// In en, this message translates to:
+  /// **'Goes to: {station}'**
+  String goesTo(String station);
+
+  /// Error
+  ///
+  /// In en, this message translates to:
+  /// **'A station with this name already exists'**
+  String get errStationExists;
+
+  /// Overview: today's revenue so far against the same weekday last week up to the same time. weekday is a day name, e.g. Tuesday
+  ///
+  /// In en, this message translates to:
+  /// **'Compared with last {weekday} at this time'**
+  String vsLastWeek(String weekday);
+
+  /// Overview: revenue is higher than the same time last week. amount is money, pct a number like 12.5
+  ///
+  /// In en, this message translates to:
+  /// **'Up {amount} ({pct}%)'**
+  String upBy(String amount, String pct);
+
+  /// Overview: revenue is lower than the same time last week. amount is money, pct a number like 12.5
+  ///
+  /// In en, this message translates to:
+  /// **'Down {amount} ({pct}%)'**
+  String downBy(String amount, String pct);
+
+  /// Overview: revenue equals the same time last week
+  ///
+  /// In en, this message translates to:
+  /// **'Same as last week'**
+  String get sameAsLastWeek;
+
+  /// Overview: there were no sales at this time last week, so no comparison is shown
+  ///
+  /// In en, this message translates to:
+  /// **'No sales to compare'**
+  String get noSalesToCompare;
+
+  /// Overview: heading over today's payments by cash / UPI / card
+  ///
+  /// In en, this message translates to:
+  /// **'Money received today'**
+  String get receivedToday;
+
+  /// Overview: a payment method's share of money received today, e.g. 40%
+  ///
+  /// In en, this message translates to:
+  /// **'{pct}%'**
+  String sharePct(String pct);
+
+  /// Reports, Items: heading over sales grouped by menu category (Starters, Mains...)
+  ///
+  /// In en, this message translates to:
+  /// **'By category'**
+  String get repByCategory;
+
+  /// Reports: one menu category's line. dishes and qty are counts, pct a number like 42.5
+  ///
+  /// In en, this message translates to:
+  /// **'{dishes, plural, =1{1 dish} other{{dishes} dishes}} · {qty} sold · {pct}% of sales'**
+  String repCategoryLine(int dishes, String qty, String pct);
+
+  /// Reports: category for bills issued before categories were kept on bills
+  ///
+  /// In en, this message translates to:
+  /// **'Not recorded'**
+  String get repNotRecorded;
+
+  /// Reports: explains that categories are as they were when billed
+  ///
+  /// In en, this message translates to:
+  /// **'Each dish counts under the category it had when it was billed; moving it later does not change past reports.'**
+  String get basisCategories;
+
+  /// Reports: button to download sales by category as a CSV file
+  ///
+  /// In en, this message translates to:
+  /// **'Categories (CSV)'**
+  String get categoriesCsv;
 }
 
 class _AppLocalizationsDelegate

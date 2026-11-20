@@ -21,7 +21,15 @@ Future<void> printKot(BuildContext context, WidgetRef ref, Map order, {required 
       'send_to_kitchen': sendToKitchen,
       'paper_mm': settings.escposMm,
     }));
-    await printDocument(r, title: 'KOT ${order['number']}', settings: settings);
+    // One slip per kitchen station when the order spans several (each with only its dishes); else the full ticket.
+    final tickets = (r['tickets'] as List? ?? const []).cast<Map>();
+    if (tickets.isEmpty) {
+      await printDocument(r, title: 'KOT ${order['number']}', settings: settings);
+    } else {
+      for (final t in tickets) {
+        await printDocument(Map<String, dynamic>.from(t), title: 'KOT ${order['number']} ${t['station']}', settings: settings);
+      }
+    }
     if (context.mounted) showDone(context, sendToKitchen && order['status'] == 'CONFIRMED' ? l.kotSentOnPaper : l.kotPrinted);
   });
 }

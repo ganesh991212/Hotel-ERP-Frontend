@@ -2286,4 +2286,370 @@ class AppLocalizationsTe extends AppLocalizations {
   @override
   String get errItemInCombo =>
       'ఈ వంటకం ఒక కాంబోలో ఉంది. ముందు కాంబో నుండి తీసివేయండి, లేదా సోల్డ్ అవుట్ చేయండి.';
+
+  @override
+  String get editCategory => 'కేటగిరీ మార్చు';
+
+  @override
+  String get servingHours => 'వడ్డించే సమయం';
+
+  @override
+  String get servedAllDay => 'రోజంతా వడ్డిస్తారు';
+
+  @override
+  String servedHours(String hours) {
+    return '$hours వడ్డిస్తారు';
+  }
+
+  @override
+  String get outsideHoursTitle => 'ఇప్పుడు వడ్డించరు';
+
+  @override
+  String outsideHoursBody(String items, String category, String hours) {
+    return '$items ($category, $hours) వడ్డించే సమయం దాటింది. అయినా ఆర్డర్ చేయాలా?';
+  }
+
+  @override
+  String get orderAnyway => 'అయినా ఆర్డర్ చేయి';
+
+  @override
+  String get errOutsideHours => 'ఈ సమయంలో వడ్డించరు';
+
+  @override
+  String get closeDay => 'రోజు ముగించు';
+
+  @override
+  String get closeDayHelp =>
+      'ఈరోజు ప్రతి డివైస్‌లో నమోదైన దాని ప్రకారం డ్రాయర్‌లో ఉండాల్సిన మొత్తం. నగదు లెక్కించి క్రింద ఇవ్వండి.';
+
+  @override
+  String get today => 'ఈరోజు';
+
+  @override
+  String get history => 'చరిత్ర';
+
+  @override
+  String get openingFloat => 'ప్రారంభ నగదు';
+
+  @override
+  String get cashReceived => 'వచ్చిన నగదు';
+
+  @override
+  String get cashPaidOut => 'చెల్లించిన నగదు (ఖర్చులు)';
+
+  @override
+  String get expectedInDrawer => 'డ్రాయర్‌లో ఉండాల్సింది';
+
+  @override
+  String get countedCash => 'లెక్కించిన నగదు';
+
+  @override
+  String get keepForTomorrow => 'రేపటికి డ్రాయర్‌లో ఉంచేది';
+
+  @override
+  String toDeposit(String amount) {
+    return 'బ్యాంకుకు: $amount';
+  }
+
+  @override
+  String cashOver(String amount) {
+    return 'ఎక్కువ $amount';
+  }
+
+  @override
+  String cashShort(String amount) {
+    return 'తక్కువ $amount';
+  }
+
+  @override
+  String get cashExact => 'సరిగ్గా';
+
+  @override
+  String get whyDifferent => 'ఎందుకు తేడా? (అవసరం)';
+
+  @override
+  String get closeDayButton => 'రోజు ముగించండి';
+
+  @override
+  String get closeDayConfirm => 'ఇది తుది. రేపటి ప్రారంభ నగదు మీరు ఉంచేదే.';
+
+  @override
+  String dayClosedBy(String name, String time) {
+    return '$time కి $name ముగించారు';
+  }
+
+  @override
+  String cashAfterClose(String amount) {
+    return 'ముగించిన తర్వాత వచ్చిన నగదు: $amount';
+  }
+
+  @override
+  String unpaidBillsWarning(int count, String amount) {
+    return '$count బిల్లులు ఇంకా చెల్లించలేదు ($amount)';
+  }
+
+  @override
+  String shortDays(int count) {
+    return '$count తక్కువ రోజులు';
+  }
+
+  @override
+  String netOverShort(String amount) {
+    return 'మొత్తం ఎక్కువ/తక్కువ: $amount';
+  }
+
+  @override
+  String get noCloses => 'ఇంకా ఏ రోజూ ముగించలేదు';
+
+  @override
+  String get errNoteRequired => 'నగదు ఎందుకు ఎక్కువ/తక్కువో చెప్పండి';
+
+  @override
+  String get errAlreadyClosed => 'ఈ రోజు ఇప్పటికే ముగిసింది';
+
+  @override
+  String get seated => 'కూర్చున్నారు';
+
+  @override
+  String get cleaning => 'శుభ్రం చేస్తున్నారు';
+
+  @override
+  String get reserved => 'రిజర్వ్';
+
+  @override
+  String get seatGuests => 'అతిథులను కూర్చోబెట్టు';
+
+  @override
+  String get guestsCountLabel => 'ఎంత మంది అతిథులు?';
+
+  @override
+  String guestsAndTime(String guests, int minutes) {
+    return '$guests · $minutes ని';
+  }
+
+  @override
+  String guestsN(int count) {
+    return '$count అతిథులు';
+  }
+
+  @override
+  String get markClean => 'శుభ్రం';
+
+  @override
+  String get reserve => 'రిజర్వ్ చేయి';
+
+  @override
+  String get reserveNoteHint => 'ఉదా. రాత్రి 8, 4 మంది';
+
+  @override
+  String get cancelReservation => 'రిజర్వేషన్ రద్దు';
+
+  @override
+  String get guestsLeft => 'అతిథులు వెళ్లారు (టేబుల్ ఖాళీ)';
+
+  @override
+  String get changeGuests => 'అతిథుల సంఖ్య మార్చు';
+
+  @override
+  String coversLine(int covers) {
+    return '$covers అతిథులు';
+  }
+
+  @override
+  String avgPerGuest(String amount) {
+    return 'ఒక్కో అతిథికి సగటు: $amount';
+  }
+
+  @override
+  String get errTableInUse => 'ఈ టేబుల్ వద్ద అతిథులు ఉన్నారు';
+
+  @override
+  String get moveTable => 'మార్చు';
+
+  @override
+  String get mergeTables => 'కలపండి';
+
+  @override
+  String get moveTo => 'ఏ టేబుల్‌కు మార్చాలి?';
+
+  @override
+  String get mergeWhich => 'ఏ టేబుల్‌లు దీనితో కలవాలి?';
+
+  @override
+  String get noFreeTables => 'ఇప్పుడు ఖాళీ టేబుల్ లేదు';
+
+  @override
+  String get noOtherBusy => 'వేరే టేబుల్‌లో అతిథులు లేరు';
+
+  @override
+  String movedTo(String label) {
+    return 'టేబుల్ $label కు మార్చారు';
+  }
+
+  @override
+  String mergedInto(String label) {
+    return 'టేబుల్ $label లో కలిపారు';
+  }
+
+  @override
+  String get errTableHasBill =>
+      'ఈ టేబుల్‌కు బిల్లు ఉంది. ముందు చెల్లించండి లేదా రద్దు చేయండి.';
+
+  @override
+  String get bookings => 'బుకింగ్‌లు';
+
+  @override
+  String get waitlist => 'వెయిట్‌లిస్ట్';
+
+  @override
+  String get newBooking => 'కొత్త బుకింగ్';
+
+  @override
+  String get addToWaitlist => 'వెయిట్‌లిస్ట్‌లో చేర్చు';
+
+  @override
+  String get tableOptional => 'టేబుల్ (ఐచ్ఛికం)';
+
+  @override
+  String get anyTable => 'ఏ టేబుల్ అయినా';
+
+  @override
+  String get quotedWait => 'అతిథికి చెప్పిన వేచి సమయం (నిమిషాలు)';
+
+  @override
+  String avgWaitToday(int minutes) {
+    return 'ఈరోజు నిజమైన సగటు వేచి సమయం: $minutes ని';
+  }
+
+  @override
+  String waitedOfQuoted(int waited, int quoted) {
+    return '$waited ని వేచి ఉన్నారు (చెప్పింది $quoted)';
+  }
+
+  @override
+  String waitedMin(int waited) {
+    return '$waited ని వేచి ఉన్నారు';
+  }
+
+  @override
+  String get seat => 'కూర్చోబెట్టు';
+
+  @override
+  String get noShow => 'రాలేదు';
+
+  @override
+  String get cancelBooking => 'రద్దు';
+
+  @override
+  String noShowsBefore(int count) {
+    return '$count సార్లు ముందు రాలేదు';
+  }
+
+  @override
+  String get noBookingsDay => 'ఈ రోజుకు బుకింగ్‌లు లేవు';
+
+  @override
+  String get nobodyWaiting => 'ఎవరూ వేచి లేరు';
+
+  @override
+  String bookedAt(String time, String name) {
+    return 'బుక్ $time · $name';
+  }
+
+  @override
+  String get pickTable => 'టేబుల్ ఎంచుకోండి';
+
+  @override
+  String get bookingStatusSeated => 'కూర్చున్నారు';
+
+  @override
+  String get bookingStatusCancelled => 'రద్దు';
+
+  @override
+  String tableBookedWarn(String name, String time) {
+    return '$time కి ఈ టేబుల్ $name కి బుక్ అయింది. అయినా బుక్ చేయాలా?';
+  }
+
+  @override
+  String get bookAnyway => 'అయినా బుక్ చేయి';
+
+  @override
+  String get errPastTime => 'ఆ సమయం దాటిపోయింది';
+
+  @override
+  String get stations => 'స్టేషన్లు';
+
+  @override
+  String get stationsHelp =>
+      'వాటి సొంత టికెట్, స్క్రీన్ ఉండే వంటగది విభాగాలు, ఉదా. బార్, తందూర్. స్టేషన్ లేని వంటకాలు ప్రధాన వంటగదికి వెళ్తాయి.';
+
+  @override
+  String get newStationHint => 'ఉదా. బార్';
+
+  @override
+  String get mainKitchen => 'వంటగది';
+
+  @override
+  String get station => 'స్టేషన్';
+
+  @override
+  String get followCategory => 'కేటగిరీ లాగే';
+
+  @override
+  String get allStations => 'అన్ని స్టేషన్లు';
+
+  @override
+  String goesTo(String station) {
+    return 'వెళ్తుంది: $station';
+  }
+
+  @override
+  String get errStationExists => 'ఈ పేరుతో స్టేషన్ ఇప్పటికే ఉంది';
+
+  @override
+  String vsLastWeek(String weekday) {
+    return 'గత $weekday ఇదే సమయంతో పోలిస్తే';
+  }
+
+  @override
+  String upBy(String amount, String pct) {
+    return '$amount పెరిగింది ($pct%)';
+  }
+
+  @override
+  String downBy(String amount, String pct) {
+    return '$amount తగ్గింది ($pct%)';
+  }
+
+  @override
+  String get sameAsLastWeek => 'గత వారం లాగానే';
+
+  @override
+  String get noSalesToCompare => 'పోల్చడానికి అమ్మకాలు లేవు';
+
+  @override
+  String get receivedToday => 'ఈరోజు వచ్చిన డబ్బు';
+
+  @override
+  String sharePct(String pct) {
+    return '$pct%';
+  }
+
+  @override
+  String get repByCategory => 'కేటగిరీ వారీగా';
+
+  @override
+  String repCategoryLine(int dishes, String qty, String pct) {
+    return '$dishes వంటకాలు · $qty అమ్ముడయ్యాయి · అమ్మకాల్లో $pct%';
+  }
+
+  @override
+  String get repNotRecorded => 'నమోదు కాలేదు';
+
+  @override
+  String get basisCategories =>
+      'ప్రతి వంటకం బిల్లు అయినప్పుడు ఉన్న కేటగిరీలోనే లెక్కించబడుతుంది; తర్వాత మార్చినా పాత రిపోర్టులు మారవు.';
+
+  @override
+  String get categoriesCsv => 'కేటగిరీలు (CSV)';
 }

@@ -2298,4 +2298,409 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get errItemInCombo =>
       'This dish is in a combo. Take it out of the combo first, or mark it sold out.';
+
+  @override
+  String get editCategory => 'Edit category';
+
+  @override
+  String get servingHours => 'Serving hours';
+
+  @override
+  String get servedAllDay => 'Served all day';
+
+  @override
+  String servedHours(String hours) {
+    return 'Served $hours';
+  }
+
+  @override
+  String get outsideHoursTitle => 'Not served now';
+
+  @override
+  String outsideHoursBody(String items, String category, String hours) {
+    return '$items ($category, $hours) are outside their serving hours. Order anyway?';
+  }
+
+  @override
+  String get orderAnyway => 'Order anyway';
+
+  @override
+  String get errOutsideHours => 'Not served at this time';
+
+  @override
+  String get closeDay => 'Close day';
+
+  @override
+  String get closeDayHelp =>
+      'What the drawer should hold, from everything recorded on every device today. Count the cash and enter it below.';
+
+  @override
+  String get today => 'Today';
+
+  @override
+  String get history => 'History';
+
+  @override
+  String get openingFloat => 'Opening float';
+
+  @override
+  String get cashReceived => 'Cash received';
+
+  @override
+  String get cashPaidOut => 'Cash paid out (expenses)';
+
+  @override
+  String get expectedInDrawer => 'Should be in the drawer';
+
+  @override
+  String get countedCash => 'Cash counted';
+
+  @override
+  String get keepForTomorrow => 'Keep in the drawer for tomorrow';
+
+  @override
+  String toDeposit(String amount) {
+    return 'To the bank: $amount';
+  }
+
+  @override
+  String cashOver(String amount) {
+    return 'Over $amount';
+  }
+
+  @override
+  String cashShort(String amount) {
+    return 'Short $amount';
+  }
+
+  @override
+  String get cashExact => 'Exact';
+
+  @override
+  String get whyDifferent => 'Why is it different? (needed)';
+
+  @override
+  String get closeDayButton => 'Close the day';
+
+  @override
+  String get closeDayConfirm =>
+      'This is final. Tomorrow\'s opening float will be what you keep in the drawer.';
+
+  @override
+  String dayClosedBy(String name, String time) {
+    return 'Closed by $name at $time';
+  }
+
+  @override
+  String cashAfterClose(String amount) {
+    return 'Cash taken after closing: $amount';
+  }
+
+  @override
+  String unpaidBillsWarning(int count, String amount) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count bills are still unpaid',
+      one: '1 bill is still unpaid',
+    );
+    return '$_temp0 ($amount)';
+  }
+
+  @override
+  String shortDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count short days',
+      one: '1 short day',
+      zero: 'No short days',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String netOverShort(String amount) {
+    return 'Net over/short: $amount';
+  }
+
+  @override
+  String get noCloses => 'No days closed yet';
+
+  @override
+  String get errNoteRequired => 'Say why the cash is over or short';
+
+  @override
+  String get errAlreadyClosed => 'This day is already closed';
+
+  @override
+  String get seated => 'Seated';
+
+  @override
+  String get cleaning => 'Cleaning';
+
+  @override
+  String get reserved => 'Reserved';
+
+  @override
+  String get seatGuests => 'Seat guests';
+
+  @override
+  String get guestsCountLabel => 'How many guests?';
+
+  @override
+  String guestsAndTime(String guests, int minutes) {
+    return '$guests · $minutes min';
+  }
+
+  @override
+  String guestsN(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count guests',
+      one: '1 guest',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get markClean => 'Clean';
+
+  @override
+  String get reserve => 'Reserve';
+
+  @override
+  String get reserveNoteHint => 'e.g. 8 pm, 4 people';
+
+  @override
+  String get cancelReservation => 'Cancel reservation';
+
+  @override
+  String get guestsLeft => 'Guests left (free table)';
+
+  @override
+  String get changeGuests => 'Change guests';
+
+  @override
+  String coversLine(int covers) {
+    String _temp0 = intl.Intl.pluralLogic(
+      covers,
+      locale: localeName,
+      other: '$covers guests',
+      one: '1 guest',
+      zero: 'No guests recorded',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String avgPerGuest(String amount) {
+    return 'Average per guest: $amount';
+  }
+
+  @override
+  String get errTableInUse => 'Guests are at this table';
+
+  @override
+  String get moveTable => 'Move';
+
+  @override
+  String get mergeTables => 'Merge';
+
+  @override
+  String get moveTo => 'Move to which table?';
+
+  @override
+  String get mergeWhich => 'Which tables join this one?';
+
+  @override
+  String get noFreeTables => 'No free table right now';
+
+  @override
+  String get noOtherBusy => 'No other table has guests';
+
+  @override
+  String movedTo(String label) {
+    return 'Moved to table $label';
+  }
+
+  @override
+  String mergedInto(String label) {
+    return 'Merged into table $label';
+  }
+
+  @override
+  String get errTableHasBill =>
+      'This table already has a bill. Settle or cancel it first.';
+
+  @override
+  String get bookings => 'Bookings';
+
+  @override
+  String get waitlist => 'Waitlist';
+
+  @override
+  String get newBooking => 'New booking';
+
+  @override
+  String get addToWaitlist => 'Add to waitlist';
+
+  @override
+  String get tableOptional => 'Table (optional)';
+
+  @override
+  String get anyTable => 'Any table';
+
+  @override
+  String get quotedWait => 'Wait told to the guest (minutes)';
+
+  @override
+  String avgWaitToday(int minutes) {
+    return 'Today\'s real average wait: $minutes min';
+  }
+
+  @override
+  String waitedOfQuoted(int waited, int quoted) {
+    return 'Waiting $waited min (told $quoted)';
+  }
+
+  @override
+  String waitedMin(int waited) {
+    return 'Waiting $waited min';
+  }
+
+  @override
+  String get seat => 'Seat';
+
+  @override
+  String get noShow => 'No-show';
+
+  @override
+  String get cancelBooking => 'Cancel';
+
+  @override
+  String noShowsBefore(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count no-shows before',
+      one: '1 no-show before',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get noBookingsDay => 'No bookings for this day';
+
+  @override
+  String get nobodyWaiting => 'Nobody is waiting';
+
+  @override
+  String bookedAt(String time, String name) {
+    return 'Booked $time · $name';
+  }
+
+  @override
+  String get pickTable => 'Pick a table';
+
+  @override
+  String get bookingStatusSeated => 'Seated';
+
+  @override
+  String get bookingStatusCancelled => 'Cancelled';
+
+  @override
+  String tableBookedWarn(String name, String time) {
+    return '$name has this table at $time. Book anyway?';
+  }
+
+  @override
+  String get bookAnyway => 'Book anyway';
+
+  @override
+  String get errPastTime => 'That time has passed';
+
+  @override
+  String get stations => 'Stations';
+
+  @override
+  String get stationsHelp =>
+      'Sections of the kitchen that get their own ticket and screen, e.g. Bar, Tandoor. Dishes without a station go to the main Kitchen.';
+
+  @override
+  String get newStationHint => 'e.g. Bar';
+
+  @override
+  String get mainKitchen => 'Kitchen';
+
+  @override
+  String get station => 'Station';
+
+  @override
+  String get followCategory => 'Same as category';
+
+  @override
+  String get allStations => 'All stations';
+
+  @override
+  String goesTo(String station) {
+    return 'Goes to: $station';
+  }
+
+  @override
+  String get errStationExists => 'A station with this name already exists';
+
+  @override
+  String vsLastWeek(String weekday) {
+    return 'Compared with last $weekday at this time';
+  }
+
+  @override
+  String upBy(String amount, String pct) {
+    return 'Up $amount ($pct%)';
+  }
+
+  @override
+  String downBy(String amount, String pct) {
+    return 'Down $amount ($pct%)';
+  }
+
+  @override
+  String get sameAsLastWeek => 'Same as last week';
+
+  @override
+  String get noSalesToCompare => 'No sales to compare';
+
+  @override
+  String get receivedToday => 'Money received today';
+
+  @override
+  String sharePct(String pct) {
+    return '$pct%';
+  }
+
+  @override
+  String get repByCategory => 'By category';
+
+  @override
+  String repCategoryLine(int dishes, String qty, String pct) {
+    String _temp0 = intl.Intl.pluralLogic(
+      dishes,
+      locale: localeName,
+      other: '$dishes dishes',
+      one: '1 dish',
+    );
+    return '$_temp0 · $qty sold · $pct% of sales';
+  }
+
+  @override
+  String get repNotRecorded => 'Not recorded';
+
+  @override
+  String get basisCategories =>
+      'Each dish counts under the category it had when it was billed; moving it later does not change past reports.';
+
+  @override
+  String get categoriesCsv => 'Categories (CSV)';
 }

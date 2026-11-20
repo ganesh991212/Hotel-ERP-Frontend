@@ -2,8 +2,11 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 import 'package:material_ui/material_ui.dart';
 
+import '../../core/api/api_client.dart';
 import '../../core/auth/session.dart';
 import '../../core/money.dart';
 import '../../core/theme/tokens.dart';
@@ -14,6 +17,7 @@ import '../../ui/shell.dart';
 import '../../ui/status.dart';
 import 'cart.dart';
 import 'print_actions.dart';
+import 'table_visit.dart';
 
 final _tablesProvider = liveProvider<List<Map<String, dynamic>>>(
     (api) async => ((await api.get('/api/v1/tables')) as List).cast<Map<String, dynamic>>());
@@ -70,6 +74,12 @@ class _FloorPageState extends ConsumerState<FloorPage> {
       Reveal(
         index: 0,
         child: PageHeading(l.tabFloor, actions: [
+          if (s.can('order.create'))
+            OutlinedButton.icon(
+              onPressed: () => context.go('/h/floor/bookings'),
+              icon: const Icon(Icons.event_available_rounded, size: 18),
+              label: Text(l.bookings),
+            ),
           if (s.can('order.create') && s.feature('WAITER_ORDERING'))
             FilledButton.icon(
               onPressed: () => showTakeawaySheet(context),
@@ -255,7 +265,27 @@ class _TableTile extends StatelessWidget {
             color: t.warn,
           )
         else
-          StatusChip(icon: Icons.check_circle_outline, label: l.free, color: t.ok),
+          visitChip(context, table) ?? StatusChip(icon: Icons.check_circle_outline, label: l.free, color: t.ok),
+        if (!inactive) Padding(padding: const EdgeInsets.only(top: 4), child: SeatedLine(table: table)),
+        // A booking on this table soon (the server sends those within two hours).
+        if (!inactive && table['next_booking'] is Map)
+          Padding(
+            padding: const EdgeInsets.only(top: 4),
+            child: Row(children: [
+              Icon(Icons.event_available_rounded, size: 14, color: t.accent),
+              const SizedBox(width: 4),
+              Flexible(
+                child: Text(
+                  l.bookedAt(
+                    DateFormat.jm().format(DateTime.parse(table['next_booking']['at'] as String).toLocal()),
+                    '${table['next_booking']['name']}',
+                  ),
+                  style: tt.labelMedium,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ]),
+          ),
       ]),
     );
   }
@@ -274,7 +304,12 @@ Future<void> showTableSheet(BuildContext context, Map<String, dynamic> table, {r
     context,
     title: l.tableLabel(table['label']),
     maxWidth: 720,
-    body: OrderComposer(table: table, canOrder: canOrder),
+    body: Consumer(
+      builder: (context, ref, _) => Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+        if (canOrder) TableVisitActions(table: table, onChanged: () => ref.invalidate(_tablesProvider)),
+        OrderComposer(table: table, canOrder: canOrder),
+      ]),
+    ),
   );
 }
 
@@ -340,11 +375,54 @@ class _OrderComposerState extends ConsumerState<OrderComposer> {
     }
   }
 
-  Future<void> _place() async {
+  /// Dishes outside their serving hours: the server warns (`outside_hours`); staff may order anyway (a late guest).
+  Future<bool> _confirmOutsideHours(ApiException e) async {
+    final l = AppLocalizations.of(context);
+    final ok = await showGlassDialog<bool>(
+      context,
+      title: l.outsideHoursTitle,
+      body: Builder(
+        builder: (ctx) => Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+          Text(l.outsideHoursBody(
+            ((e.details['items'] as List?) ?? const []).join(', '),
+            '${e.details['category'] ?? ''}',
+            '${e.details['hours'] ?? ''}',
+          )),
+          DialogActions(primary: l.orderAnyway, onPrimary: () => Navigator.of(ctx).pop(true)),
+        ]),
+      ),
+    );
+    return ok == true;
+  }
+
+  Future<void> _place({bool allowOutsideHours = false}) async {
     final l = AppLocalizations.of(context);
     setState(() => _busy = true);
+    ApiException? warned;
     final ok = await guard(context, () async {
-      final table = widget.table;
+      try {
+        await _send(widget.table, allowOutsideHours);
+      } on ApiException catch (e) {
+        if (e.code != 'outside_hours' || allowOutsideHours) rethrow;
+        warned = e; // asked below, outside guard: cancelling is not an error
+      }
+    });
+    if (!mounted) return;
+    if (warned != null) {
+      if (await _confirmOutsideHours(warned!)) return _place(allowOutsideHours: true);
+      if (mounted) setState(() => _busy = false);
+      return;
+    }
+    setState(() => _busy = false);
+    if (ok) {
+      ref.invalidate(_openOrdersProvider);
+      _clientRef = newClientRef();
+      Navigator.of(context).pop();
+      showDone(context, l.orderSent);
+    }
+  }
+
+  Future<void> _send(Map<String, dynamic>? table, bool allowOutsideHours) async {
       await ref.read(apiProvider).post('/api/v1/orders', {
         if (table != null) 'table_id': table['id'] else ...{
           'takeaway': true,
@@ -354,16 +432,8 @@ class _OrderComposerState extends ConsumerState<OrderComposer> {
         'items': _lines,
         if (_note.text.trim().isNotEmpty) 'note': _note.text.trim(),
         'client_ref': _clientRef, // same ref on retry => no duplicate order
+        if (allowOutsideHours) 'allow_outside_hours': true,
       });
-    });
-    if (!mounted) return;
-    setState(() => _busy = false);
-    if (ok) {
-      ref.invalidate(_openOrdersProvider);
-      _clientRef = newClientRef();
-      Navigator.of(context).pop();
-      showDone(context, l.orderSent);
-    }
   }
 
   @override

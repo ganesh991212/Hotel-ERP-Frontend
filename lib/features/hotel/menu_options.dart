@@ -868,3 +868,303 @@ class _ComboFormState extends ConsumerState<_ComboForm> {
     );
   }
 }
+
+// ---------- categories and serving hours ----------
+
+Future<void> showCategoryForm(BuildContext context, Map<String, dynamic>? category) => showGlassDialog(
+  context,
+  title: category == null ? AppLocalizations.of(context).addCategory : AppLocalizations.of(context).editCategory,
+  maxWidth: 520,
+  body: _CategoryForm(category: category),
+);
+
+class _CategoryForm extends ConsumerStatefulWidget {
+  const _CategoryForm({this.category});
+  final Map<String, dynamic>? category;
+
+  @override
+  ConsumerState<_CategoryForm> createState() => _CategoryFormState();
+}
+
+class _CategoryFormState extends ConsumerState<_CategoryForm> {
+  late final _name = TextEditingController(text: widget.category?['name'] as String? ?? '');
+  late int _days = (widget.category?['days'] as num?)?.toInt() ?? 127;
+  late bool _allDay = widget.category?['available_from'] == null;
+  late TimeOfDay _from = _RuleFormState._parse(widget.category?['available_from'] as String? ?? '07:00');
+  late TimeOfDay _to = _RuleFormState._parse(widget.category?['available_to'] as String? ?? '11:00');
+  late String? _station = widget.category?['station_id'] as String?;
+  bool _busy = false;
+
+  @override
+  void dispose() {
+    _name.dispose();
+    super.dispose();
+  }
+
+  Future<void> _pick(bool start) async {
+    final t = await showTimePicker(context: context, initialTime: start ? _from : _to);
+    if (t != null) setState(() => start ? _from = t : _to = t);
+  }
+
+  Future<void> _save() async {
+    final l = AppLocalizations.of(context);
+    if (_name.text.trim().isEmpty) return;
+    if (!_allDay && _RuleFormState._fmt(_from) == _RuleFormState._fmt(_to)) return showWarning(context, l.errSameTimes);
+    setState(() => _busy = true);
+    final body = {
+      'name': _name.text.trim(),
+      if (widget.category != null) 'sort': widget.category!['sort'],
+      'days': _days,
+      'available_from': _allDay ? null : _RuleFormState._fmt(_from),
+      'available_to': _allDay ? null : _RuleFormState._fmt(_to),
+      'station_id': _station,
+    };
+    final ok = await guard(context, () async {
+      final api = ref.read(apiProvider);
+      widget.category == null
+          ? await api.post('/api/v1/categories', body)
+          : await api.put('/api/v1/categories/${widget.category!['id']}', body);
+      ref.invalidate(menuDataProvider);
+    });
+    if (!mounted) return;
+    setState(() => _busy = false);
+    if (ok) {
+      Navigator.of(context).pop();
+      showDone(context, l.saved);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
+    final names = _dayNames(context);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        FieldLabel(l.name),
+        TextField(controller: _name, autofocus: widget.category == null),
+        FieldLabel(l.servingHours),
+        Wrap(
+          spacing: 6,
+          runSpacing: 6,
+          children: [
+            for (var d = 0; d < 7; d++)
+              FilterChip(
+                label: Text(names[d]),
+                selected: _days & (1 << d) != 0,
+                onSelected: (on) => setState(() {
+                  final next = on ? _days | (1 << d) : _days & ~(1 << d);
+                  if (next != 0) _days = next;
+                }),
+              ),
+          ],
+        ),
+        SwitchListTile(
+          contentPadding: EdgeInsets.zero,
+          value: _allDay,
+          onChanged: (v) => setState(() => _allDay = v),
+          title: Text(l.servedAllDay),
+        ),
+        if (!_allDay)
+          Row(
+            children: [
+              Expanded(
+                child: OutlinedButton.icon(
+                  onPressed: () => _pick(true),
+                  icon: const Icon(Icons.schedule_rounded, size: 18),
+                  label: Text('${l.fromTime} ${_RuleFormState._fmt(_from)}'),
+                ),
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: OutlinedButton.icon(
+                  onPressed: () => _pick(false),
+                  icon: const Icon(Icons.schedule_rounded, size: 18),
+                  label: Text('${l.toTime} ${_RuleFormState._fmt(_to)}'),
+                ),
+              ),
+            ],
+          ),
+        // Where this category's dishes go in the kitchen (none = the main Kitchen).
+        if ((ref.watch(menuStationsProvider).value ?? const []).isNotEmpty) ...[
+          FieldLabel(l.station),
+          Wrap(spacing: 6, runSpacing: 6, children: [
+            ChoiceChip(
+              label: Text(l.mainKitchen),
+              selected: _station == null,
+              onSelected: (_) => setState(() => _station = null),
+            ),
+            for (final st in ref.watch(menuStationsProvider).value ?? const <Map<String, dynamic>>[])
+              ChoiceChip(
+                label: Text(st['name'] as String),
+                selected: _station == st['id'],
+                onSelected: (_) => setState(() => _station = st['id'] as String),
+              ),
+          ]),
+        ],
+        DialogActions(primary: l.save, busy: _busy, onPrimary: _busy ? null : _save),
+      ],
+    );
+  }
+}
+
+// ---------- kitchen stations ----------
+
+final menuStationsProvider = FutureProvider.autoDispose<List<Map<String, dynamic>>>(
+  (ref) async => _maps(await ref.read(apiProvider).get('/api/v1/stations')),
+);
+
+Future<void> showStationsDialog(BuildContext context) => showGlassDialog(
+  context,
+  title: AppLocalizations.of(context).stations,
+  maxWidth: 520,
+  body: const _StationsEditor(),
+);
+
+class _StationsEditor extends ConsumerStatefulWidget {
+  const _StationsEditor();
+
+  @override
+  ConsumerState<_StationsEditor> createState() => _StationsEditorState();
+}
+
+class _StationsEditorState extends ConsumerState<_StationsEditor> {
+  final _name = TextEditingController();
+
+  @override
+  void dispose() {
+    _name.dispose();
+    super.dispose();
+  }
+
+  Future<void> _call(Future<void> Function() f) async {
+    await guard(context, () async {
+      await f();
+      ref.invalidate(menuStationsProvider);
+      ref.invalidate(menuDataProvider);
+    });
+  }
+
+  Future<void> _rename(Map s) async {
+    final l = AppLocalizations.of(context);
+    final c = TextEditingController(text: s['name'] as String);
+    final ok = await showGlassDialog<bool>(
+      context,
+      title: l.edit,
+      body: Builder(
+        builder: (ctx) => Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            TextField(controller: c, autofocus: true),
+            DialogActions(primary: l.save, onPrimary: () => Navigator.of(ctx).pop(true)),
+          ],
+        ),
+      ),
+    );
+    if (ok == true && c.text.trim().isNotEmpty) {
+      await _call(() => ref.read(apiProvider).put('/api/v1/stations/${s['id']}', {'name': c.text.trim()}));
+    }
+    c.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
+    final t = context.tokens;
+    final stations = ref.watch(menuStationsProvider);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Text(l.stationsHelp, style: Theme.of(context).textTheme.bodySmall),
+        const SizedBox(height: 10),
+        stations.when(
+          loading: () => const LoadingBlock(height: 80),
+          error: (e, _) => EmptyState(icon: Icons.cloud_off_rounded, title: errorText(context, e)),
+          data: (ss) => Column(
+            children: [
+              for (final s in ss)
+                Row(
+                  children: [
+                    const Icon(Icons.soup_kitchen_outlined, size: 18),
+                    const SizedBox(width: 8),
+                    Expanded(child: Text(s['name'] as String)),
+                    IconButton(
+                      tooltip: l.edit,
+                      onPressed: () => _rename(s),
+                      icon: const Icon(Icons.edit_outlined, size: 18),
+                    ),
+                    IconButton(
+                      tooltip: l.delete,
+                      onPressed: () => _call(() => ref.read(apiProvider).delete('/api/v1/stations/${s['id']}')),
+                      icon: Icon(Icons.delete_outline, size: 18, color: t.danger),
+                    ),
+                  ],
+                ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 8),
+        Row(
+          children: [
+            Expanded(
+              child: TextField(
+                controller: _name,
+                decoration: InputDecoration(hintText: l.newStationHint),
+              ),
+            ),
+            const SizedBox(width: 8),
+            FilledButton(
+              onPressed: () async {
+                final name = _name.text.trim();
+                if (name.isEmpty) return;
+                await _call(() => ref.read(apiProvider).post('/api/v1/stations', {'name': name}));
+                _name.clear();
+              },
+              child: Text(l.save),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+/// A dish's own station: follow its category, or a specific station.
+Future<void> showItemStationDialog(BuildContext context, Map<String, dynamic> item) => showGlassDialog(
+  context,
+  title: '${AppLocalizations.of(context).station} · ${item['name']}',
+  body: _ItemStation(item: item),
+);
+
+class _ItemStation extends ConsumerWidget {
+  const _ItemStation({required this.item});
+  final Map<String, dynamic> item;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l = AppLocalizations.of(context);
+    final stations = ref.watch(menuStationsProvider).value ?? const [];
+    final own = item['station_id'];
+    Future<void> pick(String? id) async {
+      final ok = await guard(context, () async {
+        await ref.read(apiProvider).patch('/api/v1/items/${item['id']}', {'station_id': id});
+        ref.invalidate(menuDataProvider);
+      });
+      if (ok && context.mounted) Navigator.of(context).pop();
+    }
+
+    return Wrap(
+      spacing: 8,
+      runSpacing: 8,
+      children: [
+        ChoiceChip(label: Text(l.followCategory), selected: own == null, onSelected: (_) => pick(null)),
+        for (final s in stations)
+          ChoiceChip(
+            label: Text(s['name'] as String),
+            selected: own == s['id'],
+            onSelected: (_) => pick(s['id'] as String),
+          ),
+      ],
+    );
+  }
+}

@@ -104,6 +104,29 @@ void main() {
     expect(find.text('A/1 to A/3: 3 issued, 2 cancelled, 1 net'), findsOneWidget);
   });
 
+  testWidgets('items report shows categories from the server, older bills as Not recorded', (tester) async {
+    Map<String, dynamic> item(String name, String cat, int qty, int minor) => {
+      'name': name, 'category': cat, 'qty': qty, 'gross_minor': minor, 'discount_minor': 0, 'taxable_minor': minor,
+    };
+    final d = {
+      'report': 'items',
+      'items': [item('Veg Thali', 'Mains', 2, 64000), item('Masala Chai', 'Not recorded', 1, 4000)],
+      'categories': [
+        {'category': 'Mains', 'items': 1, 'qty': 2, 'gross_minor': 64000, 'discount_minor': 0, 'taxable_minor': 64000,
+          'share_pct': 94.1},
+        {'category': 'Not recorded', 'items': 1, 'qty': 1, 'gross_minor': 4000, 'discount_minor': 0,
+          'taxable_minor': 4000, 'share_pct': 5.9},
+      ],
+      'totals': {'qty': 3, 'gross_minor': 68000, 'discount_minor': 0, 'taxable_minor': 68000},
+    };
+    await _show(tester, ItemsReport(d: d), 380);
+    expect(tester.takeException(), isNull, reason: 'no overflow at phone width');
+    expect(find.text('By category'), findsOneWidget);
+    expect(find.text('1 dish · 2 sold · 94.1% of sales'), findsOneWidget);
+    expect(find.text('Not recorded'), findsOneWidget);
+    expect(find.text('₹640'), findsNWidgets(2), reason: 'Mains row and the Veg Thali row');
+  });
+
   testWidgets('an empty period says so instead of showing zeros', (tester) async {
     final empty = {..._sales, 'days': [], 'totals': _row(bills: 0, total: 0)..['cancelled_bills'] = 0};
     empty['unbilled'] = {'orders': 0, 'value_minor': 0};
