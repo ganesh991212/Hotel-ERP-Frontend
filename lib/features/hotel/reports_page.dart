@@ -2,9 +2,12 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:material_ui/material_ui.dart';
+import 'package:pdf/pdf.dart';
+import 'package:printing/printing.dart';
 
 import '../../core/auth/session.dart';
 import '../../core/money.dart';
+import '../../core/printing/print_service.dart';
 import '../../core/theme/tokens.dart';
 import '../../l10n/app_localizations.dart';
 import '../../ui/components.dart';
@@ -101,6 +104,16 @@ class _ReportsPageState extends ConsumerState<ReportsPage> {
     _setRange(r.start, r.end);
   }
 
+  /// The report as an A4 PDF, built from the server's print blocks (same figures as the screen), then the
+  /// device's own print / save / share sheet.
+  Future<void> _pdf() async {
+    await guard(context, () async {
+      final doc = Map<String, dynamic>.from(await ref.read(apiProvider).get('/api/v1/reports/${_kind.name}.print$_range'));
+      final bytes = await buildReportPdf(doc);
+      await Printing.layoutPdf(name: doc['title'] as String, format: PdfPageFormat.a4, onLayout: (_) async => bytes);
+    });
+  }
+
   Future<void> _download(String kind) async {
     final l = AppLocalizations.of(context);
     await guard(context, () async {
@@ -131,6 +144,11 @@ class _ReportsPageState extends ConsumerState<ReportsPage> {
           child: PageHeading(
             l.reportsTitle,
             actions: [
+              OutlinedButton.icon(
+                onPressed: _from == null ? null : _pdf,
+                icon: const Icon(Icons.picture_as_pdf_outlined, size: 18),
+                label: Text(l.downloadPdf),
+              ),
               OutlinedButton.icon(
                 onPressed: _from == null ? null : () => _download(_kind.name),
                 icon: const Icon(Icons.download_rounded, size: 18),

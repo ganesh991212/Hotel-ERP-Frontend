@@ -3965,5 +3965,9 @@
   "keyHelp": "Show this list",
   "@keyHelp": {
     "description": "Shortcut list: what ? does"
+  },
+  "downloadPdf": "PDF",
+  "@downloadPdf": {
+    "description": "Reports: button to print, save or share the report as an A4 PDF"
   }
 }

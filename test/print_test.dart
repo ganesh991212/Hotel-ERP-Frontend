@@ -27,6 +27,23 @@ void main() {
     }
   });
 
+  test('a long report flows onto several A4 pages', () async {
+    int pages(List<int> bytes) => RegExp(r'/Type\s*/Page[^s]').allMatches(latin1.decode(bytes)).length;
+    Map<String, dynamic> doc(int rows) => {
+          'title': 'Item-wise sales 2026-11-01 to 2026-11-20',
+          'blocks': [
+            ['title', 'Demo Bistro'],
+            ['small', 'Issued bills on the hotel calendar day'],
+            for (var i = 0; i < rows; i++) ['row', '$i x Masala Chai', 'Rs. 40.00'],
+          ],
+        };
+    final short = await buildReportPdf(doc(5), compress: false);
+    final long = await buildReportPdf(doc(300), compress: false);
+    expect(latin1.decode(long).startsWith('%PDF'), isTrue);
+    expect(pages(short), 1);
+    expect(pages(long), greaterThan(3), reason: 'nothing is cut off: rows flow onto new pages');
+  });
+
   test('branded QR cards render on A4 (sheet and single) and roll, with and without a logo', () async {
     Map<String, dynamic> doc(int n, {String? logo}) => {
           'hotel': {'name': 'Demo Bistro', 'address_line': 'Road No. 36, Jubilee Hills, Hyderabad', 'logo_b64': logo},

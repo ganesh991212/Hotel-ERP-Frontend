@@ -2826,4 +2826,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get keyHelp => 'यह सूची दिखाएँ';
+
+  @override
+  String get downloadPdf => 'PDF';
 }

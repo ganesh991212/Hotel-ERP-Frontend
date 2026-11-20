@@ -2891,4 +2891,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get keyHelp => 'Show this list';
+
+  @override
+  String get downloadPdf => 'PDF';
 }

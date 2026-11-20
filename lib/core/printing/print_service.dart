@@ -315,6 +315,34 @@ Future<void> _fonts() async {
   _display ??= pw.Font.ttf(await rootBundle.load('assets/fonts/Outfit_500Medium.ttf'));
 }
 
+pw.Font? _telugu, _devanagari;
+
+/// A report (sales, items, GST, P&L...) as an A4 PDF from the server's print blocks: the same figures as the screen.
+/// Long reports flow onto more pages; every page has the report name and "Page x of y". Regional item names fall
+/// back to the Noto fonts shipped with the app (backend docs/14 "Reports as PDF").
+Future<Uint8List> buildReportPdf(Map<String, dynamic> doc, {bool compress = true}) async {
+  await _fonts();
+  _telugu ??= pw.Font.ttf(await rootBundle.load('assets/fonts/NotoSansTelugu_400Regular.ttf'));
+  _devanagari ??= pw.Font.ttf(await rootBundle.load('assets/fonts/NotoSansDevanagari_400Regular.ttf'));
+  final title = doc['title'] as String;
+  final pdf = pw.Document(
+    compress: compress,
+    theme: pw.ThemeData.withFont(base: _regular, bold: _bold, fontFallback: [_telugu!, _devanagari!]),
+  );
+  pdf.addPage(
+    pw.MultiPage(
+      pageFormat: PdfPageFormat.a4,
+      margin: const pw.EdgeInsets.all(36),
+      footer: (ctx) => pw.Row(children: [
+        pw.Expanded(child: pw.Text(title, style: pw.TextStyle(font: _regular, fontSize: 8))),
+        pw.Text('Page ${ctx.pageNumber} of ${ctx.pagesCount}', style: pw.TextStyle(font: _regular, fontSize: 8)),
+      ]),
+      build: (_) => _render((doc['blocks'] as List).cast<List>(), PdfPageFormat.a4),
+    ),
+  );
+  return pdf.save();
+}
+
 /// Blocks -> PDF. Exposed for tests (compress: false keeps text searchable, as in the CMS app).
 Future<Uint8List> buildPdf(List<List> blocks, PdfPageFormat format, {bool compress = true}) =>
     buildPdfPages([blocks], format, compress: compress);
@@ -358,6 +386,8 @@ List<pw.Widget> _render(List<List> blocks, PdfPageFormat format) {
         );
       case 'text':
         children.add(pw.Text(b[1], style: st()));
+      case 'small': // a reason, an address, a basis line (was silently dropped before)
+        children.add(pw.Text(b[1], style: st(scale: .85)));
       case 'bold':
         children.add(
           pw.Padding(

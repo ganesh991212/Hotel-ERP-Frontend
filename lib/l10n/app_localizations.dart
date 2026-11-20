@@ -5025,6 +5025,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Show this list'**
   String get keyHelp;
+
+  /// Reports: button to print, save or share the report as an A4 PDF
+  ///
+  /// In en, this message translates to:
+  /// **'PDF'**
+  String get downloadPdf;
 }
 
 class _AppLocalizationsDelegate

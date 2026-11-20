@@ -2834,4 +2834,7 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get keyHelp => 'ఈ జాబితా చూపండి';
+
+  @override
+  String get downloadPdf => 'PDF';
 }
