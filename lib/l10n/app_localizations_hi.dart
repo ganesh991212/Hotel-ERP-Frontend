@@ -2795,4 +2795,35 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get thisMonthBeforeGst => 'इस महीने, GST से पहले';
+
+  @override
+  String get searchMenuKeys =>
+      'मेनू में खोजें (/), Enter सबसे ऊपर वाला व्यंजन जोड़ता है';
+
+  @override
+  String get keyboardShortcuts => 'कीबोर्ड शॉर्टकट';
+
+  @override
+  String get keySearch => 'मेनू में खोजें';
+
+  @override
+  String get keyAddTop => 'खोज का सबसे ऊपर वाला व्यंजन जोड़ें';
+
+  @override
+  String get keySend => 'किचन में भेजें';
+
+  @override
+  String get keyHold => 'ऑर्डर होल्ड करें';
+
+  @override
+  String get keyTakeaway => 'नया टेकअवे (फ़्लोर)';
+
+  @override
+  String get keyPrint => 'बिल प्रिंट (बिल विंडो)';
+
+  @override
+  String get keyPay => 'बकाया नकद / UPI / कार्ड से चुकाएँ (बिल विंडो)';
+
+  @override
+  String get keyHelp => 'यह सूची दिखाएँ';
 }

@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -9,6 +10,7 @@ import '../../core/theme/tokens.dart';
 import '../../l10n/app_localizations.dart';
 import '../../ui/components.dart';
 import '../../ui/feedback.dart';
+import '../../ui/shortcuts.dart';
 import '../../ui/status.dart';
 import 'split_items.dart';
 
@@ -537,7 +539,21 @@ class _BillPanelState extends ConsumerState<_BillPanel> {
             Text('${minus ? '− ' : ''}${formatInr(v)}', style: strong ? tt.titleMedium : tt.bodyMedium),
           ]),
         );
-    return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+    final open = !paid && !cancelled && !_busy;
+    void pay(String m) {
+      if (open) _settle(m);
+    }
+
+    // Counter keyboard (docs/14): Alt keys only, so typing never pays a bill; no Ctrl+P (the browser's print dialog).
+    return CounterShortcuts(
+      bindings: {
+        const SingleActivator(LogicalKeyboardKey.keyP, alt: true): _print,
+        const SingleActivator(LogicalKeyboardKey.keyC, alt: true): () => pay('CASH'),
+        const SingleActivator(LogicalKeyboardKey.keyU, alt: true): () => pay('UPI'),
+        const SingleActivator(LogicalKeyboardKey.keyK, alt: true): () => pay('CARD'),
+        const CharacterActivator('?'): () => showShortcutHelp(context),
+      },
+      child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
       ?update,
       Row(children: [
         Expanded(child: Text(b['invoice_no'], style: tt.titleLarge)),
@@ -597,10 +613,13 @@ class _BillPanelState extends ConsumerState<_BillPanel> {
       if ((b['service_charge_minor'] as int) > 0) row(l.serviceCharge, b['service_charge_minor']),
       row(l.total, b['total_minor'], strong: true),
       const SizedBox(height: 14),
-      FilledButton.icon(
-        onPressed: _print,
-        icon: const Icon(Icons.print_outlined, size: 18),
-        label: Text((b['print_count'] as int) > 0 ? l.printDuplicate : l.printBill),
+      Tooltip(
+        message: 'Alt + P',
+        child: FilledButton.icon(
+          onPressed: _print,
+          icon: const Icon(Icons.print_outlined, size: 18),
+          label: Text((b['print_count'] as int) > 0 ? l.printDuplicate : l.printBill),
+        ),
       ),
       // Guest bills of a split are not discounted (yet): the discount would not follow the guest's items.
       if (!paid && !cancelled && b['split'] == null && ((s.me['max_discount_bp'] as num?)?.toInt() ?? 0) > 0)
@@ -636,7 +655,7 @@ class _BillPanelState extends ConsumerState<_BillPanel> {
         row(l.dueNow, b['due_minor'] as int, strong: true),
       ],
       if (!paid && !cancelled) ...[
-        FieldLabel(l.payWholeDue),
+        FieldLabel(l.payWholeDue, help: 'Alt + C / U / K'),
         ChoiceRow<String>(
           options: [('CASH', l.payCash), ('UPI', l.payUpi), ('CARD', l.payCard)],
           value: '',
@@ -670,7 +689,8 @@ class _BillPanelState extends ConsumerState<_BillPanel> {
         const SizedBox(height: 8),
         TextButton(onPressed: _void, child: Text(l.voidBill, style: TextStyle(color: t.danger))),
       ],
-    ]);
+      ]),
+    );
   }
 }
 

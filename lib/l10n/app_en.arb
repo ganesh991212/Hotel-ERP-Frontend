@@ -3925,5 +3925,45 @@
   "thisMonthBeforeGst": "This month, before GST",
   "@thisMonthBeforeGst": {
     "description": "Overview month card: income this month without GST (GST is not income)"
+  },
+  "searchMenuKeys": "Search the menu (/), Enter adds the top dish",
+  "@searchMenuKeys": {
+    "description": "Order composer: search box hint with its keyboard shortcuts"
+  },
+  "keyboardShortcuts": "Keyboard shortcuts",
+  "@keyboardShortcuts": {
+    "description": "Dialog title listing the counter keyboard shortcuts"
+  },
+  "keySearch": "Search the menu",
+  "@keySearch": {
+    "description": "Shortcut list: what / does"
+  },
+  "keyAddTop": "Add the top dish from the search",
+  "@keyAddTop": {
+    "description": "Shortcut list: what Enter in the search box does"
+  },
+  "keySend": "Send to kitchen",
+  "@keySend": {
+    "description": "Shortcut list: what Ctrl+Enter does"
+  },
+  "keyHold": "Hold the order",
+  "@keyHold": {
+    "description": "Shortcut list: what Alt+H does"
+  },
+  "keyTakeaway": "New takeaway (Floor)",
+  "@keyTakeaway": {
+    "description": "Shortcut list: what T does on the Floor"
+  },
+  "keyPrint": "Print the bill (bill window)",
+  "@keyPrint": {
+    "description": "Shortcut list: what Alt+P does"
+  },
+  "keyPay": "Pay what is due by cash / UPI / card (bill window)",
+  "@keyPay": {
+    "description": "Shortcut list: what Alt+C, Alt+U, Alt+K do"
+  },
+  "keyHelp": "Show this list",
+  "@keyHelp": {
+    "description": "Shortcut list: what ? does"
   }
 }

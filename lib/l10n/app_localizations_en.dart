@@ -2861,4 +2861,34 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get thisMonthBeforeGst => 'This month, before GST';
+
+  @override
+  String get searchMenuKeys => 'Search the menu (/), Enter adds the top dish';
+
+  @override
+  String get keyboardShortcuts => 'Keyboard shortcuts';
+
+  @override
+  String get keySearch => 'Search the menu';
+
+  @override
+  String get keyAddTop => 'Add the top dish from the search';
+
+  @override
+  String get keySend => 'Send to kitchen';
+
+  @override
+  String get keyHold => 'Hold the order';
+
+  @override
+  String get keyTakeaway => 'New takeaway (Floor)';
+
+  @override
+  String get keyPrint => 'Print the bill (bill window)';
+
+  @override
+  String get keyPay => 'Pay what is due by cash / UPI / card (bill window)';
+
+  @override
+  String get keyHelp => 'Show this list';
 }

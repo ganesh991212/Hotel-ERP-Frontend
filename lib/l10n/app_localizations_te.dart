@@ -2803,4 +2803,35 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get thisMonthBeforeGst => 'ఈ నెల, GST ముందు';
+
+  @override
+  String get searchMenuKeys =>
+      'మెనూలో వెతకండి (/), Enter పై వంటకాన్ని జోడిస్తుంది';
+
+  @override
+  String get keyboardShortcuts => 'కీబోర్డ్ షార్ట్‌కట్‌లు';
+
+  @override
+  String get keySearch => 'మెనూలో వెతకండి';
+
+  @override
+  String get keyAddTop => 'వెతుకులాటలో పై వంటకాన్ని జోడించండి';
+
+  @override
+  String get keySend => 'కిచెన్‌కు పంపండి';
+
+  @override
+  String get keyHold => 'ఆర్డర్ హోల్డ్ చేయండి';
+
+  @override
+  String get keyTakeaway => 'కొత్త టేక్‌అవే (ఫ్లోర్)';
+
+  @override
+  String get keyPrint => 'బిల్ ప్రింట్ (బిల్ విండో)';
+
+  @override
+  String get keyPay => 'బకాయి నగదు / UPI / కార్డ్‌తో చెల్లించండి (బిల్ విండో)';
+
+  @override
+  String get keyHelp => 'ఈ జాబితా చూపండి';
 }

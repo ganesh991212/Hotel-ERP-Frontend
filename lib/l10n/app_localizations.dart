@@ -4965,6 +4965,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'This month, before GST'**
   String get thisMonthBeforeGst;
+
+  /// Order composer: search box hint with its keyboard shortcuts
+  ///
+  /// In en, this message translates to:
+  /// **'Search the menu (/), Enter adds the top dish'**
+  String get searchMenuKeys;
+
+  /// Dialog title listing the counter keyboard shortcuts
+  ///
+  /// In en, this message translates to:
+  /// **'Keyboard shortcuts'**
+  String get keyboardShortcuts;
+
+  /// Shortcut list: what / does
+  ///
+  /// In en, this message translates to:
+  /// **'Search the menu'**
+  String get keySearch;
+
+  /// Shortcut list: what Enter in the search box does
+  ///
+  /// In en, this message translates to:
+  /// **'Add the top dish from the search'**
+  String get keyAddTop;
+
+  /// Shortcut list: what Ctrl+Enter does
+  ///
+  /// In en, this message translates to:
+  /// **'Send to kitchen'**
+  String get keySend;
+
+  /// Shortcut list: what Alt+H does
+  ///
+  /// In en, this message translates to:
+  /// **'Hold the order'**
+  String get keyHold;
+
+  /// Shortcut list: what T does on the Floor
+  ///
+  /// In en, this message translates to:
+  /// **'New takeaway (Floor)'**
+  String get keyTakeaway;
+
+  /// Shortcut list: what Alt+P does
+  ///
+  /// In en, this message translates to:
+  /// **'Print the bill (bill window)'**
+  String get keyPrint;
+
+  /// Shortcut list: what Alt+C, Alt+U, Alt+K do
+  ///
+  /// In en, this message translates to:
+  /// **'Pay what is due by cash / UPI / card (bill window)'**
+  String get keyPay;
+
+  /// Shortcut list: what ? does
+  ///
+  /// In en, this message translates to:
+  /// **'Show this list'**
+  String get keyHelp;
 }
 
 class _AppLocalizationsDelegate

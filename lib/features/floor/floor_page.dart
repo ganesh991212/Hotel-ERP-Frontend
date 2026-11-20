@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
@@ -14,6 +15,7 @@ import '../../l10n/app_localizations.dart';
 import '../../ui/components.dart';
 import '../../ui/feedback.dart';
 import '../../ui/shell.dart';
+import '../../ui/shortcuts.dart';
 import '../../ui/status.dart';
 import 'cart.dart';
 import 'held_orders.dart';
@@ -71,7 +73,13 @@ class _FloorPageState extends ConsumerState<FloorPage> {
         : <Map<String, dynamic>>[];
     final attention = [...overdue, ...ready, ...placed, ...onPaper, ...waiting, ...toBill];
 
-    return PageBody(children: [
+    final takeaway = s.can('order.create') && s.feature('WAITER_ORDERING');
+    return CounterShortcuts(
+      bindings: {
+        if (takeaway) const CharacterActivator('t'): () => showTakeawaySheet(context),
+        const CharacterActivator('?'): () => showShortcutHelp(context),
+      },
+      child: PageBody(children: [
       Reveal(
         index: 0,
         child: PageHeading(l.tabFloor, actions: [
@@ -155,7 +163,8 @@ class _FloorPageState extends ConsumerState<FloorPage> {
           ]);
         },
       ),
-    ]);
+      ]),
+    );
   }
 }
 
@@ -346,6 +355,7 @@ class _OrderComposerState extends ConsumerState<OrderComposer> {
   final Cart _cart = Cart();
   final _note = TextEditingController();
   final _search = TextEditingController();
+  final _searchFocus = FocusNode();
   final _guestName = TextEditingController();
   final _guestPhone = TextEditingController();
   String _cat = '';
@@ -411,6 +421,7 @@ class _OrderComposerState extends ConsumerState<OrderComposer> {
 
   @override
   void dispose() {
+    _searchFocus.dispose();
     _debounce?.cancel();
     super.dispose();
   }
@@ -521,8 +532,20 @@ class _OrderComposerState extends ConsumerState<OrderComposer> {
         ? const <Map<String, dynamic>>[]
         : (ref.watch(_openOrdersProvider).value ?? const []).where((o) => o['table']?['id'] == table['id']).toList();
     final menu = ref.watch(menuDataProvider);
+    final canSend = widget.canOrder && !_cart.isEmpty && !_busy && _quote != null;
 
-    return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+    return CounterShortcuts(
+      bindings: {
+        const CharacterActivator('/'): () => _searchFocus.requestFocus(),
+        const SingleActivator(LogicalKeyboardKey.enter, control: true): () {
+          if (canSend) _place();
+        },
+        const SingleActivator(LogicalKeyboardKey.keyH, alt: true): () {
+          if (widget.canOrder && !_cart.isEmpty && !_busy) _hold();
+        },
+        const CharacterActivator('?'): () => showShortcutHelp(context),
+      },
+      child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
       if (table == null) ...[
         // Takeaway: who collects it. Both optional; the order number is the token.
         Row(children: [
@@ -598,8 +621,18 @@ class _OrderComposerState extends ConsumerState<OrderComposer> {
               const SizedBox(height: 8),
               TextField(
                 controller: _search,
+                focusNode: _searchFocus,
                 onChanged: (_) => setState(() {}),
-                decoration: InputDecoration(prefixIcon: const Icon(Icons.search), hintText: l.searchMenu),
+                // Counter keyboard: Enter adds the top dish shown, and the search clears for the next one.
+                onSubmitted: (_) {
+                  final top = shown.where((i) => i['is_available'] == true).firstOrNull;
+                  if (top == null) return;
+                  _add(top);
+                  _search.clear();
+                  setState(() {});
+                  _searchFocus.requestFocus();
+                },
+                decoration: InputDecoration(prefixIcon: const Icon(Icons.search), hintText: l.searchMenuKeys),
               ),
               const SizedBox(height: 10),
               SingleChildScrollView(
@@ -649,24 +682,31 @@ class _OrderComposerState extends ConsumerState<OrderComposer> {
               QuoteSummary(quote: _quote),
               const SizedBox(height: 12),
               Row(children: [
-                OutlinedButton.icon(
-                  onPressed: _cart.isEmpty || _busy ? null : _hold,
-                  icon: const Icon(Icons.pause_circle_outline_rounded, size: 18),
-                  label: Text(l.holdOrder),
+                Tooltip(
+                  message: 'Alt + H',
+                  child: OutlinedButton.icon(
+                    onPressed: _cart.isEmpty || _busy ? null : _hold,
+                    icon: const Icon(Icons.pause_circle_outline_rounded, size: 18),
+                    label: Text(l.holdOrder),
+                  ),
                 ),
                 const SizedBox(width: 10),
                 Expanded(
-                  child: FilledButton.icon(
-                    onPressed: _cart.isEmpty || _busy || _quote == null ? null : _place,
-                    icon: const Icon(Icons.send_rounded, size: 18),
-                    label: Text(l.sendToKitchen),
+                  child: Tooltip(
+                    message: 'Ctrl + Enter',
+                    child: FilledButton.icon(
+                      onPressed: _cart.isEmpty || _busy || _quote == null ? null : _place,
+                      icon: const Icon(Icons.send_rounded, size: 18),
+                      label: Text(l.sendToKitchen),
+                    ),
                   ),
                 ),
               ]),
             ]);
           },
         ),
-    ]);
+      ]),
+    );
   }
 }
 
