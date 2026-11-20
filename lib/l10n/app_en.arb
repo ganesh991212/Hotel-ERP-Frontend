@@ -3574,5 +3574,46 @@
   "errPastTime": "That time has passed",
   "@errPastTime": {
     "description": "Error"
+  },
+  "stations": "Stations",
+  "@stations": {
+    "description": "Menu button: kitchen stations"
+  },
+  "stationsHelp": "Sections of the kitchen that get their own ticket and screen, e.g. Bar, Tandoor. Dishes without a station go to the main Kitchen.",
+  "@stationsHelp": {
+    "description": "Explains stations"
+  },
+  "newStationHint": "e.g. Bar",
+  "@newStationHint": {
+    "description": "Hint"
+  },
+  "mainKitchen": "Kitchen",
+  "@mainKitchen": {
+    "description": "The main kitchen (dishes without a station)"
+  },
+  "station": "Station",
+  "@station": {
+    "description": "Field / menu option"
+  },
+  "followCategory": "Same as category",
+  "@followCategory": {
+    "description": "Dish station: follow its category"
+  },
+  "allStations": "All stations",
+  "@allStations": {
+    "description": "Kitchen screen filter"
+  },
+  "goesTo": "Goes to: {station}",
+  "@goesTo": {
+    "description": "Where a dish's ticket goes",
+    "placeholders": {
+      "station": {
+        "type": "String"
+      }
+    }
+  },
+  "errStationExists": "A station with this name already exists",
+  "@errStationExists": {
+    "description": "Error"
   }
 }

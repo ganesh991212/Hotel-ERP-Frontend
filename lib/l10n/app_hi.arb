@@ -747,5 +747,14 @@
   "bookingStatusCancelled": "रद्द",
   "tableBookedWarn": "{time} पर यह टेबल {name} के लिए बुक है। फिर भी बुक करें?",
   "bookAnyway": "फिर भी बुक करें",
-  "errPastTime": "वह समय निकल गया"
+  "errPastTime": "वह समय निकल गया",
+  "stations": "स्टेशन",
+  "stationsHelp": "रसोई के हिस्से जिनका अपना टिकट और स्क्रीन हो, जैसे बार, तंदूर। बिना स्टेशन वाले व्यंजन मुख्य रसोई में जाते हैं।",
+  "newStationHint": "जैसे बार",
+  "mainKitchen": "रसोई",
+  "station": "स्टेशन",
+  "followCategory": "कैटेगरी जैसा",
+  "allStations": "सभी स्टेशन",
+  "goesTo": "जाता है: {station}",
+  "errStationExists": "इस नाम का स्टेशन पहले से है"
 }

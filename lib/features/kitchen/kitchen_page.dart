@@ -9,6 +9,7 @@ import '../../ui/feedback.dart';
 import '../../ui/shell.dart';
 import '../../ui/status.dart';
 import '../floor/cart.dart' show orderLineDetails;
+import 'station_filter.dart';
 import '../floor/print_actions.dart';
 
 /// Board refreshes on every outlet event and polls every 5 s as the documented fallback.
@@ -33,7 +34,7 @@ class KitchenPage extends ConsumerWidget {
       child: board.when(
         loading: () => const LoadingBlock(height: 400),
         error: (e, _) => Center(child: EmptyState(icon: Icons.cloud_off_rounded, title: errorText(context, e))),
-        data: (b) => _Board(b: b, session: s, online: online),
+        data: (b) => _Board(b: filterBoard(b, ref.watch(kitchenStationProvider)), session: s, online: online),
       ),
     );
   }
@@ -66,6 +67,7 @@ class _Board extends ConsumerWidget {
       ),
       StatusChip(icon: Icons.route_outlined, label: _modeLabel(context, b['kitchen_mode']), color: t.dim),
       if (isChef) _ShiftSwitch(chef: me),
+      const StationPicker(),
     ]);
 
     final grabsCard = Glass(

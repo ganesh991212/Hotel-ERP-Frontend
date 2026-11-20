@@ -2620,4 +2620,34 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get errPastTime => 'That time has passed';
+
+  @override
+  String get stations => 'Stations';
+
+  @override
+  String get stationsHelp =>
+      'Sections of the kitchen that get their own ticket and screen, e.g. Bar, Tandoor. Dishes without a station go to the main Kitchen.';
+
+  @override
+  String get newStationHint => 'e.g. Bar';
+
+  @override
+  String get mainKitchen => 'Kitchen';
+
+  @override
+  String get station => 'Station';
+
+  @override
+  String get followCategory => 'Same as category';
+
+  @override
+  String get allStations => 'All stations';
+
+  @override
+  String goesTo(String station) {
+    return 'Goes to: $station';
+  }
+
+  @override
+  String get errStationExists => 'A station with this name already exists';
 }

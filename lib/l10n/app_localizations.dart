@@ -4593,6 +4593,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'That time has passed'**
   String get errPastTime;
+
+  /// Menu button: kitchen stations
+  ///
+  /// In en, this message translates to:
+  /// **'Stations'**
+  String get stations;
+
+  /// Explains stations
+  ///
+  /// In en, this message translates to:
+  /// **'Sections of the kitchen that get their own ticket and screen, e.g. Bar, Tandoor. Dishes without a station go to the main Kitchen.'**
+  String get stationsHelp;
+
+  /// Hint
+  ///
+  /// In en, this message translates to:
+  /// **'e.g. Bar'**
+  String get newStationHint;
+
+  /// The main kitchen (dishes without a station)
+  ///
+  /// In en, this message translates to:
+  /// **'Kitchen'**
+  String get mainKitchen;
+
+  /// Field / menu option
+  ///
+  /// In en, this message translates to:
+  /// **'Station'**
+  String get station;
+
+  /// Dish station: follow its category
+  ///
+  /// In en, this message translates to:
+  /// **'Same as category'**
+  String get followCategory;
+
+  /// Kitchen screen filter
+  ///
+  /// In en, this message translates to:
+  /// **'All stations'**
+  String get allStations;
+
+  /// Where a dish's ticket goes
+  ///
+  /// In en, this message translates to:
+  /// **'Goes to: {station}'**
+  String goesTo(String station);
+
+  /// Error
+  ///
+  /// In en, this message translates to:
+  /// **'A station with this name already exists'**
+  String get errStationExists;
 }
 
 class _AppLocalizationsDelegate

@@ -43,6 +43,12 @@ class _MenuPageState extends ConsumerState<MenuPage> {
           ),
           if (canEdit)
             OutlinedButton.icon(
+              onPressed: () => showStationsDialog(context),
+              icon: const Icon(Icons.soup_kitchen_outlined, size: 18),
+              label: Text(l.stations),
+            ),
+          if (canEdit)
+            OutlinedButton.icon(
               onPressed: () => showPriceRulesDialog(context),
               icon: const Icon(Icons.local_offer_outlined, size: 18),
               label: Text(l.happyHour),
@@ -200,12 +206,14 @@ class _ItemRow extends ConsumerWidget {
               onSelected: (v) => switch (v) {
                 0 => showSizesDialog(context, item),
                 1 => showItemAddonsDialog(context, item),
-                _ => showComboDialog(context, item),
+                2 => showComboDialog(context, item),
+                _ => showItemStationDialog(context, item),
               },
               itemBuilder: (_) => [
                 PopupMenuItem(value: 0, child: Text(l.sizes)),
                 PopupMenuItem(value: 1, child: Text(l.addons)),
                 PopupMenuItem(value: 2, child: Text(l.combo)),
+                PopupMenuItem(value: 3, child: Text(l.station)),
               ],
             ),
           ])
@@ -219,6 +227,7 @@ class _ItemRow extends ConsumerWidget {
     final extras = Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       if (comboContents(item).isNotEmpty) Text('${l.combo}: ${comboContents(item)}', style: tt.labelSmall),
       OfferBadge(item: item),
+      if (item['station'] is Map) Text(l.goesTo('${item['station']['name']}'), style: tt.labelSmall),
       if (variants.isNotEmpty) Padding(padding: const EdgeInsets.only(top: 4), child: SizeAvailabilityChips(item: item)),
       if (groups.isNotEmpty)
         Padding(

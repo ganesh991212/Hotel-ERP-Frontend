@@ -2565,4 +2565,34 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get errPastTime => 'वह समय निकल गया';
+
+  @override
+  String get stations => 'स्टेशन';
+
+  @override
+  String get stationsHelp =>
+      'रसोई के हिस्से जिनका अपना टिकट और स्क्रीन हो, जैसे बार, तंदूर। बिना स्टेशन वाले व्यंजन मुख्य रसोई में जाते हैं।';
+
+  @override
+  String get newStationHint => 'जैसे बार';
+
+  @override
+  String get mainKitchen => 'रसोई';
+
+  @override
+  String get station => 'स्टेशन';
+
+  @override
+  String get followCategory => 'कैटेगरी जैसा';
+
+  @override
+  String get allStations => 'सभी स्टेशन';
+
+  @override
+  String goesTo(String station) {
+    return 'जाता है: $station';
+  }
+
+  @override
+  String get errStationExists => 'इस नाम का स्टेशन पहले से है';
 }

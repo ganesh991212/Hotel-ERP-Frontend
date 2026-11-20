@@ -2575,4 +2575,34 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get errPastTime => 'ఆ సమయం దాటిపోయింది';
+
+  @override
+  String get stations => 'స్టేషన్లు';
+
+  @override
+  String get stationsHelp =>
+      'వాటి సొంత టికెట్, స్క్రీన్ ఉండే వంటగది విభాగాలు, ఉదా. బార్, తందూర్. స్టేషన్ లేని వంటకాలు ప్రధాన వంటగదికి వెళ్తాయి.';
+
+  @override
+  String get newStationHint => 'ఉదా. బార్';
+
+  @override
+  String get mainKitchen => 'వంటగది';
+
+  @override
+  String get station => 'స్టేషన్';
+
+  @override
+  String get followCategory => 'కేటగిరీ లాగే';
+
+  @override
+  String get allStations => 'అన్ని స్టేషన్లు';
+
+  @override
+  String goesTo(String station) {
+    return 'వెళ్తుంది: $station';
+  }
+
+  @override
+  String get errStationExists => 'ఈ పేరుతో స్టేషన్ ఇప్పటికే ఉంది';
 }

@@ -747,5 +747,14 @@
   "bookingStatusCancelled": "రద్దు",
   "tableBookedWarn": "{time} కి ఈ టేబుల్ {name} కి బుక్ అయింది. అయినా బుక్ చేయాలా?",
   "bookAnyway": "అయినా బుక్ చేయి",
-  "errPastTime": "ఆ సమయం దాటిపోయింది"
+  "errPastTime": "ఆ సమయం దాటిపోయింది",
+  "stations": "స్టేషన్లు",
+  "stationsHelp": "వాటి సొంత టికెట్, స్క్రీన్ ఉండే వంటగది విభాగాలు, ఉదా. బార్, తందూర్. స్టేషన్ లేని వంటకాలు ప్రధాన వంటగదికి వెళ్తాయి.",
+  "newStationHint": "ఉదా. బార్",
+  "mainKitchen": "వంటగది",
+  "station": "స్టేషన్",
+  "followCategory": "కేటగిరీ లాగే",
+  "allStations": "అన్ని స్టేషన్లు",
+  "goesTo": "వెళ్తుంది: {station}",
+  "errStationExists": "ఈ పేరుతో స్టేషన్ ఇప్పటికే ఉంది"
 }
