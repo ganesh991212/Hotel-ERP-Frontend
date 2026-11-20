@@ -8,6 +8,7 @@ import '../../ui/components.dart';
 import '../../ui/feedback.dart';
 import '../../ui/shell.dart';
 import '../../ui/status.dart';
+import '../floor/cart.dart' show orderLineDetails;
 import '../floor/print_actions.dart';
 
 /// Board refreshes on every outlet event and polls every 5 s as the documented fallback.
@@ -262,6 +263,7 @@ class _HeadTicket extends StatelessWidget {
               Expanded(
                 child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                   Text(it['name'], style: tt.titleMedium?.copyWith(color: t.onNight)),
+                  for (final d in orderLineDetails(it)) Text(d, style: tt.bodyMedium?.copyWith(color: t.nightDim)),
                   if (it['note'] != null) Text(it['note'], style: tt.bodySmall?.copyWith(color: t.warn)),
                 ]),
               ),
@@ -353,8 +355,11 @@ class _TicketCard extends StatelessWidget {
         const SizedBox(height: 4),
         _ElapsedLine(o: o),
         const SizedBox(height: 8),
-        for (final it in (o['items'] as List))
+        for (final it in (o['items'] as List)) ...[
           Text('${it['qty']}×  ${it['name']}${it['note'] != null ? '  ·  ${it['note']}' : ''}', style: tt.bodyMedium),
+          for (final d in orderLineDetails(it))
+            Padding(padding: const EdgeInsets.only(left: 22), child: Text(d, style: tt.bodySmall)),
+        ],
         if (o['note'] != null) Text(o['note'], style: tt.bodySmall?.copyWith(color: t.warn)),
         if (action != null) ...[const SizedBox(height: 12), action!],
       ]),

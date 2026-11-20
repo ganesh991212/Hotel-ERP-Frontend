@@ -2118,4 +2118,184 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get errBillDiscounted =>
       'This bill has a discount. Cancel it first, then split by items.';
+
+  @override
+  String get chooseSize => 'Choose a size';
+
+  @override
+  String pickUpTo(int max) {
+    return 'Up to $max';
+  }
+
+  @override
+  String pickExactly(int n) {
+    return 'Choose $n';
+  }
+
+  @override
+  String pickBetween(int min, int max) {
+    return 'Choose $min to $max';
+  }
+
+  @override
+  String get addToOrder => 'Add';
+
+  @override
+  String get hasOptions => 'Sizes / add-ons';
+
+  @override
+  String get errVariantRequired => 'Choose a size first';
+
+  @override
+  String get errAddonCount => 'Check the add-on choices';
+
+  @override
+  String get removeLine => 'Remove';
+
+  @override
+  String get sizes => 'Sizes';
+
+  @override
+  String get sizesHelp =>
+      'Two or more sizes, each with its own price (e.g. Half ₹180, Full ₹320). Remove them all to sell the dish at one price.';
+
+  @override
+  String get addSize => 'Add size';
+
+  @override
+  String get sizeNameHint => 'e.g. Half';
+
+  @override
+  String get errSizesCount => 'Give two or more sizes, or none';
+
+  @override
+  String get errPriceInvalid => 'Enter a valid price';
+
+  @override
+  String get addons => 'Add-ons';
+
+  @override
+  String get addonGroups => 'Add-on groups';
+
+  @override
+  String get addonGroupsHelp =>
+      'Make a group once (e.g. Extras, Choose your bread) and offer it with any dish.';
+
+  @override
+  String get newGroup => 'New group';
+
+  @override
+  String get groupNameHint => 'e.g. Extras';
+
+  @override
+  String get minPicks => 'At least';
+
+  @override
+  String get maxPicks => 'At most';
+
+  @override
+  String get addAddon => 'Add add-on';
+
+  @override
+  String get addonNameHint => 'e.g. Raita';
+
+  @override
+  String usedBy(String names) {
+    return 'Used by: $names';
+  }
+
+  @override
+  String get notUsedYet => 'Not offered with any dish yet';
+
+  @override
+  String addonsForItem(String item) {
+    return 'Choose which add-on groups $item offers.';
+  }
+
+  @override
+  String get noAddonGroups =>
+      'No add-on groups yet. Create one in Add-on groups.';
+
+  @override
+  String deleteGroupConfirm(String name) {
+    return 'Delete $name? Dishes using it will stop offering it. Orders already placed keep their add-ons.';
+  }
+
+  @override
+  String get saved => 'Saved';
+
+  @override
+  String offerBadge(String name, String percent, String time) {
+    return '$name −$percent till $time';
+  }
+
+  @override
+  String get happyHour => 'Happy hour';
+
+  @override
+  String get happyHourHelp =>
+      'Percent off the dish or size price on chosen days and times, for every order (waiter or QR). Add-ons keep their price; overlapping offers never add up.';
+
+  @override
+  String get newOffer => 'New offer';
+
+  @override
+  String get offerNameHint => 'e.g. Happy hour';
+
+  @override
+  String get percentOff => 'Percent off';
+
+  @override
+  String get days => 'Days';
+
+  @override
+  String get fromTime => 'From';
+
+  @override
+  String get toTime => 'To';
+
+  @override
+  String get appliesTo => 'Applies to';
+
+  @override
+  String get wholeMenu => 'Whole menu';
+
+  @override
+  String get offerOn => 'On';
+
+  @override
+  String get noOffers => 'No offers yet';
+
+  @override
+  String offerSummary(String percent, String days, String from, String to) {
+    return '$percent off · $days · $from–$to';
+  }
+
+  @override
+  String get everyDay => 'Every day';
+
+  @override
+  String get errBadPercent => 'Enter a percent between 0.01 and 90';
+
+  @override
+  String get errSameTimes => 'Start and end times must differ';
+
+  @override
+  String get combo => 'Combo';
+
+  @override
+  String get comboHelp =>
+      'List the dishes in this combo. It keeps its own price and tax. For a choice (e.g. a drink), attach an add-on group set to choose 1.';
+
+  @override
+  String get comboNeedsTwo =>
+      'A combo needs at least two dishes. Remove them all to make it an ordinary dish.';
+
+  @override
+  String get errBadCombo =>
+      'That combo isn\'t allowed (a combo can\'t contain itself or another combo, and needs two dishes)';
+
+  @override
+  String get errItemInCombo =>
+      'This dish is in a combo. Take it out of the combo first, or mark it sold out.';
 }

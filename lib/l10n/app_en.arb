@@ -2850,5 +2850,271 @@
   "errBillDiscounted": "This bill has a discount. Cancel it first, then split by items.",
   "@errBillDiscounted": {
     "description": "Error: a discounted bill cannot be split by items"
+  },
+  "chooseSize": "Choose a size",
+  "@chooseSize": {
+    "description": "Label above Half / Full"
+  },
+  "pickUpTo": "Up to {max}",
+  "@pickUpTo": {
+    "description": "Add-on group rule: optional, at most max",
+    "placeholders": {
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "pickExactly": "Choose {n}",
+  "@pickExactly": {
+    "description": "Add-on group rule: exactly n",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "pickBetween": "Choose {min} to {max}",
+  "@pickBetween": {
+    "description": "Add-on group rule",
+    "placeholders": {
+      "min": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "addToOrder": "Add",
+  "@addToOrder": {
+    "description": "Button: add the dish with its size and add-ons"
+  },
+  "hasOptions": "Sizes / add-ons",
+  "@hasOptions": {
+    "description": "Hint on a dish that opens a choice sheet"
+  },
+  "errVariantRequired": "Choose a size first",
+  "@errVariantRequired": {
+    "description": "Error from the server"
+  },
+  "errAddonCount": "Check the add-on choices",
+  "@errAddonCount": {
+    "description": "Error from the server"
+  },
+  "removeLine": "Remove",
+  "@removeLine": {
+    "description": "Tooltip: remove a dish (with its size and add-ons) from the order being built"
+  },
+  "sizes": "Sizes",
+  "@sizes": {
+    "description": "Menu: a dish's sizes (Half / Full)"
+  },
+  "sizesHelp": "Two or more sizes, each with its own price (e.g. Half ₹180, Full ₹320). Remove them all to sell the dish at one price.",
+  "@sizesHelp": {
+    "description": "Explains sizes"
+  },
+  "addSize": "Add size",
+  "@addSize": {
+    "description": "Button"
+  },
+  "sizeNameHint": "e.g. Half",
+  "@sizeNameHint": {
+    "description": "Hint for a size name"
+  },
+  "errSizesCount": "Give two or more sizes, or none",
+  "@errSizesCount": {
+    "description": "Validation"
+  },
+  "errPriceInvalid": "Enter a valid price",
+  "@errPriceInvalid": {
+    "description": "Validation"
+  },
+  "addons": "Add-ons",
+  "@addons": {
+    "description": "Menu: add-ons offered with a dish"
+  },
+  "addonGroups": "Add-on groups",
+  "@addonGroups": {
+    "description": "Menu: reusable add-on groups"
+  },
+  "addonGroupsHelp": "Make a group once (e.g. Extras, Choose your bread) and offer it with any dish.",
+  "@addonGroupsHelp": {
+    "description": "Explains add-on groups"
+  },
+  "newGroup": "New group",
+  "@newGroup": {
+    "description": "Button"
+  },
+  "groupNameHint": "e.g. Extras",
+  "@groupNameHint": {
+    "description": "Hint for a group name"
+  },
+  "minPicks": "At least",
+  "@minPicks": {
+    "description": "How many add-ons must be picked"
+  },
+  "maxPicks": "At most",
+  "@maxPicks": {
+    "description": "How many add-ons may be picked"
+  },
+  "addAddon": "Add add-on",
+  "@addAddon": {
+    "description": "Button"
+  },
+  "addonNameHint": "e.g. Raita",
+  "@addonNameHint": {
+    "description": "Hint for an add-on name"
+  },
+  "usedBy": "Used by: {names}",
+  "@usedBy": {
+    "description": "Which dishes offer this group",
+    "placeholders": {
+      "names": {
+        "type": "String"
+      }
+    }
+  },
+  "notUsedYet": "Not offered with any dish yet",
+  "@notUsedYet": {
+    "description": "Group not attached anywhere"
+  },
+  "addonsForItem": "Choose which add-on groups {item} offers.",
+  "@addonsForItem": {
+    "description": "Explains attaching groups to a dish",
+    "placeholders": {
+      "item": {
+        "type": "String"
+      }
+    }
+  },
+  "noAddonGroups": "No add-on groups yet. Create one in Add-on groups.",
+  "@noAddonGroups": {
+    "description": "Empty state"
+  },
+  "deleteGroupConfirm": "Delete {name}? Dishes using it will stop offering it. Orders already placed keep their add-ons.",
+  "@deleteGroupConfirm": {
+    "description": "Confirm deleting an add-on group",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "saved": "Saved",
+  "@saved": {
+    "description": "Toast"
+  },
+  "offerBadge": "{name} −{percent} till {time}",
+  "@offerBadge": {
+    "description": "Badge on a dish while a happy-hour offer runs",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "percent": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "happyHour": "Happy hour",
+  "@happyHour": {
+    "description": "Menu: time-based offers"
+  },
+  "happyHourHelp": "Percent off the dish or size price on chosen days and times, for every order (waiter or QR). Add-ons keep their price; overlapping offers never add up.",
+  "@happyHourHelp": {
+    "description": "Explains happy hour"
+  },
+  "newOffer": "New offer",
+  "@newOffer": {
+    "description": "Button"
+  },
+  "offerNameHint": "e.g. Happy hour",
+  "@offerNameHint": {
+    "description": "Hint"
+  },
+  "percentOff": "Percent off",
+  "@percentOff": {
+    "description": "Field label"
+  },
+  "days": "Days",
+  "@days": {
+    "description": "Field label"
+  },
+  "fromTime": "From",
+  "@fromTime": {
+    "description": "Start time"
+  },
+  "toTime": "To",
+  "@toTime": {
+    "description": "End time"
+  },
+  "appliesTo": "Applies to",
+  "@appliesTo": {
+    "description": "Field label: which categories"
+  },
+  "wholeMenu": "Whole menu",
+  "@wholeMenu": {
+    "description": "No category chosen = whole menu"
+  },
+  "offerOn": "On",
+  "@offerOn": {
+    "description": "Switch label: offer is switched on"
+  },
+  "noOffers": "No offers yet",
+  "@noOffers": {
+    "description": "Empty state"
+  },
+  "offerSummary": "{percent} off · {days} · {from}–{to}",
+  "@offerSummary": {
+    "description": "One offer in the list",
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      },
+      "days": {
+        "type": "String"
+      },
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "everyDay": "Every day",
+  "@everyDay": {
+    "description": "All seven days"
+  },
+  "errBadPercent": "Enter a percent between 0.01 and 90",
+  "@errBadPercent": {
+    "description": "Validation"
+  },
+  "errSameTimes": "Start and end times must differ",
+  "@errSameTimes": {
+    "description": "Validation"
+  },
+  "combo": "Combo",
+  "@combo": {
+    "description": "Menu: a dish made of other dishes"
+  },
+  "comboHelp": "List the dishes in this combo. It keeps its own price and tax. For a choice (e.g. a drink), attach an add-on group set to choose 1.",
+  "@comboHelp": {
+    "description": "Explains combos"
+  },
+  "comboNeedsTwo": "A combo needs at least two dishes. Remove them all to make it an ordinary dish.",
+  "@comboNeedsTwo": {
+    "description": "Validation"
+  },
+  "errBadCombo": "That combo isn't allowed (a combo can't contain itself or another combo, and needs two dishes)",
+  "@errBadCombo": {
+    "description": "Error from the server"
+  },
+  "errItemInCombo": "This dish is in a combo. Take it out of the combo first, or mark it sold out.",
+  "@errItemInCombo": {
+    "description": "Error: delete refused"
   }
 }

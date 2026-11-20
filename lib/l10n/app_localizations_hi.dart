@@ -2095,4 +2095,184 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String get errBillDiscounted =>
       'इस बिल पर छूट है। पहले इसे रद्द करें, फिर आइटम के हिसाब से बाँटें।';
+
+  @override
+  String get chooseSize => 'साइज़ चुनें';
+
+  @override
+  String pickUpTo(int max) {
+    return 'अधिकतम $max';
+  }
+
+  @override
+  String pickExactly(int n) {
+    return '$n चुनें';
+  }
+
+  @override
+  String pickBetween(int min, int max) {
+    return '$min से $max चुनें';
+  }
+
+  @override
+  String get addToOrder => 'जोड़ें';
+
+  @override
+  String get hasOptions => 'साइज़ / ऐड-ऑन';
+
+  @override
+  String get errVariantRequired => 'पहले साइज़ चुनें';
+
+  @override
+  String get errAddonCount => 'ऐड-ऑन विकल्प जाँचें';
+
+  @override
+  String get removeLine => 'हटाएं';
+
+  @override
+  String get sizes => 'साइज़';
+
+  @override
+  String get sizesHelp =>
+      'दो या अधिक साइज़, हर एक की अपनी कीमत (जैसे हाफ़ ₹180, फुल ₹320)। एक ही कीमत पर बेचने के लिए सब हटा दें।';
+
+  @override
+  String get addSize => 'साइज़ जोड़ें';
+
+  @override
+  String get sizeNameHint => 'जैसे हाफ़';
+
+  @override
+  String get errSizesCount => 'दो या अधिक साइज़ दें, या कोई नहीं';
+
+  @override
+  String get errPriceInvalid => 'सही कीमत डालें';
+
+  @override
+  String get addons => 'ऐड-ऑन';
+
+  @override
+  String get addonGroups => 'ऐड-ऑन ग्रुप';
+
+  @override
+  String get addonGroupsHelp =>
+      'एक बार ग्रुप बनाएं (जैसे एक्स्ट्रा, ब्रेड चुनें) और किसी भी व्यंजन के साथ दें।';
+
+  @override
+  String get newGroup => 'नया ग्रुप';
+
+  @override
+  String get groupNameHint => 'जैसे एक्स्ट्रा';
+
+  @override
+  String get minPicks => 'कम से कम';
+
+  @override
+  String get maxPicks => 'अधिकतम';
+
+  @override
+  String get addAddon => 'ऐड-ऑन जोड़ें';
+
+  @override
+  String get addonNameHint => 'जैसे रायता';
+
+  @override
+  String usedBy(String names) {
+    return 'इस्तेमाल: $names';
+  }
+
+  @override
+  String get notUsedYet => 'अभी किसी व्यंजन के साथ नहीं';
+
+  @override
+  String addonsForItem(String item) {
+    return '$item के साथ कौन से ऐड-ऑन ग्रुप दें, चुनें।';
+  }
+
+  @override
+  String get noAddonGroups =>
+      'अभी कोई ऐड-ऑन ग्रुप नहीं। ऐड-ऑन ग्रुप में एक बनाएं।';
+
+  @override
+  String deleteGroupConfirm(String name) {
+    return '$name हटाएं? इसे इस्तेमाल करने वाले व्यंजन इसे नहीं देंगे। पहले के ऑर्डर नहीं बदलेंगे।';
+  }
+
+  @override
+  String get saved => 'सेव हो गया';
+
+  @override
+  String offerBadge(String name, String percent, String time) {
+    return '$name −$percent $time तक';
+  }
+
+  @override
+  String get happyHour => 'हैप्पी आवर';
+
+  @override
+  String get happyHourHelp =>
+      'चुने दिनों और समय पर व्यंजन या साइज़ की कीमत पर प्रतिशत छूट, हर ऑर्डर पर (वेटर या QR)। ऐड-ऑन की कीमत वही; ऑफ़र जुड़ते नहीं।';
+
+  @override
+  String get newOffer => 'नया ऑफ़र';
+
+  @override
+  String get offerNameHint => 'जैसे हैप्पी आवर';
+
+  @override
+  String get percentOff => 'प्रतिशत छूट';
+
+  @override
+  String get days => 'दिन';
+
+  @override
+  String get fromTime => 'से';
+
+  @override
+  String get toTime => 'तक';
+
+  @override
+  String get appliesTo => 'किस पर लागू';
+
+  @override
+  String get wholeMenu => 'पूरा मेनू';
+
+  @override
+  String get offerOn => 'चालू';
+
+  @override
+  String get noOffers => 'अभी कोई ऑफ़र नहीं';
+
+  @override
+  String offerSummary(String percent, String days, String from, String to) {
+    return '$percent छूट · $days · $from–$to';
+  }
+
+  @override
+  String get everyDay => 'हर दिन';
+
+  @override
+  String get errBadPercent => '0.01 से 90 के बीच प्रतिशत डालें';
+
+  @override
+  String get errSameTimes => 'शुरू और खत्म का समय अलग होना चाहिए';
+
+  @override
+  String get combo => 'कॉम्बो';
+
+  @override
+  String get comboHelp =>
+      'इस कॉम्बो के व्यंजन चुनें। कीमत और टैक्स इसके अपने रहेंगे। चुनाव के लिए (जैसे ड्रिंक) 1 चुनने वाला ऐड-ऑन ग्रुप जोड़ें।';
+
+  @override
+  String get comboNeedsTwo =>
+      'कॉम्बो में कम से कम दो व्यंजन चाहिए। सामान्य व्यंजन बनाने के लिए सब हटा दें।';
+
+  @override
+  String get errBadCombo =>
+      'यह कॉम्बो मान्य नहीं (कॉम्बो में खुद या दूसरा कॉम्बो नहीं हो सकता, और दो व्यंजन चाहिए)';
+
+  @override
+  String get errItemInCombo =>
+      'यह व्यंजन एक कॉम्बो में है। पहले उसे कॉम्बो से हटाएं, या सोल्ड आउट करें।';
 }
