@@ -2642,4 +2642,54 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get categoriesCsv => 'कैटेगरी (CSV)';
+
+  @override
+  String get holdOrder => 'होल्ड';
+
+  @override
+  String get orderHeld =>
+      'ऑर्डर होल्ड पर है। टेबल या टेकअवे से दोबारा शुरू करें।';
+
+  @override
+  String get heldOrders => 'होल्ड ऑर्डर';
+
+  @override
+  String heldAt(String time) {
+    return '$time पर होल्ड';
+  }
+
+  @override
+  String get heldNeedsChanges => 'बदलाव चाहिए';
+
+  @override
+  String get resumeHeld => 'यह ऑर्डर फिर शुरू करें';
+
+  @override
+  String get discardHeld => 'हटाएँ';
+
+  @override
+  String get discardHeldTitle => 'यह होल्ड ऑर्डर हटाएँ?';
+
+  @override
+  String get discardHeldBody =>
+      'किचन में कुछ नहीं भेजा गया। मेहमान का ऑर्डर खो जाएगा।';
+
+  @override
+  String heldMissing(String names) {
+    return 'अब मेनू में नहीं: $names';
+  }
+
+  @override
+  String get errHoldGone =>
+      'यह होल्ड ऑर्डर दूसरे डिवाइस पर पहले ही भेजा या हटाया जा चुका है';
+
+  @override
+  String heldCount(String count) {
+    return '$count होल्ड';
+  }
+
+  @override
+  String heldOrdersWaiting(int count) {
+    return '$count होल्ड ऑर्डर किचन में नहीं भेजे गए';
+  }
 }

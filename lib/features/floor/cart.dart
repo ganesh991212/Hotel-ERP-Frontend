@@ -80,6 +80,12 @@ class Cart {
     }
   }
 
+  /// Put a line back with a quantity (resuming a held order).
+  void put(CartLine line, int qty) {
+    _lines.putIfAbsent(line.key, () => line);
+    _qty[line.key] = ((_qty[line.key] ?? 0) + qty).clamp(1, 20);
+  }
+
   void removeLastOf(String itemId) {
     final key = _lines.keys.lastWhere((k) => _lines[k]!.itemId == itemId, orElse: () => '');
     if (key.isNotEmpty) change(key, -1);

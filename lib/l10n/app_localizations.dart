@@ -4719,6 +4719,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Categories (CSV)'**
   String get categoriesCsv;
+
+  /// Order composer: button that saves the cart without sending it to the kitchen, to finish later
+  ///
+  /// In en, this message translates to:
+  /// **'Hold'**
+  String get holdOrder;
+
+  /// Toast after holding a cart
+  ///
+  /// In en, this message translates to:
+  /// **'Order held. Resume it from the table or Takeaway.'**
+  String get orderHeld;
+
+  /// Order composer: heading over carts put on hold
+  ///
+  /// In en, this message translates to:
+  /// **'Held orders'**
+  String get heldOrders;
+
+  /// Held order chip; time is a clock time like 7:42 PM
+  ///
+  /// In en, this message translates to:
+  /// **'Held {time}'**
+  String heldAt(String time);
+
+  /// Held order chip: a dish was removed or sold out since it was held
+  ///
+  /// In en, this message translates to:
+  /// **'needs changes'**
+  String get heldNeedsChanges;
+
+  /// Tooltip on a held order chip
+  ///
+  /// In en, this message translates to:
+  /// **'Resume this order'**
+  String get resumeHeld;
+
+  /// Tooltip on the cross of a held order chip
+  ///
+  /// In en, this message translates to:
+  /// **'Discard'**
+  String get discardHeld;
+
+  /// Dialog title before discarding a held cart
+  ///
+  /// In en, this message translates to:
+  /// **'Discard this held order?'**
+  String get discardHeldTitle;
+
+  /// Dialog body before discarding a held cart
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing was sent to the kitchen. The guest\'s order will be lost.'**
+  String get discardHeldBody;
+
+  /// Toast when resuming a held order whose dishes were removed; names is a comma list
+  ///
+  /// In en, this message translates to:
+  /// **'No longer on the menu: {names}'**
+  String heldMissing(String names);
+
+  /// Error when two devices resume the same held order
+  ///
+  /// In en, this message translates to:
+  /// **'This held order was already sent or discarded on another device'**
+  String get errHoldGone;
+
+  /// Floor: number of held orders on a table or for takeaway, e.g. 2 held
+  ///
+  /// In en, this message translates to:
+  /// **'{count} held'**
+  String heldCount(String count);
+
+  /// Close the day: carts put on hold and never sent (a guest may still be waiting)
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 held order was never sent to the kitchen} other{{count} held orders were never sent to the kitchen}}'**
+  String heldOrdersWaiting(int count);
 }
 
 class _AppLocalizationsDelegate

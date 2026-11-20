@@ -45,6 +45,7 @@ String errorText(BuildContext context, Object e) {
           ? '${l.errOutsideHours} (${e.details['category']} ${e.details['hours']})'
           : l.errOutsideHours,
       'item_in_combo' => l.errItemInCombo,
+      'hold_gone' => l.errHoldGone,
       'addon_count' || 'bad_addon' || 'bad_variant' => l.errAddonCount,
       'guest_empty' || 'bad_split' => l.splitIncomplete,
       'range_too_long' => e.details['max_days'] is num

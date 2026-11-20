@@ -768,5 +768,18 @@
   "repCategoryLine": "{dishes} व्यंजन · {qty} बिके · बिक्री का {pct}%",
   "repNotRecorded": "दर्ज नहीं",
   "basisCategories": "हर व्यंजन उसी कैटेगरी में गिना जाता है जो बिल बनते समय थी; बाद में बदलने से पुरानी रिपोर्ट नहीं बदलती।",
-  "categoriesCsv": "कैटेगरी (CSV)"
+  "categoriesCsv": "कैटेगरी (CSV)",
+  "holdOrder": "होल्ड",
+  "orderHeld": "ऑर्डर होल्ड पर है। टेबल या टेकअवे से दोबारा शुरू करें।",
+  "heldOrders": "होल्ड ऑर्डर",
+  "heldAt": "{time} पर होल्ड",
+  "heldNeedsChanges": "बदलाव चाहिए",
+  "resumeHeld": "यह ऑर्डर फिर शुरू करें",
+  "discardHeld": "हटाएँ",
+  "discardHeldTitle": "यह होल्ड ऑर्डर हटाएँ?",
+  "discardHeldBody": "किचन में कुछ नहीं भेजा गया। मेहमान का ऑर्डर खो जाएगा।",
+  "heldMissing": "अब मेनू में नहीं: {names}",
+  "errHoldGone": "यह होल्ड ऑर्डर दूसरे डिवाइस पर पहले ही भेजा या हटाया जा चुका है",
+  "heldCount": "{count} होल्ड",
+  "heldOrdersWaiting": "{count} होल्ड ऑर्डर किचन में नहीं भेजे गए"
 }

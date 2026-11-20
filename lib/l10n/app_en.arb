@@ -3700,5 +3700,77 @@
   "categoriesCsv": "Categories (CSV)",
   "@categoriesCsv": {
     "description": "Reports: button to download sales by category as a CSV file"
+  },
+  "holdOrder": "Hold",
+  "@holdOrder": {
+    "description": "Order composer: button that saves the cart without sending it to the kitchen, to finish later"
+  },
+  "orderHeld": "Order held. Resume it from the table or Takeaway.",
+  "@orderHeld": {
+    "description": "Toast after holding a cart"
+  },
+  "heldOrders": "Held orders",
+  "@heldOrders": {
+    "description": "Order composer: heading over carts put on hold"
+  },
+  "heldAt": "Held {time}",
+  "@heldAt": {
+    "description": "Held order chip; time is a clock time like 7:42 PM",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "heldNeedsChanges": "needs changes",
+  "@heldNeedsChanges": {
+    "description": "Held order chip: a dish was removed or sold out since it was held"
+  },
+  "resumeHeld": "Resume this order",
+  "@resumeHeld": {
+    "description": "Tooltip on a held order chip"
+  },
+  "discardHeld": "Discard",
+  "@discardHeld": {
+    "description": "Tooltip on the cross of a held order chip"
+  },
+  "discardHeldTitle": "Discard this held order?",
+  "@discardHeldTitle": {
+    "description": "Dialog title before discarding a held cart"
+  },
+  "discardHeldBody": "Nothing was sent to the kitchen. The guest's order will be lost.",
+  "@discardHeldBody": {
+    "description": "Dialog body before discarding a held cart"
+  },
+  "heldMissing": "No longer on the menu: {names}",
+  "@heldMissing": {
+    "description": "Toast when resuming a held order whose dishes were removed; names is a comma list",
+    "placeholders": {
+      "names": {
+        "type": "String"
+      }
+    }
+  },
+  "errHoldGone": "This held order was already sent or discarded on another device",
+  "@errHoldGone": {
+    "description": "Error when two devices resume the same held order"
+  },
+  "heldCount": "{count} held",
+  "@heldCount": {
+    "description": "Floor: number of held orders on a table or for takeaway, e.g. 2 held",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "heldOrdersWaiting": "{count, plural, =1{1 held order was never sent to the kitchen} other{{count} held orders were never sent to the kitchen}}",
+  "@heldOrdersWaiting": {
+    "description": "Close the day: carts put on hold and never sent (a guest may still be waiting)",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
   }
 }

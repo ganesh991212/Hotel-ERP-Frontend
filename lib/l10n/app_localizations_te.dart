@@ -2652,4 +2652,53 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get categoriesCsv => 'కేటగిరీలు (CSV)';
+
+  @override
+  String get holdOrder => 'హోల్డ్';
+
+  @override
+  String get orderHeld =>
+      'ఆర్డర్ హోల్డ్‌లో ఉంది. టేబుల్ లేదా టేక్‌అవే నుండి కొనసాగించండి.';
+
+  @override
+  String get heldOrders => 'హోల్డ్‌లో ఉన్న ఆర్డర్లు';
+
+  @override
+  String heldAt(String time) {
+    return '$timeకి హోల్డ్';
+  }
+
+  @override
+  String get heldNeedsChanges => 'మార్పులు అవసరం';
+
+  @override
+  String get resumeHeld => 'ఈ ఆర్డర్ కొనసాగించండి';
+
+  @override
+  String get discardHeld => 'తీసివేయండి';
+
+  @override
+  String get discardHeldTitle => 'ఈ హోల్డ్ ఆర్డర్ తీసివేయాలా?';
+
+  @override
+  String get discardHeldBody => 'కిచెన్‌కు ఏమీ పంపలేదు. అతిథి ఆర్డర్ పోతుంది.';
+
+  @override
+  String heldMissing(String names) {
+    return 'ఇప్పుడు మెనూలో లేవు: $names';
+  }
+
+  @override
+  String get errHoldGone =>
+      'ఈ హోల్డ్ ఆర్డర్ ఇప్పటికే వేరే పరికరంలో పంపబడింది లేదా తీసివేయబడింది';
+
+  @override
+  String heldCount(String count) {
+    return '$count హోల్డ్';
+  }
+
+  @override
+  String heldOrdersWaiting(int count) {
+    return '$count హోల్డ్ ఆర్డర్లు కిచెన్‌కు పంపలేదు';
+  }
 }

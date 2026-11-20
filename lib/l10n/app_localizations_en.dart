@@ -2703,4 +2703,59 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get categoriesCsv => 'Categories (CSV)';
+
+  @override
+  String get holdOrder => 'Hold';
+
+  @override
+  String get orderHeld => 'Order held. Resume it from the table or Takeaway.';
+
+  @override
+  String get heldOrders => 'Held orders';
+
+  @override
+  String heldAt(String time) {
+    return 'Held $time';
+  }
+
+  @override
+  String get heldNeedsChanges => 'needs changes';
+
+  @override
+  String get resumeHeld => 'Resume this order';
+
+  @override
+  String get discardHeld => 'Discard';
+
+  @override
+  String get discardHeldTitle => 'Discard this held order?';
+
+  @override
+  String get discardHeldBody =>
+      'Nothing was sent to the kitchen. The guest\'s order will be lost.';
+
+  @override
+  String heldMissing(String names) {
+    return 'No longer on the menu: $names';
+  }
+
+  @override
+  String get errHoldGone =>
+      'This held order was already sent or discarded on another device';
+
+  @override
+  String heldCount(String count) {
+    return '$count held';
+  }
+
+  @override
+  String heldOrdersWaiting(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count held orders were never sent to the kitchen',
+      one: '1 held order was never sent to the kitchen',
+    );
+    return '$_temp0';
+  }
 }

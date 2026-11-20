@@ -205,6 +205,18 @@ class _CloseDayPageState extends ConsumerState<CloseDayPage> {
                     ],
                   ),
                 ),
+              // Carts put on hold and never sent: a guest may still be waiting for food.
+              if (_i(p['held_orders']) > 0)
+                Padding(
+                  padding: const EdgeInsets.only(top: 8),
+                  child: Row(
+                    children: [
+                      Icon(Icons.pause_circle_outline_rounded, size: 18, color: t.warn),
+                      const SizedBox(width: 6),
+                      Expanded(child: Text(l.heldOrdersWaiting(_i(p['held_orders'])))),
+                    ],
+                  ),
+                ),
             ],
           ),
         ),

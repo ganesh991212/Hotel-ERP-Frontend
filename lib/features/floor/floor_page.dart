@@ -16,6 +16,7 @@ import '../../ui/feedback.dart';
 import '../../ui/shell.dart';
 import '../../ui/status.dart';
 import 'cart.dart';
+import 'held_orders.dart';
 import 'print_actions.dart';
 import 'table_visit.dart';
 
@@ -84,7 +85,10 @@ class _FloorPageState extends ConsumerState<FloorPage> {
             FilledButton.icon(
               onPressed: () => showTakeawaySheet(context),
               icon: const Icon(Icons.shopping_bag_outlined, size: 18),
-              label: Text(l.newTakeaway),
+              label: Text(switch (heldFor(ref.watch(heldOrdersProvider).value ?? const [], null).length) {
+                0 => l.newTakeaway,
+                final n => '${l.newTakeaway} · ${l.heldCount('$n')}',
+              }),
             ),
         ]),
       ),
@@ -267,6 +271,20 @@ class _TableTile extends StatelessWidget {
         else
           visitChip(context, table) ?? StatusChip(icon: Icons.check_circle_outline, label: l.free, color: t.ok),
         if (!inactive) Padding(padding: const EdgeInsets.only(top: 4), child: SeatedLine(table: table)),
+        // Carts on hold for this table (not sent to the kitchen yet).
+        if (!inactive)
+          Consumer(builder: (context, ref, _) {
+            final n = heldFor(ref.watch(heldOrdersProvider).value ?? const [], table['id'] as String).length;
+            if (n == 0) return const SizedBox.shrink();
+            return Padding(
+              padding: const EdgeInsets.only(top: 4),
+              child: Row(children: [
+                Icon(Icons.pause_circle_outline_rounded, size: 14, color: t.warn),
+                const SizedBox(width: 4),
+                Text(l.heldCount('$n'), style: tt.labelMedium),
+              ]),
+            );
+          }),
         // A booking on this table soon (the server sends those within two hours).
         if (!inactive && table['next_booking'] is Map)
           Padding(
@@ -335,6 +353,61 @@ class _OrderComposerState extends ConsumerState<OrderComposer> {
   Timer? _debounce;
   bool _busy = false;
   String _clientRef = newClientRef();
+  String? _heldId; // the hold this cart was resumed from; sending or holding again consumes it
+
+  /// Resume a held cart: lines back in, name and note back; today's price comes from the server's quote.
+  void _resume(Map<String, dynamic> held, List<Map<String, dynamic>> menuItems) {
+    final l = AppLocalizations.of(context);
+    final missing = fillCartFromHeld(_cart, held, menuItems);
+    setState(() {
+      _heldId = held['id'] as String;
+      _guestName.text = (held['customer_name'] as String?) ?? '';
+      _note.text = (held['note'] as String?) ?? '';
+    });
+    if (missing.isNotEmpty) showWarning(context, l.heldMissing(missing.join(', ')));
+    _requoteSoon();
+  }
+
+  Future<void> _discard(Map<String, dynamic> held) async {
+    final l = AppLocalizations.of(context);
+    final ok = await showGlassDialog<bool>(
+      context,
+      title: l.discardHeldTitle,
+      body: Builder(
+        builder: (ctx) => Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+          Text(l.discardHeldBody),
+          DialogActions(primary: l.discardHeld, onPrimary: () => Navigator.of(ctx).pop(true)),
+        ]),
+      ),
+    );
+    if (ok != true || !mounted) return;
+    await guard(context, () => ref.read(apiProvider).delete('/api/v1/held-orders/${held['id']}'));
+    ref.invalidate(heldOrdersProvider);
+  }
+
+  /// Save the cart on the server without sending it to the kitchen (a guest went to get their wallet).
+  Future<void> _hold() async {
+    final l = AppLocalizations.of(context);
+    setState(() => _busy = true);
+    final ok = await guard(context, () async {
+      final api = ref.read(apiProvider);
+      await api.post('/api/v1/held-orders', {
+        if (widget.table != null) 'table_id': widget.table!['id'],
+        if (widget.table == null && _guestName.text.trim().isNotEmpty) 'customer_name': _guestName.text.trim(),
+        if (_note.text.trim().isNotEmpty) 'note': _note.text.trim(),
+        'items': _lines,
+      });
+      // Held again after resuming: the new hold replaces the old one.
+      if (_heldId != null) await api.delete('/api/v1/held-orders/$_heldId');
+    });
+    if (!mounted) return;
+    setState(() => _busy = false);
+    ref.invalidate(heldOrdersProvider);
+    if (ok) {
+      Navigator.of(context).pop();
+      showDone(context, l.orderHeld);
+    }
+  }
 
   @override
   void dispose() {
@@ -416,6 +489,7 @@ class _OrderComposerState extends ConsumerState<OrderComposer> {
     setState(() => _busy = false);
     if (ok) {
       ref.invalidate(_openOrdersProvider);
+      ref.invalidate(heldOrdersProvider);
       _clientRef = newClientRef();
       Navigator.of(context).pop();
       showDone(context, l.orderSent);
@@ -433,6 +507,7 @@ class _OrderComposerState extends ConsumerState<OrderComposer> {
         if (_note.text.trim().isNotEmpty) 'note': _note.text.trim(),
         'client_ref': _clientRef, // same ref on retry => no duplicate order
         if (allowOutsideHours) 'allow_outside_hours': true,
+        if (_heldId != null) 'held_order_id': _heldId, // consumed with the order: never sent twice
       });
   }
 
@@ -507,12 +582,19 @@ class _OrderComposerState extends ConsumerState<OrderComposer> {
           error: (e, _) => Text(errorText(context, e)),
           data: (m) {
             final (cats, items) = m;
+            final held = heldFor(ref.watch(heldOrdersProvider).value ?? const [], table?['id'] as String?);
             final q = _search.text.trim().toLowerCase();
             final shown = items
                 .where((i) => _cat.isEmpty || i['category_id'] == _cat)
                 .where((i) => q.isEmpty || (i['name'] as String).toLowerCase().contains(q))
                 .toList();
             return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+              // Held carts for this table / the counter; resuming fills an empty cart only.
+              if (held.isNotEmpty && _cart.isEmpty && _heldId == null) ...[
+                const SizedBox(height: 8),
+                HeldStrip(held: held, onResume: (h) => _resume(h, items), onDiscard: _discard),
+                const SizedBox(height: 4),
+              ],
               const SizedBox(height: 8),
               TextField(
                 controller: _search,
@@ -566,11 +648,21 @@ class _OrderComposerState extends ConsumerState<OrderComposer> {
               const SizedBox(height: 14),
               QuoteSummary(quote: _quote),
               const SizedBox(height: 12),
-              FilledButton.icon(
-                onPressed: _cart.isEmpty || _busy || _quote == null ? null : _place,
-                icon: const Icon(Icons.send_rounded, size: 18),
-                label: Text(l.sendToKitchen),
-              ),
+              Row(children: [
+                OutlinedButton.icon(
+                  onPressed: _cart.isEmpty || _busy ? null : _hold,
+                  icon: const Icon(Icons.pause_circle_outline_rounded, size: 18),
+                  label: Text(l.holdOrder),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: FilledButton.icon(
+                    onPressed: _cart.isEmpty || _busy || _quote == null ? null : _place,
+                    icon: const Icon(Icons.send_rounded, size: 18),
+                    label: Text(l.sendToKitchen),
+                  ),
+                ),
+              ]),
             ]);
           },
         ),
