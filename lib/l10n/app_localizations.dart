@@ -4455,6 +4455,144 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'This table already has a bill. Settle or cancel it first.'**
   String get errTableHasBill;
+
+  /// Floor button and screen title
+  ///
+  /// In en, this message translates to:
+  /// **'Bookings'**
+  String get bookings;
+
+  /// Tab: walk-ins waiting
+  ///
+  /// In en, this message translates to:
+  /// **'Waitlist'**
+  String get waitlist;
+
+  /// Button
+  ///
+  /// In en, this message translates to:
+  /// **'New booking'**
+  String get newBooking;
+
+  /// Button
+  ///
+  /// In en, this message translates to:
+  /// **'Add to waitlist'**
+  String get addToWaitlist;
+
+  /// Field
+  ///
+  /// In en, this message translates to:
+  /// **'Table (optional)'**
+  String get tableOptional;
+
+  /// No table chosen
+  ///
+  /// In en, this message translates to:
+  /// **'Any table'**
+  String get anyTable;
+
+  /// Field
+  ///
+  /// In en, this message translates to:
+  /// **'Wait told to the guest (minutes)'**
+  String get quotedWait;
+
+  /// Hint next to the quote
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s real average wait: {minutes} min'**
+  String avgWaitToday(int minutes);
+
+  /// Waitlist row
+  ///
+  /// In en, this message translates to:
+  /// **'Waiting {waited} min (told {quoted})'**
+  String waitedOfQuoted(int waited, int quoted);
+
+  /// Waitlist row without a quote
+  ///
+  /// In en, this message translates to:
+  /// **'Waiting {waited} min'**
+  String waitedMin(int waited);
+
+  /// Button: seat this party
+  ///
+  /// In en, this message translates to:
+  /// **'Seat'**
+  String get seat;
+
+  /// Button / status
+  ///
+  /// In en, this message translates to:
+  /// **'No-show'**
+  String get noShow;
+
+  /// Button: cancel a booking
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancelBooking;
+
+  /// Warning on a booking
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 no-show before} other{{count} no-shows before}}'**
+  String noShowsBefore(int count);
+
+  /// Empty
+  ///
+  /// In en, this message translates to:
+  /// **'No bookings for this day'**
+  String get noBookingsDay;
+
+  /// Empty
+  ///
+  /// In en, this message translates to:
+  /// **'Nobody is waiting'**
+  String get nobodyWaiting;
+
+  /// Badge on a table
+  ///
+  /// In en, this message translates to:
+  /// **'Booked {time} · {name}'**
+  String bookedAt(String time, String name);
+
+  /// Seat dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'Pick a table'**
+  String get pickTable;
+
+  /// Booking status
+  ///
+  /// In en, this message translates to:
+  /// **'Seated'**
+  String get bookingStatusSeated;
+
+  /// Booking status
+  ///
+  /// In en, this message translates to:
+  /// **'Cancelled'**
+  String get bookingStatusCancelled;
+
+  /// Overlap warning
+  ///
+  /// In en, this message translates to:
+  /// **'{name} has this table at {time}. Book anyway?'**
+  String tableBookedWarn(String name, String time);
+
+  /// Button
+  ///
+  /// In en, this message translates to:
+  /// **'Book anyway'**
+  String get bookAnyway;
+
+  /// Error
+  ///
+  /// In en, this message translates to:
+  /// **'That time has passed'**
+  String get errPastTime;
 }
 
 class _AppLocalizationsDelegate

@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 import 'package:material_ui/material_ui.dart';
 
 import '../../core/api/api_client.dart';
@@ -72,6 +74,12 @@ class _FloorPageState extends ConsumerState<FloorPage> {
       Reveal(
         index: 0,
         child: PageHeading(l.tabFloor, actions: [
+          if (s.can('order.create'))
+            OutlinedButton.icon(
+              onPressed: () => context.go('/h/floor/bookings'),
+              icon: const Icon(Icons.event_available_rounded, size: 18),
+              label: Text(l.bookings),
+            ),
           if (s.can('order.create') && s.feature('WAITER_ORDERING'))
             FilledButton.icon(
               onPressed: () => showTakeawaySheet(context),
@@ -259,6 +267,25 @@ class _TableTile extends StatelessWidget {
         else
           visitChip(context, table) ?? StatusChip(icon: Icons.check_circle_outline, label: l.free, color: t.ok),
         if (!inactive) Padding(padding: const EdgeInsets.only(top: 4), child: SeatedLine(table: table)),
+        // A booking on this table soon (the server sends those within two hours).
+        if (!inactive && table['next_booking'] is Map)
+          Padding(
+            padding: const EdgeInsets.only(top: 4),
+            child: Row(children: [
+              Icon(Icons.event_available_rounded, size: 14, color: t.accent),
+              const SizedBox(width: 4),
+              Flexible(
+                child: Text(
+                  l.bookedAt(
+                    DateFormat.jm().format(DateTime.parse(table['next_booking']['at'] as String).toLocal()),
+                    '${table['next_booking']['name']}',
+                  ),
+                  style: tt.labelMedium,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ]),
+          ),
       ]),
     );
   }

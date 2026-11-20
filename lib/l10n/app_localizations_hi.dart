@@ -2484,4 +2484,85 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String get errTableHasBill =>
       'इस टेबल का बिल बन चुका है। पहले भुगतान करें या रद्द करें।';
+
+  @override
+  String get bookings => 'बुकिंग';
+
+  @override
+  String get waitlist => 'वेटलिस्ट';
+
+  @override
+  String get newBooking => 'नई बुकिंग';
+
+  @override
+  String get addToWaitlist => 'वेटलिस्ट में जोड़ें';
+
+  @override
+  String get tableOptional => 'टेबल (वैकल्पिक)';
+
+  @override
+  String get anyTable => 'कोई भी टेबल';
+
+  @override
+  String get quotedWait => 'मेहमान को बताया इंतज़ार (मिनट)';
+
+  @override
+  String avgWaitToday(int minutes) {
+    return 'आज का असली औसत इंतज़ार: $minutes मि';
+  }
+
+  @override
+  String waitedOfQuoted(int waited, int quoted) {
+    return '$waited मि से इंतज़ार (बताया $quoted)';
+  }
+
+  @override
+  String waitedMin(int waited) {
+    return '$waited मि से इंतज़ार';
+  }
+
+  @override
+  String get seat => 'बैठाएं';
+
+  @override
+  String get noShow => 'नहीं आए';
+
+  @override
+  String get cancelBooking => 'रद्द';
+
+  @override
+  String noShowsBefore(int count) {
+    return 'पहले $count बार नहीं आए';
+  }
+
+  @override
+  String get noBookingsDay => 'इस दिन कोई बुकिंग नहीं';
+
+  @override
+  String get nobodyWaiting => 'कोई इंतज़ार में नहीं';
+
+  @override
+  String bookedAt(String time, String name) {
+    return 'बुक $time · $name';
+  }
+
+  @override
+  String get pickTable => 'टेबल चुनें';
+
+  @override
+  String get bookingStatusSeated => 'बैठे';
+
+  @override
+  String get bookingStatusCancelled => 'रद्द';
+
+  @override
+  String tableBookedWarn(String name, String time) {
+    return '$time पर यह टेबल $name के लिए बुक है। फिर भी बुक करें?';
+  }
+
+  @override
+  String get bookAnyway => 'फिर भी बुक करें';
+
+  @override
+  String get errPastTime => 'वह समय निकल गया';
 }

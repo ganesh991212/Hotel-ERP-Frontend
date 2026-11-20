@@ -2533,4 +2533,91 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get errTableHasBill =>
       'This table already has a bill. Settle or cancel it first.';
+
+  @override
+  String get bookings => 'Bookings';
+
+  @override
+  String get waitlist => 'Waitlist';
+
+  @override
+  String get newBooking => 'New booking';
+
+  @override
+  String get addToWaitlist => 'Add to waitlist';
+
+  @override
+  String get tableOptional => 'Table (optional)';
+
+  @override
+  String get anyTable => 'Any table';
+
+  @override
+  String get quotedWait => 'Wait told to the guest (minutes)';
+
+  @override
+  String avgWaitToday(int minutes) {
+    return 'Today\'s real average wait: $minutes min';
+  }
+
+  @override
+  String waitedOfQuoted(int waited, int quoted) {
+    return 'Waiting $waited min (told $quoted)';
+  }
+
+  @override
+  String waitedMin(int waited) {
+    return 'Waiting $waited min';
+  }
+
+  @override
+  String get seat => 'Seat';
+
+  @override
+  String get noShow => 'No-show';
+
+  @override
+  String get cancelBooking => 'Cancel';
+
+  @override
+  String noShowsBefore(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count no-shows before',
+      one: '1 no-show before',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get noBookingsDay => 'No bookings for this day';
+
+  @override
+  String get nobodyWaiting => 'Nobody is waiting';
+
+  @override
+  String bookedAt(String time, String name) {
+    return 'Booked $time · $name';
+  }
+
+  @override
+  String get pickTable => 'Pick a table';
+
+  @override
+  String get bookingStatusSeated => 'Seated';
+
+  @override
+  String get bookingStatusCancelled => 'Cancelled';
+
+  @override
+  String tableBookedWarn(String name, String time) {
+    return '$name has this table at $time. Book anyway?';
+  }
+
+  @override
+  String get bookAnyway => 'Book anyway';
+
+  @override
+  String get errPastTime => 'That time has passed';
 }

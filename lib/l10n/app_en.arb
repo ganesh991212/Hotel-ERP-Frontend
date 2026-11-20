@@ -3443,5 +3443,136 @@
   "errTableHasBill": "This table already has a bill. Settle or cancel it first.",
   "@errTableHasBill": {
     "description": "Error"
+  },
+  "bookings": "Bookings",
+  "@bookings": {
+    "description": "Floor button and screen title"
+  },
+  "waitlist": "Waitlist",
+  "@waitlist": {
+    "description": "Tab: walk-ins waiting"
+  },
+  "newBooking": "New booking",
+  "@newBooking": {
+    "description": "Button"
+  },
+  "addToWaitlist": "Add to waitlist",
+  "@addToWaitlist": {
+    "description": "Button"
+  },
+  "tableOptional": "Table (optional)",
+  "@tableOptional": {
+    "description": "Field"
+  },
+  "anyTable": "Any table",
+  "@anyTable": {
+    "description": "No table chosen"
+  },
+  "quotedWait": "Wait told to the guest (minutes)",
+  "@quotedWait": {
+    "description": "Field"
+  },
+  "avgWaitToday": "Today's real average wait: {minutes} min",
+  "@avgWaitToday": {
+    "description": "Hint next to the quote",
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "waitedOfQuoted": "Waiting {waited} min (told {quoted})",
+  "@waitedOfQuoted": {
+    "description": "Waitlist row",
+    "placeholders": {
+      "waited": {
+        "type": "int"
+      },
+      "quoted": {
+        "type": "int"
+      }
+    }
+  },
+  "waitedMin": "Waiting {waited} min",
+  "@waitedMin": {
+    "description": "Waitlist row without a quote",
+    "placeholders": {
+      "waited": {
+        "type": "int"
+      }
+    }
+  },
+  "seat": "Seat",
+  "@seat": {
+    "description": "Button: seat this party"
+  },
+  "noShow": "No-show",
+  "@noShow": {
+    "description": "Button / status"
+  },
+  "cancelBooking": "Cancel",
+  "@cancelBooking": {
+    "description": "Button: cancel a booking"
+  },
+  "noShowsBefore": "{count, plural, =1{1 no-show before} other{{count} no-shows before}}",
+  "@noShowsBefore": {
+    "description": "Warning on a booking",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "noBookingsDay": "No bookings for this day",
+  "@noBookingsDay": {
+    "description": "Empty"
+  },
+  "nobodyWaiting": "Nobody is waiting",
+  "@nobodyWaiting": {
+    "description": "Empty"
+  },
+  "bookedAt": "Booked {time} · {name}",
+  "@bookedAt": {
+    "description": "Badge on a table",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "pickTable": "Pick a table",
+  "@pickTable": {
+    "description": "Seat dialog title"
+  },
+  "bookingStatusSeated": "Seated",
+  "@bookingStatusSeated": {
+    "description": "Booking status"
+  },
+  "bookingStatusCancelled": "Cancelled",
+  "@bookingStatusCancelled": {
+    "description": "Booking status"
+  },
+  "tableBookedWarn": "{name} has this table at {time}. Book anyway?",
+  "@tableBookedWarn": {
+    "description": "Overlap warning",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "bookAnyway": "Book anyway",
+  "@bookAnyway": {
+    "description": "Button"
+  },
+  "errPastTime": "That time has passed",
+  "@errPastTime": {
+    "description": "Error"
   }
 }

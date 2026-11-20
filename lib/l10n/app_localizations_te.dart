@@ -2494,4 +2494,85 @@ class AppLocalizationsTe extends AppLocalizations {
   @override
   String get errTableHasBill =>
       'ఈ టేబుల్‌కు బిల్లు ఉంది. ముందు చెల్లించండి లేదా రద్దు చేయండి.';
+
+  @override
+  String get bookings => 'బుకింగ్‌లు';
+
+  @override
+  String get waitlist => 'వెయిట్‌లిస్ట్';
+
+  @override
+  String get newBooking => 'కొత్త బుకింగ్';
+
+  @override
+  String get addToWaitlist => 'వెయిట్‌లిస్ట్‌లో చేర్చు';
+
+  @override
+  String get tableOptional => 'టేబుల్ (ఐచ్ఛికం)';
+
+  @override
+  String get anyTable => 'ఏ టేబుల్ అయినా';
+
+  @override
+  String get quotedWait => 'అతిథికి చెప్పిన వేచి సమయం (నిమిషాలు)';
+
+  @override
+  String avgWaitToday(int minutes) {
+    return 'ఈరోజు నిజమైన సగటు వేచి సమయం: $minutes ని';
+  }
+
+  @override
+  String waitedOfQuoted(int waited, int quoted) {
+    return '$waited ని వేచి ఉన్నారు (చెప్పింది $quoted)';
+  }
+
+  @override
+  String waitedMin(int waited) {
+    return '$waited ని వేచి ఉన్నారు';
+  }
+
+  @override
+  String get seat => 'కూర్చోబెట్టు';
+
+  @override
+  String get noShow => 'రాలేదు';
+
+  @override
+  String get cancelBooking => 'రద్దు';
+
+  @override
+  String noShowsBefore(int count) {
+    return '$count సార్లు ముందు రాలేదు';
+  }
+
+  @override
+  String get noBookingsDay => 'ఈ రోజుకు బుకింగ్‌లు లేవు';
+
+  @override
+  String get nobodyWaiting => 'ఎవరూ వేచి లేరు';
+
+  @override
+  String bookedAt(String time, String name) {
+    return 'బుక్ $time · $name';
+  }
+
+  @override
+  String get pickTable => 'టేబుల్ ఎంచుకోండి';
+
+  @override
+  String get bookingStatusSeated => 'కూర్చున్నారు';
+
+  @override
+  String get bookingStatusCancelled => 'రద్దు';
+
+  @override
+  String tableBookedWarn(String name, String time) {
+    return '$time కి ఈ టేబుల్ $name కి బుక్ అయింది. అయినా బుక్ చేయాలా?';
+  }
+
+  @override
+  String get bookAnyway => 'అయినా బుక్ చేయి';
+
+  @override
+  String get errPastTime => 'ఆ సమయం దాటిపోయింది';
 }
