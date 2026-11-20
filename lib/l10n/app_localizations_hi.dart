@@ -2749,4 +2749,50 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get gstB2b => 'कंपनी (B2B) बिल';
+
+  @override
+  String get reportPnl => 'लाभ और हानि';
+
+  @override
+  String lastMonths(int count) {
+    return 'पिछले $count महीने';
+  }
+
+  @override
+  String get pnlSoFar => 'अब तक';
+
+  @override
+  String get pnlSales => 'GST से पहले बिक्री';
+
+  @override
+  String get pnlExpenses => 'खर्च';
+
+  @override
+  String get pnlProfit => 'परिचालन लाभ';
+
+  @override
+  String get pnlLoss => 'परिचालन हानि';
+
+  @override
+  String pnlMargin(String pct) {
+    return 'बिक्री का $pct%';
+  }
+
+  @override
+  String get pnlGst => 'वसूला गया GST';
+
+  @override
+  String get pnlGstHelp => 'सरकार को देना है; आय नहीं';
+
+  @override
+  String pnlTotal(int count) {
+    return 'कुल, $count महीने';
+  }
+
+  @override
+  String get basisPnl =>
+      'बिक्री यानी GST से पहले, छूट के बाद जारी बिल। खर्च उसी दिन गिने जाते हैं जिस दिन किए गए। खाने की लागत वही है जो आपने खर्च में दर्ज की (स्टॉक अभी ट्रैक नहीं होता)।';
+
+  @override
+  String get thisMonthBeforeGst => 'इस महीने, GST से पहले';
 }

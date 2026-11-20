@@ -16,7 +16,7 @@ import '../../ui/status.dart';
 /// issued bills only; this screen formats them and never adds anything up itself.
 const maxReportDays = 92;
 
-enum ReportKind { sales, items, gst, staff }
+enum ReportKind { sales, items, gst, pnl, staff }
 
 String _ymd(DateTime d) => DateFormat('yyyy-MM-dd').format(d);
 
@@ -41,7 +41,17 @@ class _ReportsPageState extends ConsumerState<ReportsPage> {
     WidgetsBinding.instance.addPostFrameCallback((_) => _load());
   }
 
-  String get _range => _from == null ? '' : '?${Uri(queryParameters: {'from': _ymd(_from!), 'to': _ymd(_to!)}).query}';
+  int _pnlMonths = 6; // the P&L counts whole months, not days
+
+  String get _range {
+    if (_kind == ReportKind.pnl) {
+      final t = _today;
+      if (t == null) return '';
+      final from = DateTime(t.year, t.month - (_pnlMonths - 1));
+      return '?${Uri(queryParameters: {'from': _ymd(from), 'to': _ymd(t)}).query}';
+    }
+    return _from == null ? '' : '?${Uri(queryParameters: {'from': _ymd(_from!), 'to': _ymd(_to!)}).query}';
+  }
 
   Future<void> _load() async {
     final gen = ++_generation;
@@ -54,10 +64,12 @@ class _ReportsPageState extends ConsumerState<ReportsPage> {
       if (!mounted || gen != _generation) return;
       setState(() {
         _data = d;
-        // No dates sent = the hotel's today (its timezone, not the phone's).
-        _today ??= DateTime.parse(d['to'] as String);
-        _from ??= DateTime.parse(d['from'] as String);
-        _to ??= DateTime.parse(d['to'] as String);
+        if (d['report'] != 'pnl') {
+          // No dates sent = the hotel's today (its timezone, not the phone's).
+          _today ??= DateTime.parse(d['to'] as String);
+          _from ??= DateTime.parse(d['from'] as String);
+          _to ??= DateTime.parse(d['to'] as String);
+        }
       });
     } catch (e) {
       if (mounted && gen == _generation) setState(() => _error = e);
@@ -93,7 +105,7 @@ class _ReportsPageState extends ConsumerState<ReportsPage> {
     final l = AppLocalizations.of(context);
     await guard(context, () async {
       final bytes = await ref.read(apiProvider).getBytes('/api/v1/reports/$kind.csv$_range');
-      final name = '${kind}_${_ymd(_from!)}_${_ymd(_to!)}.csv';
+      final name = kind == 'pnl' ? 'pnl_${_pnlMonths}_months.csv' : '${kind}_${_ymd(_from!)}_${_ymd(_to!)}.csv';
       final saved = await FilePicker.saveFile(fileName: name, bytes: bytes, mimeType: 'text/csv');
       if (saved != null && mounted) showDone(context, l.fileSaved(name));
     });
@@ -150,6 +162,7 @@ class _ReportsPageState extends ConsumerState<ReportsPage> {
                   (ReportKind.sales, l.reportSales),
                   (ReportKind.items, l.reportItems),
                   (ReportKind.gst, l.reportGst),
+                  (ReportKind.pnl, l.reportPnl),
                   if (staffAllowed) (ReportKind.staff, l.reportStaff),
                 ],
                 selected: _kind,
@@ -165,7 +178,23 @@ class _ReportsPageState extends ConsumerState<ReportsPage> {
           ),
         ),
         const SizedBox(height: 12),
-        if (today != null)
+        if (today != null && _kind == ReportKind.pnl)
+          Wrap(
+            spacing: 8,
+            children: [
+              for (final n in [6, 12])
+                CountChip(
+                  label: l.lastMonths(n),
+                  count: null,
+                  selected: _pnlMonths == n,
+                  onTap: () {
+                    setState(() => _pnlMonths = n);
+                    _load();
+                  },
+                ),
+            ],
+          )
+        else if (today != null)
           Wrap(
             spacing: 8,
             runSpacing: 8,
@@ -211,6 +240,7 @@ class _ReportsPageState extends ConsumerState<ReportsPage> {
               ReportKind.sales => SalesReport(d: _data!),
               ReportKind.items => ItemsReport(d: _data!),
               ReportKind.gst => GstReport(d: _data!),
+              ReportKind.pnl => PnlReport(d: _data!),
               ReportKind.staff => StaffReport(d: _data!),
             },
           ),
@@ -660,6 +690,74 @@ class GstReport extends StatelessWidget {
       ],
     );
   }
+}
+
+/// Profit and loss by month, newest first. Every figure (sales before GST, profit, margin) comes from the server.
+class PnlReport extends StatelessWidget {
+  const PnlReport({super.key, required this.d});
+  final Map<String, dynamic> d;
+
+  @override
+  Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
+    final t = context.tokens;
+    final tt = Theme.of(context).textTheme;
+    final months = (d['months'] as List).cast<Map>().map(Map<String, dynamic>.from).toList().reversed.toList();
+    final fmt = DateFormat.yMMMM(Localizations.localeOf(context).toLanguageTag());
+
+    Widget card(String title, Map<String, dynamic> m, {bool soFar = false}) {
+      final profit = _i(m['operating_profit_minor']);
+      final expenses = (m['expenses'] as List).cast<Map>();
+      return Glass(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(children: [
+              Expanded(child: Text(title, style: tt.titleMedium)),
+              if (soFar) StatusChip(icon: Icons.more_time_rounded, label: l.pnlSoFar, color: t.info),
+            ]),
+            const SizedBox(height: 6),
+            _Line(l.pnlSales, _i(m['sales_minor']), sub: l.repBills(_i(m['bills']))),
+            if (_i(m['service_charge_minor']) != 0) _Line(l.serviceCharge, _i(m['service_charge_minor'])),
+            _Line(l.pnlExpenses, _i(m['expenses_minor']), minus: true, sub: [
+              for (final e in expenses) '${e['category']} ${formatInr(_i(e['amount_minor']))}',
+            ].join(' · ').ifEmpty(null)),
+            Divider(height: 14, color: t.hair),
+            Row(children: [
+              Icon(profit >= 0 ? Icons.trending_up_rounded : Icons.trending_down_rounded, size: 18, color: t.ink),
+              const SizedBox(width: 6),
+              Expanded(
+                child: _Line(
+                  profit >= 0 ? l.pnlProfit : l.pnlLoss,
+                  profit,
+                  strong: true,
+                  sub: m['margin_pct'] == null ? null : l.pnlMargin('${m['margin_pct']}'),
+                ),
+              ),
+            ]),
+            _Line(l.pnlGst, _i(m['gst_collected_minor']), sub: l.pnlGstHelp),
+          ],
+        ),
+      );
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Glass(child: _Basis(l.basisPnl)),
+        const SizedBox(height: 12),
+        card(l.pnlTotal(months.length), Map<String, dynamic>.from(d['totals'] as Map)),
+        for (final m in months) ...[
+          const SizedBox(height: 12),
+          card(fmt.format(DateTime.parse('${m['month']}-01')), m, soFar: m['so_far'] == true),
+        ],
+      ],
+    );
+  }
+}
+
+extension on String {
+  String? ifEmpty(String? other) => isEmpty ? other : this;
 }
 
 class StaffReport extends StatelessWidget {

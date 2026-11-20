@@ -4887,6 +4887,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Company (B2B) bills'**
   String get gstB2b;
+
+  /// Reports tab: profit and loss by month
+  ///
+  /// In en, this message translates to:
+  /// **'Profit & loss'**
+  String get reportPnl;
+
+  /// Reports, Profit & loss: range chip
+  ///
+  /// In en, this message translates to:
+  /// **'Last {count} months'**
+  String lastMonths(int count);
+
+  /// Profit & loss: the current month is not complete yet
+  ///
+  /// In en, this message translates to:
+  /// **'So far'**
+  String get pnlSoFar;
+
+  /// Profit & loss: issued bills' value after discounts, without GST
+  ///
+  /// In en, this message translates to:
+  /// **'Sales before GST'**
+  String get pnlSales;
+
+  /// Profit & loss: expenses entered for the month
+  ///
+  /// In en, this message translates to:
+  /// **'Expenses'**
+  String get pnlExpenses;
+
+  /// Profit & loss: income minus expenses (positive)
+  ///
+  /// In en, this message translates to:
+  /// **'Operating profit'**
+  String get pnlProfit;
+
+  /// Profit & loss: income minus expenses (negative)
+  ///
+  /// In en, this message translates to:
+  /// **'Operating loss'**
+  String get pnlLoss;
+
+  /// Profit & loss: profit as a share of income; pct is a number like 18.5
+  ///
+  /// In en, this message translates to:
+  /// **'{pct}% of sales'**
+  String pnlMargin(String pct);
+
+  /// Profit & loss: tax collected on bills
+  ///
+  /// In en, this message translates to:
+  /// **'GST collected'**
+  String get pnlGst;
+
+  /// Profit & loss: explains that GST is not counted as income
+  ///
+  /// In en, this message translates to:
+  /// **'Owed to the government; not income'**
+  String get pnlGstHelp;
+
+  /// Profit & loss: the total card over the months shown
+  ///
+  /// In en, this message translates to:
+  /// **'Total, {count} months'**
+  String pnlTotal(int count);
+
+  /// Profit & loss: what the report counts
+  ///
+  /// In en, this message translates to:
+  /// **'Sales are issued bills before GST, after discounts. Expenses are counted on the day they were spent. Food cost is only what you entered as expenses (stock is not tracked yet).'**
+  String get basisPnl;
+
+  /// Overview month card: income this month without GST (GST is not income)
+  ///
+  /// In en, this message translates to:
+  /// **'This month, before GST'**
+  String get thisMonthBeforeGst;
 }
 
 class _AppLocalizationsDelegate

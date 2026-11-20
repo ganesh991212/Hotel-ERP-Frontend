@@ -2757,4 +2757,50 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get gstB2b => 'కంపెనీ (B2B) బిల్లులు';
+
+  @override
+  String get reportPnl => 'లాభ నష్టాలు';
+
+  @override
+  String lastMonths(int count) {
+    return 'గత $count నెలలు';
+  }
+
+  @override
+  String get pnlSoFar => 'ఇప్పటివరకు';
+
+  @override
+  String get pnlSales => 'GST ముందు అమ్మకాలు';
+
+  @override
+  String get pnlExpenses => 'ఖర్చులు';
+
+  @override
+  String get pnlProfit => 'నిర్వహణ లాభం';
+
+  @override
+  String get pnlLoss => 'నిర్వహణ నష్టం';
+
+  @override
+  String pnlMargin(String pct) {
+    return 'అమ్మకాల్లో $pct%';
+  }
+
+  @override
+  String get pnlGst => 'వసూలు చేసిన GST';
+
+  @override
+  String get pnlGstHelp => 'ప్రభుత్వానికి చెల్లించాలి; ఆదాయం కాదు';
+
+  @override
+  String pnlTotal(int count) {
+    return 'మొత్తం, $count నెలలు';
+  }
+
+  @override
+  String get basisPnl =>
+      'అమ్మకాలు అంటే GST ముందు, డిస్కౌంట్ల తర్వాత ఇచ్చిన బిల్లులు. ఖర్చులు ఖర్చు చేసిన రోజున లెక్కించబడతాయి. ఆహార ఖర్చు మీరు ఖర్చులుగా నమోదు చేసినదే (స్టాక్ ఇంకా లెక్కించడం లేదు).';
+
+  @override
+  String get thisMonthBeforeGst => 'ఈ నెల, GST ముందు';
 }

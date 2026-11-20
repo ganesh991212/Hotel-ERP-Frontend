@@ -3858,5 +3858,72 @@
   "gstB2b": "Company (B2B) bills",
   "@gstB2b": {
     "description": "GST report: heading over bills issued to a company's GSTIN, one per line (GSTR-1 B2B)"
+  },
+  "reportPnl": "Profit & loss",
+  "@reportPnl": {
+    "description": "Reports tab: profit and loss by month"
+  },
+  "lastMonths": "Last {count} months",
+  "@lastMonths": {
+    "description": "Reports, Profit & loss: range chip",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "pnlSoFar": "So far",
+  "@pnlSoFar": {
+    "description": "Profit & loss: the current month is not complete yet"
+  },
+  "pnlSales": "Sales before GST",
+  "@pnlSales": {
+    "description": "Profit & loss: issued bills' value after discounts, without GST"
+  },
+  "pnlExpenses": "Expenses",
+  "@pnlExpenses": {
+    "description": "Profit & loss: expenses entered for the month"
+  },
+  "pnlProfit": "Operating profit",
+  "@pnlProfit": {
+    "description": "Profit & loss: income minus expenses (positive)"
+  },
+  "pnlLoss": "Operating loss",
+  "@pnlLoss": {
+    "description": "Profit & loss: income minus expenses (negative)"
+  },
+  "pnlMargin": "{pct}% of sales",
+  "@pnlMargin": {
+    "description": "Profit & loss: profit as a share of income; pct is a number like 18.5",
+    "placeholders": {
+      "pct": {
+        "type": "String"
+      }
+    }
+  },
+  "pnlGst": "GST collected",
+  "@pnlGst": {
+    "description": "Profit & loss: tax collected on bills"
+  },
+  "pnlGstHelp": "Owed to the government; not income",
+  "@pnlGstHelp": {
+    "description": "Profit & loss: explains that GST is not counted as income"
+  },
+  "pnlTotal": "Total, {count} months",
+  "@pnlTotal": {
+    "description": "Profit & loss: the total card over the months shown",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "basisPnl": "Sales are issued bills before GST, after discounts. Expenses are counted on the day they were spent. Food cost is only what you entered as expenses (stock is not tracked yet).",
+  "@basisPnl": {
+    "description": "Profit & loss: what the report counts"
+  },
+  "thisMonthBeforeGst": "This month, before GST",
+  "@thisMonthBeforeGst": {
+    "description": "Overview month card: income this month without GST (GST is not income)"
   }
 }

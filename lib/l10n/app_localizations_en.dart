@@ -2815,4 +2815,50 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get gstB2b => 'Company (B2B) bills';
+
+  @override
+  String get reportPnl => 'Profit & loss';
+
+  @override
+  String lastMonths(int count) {
+    return 'Last $count months';
+  }
+
+  @override
+  String get pnlSoFar => 'So far';
+
+  @override
+  String get pnlSales => 'Sales before GST';
+
+  @override
+  String get pnlExpenses => 'Expenses';
+
+  @override
+  String get pnlProfit => 'Operating profit';
+
+  @override
+  String get pnlLoss => 'Operating loss';
+
+  @override
+  String pnlMargin(String pct) {
+    return '$pct% of sales';
+  }
+
+  @override
+  String get pnlGst => 'GST collected';
+
+  @override
+  String get pnlGstHelp => 'Owed to the government; not income';
+
+  @override
+  String pnlTotal(int count) {
+    return 'Total, $count months';
+  }
+
+  @override
+  String get basisPnl =>
+      'Sales are issued bills before GST, after discounts. Expenses are counted on the day they were spent. Food cost is only what you entered as expenses (stock is not tracked yet).';
+
+  @override
+  String get thisMonthBeforeGst => 'This month, before GST';
 }

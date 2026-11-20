@@ -142,6 +142,27 @@ void main() {
     expect(find.text('₹640'), findsNWidgets(2), reason: 'Mains row and the Veg Thali row');
   });
 
+  testWidgets('P&L shows each month from the server, current one marked so far, GST apart from income', (tester) async {
+    Map<String, dynamic> month(String m, {bool soFar = false, int profit = 30000, double? margin = 37.5}) => {
+      'month': m, 'so_far': soFar, 'bills': 12, 'sales_minor': 80000, 'service_charge_minor': 0, 'income_minor': 80000,
+      'expenses': [{'category': 'Rent', 'amount_minor': 50000}], 'expenses_minor': 50000,
+      'operating_profit_minor': profit, 'margin_pct': margin, 'gst_collected_minor': 4000,
+    };
+    final d = {
+      'report': 'pnl',
+      'months': [month('2026-10', profit: -5000, margin: null), month('2026-11', soFar: true)],
+      'totals': month('total', profit: 25000, margin: 15.6),
+    };
+    await _show(tester, PnlReport(d: d), 380);
+    expect(tester.takeException(), isNull, reason: 'no overflow at phone width');
+    expect(find.text('So far'), findsOneWidget);
+    expect(find.text('Operating loss'), findsOneWidget);
+    expect(find.text('Operating profit'), findsNWidgets(2));
+    expect(find.text('37.5% of sales'), findsOneWidget);
+    expect(find.text('Owed to the government; not income'), findsNWidgets(3));
+    expect(find.text('Rent ₹500'), findsNWidgets(3));
+  });
+
   testWidgets('an empty period says so instead of showing zeros', (tester) async {
     final empty = {..._sales, 'days': [], 'totals': _row(bills: 0, total: 0)..['cancelled_bills'] = 0};
     empty['unbilled'] = {'orders': 0, 'value_minor': 0};

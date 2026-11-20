@@ -363,11 +363,12 @@ class _RevenueCard extends StatelessWidget {
             Text(DateFormat.MMMd().format(DateTime.now()), style: tt.labelMedium?.copyWith(color: t.onAccent)),
           ]),
           const Spacer(),
-          Text(l.thisMonth, style: tt.labelMedium?.copyWith(color: t.onAccent.withValues(alpha: .85))),
+          // Income before GST (GST is owed to the government), so income − expenses = the net below (as in the P&L).
+          Text(l.thisMonthBeforeGst, style: tt.labelMedium?.copyWith(color: t.onAccent.withValues(alpha: .85))),
           FittedBox(
             fit: BoxFit.scaleDown,
             alignment: Alignment.centerLeft,
-            child: Text(formatInr(d['revenue_month_minor'] as int, showPaise: false),
+            child: Text(formatInr(((d['income_month_minor'] ?? d['revenue_month_minor']) as num).toInt(), showPaise: false),
                 style: tt.displayMedium?.copyWith(color: t.onAccent)),
           ),
           const SizedBox(height: 4),
