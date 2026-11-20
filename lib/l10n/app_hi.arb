@@ -781,5 +781,9 @@
   "heldMissing": "अब मेनू में नहीं: {names}",
   "errHoldGone": "यह होल्ड ऑर्डर दूसरे डिवाइस पर पहले ही भेजा या हटाया जा चुका है",
   "heldCount": "{count} होल्ड",
-  "heldOrdersWaiting": "{count} होल्ड ऑर्डर किचन में नहीं भेजे गए"
+  "heldOrdersWaiting": "{count} होल्ड ऑर्डर किचन में नहीं भेजे गए",
+  "dueIn": "{minutes} मिनट में",
+  "readyDueNow": "अभी तैयार होना है",
+  "delayedBy": "{minutes} मिनट देर",
+  "onTimeToday": "आज समय पर: {pct}% ({ready} में से {onTime} ऑर्डर समय पर तैयार)"
 }

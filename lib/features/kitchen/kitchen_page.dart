@@ -9,6 +9,7 @@ import '../../ui/feedback.dart';
 import '../../ui/shell.dart';
 import '../../ui/status.dart';
 import '../floor/cart.dart' show orderLineDetails;
+import 'due.dart';
 import 'station_filter.dart';
 import '../floor/print_actions.dart';
 
@@ -379,15 +380,41 @@ class _ElapsedLine extends StatelessWidget {
     final l = AppLocalizations.of(context);
     final t = context.tokens;
     final mins = minutesSince(o['started_at'] ?? o['created_at']);
-    final late = mins > (o['est_prep_minutes'] as int? ?? 15);
-    final color = late ? t.warn : (onNight ? t.nightDim : t.dim);
-    return Row(children: [
-      Icon(late ? Icons.timer_off_outlined : Icons.timer_outlined, size: 14, color: color),
-      const SizedBox(width: 5),
-      Text(
-        o['started_at'] != null ? l.cookingFor(mins, o['est_prep_minutes']) : l.waitingFor(mins),
-        style: Theme.of(context).textTheme.labelMedium?.copyWith(color: color),
-      ),
+    // Due time fixed by the server when ordered; shown as words + icon, not colour alone (docs/14).
+    final due = dueState(o['due_at'] as String?, DateTime.now());
+    final late = due?.$1 == DueState.delayed;
+    final color = late ? t.danger : (due?.$1 == DueState.dueNow ? t.warn : (onNight ? t.nightDim : t.dim));
+    final style = Theme.of(context).textTheme.labelMedium?.copyWith(color: color);
+    return Wrap(spacing: 10, runSpacing: 2, crossAxisAlignment: WrapCrossAlignment.center, children: [
+      Row(mainAxisSize: MainAxisSize.min, children: [
+        Icon(Icons.timer_outlined, size: 14, color: onNight ? t.nightDim : t.dim),
+        const SizedBox(width: 5),
+        Text(
+          o['started_at'] != null ? l.cookingFor(mins, o['est_prep_minutes']) : l.waitingFor(mins),
+          style: Theme.of(context).textTheme.labelMedium?.copyWith(color: onNight ? t.nightDim : t.dim),
+        ),
+      ]),
+      if (due != null)
+        Row(mainAxisSize: MainAxisSize.min, children: [
+          Icon(
+            switch (due.$1) {
+              DueState.delayed => Icons.warning_amber_rounded,
+              DueState.dueNow => Icons.alarm_rounded,
+              DueState.onTime => Icons.schedule_rounded,
+            },
+            size: 14,
+            color: color,
+          ),
+          const SizedBox(width: 4),
+          Text(
+            switch (due.$1) {
+              DueState.delayed => l.delayedBy(due.$2),
+              DueState.dueNow => l.readyDueNow,
+              DueState.onTime => l.dueIn(due.$2),
+            },
+            style: late ? style?.copyWith(fontWeight: FontWeight.w700) : style,
+          ),
+        ]),
     ]);
   }
 }

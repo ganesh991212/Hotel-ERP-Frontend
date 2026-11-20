@@ -2692,4 +2692,22 @@ class AppLocalizationsHi extends AppLocalizations {
   String heldOrdersWaiting(int count) {
     return '$count होल्ड ऑर्डर किचन में नहीं भेजे गए';
   }
+
+  @override
+  String dueIn(int minutes) {
+    return '$minutes मिनट में';
+  }
+
+  @override
+  String get readyDueNow => 'अभी तैयार होना है';
+
+  @override
+  String delayedBy(int minutes) {
+    return '$minutes मिनट देर';
+  }
+
+  @override
+  String onTimeToday(String pct, int onTime, int ready) {
+    return 'आज समय पर: $pct% ($ready में से $onTime ऑर्डर समय पर तैयार)';
+  }
 }

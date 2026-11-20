@@ -2758,4 +2758,22 @@ class AppLocalizationsEn extends AppLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String dueIn(int minutes) {
+    return 'Due in $minutes min';
+  }
+
+  @override
+  String get readyDueNow => 'Due now';
+
+  @override
+  String delayedBy(int minutes) {
+    return 'Delayed $minutes min';
+  }
+
+  @override
+  String onTimeToday(String pct, int onTime, int ready) {
+    return 'On time today: $pct% ($onTime of $ready orders ready by their due time)';
+  }
 }

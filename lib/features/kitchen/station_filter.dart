@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../core/auth/session.dart';
 import '../../l10n/app_localizations.dart';
+import 'due.dart';
 
 /// Kitchen stations on the kitchen screen (backend docs/03 "Kitchen stations"): a device can show only its station's
 /// dishes. Display only: the order is still accepted and marked ready by its chef.
@@ -20,7 +21,7 @@ Map<String, dynamic> filterBoard(Map<String, dynamic> board, String? station) {
     for (final o in ((list as List?) ?? const []).cast<Map>())
       if ((o['items'] as List).cast<Map>().where((it) => stationKey(it) == station).toList() case final items
           when items.isNotEmpty)
-        {...Map<String, dynamic>.from(o), 'items': items},
+        {...Map<String, dynamic>.from(o), 'items': items, 'due_at': latestDue(items) ?? o['due_at']},
   ];
   return {
     ...board,

@@ -781,5 +781,9 @@
   "heldMissing": "ఇప్పుడు మెనూలో లేవు: {names}",
   "errHoldGone": "ఈ హోల్డ్ ఆర్డర్ ఇప్పటికే వేరే పరికరంలో పంపబడింది లేదా తీసివేయబడింది",
   "heldCount": "{count} హోల్డ్",
-  "heldOrdersWaiting": "{count} హోల్డ్ ఆర్డర్లు కిచెన్‌కు పంపలేదు"
+  "heldOrdersWaiting": "{count} హోల్డ్ ఆర్డర్లు కిచెన్‌కు పంపలేదు",
+  "dueIn": "{minutes} నిమి.లో",
+  "readyDueNow": "ఇప్పుడే సమయం",
+  "delayedBy": "{minutes} నిమి. ఆలస్యం",
+  "onTimeToday": "ఈరోజు సమయానికి: {pct}% ({ready}లో {onTime} ఆర్డర్లు గడువులోపు సిద్ధం)"
 }

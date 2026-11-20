@@ -2701,4 +2701,22 @@ class AppLocalizationsTe extends AppLocalizations {
   String heldOrdersWaiting(int count) {
     return '$count హోల్డ్ ఆర్డర్లు కిచెన్‌కు పంపలేదు';
   }
+
+  @override
+  String dueIn(int minutes) {
+    return '$minutes నిమి.లో';
+  }
+
+  @override
+  String get readyDueNow => 'ఇప్పుడే సమయం';
+
+  @override
+  String delayedBy(int minutes) {
+    return '$minutes నిమి. ఆలస్యం';
+  }
+
+  @override
+  String onTimeToday(String pct, int onTime, int ready) {
+    return 'ఈరోజు సమయానికి: $pct% ($readyలో $onTime ఆర్డర్లు గడువులోపు సిద్ధం)';
+  }
 }

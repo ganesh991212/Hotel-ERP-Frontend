@@ -3772,5 +3772,42 @@
         "type": "int"
       }
     }
+  },
+  "dueIn": "Due in {minutes} min",
+  "@dueIn": {
+    "description": "Kitchen card: minutes left before the order should be ready",
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "readyDueNow": "Due now",
+  "@readyDueNow": {
+    "description": "Kitchen card: the order should be ready about now"
+  },
+  "delayedBy": "Delayed {minutes} min",
+  "@delayedBy": {
+    "description": "Kitchen card: minutes past the time the order should have been ready",
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "onTimeToday": "On time today: {pct}% ({onTime} of {ready} orders ready by their due time)",
+  "@onTimeToday": {
+    "description": "Overview: share of today's orders made ready by the due time set when they were placed",
+    "placeholders": {
+      "pct": {
+        "type": "String"
+      },
+      "onTime": {
+        "type": "int"
+      },
+      "ready": {
+        "type": "int"
+      }
+    }
   }
 }

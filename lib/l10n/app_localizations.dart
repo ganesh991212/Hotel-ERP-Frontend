@@ -4797,6 +4797,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{count, plural, =1{1 held order was never sent to the kitchen} other{{count} held orders were never sent to the kitchen}}'**
   String heldOrdersWaiting(int count);
+
+  /// Kitchen card: minutes left before the order should be ready
+  ///
+  /// In en, this message translates to:
+  /// **'Due in {minutes} min'**
+  String dueIn(int minutes);
+
+  /// Kitchen card: the order should be ready about now
+  ///
+  /// In en, this message translates to:
+  /// **'Due now'**
+  String get readyDueNow;
+
+  /// Kitchen card: minutes past the time the order should have been ready
+  ///
+  /// In en, this message translates to:
+  /// **'Delayed {minutes} min'**
+  String delayedBy(int minutes);
+
+  /// Overview: share of today's orders made ready by the due time set when they were placed
+  ///
+  /// In en, this message translates to:
+  /// **'On time today: {pct}% ({onTime} of {ready} orders ready by their due time)'**
+  String onTimeToday(String pct, int onTime, int ready);
 }
 
 class _AppLocalizationsDelegate

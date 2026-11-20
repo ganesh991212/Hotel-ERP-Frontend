@@ -897,6 +897,21 @@ class _ServiceTimesCard extends StatelessWidget {
       child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
         CardTitle(l.serviceTimes),
         Text(l.serviceTimesHelp, style: tt.bodySmall),
+        // Ready by the due time fixed when each order was placed (counts from the server).
+        if (d['on_time'] is Map && (d['on_time'] as Map)['pct'] != null) ...[
+          const SizedBox(height: 10),
+          Row(children: [
+            Icon(Icons.verified_outlined, size: 18, color: t.ink),
+            const SizedBox(width: 6),
+            Expanded(
+              child: Text(
+                l.onTimeToday('${(d['on_time'] as Map)['pct']}', (d['on_time'] as Map)['on_time'] as int,
+                    (d['on_time'] as Map)['ready'] as int),
+                style: tt.titleSmall,
+              ),
+            ),
+          ]),
+        ],
         const SizedBox(height: 14),
         if (context.isPhone)
           GridView.count(
