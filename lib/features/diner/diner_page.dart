@@ -14,6 +14,7 @@ import '../../l10n/app_localizations.dart';
 import '../../ui/components.dart';
 import '../../ui/feedback.dart';
 import '../../ui/status.dart';
+import '../floor/cart.dart';
 import '../floor/floor_page.dart' show QtyStepper, QuoteSummary, VegMark, newClientRef;
 
 /// Public page opened by scanning a table QR. Sends item ids and quantities only; every amount
@@ -30,7 +31,7 @@ class _DinerPageState extends ConsumerState<DinerPage> {
   Map<String, dynamic>? _menu;
   Object? _error;
   String? _session;
-  final Map<String, int> _qty = {};
+  final Cart _cart = Cart();
   Map<String, dynamic>? _quote;
   List<Map<String, dynamic>> _orders = [];
   RealtimeChannel? _ws;
@@ -101,14 +102,18 @@ class _DinerPageState extends ConsumerState<DinerPage> {
     }
   }
 
-  void _change(String id, int d) {
-    setState(() {
-      final v = (_qty[id] ?? 0) + d;
-      v <= 0 ? _qty.remove(id) : _qty[id] = v.clamp(1, 20);
-    });
+  /// A dish with sizes or add-ons opens the choice sheet first (sold-out choices never reach the diner).
+  Future<void> _addDish(Map<String, dynamic> item) async {
+    final line = needsChoices(item) ? await showItemChoices(context, item) : CartLine(item);
+    if (line == null || !mounted) return;
+    _changeCart(() => _cart.add(line));
+  }
+
+  void _changeCart(VoidCallback change) {
+    setState(change);
     _debounce?.cancel();
     _debounce = Timer(const Duration(milliseconds: 250), () async {
-      if (_qty.isEmpty) return setState(() => _quote = null);
+      if (_cart.isEmpty) return setState(() => _quote = null);
       try {
         final q = await _api.public('POST', '/api/v1/d/${widget.qrToken}/quote', body: {'items': _lines});
         if (mounted) setState(() => _quote = Map<String, dynamic>.from(q));
@@ -119,9 +124,9 @@ class _DinerPageState extends ConsumerState<DinerPage> {
     });
   }
 
-  List<Map<String, dynamic>> get _lines => [for (final e in _qty.entries) {'item_id': e.key, 'qty': e.value}];
+  List<Map<String, dynamic>> get _lines => _cart.json;
 
-  int get _count => _qty.values.fold(0, (a, b) => a + b);
+  int get _count => _cart.count;
 
   @override
   Widget build(BuildContext context) {
@@ -237,10 +242,10 @@ class _DinerPageState extends ConsumerState<DinerPage> {
                               for (final i in (c['items'] as List).cast<Map<String, dynamic>>())
                                 _DishRow(
                                   item: i,
-                                  qty: _qty[i['id']] ?? 0,
+                                  qty: _cart.qtyOf(i['id']),
                                   ordering: ordering,
-                                  onAdd: () => _change(i['id'], 1),
-                                  onRemove: () => _change(i['id'], -1),
+                                  onAdd: () => _addDish(i),
+                                  onRemove: () => _changeCart(() => _cart.removeLastOf(i['id'])),
                                 ),
                             ]),
                           ),
@@ -273,10 +278,6 @@ class _DinerPageState extends ConsumerState<DinerPage> {
     final note = TextEditingController();
     final clientRef = newClientRef();
     var busy = false;
-    final items = {
-      for (final c in (_menu!['categories'] as List))
-        for (final i in (c['items'] as List)) i['id']: i,
-    };
     await showGlassDialog(
       context,
       title: l.yourOrder,
@@ -285,19 +286,19 @@ class _DinerPageState extends ConsumerState<DinerPage> {
           if (ctx.mounted) set(() {});
         };
         return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-          for (final e in _qty.entries.toList())
+          for (final (line, n) in _cart.entries.toList())
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 5),
               child: Row(children: [
-                VegMark(veg: items[e.key]['is_veg'] == true),
+                VegMark(veg: line.item['is_veg'] == true),
                 const SizedBox(width: 10),
-                Expanded(child: Text(items[e.key]['name'])),
+                Expanded(child: Text(line.label)),
                 QtyStepper(
-                  qty: e.value,
-                  onAdd: () => set(() => _change(e.key, 1)),
+                  qty: n,
+                  onAdd: () => set(() => _changeCart(() => _cart.change(line.key, 1))),
                   onRemove: () {
-                    set(() => _change(e.key, -1));
-                    if (_qty.isEmpty) Navigator.of(ctx).pop();
+                    set(() => _changeCart(() => _cart.change(line.key, -1)));
+                    if (_cart.isEmpty) Navigator.of(ctx).pop();
                   },
                 ),
               ]),
@@ -322,7 +323,7 @@ class _DinerPageState extends ConsumerState<DinerPage> {
                         'client_ref': clientRef,
                       });
                       setState(() {
-                        _qty.clear();
+                        _cart.clear();
                         _quote = null;
                       });
                       await _refreshOrders();
@@ -385,7 +386,7 @@ class _DishRow extends StatelessWidget {
           child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Text(item['name'], style: tt.titleMedium?.copyWith(color: available ? t.ink : t.faint)),
             const SizedBox(height: 2),
-            Text(formatInr(item['price_minor']), style: tt.bodyMedium),
+            Text(listPrice(item), style: tt.bodyMedium),
             if (item['description'] != null)
               Padding(padding: const EdgeInsets.only(top: 4), child: Text(item['description'], style: tt.bodySmall)),
           ]),

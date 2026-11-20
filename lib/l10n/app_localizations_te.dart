@@ -2105,4 +2105,110 @@ class AppLocalizationsTe extends AppLocalizations {
   @override
   String get errBillDiscounted =>
       'ఈ బిల్లుకు డిస్కౌంట్ ఉంది. ముందు దాన్ని రద్దు చేసి, తర్వాత విభజించండి.';
+
+  @override
+  String get chooseSize => 'సైజ్ ఎంచుకోండి';
+
+  @override
+  String pickUpTo(int max) {
+    return 'గరిష్టంగా $max';
+  }
+
+  @override
+  String pickExactly(int n) {
+    return '$n ఎంచుకోండి';
+  }
+
+  @override
+  String pickBetween(int min, int max) {
+    return '$min నుండి $max ఎంచుకోండి';
+  }
+
+  @override
+  String get addToOrder => 'జోడించు';
+
+  @override
+  String get hasOptions => 'సైజ్‌లు / యాడ్-ఆన్‌లు';
+
+  @override
+  String get errVariantRequired => 'ముందు సైజ్ ఎంచుకోండి';
+
+  @override
+  String get errAddonCount => 'యాడ్-ఆన్ ఎంపికలను సరిచూడండి';
+
+  @override
+  String get removeLine => 'తీసివేయి';
+
+  @override
+  String get sizes => 'సైజ్‌లు';
+
+  @override
+  String get sizesHelp =>
+      'రెండు లేదా అంతకంటే ఎక్కువ సైజ్‌లు, ప్రతిదానికి సొంత ధర (ఉదా. హాఫ్ ₹180, ఫుల్ ₹320). ఒకే ధరకు అమ్మాలంటే అన్నీ తీసివేయండి.';
+
+  @override
+  String get addSize => 'సైజ్ జోడించు';
+
+  @override
+  String get sizeNameHint => 'ఉదా. హాఫ్';
+
+  @override
+  String get errSizesCount =>
+      'రెండు లేదా ఎక్కువ సైజ్‌లు ఇవ్వండి, లేదా ఏదీ వద్దు';
+
+  @override
+  String get errPriceInvalid => 'సరైన ధర ఇవ్వండి';
+
+  @override
+  String get addons => 'యాడ్-ఆన్‌లు';
+
+  @override
+  String get addonGroups => 'యాడ్-ఆన్ గ్రూప్‌లు';
+
+  @override
+  String get addonGroupsHelp =>
+      'ఒకసారి గ్రూప్ చేయండి (ఉదా. ఎక్స్‌ట్రాస్, బ్రెడ్ ఎంచుకోండి), ఏ వంటకంతోనైనా ఇవ్వండి.';
+
+  @override
+  String get newGroup => 'కొత్త గ్రూప్';
+
+  @override
+  String get groupNameHint => 'ఉదా. ఎక్స్‌ట్రాస్';
+
+  @override
+  String get minPicks => 'కనీసం';
+
+  @override
+  String get maxPicks => 'గరిష్టంగా';
+
+  @override
+  String get addAddon => 'యాడ్-ఆన్ జోడించు';
+
+  @override
+  String get addonNameHint => 'ఉదా. రైతా';
+
+  @override
+  String usedBy(String names) {
+    return 'వాడేవి: $names';
+  }
+
+  @override
+  String get notUsedYet => 'ఇంకా ఏ వంటకంతోనూ ఇవ్వలేదు';
+
+  @override
+  String addonsForItem(String item) {
+    return '$item తో ఏ యాడ్-ఆన్ గ్రూప్‌లు ఇవ్వాలో ఎంచుకోండి.';
+  }
+
+  @override
+  String get noAddonGroups =>
+      'ఇంకా యాడ్-ఆన్ గ్రూప్‌లు లేవు. యాడ్-ఆన్ గ్రూప్‌లలో ఒకటి చేయండి.';
+
+  @override
+  String deleteGroupConfirm(String name) {
+    return '$name తొలగించాలా? దాన్ని వాడే వంటకాలు ఇక ఇవ్వవు. ఇప్పటికే చేసిన ఆర్డర్లు మారవు.';
+  }
+
+  @override
+  String get saved => 'సేవ్ అయింది';
 }

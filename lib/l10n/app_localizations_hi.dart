@@ -2095,4 +2095,109 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String get errBillDiscounted =>
       'इस बिल पर छूट है। पहले इसे रद्द करें, फिर आइटम के हिसाब से बाँटें।';
+
+  @override
+  String get chooseSize => 'साइज़ चुनें';
+
+  @override
+  String pickUpTo(int max) {
+    return 'अधिकतम $max';
+  }
+
+  @override
+  String pickExactly(int n) {
+    return '$n चुनें';
+  }
+
+  @override
+  String pickBetween(int min, int max) {
+    return '$min से $max चुनें';
+  }
+
+  @override
+  String get addToOrder => 'जोड़ें';
+
+  @override
+  String get hasOptions => 'साइज़ / ऐड-ऑन';
+
+  @override
+  String get errVariantRequired => 'पहले साइज़ चुनें';
+
+  @override
+  String get errAddonCount => 'ऐड-ऑन विकल्प जाँचें';
+
+  @override
+  String get removeLine => 'हटाएं';
+
+  @override
+  String get sizes => 'साइज़';
+
+  @override
+  String get sizesHelp =>
+      'दो या अधिक साइज़, हर एक की अपनी कीमत (जैसे हाफ़ ₹180, फुल ₹320)। एक ही कीमत पर बेचने के लिए सब हटा दें।';
+
+  @override
+  String get addSize => 'साइज़ जोड़ें';
+
+  @override
+  String get sizeNameHint => 'जैसे हाफ़';
+
+  @override
+  String get errSizesCount => 'दो या अधिक साइज़ दें, या कोई नहीं';
+
+  @override
+  String get errPriceInvalid => 'सही कीमत डालें';
+
+  @override
+  String get addons => 'ऐड-ऑन';
+
+  @override
+  String get addonGroups => 'ऐड-ऑन ग्रुप';
+
+  @override
+  String get addonGroupsHelp =>
+      'एक बार ग्रुप बनाएं (जैसे एक्स्ट्रा, ब्रेड चुनें) और किसी भी व्यंजन के साथ दें।';
+
+  @override
+  String get newGroup => 'नया ग्रुप';
+
+  @override
+  String get groupNameHint => 'जैसे एक्स्ट्रा';
+
+  @override
+  String get minPicks => 'कम से कम';
+
+  @override
+  String get maxPicks => 'अधिकतम';
+
+  @override
+  String get addAddon => 'ऐड-ऑन जोड़ें';
+
+  @override
+  String get addonNameHint => 'जैसे रायता';
+
+  @override
+  String usedBy(String names) {
+    return 'इस्तेमाल: $names';
+  }
+
+  @override
+  String get notUsedYet => 'अभी किसी व्यंजन के साथ नहीं';
+
+  @override
+  String addonsForItem(String item) {
+    return '$item के साथ कौन से ऐड-ऑन ग्रुप दें, चुनें।';
+  }
+
+  @override
+  String get noAddonGroups =>
+      'अभी कोई ऐड-ऑन ग्रुप नहीं। ऐड-ऑन ग्रुप में एक बनाएं।';
+
+  @override
+  String deleteGroupConfirm(String name) {
+    return '$name हटाएं? इसे इस्तेमाल करने वाले व्यंजन इसे नहीं देंगे। पहले के ऑर्डर नहीं बदलेंगे।';
+  }
+
+  @override
+  String get saved => 'सेव हो गया';
 }

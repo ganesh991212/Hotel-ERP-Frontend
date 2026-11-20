@@ -12,6 +12,7 @@ import '../../ui/components.dart';
 import '../../ui/feedback.dart';
 import '../../ui/shell.dart';
 import '../../ui/status.dart';
+import 'cart.dart';
 import 'print_actions.dart';
 
 final _tablesProvider = liveProvider<List<Map<String, dynamic>>>(
@@ -289,7 +290,7 @@ class OrderComposer extends ConsumerStatefulWidget {
 }
 
 class _OrderComposerState extends ConsumerState<OrderComposer> {
-  final Map<String, int> _qty = {};
+  final Cart _cart = Cart();
   final _note = TextEditingController();
   final _search = TextEditingController();
   final _guestName = TextEditingController();
@@ -306,23 +307,28 @@ class _OrderComposerState extends ConsumerState<OrderComposer> {
     super.dispose();
   }
 
-  void _change(String id, int delta) {
-    setState(() {
-      final v = (_qty[id] ?? 0) + delta;
-      if (v <= 0) {
-        _qty.remove(id);
-      } else {
-        _qty[id] = v.clamp(1, 20);
-      }
-    });
+  /// A dish with sizes or add-ons opens the choice sheet first; the server prices whatever is chosen.
+  Future<void> _add(Map<String, dynamic> item) async {
+    final line = needsChoices(item) ? await showItemChoices(context, item) : CartLine(item);
+    if (line == null || !mounted) return;
+    setState(() => _cart.add(line));
+    _requoteSoon();
+  }
+
+  void _remove(String itemId) {
+    setState(() => _cart.removeLastOf(itemId));
+    _requoteSoon();
+  }
+
+  void _requoteSoon() {
     _debounce?.cancel();
     _debounce = Timer(const Duration(milliseconds: 250), _requote);
   }
 
-  List<Map<String, dynamic>> get _lines => [for (final e in _qty.entries) {'item_id': e.key, 'qty': e.value}];
+  List<Map<String, dynamic>> get _lines => _cart.json;
 
   Future<void> _requote() async {
-    if (_qty.isEmpty) {
+    if (_cart.isEmpty) {
       setState(() => _quote = null);
       return;
     }
@@ -461,19 +467,37 @@ class _OrderComposerState extends ConsumerState<OrderComposer> {
                   for (final i in shown)
                     _MenuLine(
                       item: i,
-                      qty: _qty[i['id']] ?? 0,
-                      onAdd: i['is_available'] == true ? () => _change(i['id'], 1) : null,
-                      onRemove: () => _change(i['id'], -1),
+                      qty: _cart.qtyOf(i['id']),
+                      onAdd: i['is_available'] == true ? () => _add(i) : null,
+                      onRemove: () => _remove(i['id']),
                     ),
                 ]),
               ),
               const SizedBox(height: 8),
               TextField(controller: _note, decoration: InputDecoration(hintText: l.kitchenNoteHint)),
+              // What was chosen for dishes with sizes / add-ons (names only; the quote below has the money).
+              for (final (line, n) in _cart.entries)
+                if (line.variant != null || line.addons.isNotEmpty)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 6),
+                    child: Row(children: [
+                      Expanded(child: Text('$n × ${line.label}', style: tt.bodySmall)),
+                      IconButton(
+                        visualDensity: VisualDensity.compact,
+                        tooltip: l.removeLine,
+                        onPressed: () {
+                          setState(() => _cart.change(line.key, -n));
+                          _requoteSoon();
+                        },
+                        icon: Icon(Icons.close_rounded, size: 16, color: t.dim),
+                      ),
+                    ]),
+                  ),
               const SizedBox(height: 14),
               QuoteSummary(quote: _quote),
               const SizedBox(height: 12),
               FilledButton.icon(
-                onPressed: _qty.isEmpty || _busy || _quote == null ? null : _place,
+                onPressed: _cart.isEmpty || _busy || _quote == null ? null : _place,
                 icon: const Icon(Icons.send_rounded, size: 18),
                 label: Text(l.sendToKitchen),
               ),
@@ -505,7 +529,7 @@ class _MenuLine extends StatelessWidget {
         Expanded(
           child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Text(item['name'], style: tt.bodyMedium?.copyWith(color: available ? t.ink : t.faint)),
-            Text(available ? formatInr(item['price_minor']) : l.soldOut, style: tt.labelSmall),
+            Text(available ? listPrice(item) : l.soldOut, style: tt.labelSmall),
           ]),
         ),
         QtyStepper(qty: qty, onAdd: onAdd, onRemove: onRemove),

@@ -2118,4 +2118,109 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get errBillDiscounted =>
       'This bill has a discount. Cancel it first, then split by items.';
+
+  @override
+  String get chooseSize => 'Choose a size';
+
+  @override
+  String pickUpTo(int max) {
+    return 'Up to $max';
+  }
+
+  @override
+  String pickExactly(int n) {
+    return 'Choose $n';
+  }
+
+  @override
+  String pickBetween(int min, int max) {
+    return 'Choose $min to $max';
+  }
+
+  @override
+  String get addToOrder => 'Add';
+
+  @override
+  String get hasOptions => 'Sizes / add-ons';
+
+  @override
+  String get errVariantRequired => 'Choose a size first';
+
+  @override
+  String get errAddonCount => 'Check the add-on choices';
+
+  @override
+  String get removeLine => 'Remove';
+
+  @override
+  String get sizes => 'Sizes';
+
+  @override
+  String get sizesHelp =>
+      'Two or more sizes, each with its own price (e.g. Half ₹180, Full ₹320). Remove them all to sell the dish at one price.';
+
+  @override
+  String get addSize => 'Add size';
+
+  @override
+  String get sizeNameHint => 'e.g. Half';
+
+  @override
+  String get errSizesCount => 'Give two or more sizes, or none';
+
+  @override
+  String get errPriceInvalid => 'Enter a valid price';
+
+  @override
+  String get addons => 'Add-ons';
+
+  @override
+  String get addonGroups => 'Add-on groups';
+
+  @override
+  String get addonGroupsHelp =>
+      'Make a group once (e.g. Extras, Choose your bread) and offer it with any dish.';
+
+  @override
+  String get newGroup => 'New group';
+
+  @override
+  String get groupNameHint => 'e.g. Extras';
+
+  @override
+  String get minPicks => 'At least';
+
+  @override
+  String get maxPicks => 'At most';
+
+  @override
+  String get addAddon => 'Add add-on';
+
+  @override
+  String get addonNameHint => 'e.g. Raita';
+
+  @override
+  String usedBy(String names) {
+    return 'Used by: $names';
+  }
+
+  @override
+  String get notUsedYet => 'Not offered with any dish yet';
+
+  @override
+  String addonsForItem(String item) {
+    return 'Choose which add-on groups $item offers.';
+  }
+
+  @override
+  String get noAddonGroups =>
+      'No add-on groups yet. Create one in Add-on groups.';
+
+  @override
+  String deleteGroupConfirm(String name) {
+    return 'Delete $name? Dishes using it will stop offering it. Orders already placed keep their add-ons.';
+  }
+
+  @override
+  String get saved => 'Saved';
 }

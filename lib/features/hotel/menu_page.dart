@@ -9,6 +9,7 @@ import '../../ui/components.dart';
 import '../../ui/feedback.dart';
 import '../../ui/shell.dart';
 import '../floor/floor_page.dart' show VegMark, menuDataProvider;
+import 'menu_options.dart';
 
 class MenuPage extends ConsumerStatefulWidget {
   const MenuPage({super.key});
@@ -39,6 +40,12 @@ class _MenuPageState extends ConsumerState<MenuPage> {
               decoration: InputDecoration(prefixIcon: const Icon(Icons.search), hintText: l.searchMenu),
             ),
           ),
+          if (canEdit)
+            OutlinedButton.icon(
+              onPressed: () => showAddonGroupsDialog(context),
+              icon: const Icon(Icons.playlist_add_rounded, size: 18),
+              label: Text(l.addonGroups),
+            ),
           if (canEdit)
             OutlinedButton.icon(
               onPressed: () => _categoryDialog(context),
@@ -196,8 +203,33 @@ class _ItemRow extends ConsumerWidget {
       Expanded(child: Text(item['name'], style: tt.titleSmall, overflow: TextOverflow.ellipsis)),
     ]);
     final edit = canEdit
-        ? IconButton(tooltip: l.edit, onPressed: onEdit, icon: const Icon(Icons.edit_outlined, size: 18))
+        ? Row(mainAxisSize: MainAxisSize.min, children: [
+            IconButton(tooltip: l.edit, onPressed: onEdit, icon: const Icon(Icons.edit_outlined, size: 18)),
+            PopupMenuButton<int>(
+              tooltip: '${l.sizes} / ${l.addons}',
+              icon: const Icon(Icons.more_vert_rounded, size: 18),
+              onSelected: (v) => v == 0 ? showSizesDialog(context, item) : showItemAddonsDialog(context, item),
+              itemBuilder: (_) => [
+                PopupMenuItem(value: 0, child: Text(l.sizes)),
+                PopupMenuItem(value: 1, child: Text(l.addons)),
+              ],
+            ),
+          ])
         : const SizedBox(width: 48);
+    // With sizes, show each size's price (from the server) instead of the single price.
+    final variants = (item['variants'] as List?) ?? const [];
+    final price = variants.isEmpty
+        ? formatInr(item['price_minor'])
+        : variants.map((v) => '${v['name']} ${formatInr(v['price_minor'])}').join(' / ');
+    final groups = (item['addon_groups'] as List?) ?? const [];
+    final extras = Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      if (variants.isNotEmpty) Padding(padding: const EdgeInsets.only(top: 4), child: SizeAvailabilityChips(item: item)),
+      if (groups.isNotEmpty)
+        Padding(
+          padding: const EdgeInsets.only(top: 4),
+          child: Text('${l.addons}: ${groups.map((g) => g['name']).join(', ')}', style: tt.labelSmall),
+        ),
+    ]);
     final row = context.isPhone
         ? Padding(
             padding: const EdgeInsets.symmetric(vertical: 10),
@@ -205,18 +237,19 @@ class _ItemRow extends ConsumerWidget {
               Row(children: [Expanded(child: name), edit]),
               Padding(
                 padding: const EdgeInsets.only(left: 26),
-                child: Text('$category · ${formatInr(item['price_minor'])} · ${l.minutesShort(item['est_prep_minutes'])}',
+                child: Text('$category · $price · ${l.minutesShort(item['est_prep_minutes'])}',
                     style: tt.bodySmall),
               ),
+              Padding(padding: const EdgeInsets.only(left: 26), child: extras),
               Padding(padding: const EdgeInsets.only(left: 18), child: toggle),
             ]),
           )
         : Padding(
             padding: const EdgeInsets.symmetric(vertical: 6),
-            child: Row(children: [
-              Expanded(flex: 4, child: name),
+            child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Expanded(flex: 4, child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [name, extras])),
               Expanded(flex: 2, child: Text(category, style: tt.bodyMedium)),
-              Expanded(flex: 2, child: Text(formatInr(item['price_minor']), style: tt.bodyMedium)),
+              Expanded(flex: 2, child: Text(price, style: tt.bodyMedium)),
               Expanded(flex: 2, child: Text(l.minutesShort(item['est_prep_minutes']), style: tt.bodyMedium)),
               Expanded(flex: 2, child: Align(alignment: Alignment.centerLeft, child: toggle)),
               edit,

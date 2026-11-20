@@ -3795,6 +3795,186 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'This bill has a discount. Cancel it first, then split by items.'**
   String get errBillDiscounted;
+
+  /// Label above Half / Full
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a size'**
+  String get chooseSize;
+
+  /// Add-on group rule: optional, at most max
+  ///
+  /// In en, this message translates to:
+  /// **'Up to {max}'**
+  String pickUpTo(int max);
+
+  /// Add-on group rule: exactly n
+  ///
+  /// In en, this message translates to:
+  /// **'Choose {n}'**
+  String pickExactly(int n);
+
+  /// Add-on group rule
+  ///
+  /// In en, this message translates to:
+  /// **'Choose {min} to {max}'**
+  String pickBetween(int min, int max);
+
+  /// Button: add the dish with its size and add-ons
+  ///
+  /// In en, this message translates to:
+  /// **'Add'**
+  String get addToOrder;
+
+  /// Hint on a dish that opens a choice sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Sizes / add-ons'**
+  String get hasOptions;
+
+  /// Error from the server
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a size first'**
+  String get errVariantRequired;
+
+  /// Error from the server
+  ///
+  /// In en, this message translates to:
+  /// **'Check the add-on choices'**
+  String get errAddonCount;
+
+  /// Tooltip: remove a dish (with its size and add-ons) from the order being built
+  ///
+  /// In en, this message translates to:
+  /// **'Remove'**
+  String get removeLine;
+
+  /// Menu: a dish's sizes (Half / Full)
+  ///
+  /// In en, this message translates to:
+  /// **'Sizes'**
+  String get sizes;
+
+  /// Explains sizes
+  ///
+  /// In en, this message translates to:
+  /// **'Two or more sizes, each with its own price (e.g. Half ₹180, Full ₹320). Remove them all to sell the dish at one price.'**
+  String get sizesHelp;
+
+  /// Button
+  ///
+  /// In en, this message translates to:
+  /// **'Add size'**
+  String get addSize;
+
+  /// Hint for a size name
+  ///
+  /// In en, this message translates to:
+  /// **'e.g. Half'**
+  String get sizeNameHint;
+
+  /// Validation
+  ///
+  /// In en, this message translates to:
+  /// **'Give two or more sizes, or none'**
+  String get errSizesCount;
+
+  /// Validation
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid price'**
+  String get errPriceInvalid;
+
+  /// Menu: add-ons offered with a dish
+  ///
+  /// In en, this message translates to:
+  /// **'Add-ons'**
+  String get addons;
+
+  /// Menu: reusable add-on groups
+  ///
+  /// In en, this message translates to:
+  /// **'Add-on groups'**
+  String get addonGroups;
+
+  /// Explains add-on groups
+  ///
+  /// In en, this message translates to:
+  /// **'Make a group once (e.g. Extras, Choose your bread) and offer it with any dish.'**
+  String get addonGroupsHelp;
+
+  /// Button
+  ///
+  /// In en, this message translates to:
+  /// **'New group'**
+  String get newGroup;
+
+  /// Hint for a group name
+  ///
+  /// In en, this message translates to:
+  /// **'e.g. Extras'**
+  String get groupNameHint;
+
+  /// How many add-ons must be picked
+  ///
+  /// In en, this message translates to:
+  /// **'At least'**
+  String get minPicks;
+
+  /// How many add-ons may be picked
+  ///
+  /// In en, this message translates to:
+  /// **'At most'**
+  String get maxPicks;
+
+  /// Button
+  ///
+  /// In en, this message translates to:
+  /// **'Add add-on'**
+  String get addAddon;
+
+  /// Hint for an add-on name
+  ///
+  /// In en, this message translates to:
+  /// **'e.g. Raita'**
+  String get addonNameHint;
+
+  /// Which dishes offer this group
+  ///
+  /// In en, this message translates to:
+  /// **'Used by: {names}'**
+  String usedBy(String names);
+
+  /// Group not attached anywhere
+  ///
+  /// In en, this message translates to:
+  /// **'Not offered with any dish yet'**
+  String get notUsedYet;
+
+  /// Explains attaching groups to a dish
+  ///
+  /// In en, this message translates to:
+  /// **'Choose which add-on groups {item} offers.'**
+  String addonsForItem(String item);
+
+  /// Empty state
+  ///
+  /// In en, this message translates to:
+  /// **'No add-on groups yet. Create one in Add-on groups.'**
+  String get noAddonGroups;
+
+  /// Confirm deleting an add-on group
+  ///
+  /// In en, this message translates to:
+  /// **'Delete {name}? Dishes using it will stop offering it. Orders already placed keep their add-ons.'**
+  String deleteGroupConfirm(String name);
+
+  /// Toast
+  ///
+  /// In en, this message translates to:
+  /// **'Saved'**
+  String get saved;
 }
 
 class _AppLocalizationsDelegate
